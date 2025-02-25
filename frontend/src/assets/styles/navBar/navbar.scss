@@ -1,0 +1,122 @@
+
+.nav-bar-drop {
+    background-color: #fff !important;
+    height: 80px !important;
+    padding-top: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    margin: auto;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #ebebeb;
+    // border: 1px solid #ebebeb;
+    // border-top: none;
+
+    .container {
+      margin: auto;
+      width: 100% !important;
+      height: 80px;
+      padding: 0;
+      
+    }
+
+    .navbar-brand {
+      font-size: 40px !important;
+      color: #000 !important;
+    }
+  
+    .navbar-toggler {
+        border: none; 
+        box-shadow: none !important; 
+    
+        &:focus {
+          outline: none; 
+          box-shadow: none !important; 
+        }
+    }
+
+    .navbar-collapse {
+        width: 100%;
+    }
+
+    
+
+    .navbar-nav {
+      margin-left: auto !important;
+      background-color: #fff !important; 
+      align-items: center;
+      border-radius: 6px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+
+      .nav-link {
+        color: #000 !important;
+  
+        &:hover {
+          color: #bbb !important;
+        }
+      }
+      
+      .nav-dropdown {
+        
+        .dropdown-menu {
+          background-color: #fff !important;
+          margin: 5px;  
+
+          .dropdown-item {
+            color: #000 !important;
+            
+            &:focus {
+              background-color: #c2c6ca !important;
+            }
+
+            &:hover {
+              background-color: #495057 !important;
+              color: #000 !important;
+            }
+          }
+        }
+      }
+    }
+  
+
+  @media (max-width: 991.98px) {
+    .navbar-collapse {
+      align-items: flex-start !important;
+    }
+
+    .navbar-nav {
+      flex-direction: column !important;
+      width: 100%;
+      border: 1px solid #ebebeb;
+      border-top: none;
+      padding: 10px;
+
+      .nav-link,
+      .nav-item,
+      .nav-dropdown {
+        width: 100%;
+        text-align: left !important;
+
+        .dropdown-menu{
+            border: none;
+        }
+
+        .dropdown-item {
+            &:focus {
+                background-color: #c2c6ca !important;
+            }
+        }
+
+      }
+    }
+  }
+}
+
+
+.drop-down-menu-custom {
+  .dropdown-item{
+    &:focus {
+      background-color: #c2c6ca !important;
+  }
+  }
+}

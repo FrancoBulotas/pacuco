@@ -1,0 +1,76 @@
+
+
+.accordion-button {
+  background-color: #ffffff; /* Fondo personalizado para el header */
+  color: #333; /* Cambiar color del texto */
+  outline: none;
+  box-shadow: none;
+}
+.accordion-button:focus, 
+.accordion-button:not(.collapsed) {
+  outline: none !important;
+  
+  background-color: #ffffff; /* Fondo personalizado para el header */
+  color: #333; /* Cambiar color del texto */
+}
+
+
+.table > :not(caption) > * > * {
+  //box-shadow: none !important; /* Elimina la sombra de fondo */
+  background-color: transparent !important; /* Establece tu color de fondo */
+}
+
+.form-control {
+  &:focus{
+    box-shadow: none;
+    outline: none;
+    border: 1px solid #e9e9e9;
+  }
+}
+
+.contenedor-tabla {
+    height: 500px;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+
+    &::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+    }
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+      border: 2px solid #f1f1f1; /* Espacio alrededor de la barra */
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+}
+
+@media screen and (max-width: 768px) {
+  .hide-on-mobile {
+      display: none;
+  }
+}
+
+
+@media screen and (min-width: 1118px) {
+  .contenedor-tabla{
+    height: 450px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+

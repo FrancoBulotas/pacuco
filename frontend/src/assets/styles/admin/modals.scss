@@ -1,0 +1,28 @@
+
+
+.mb-3 {
+    .form-control{
+        box-shadow: none;
+        border: 1px solid #cecece;
+    }
+}
+
+.form-check {
+    .form-check-input {
+        border: 1px solid #aaaaaa;
+        box-shadow: none;
+        height: 18px;
+        width: 18px;
+    }
+    .form-check-input:checked{
+        background-color: #f3bbdd;
+        box-shadow: none;
+        border: 1px solid #aaaaaa;
+    }
+
+    .form-check-label {
+        font-size: 16px;
+        font-weight: 600;
+        color: #555;
+    }
+}

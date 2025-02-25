@@ -1,0 +1,54 @@
+
+
+.container-frecuent-questions {
+    max-width: 1100px;    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+    /* gap: 50px;     */
+    margin-bottom: 80px;
+}
+
+.child-container-frecuent-questions {
+    display: flex;
+    width: 100%;
+    height: 400px;
+    max-width: 280px;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center; 
+    text-align: center;
+    margin: 20px;
+    flex: 1 1 calc(33% - 0px);
+}
+
+.icon-frecuent-questions {
+    color:#ffc8c8;
+    font-size: 70px;
+}
+
+.p-title-frecuent-questions {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+@media screen and (max-width: 500px){
+    .child-container-frecuent-questions {
+        height: auto;
+    }
+}
+
+/* Estilo para el rango entre 0px y 1100px */
+@media (max-width: 1100px) and (min-width: 0px) {
+    .child-container-frecuent-questions {
+        flex: 1 1 calc(50% - 0px); /* 2 columnas */
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .container-frecuent-questions { 
+        min-height: 500px;
+    }
+}

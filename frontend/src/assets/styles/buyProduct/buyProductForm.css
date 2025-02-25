@@ -1,0 +1,165 @@
+
+
+.simulacion-body-comprar-carrito {
+    margin: 0;
+    
+    padding: 20px;
+    /* font-family: 'Arial', sans-serif; */
+    background-color: #f2f2f2; /* Gris claro */
+    color: #333; /* Gris oscuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.container-finalizar-compra {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+}
+.formulario-div {
+    margin-bottom: 20px;
+}
+.div-tipo-envio {
+    margin-bottom: 20px;
+}
+.tipo-envio {
+    font-size: 16px;
+    color: #333; /* Gris oscuro */
+}
+
+.linea-horizontal-envio,
+.linea-horizontal {
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+#costo-de-envio-sucursal,
+#costo-de-envio-domicilio,
+#texto-caso-sucursal {
+    font-size: 14px;
+    color: #333; /* Gris oscuro */
+    margin-bottom: 10px;
+}
+
+.container-inputs-carrito{
+    display: inline-block;
+}
+
+.thead-carrito th {
+    background-color: #333; /* Negro */
+    color: #fff; /* Blanco */
+    padding: 10px;
+    text-align: left;
+}
+.tr-precio-total th {
+    text-align: right;
+    font-size: 16px;
+    color: #333; /* Gris oscuro */
+}
+.text-right{
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+}
+.img-carrito{
+    width:140px;
+    padding:5px;
+}
+
+/* #divMedioDePago{
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    margin: 0;
+    padding: 20px;
+    height: 200px;
+    
+} */
+/* #labelCBU1, #labelAlias1 {
+    font-weight: bold;
+    display: none;
+    margin-left: 10px;
+} */
+
+/* .div-img-qr {
+    display: flex;
+    justify-content: center;
+} */
+
+#img-qr{
+    /* margin: 30px; */
+    max-width: 160px;
+    height: auto;
+}
+
+.labelMedioDePago {
+    padding-top: 0px;
+    margin-left: 10px;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.divAclaracion {
+    margin: 10px;
+    font-size: 13px;
+}
+.btn-seguir {
+    text-decoration: underline;
+    padding: 4px;
+    color: #000;
+}
+.form-group{
+    width: 100%;
+}
+
+@media (max-width: 480px) {
+    .simulacion-body-comprar-carrito {
+        padding: 20px 0px;
+    }
+
+    .thead-carrito th,
+    .table th,
+    .table td {
+        padding: 3px;
+        font-size: 12px;
+    }
+    .tr-precio-total th {
+        font-size: 14px;
+    }
+    .text-right{
+        display: flex;
+        text-align: center;
+        justify-content: space-between;
+        width: 120px;
+    }
+    .img-carrito{
+        width: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-finalizar-compra {
+        padding: 10px;
+    }
+    .div-tipo-envio p,
+    .divAclaracion p {
+        font-size: 14px;
+    }
+    .thead-carrito th,
+    .table th,
+    .table td {
+        padding: 5px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 1208px) {
+    .simulacion-body-comprar-carrito{
+        margin-top: 90px;
+    }
+}

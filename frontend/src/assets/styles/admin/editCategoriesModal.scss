@@ -1,0 +1,41 @@
+
+.accordion {
+    --bs-accordion-bg: #f8f9fa; // Fondo del acordeón
+    --bs-accordion-border-color: #ccc; // Color del borde
+    --bs-accordion-btn-bg: #f2f5f8; // Fondo del encabezado
+    --bs-accordion-btn-color: #fff; // Color del texto del encabezado
+    --bs-accordion-btn-hover-bg: #d8d8d8; // Fondo al pasar el mouse
+    --bs-accordion-btn-hover-color: #fff; // Color del texto al pasar el mouse
+    --bs-accordion-active-bg: #d1d1d1; // Fondo del encabezado activo
+    --bs-accordion-active-color: #fff; // Color del texto en el encabezado activo
+
+    .accordion-item {
+        border: 1px solid var(--bs-accordion-border-color);
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+
+    .accordion-header {
+        button {
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        :focus {
+            box-shadow: none;
+        }
+    }
+
+    .accordion-body {
+        background-color: #fff;
+        color: #333;
+        font-size: 0.95rem;
+        padding: 15px;
+    }
+}
+
+.li-subcategories {
+    border-bottom: 1px solid #d4d3d3;
+}

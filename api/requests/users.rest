@@ -1,0 +1,31 @@
+
+GET http://localhost:8080/api/users
+###
+DELETE http://localhost:8080/api/users/
+###
+POST http://localhost:8080/api/users HTTP/1.1
+content-type: application/json
+
+{
+    "username": "sad",
+    "password": "DSAasd"
+}
+###
+POST http://localhost:8080/api/users/create HTTP/1.1
+content-type: application/json
+[
+    {
+        "admins" : ["Admin"]
+    },
+    {
+        "users":
+        {
+            "username": "Admin",
+            "id": "6685e536eca24cd4eb23febd"
+        },
+        {
+            "username": "Prueba",
+            "id": "67af94af7c777675368555f2"
+        }
+    }
+]

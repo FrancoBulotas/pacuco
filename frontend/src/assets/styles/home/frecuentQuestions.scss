@@ -1,0 +1,68 @@
+
+.accordion-container {
+
+    // padding: 30px;
+    width: 100%;
+    // margin-bottom: 40px;
+    // background: #f1f1f1;
+  
+    .accordion-wrapper {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      width: 100%;
+      max-width: 800px;
+      border-radius: 6px;
+  
+      h4 {
+        font-family: 'Monaco', monospace;
+        margin-bottom: 20px;
+        margin: 0 auto;
+        font-size: 30px;
+        font-weight: 600;
+        color: #333;
+      }
+  
+      .accordion-item {
+        // margin-bottom: 15px;
+  
+        .accordion-header {
+          background-color: transparent; // Color de fondo del header
+          color: #fff; // Color de texto del header
+          padding: 10px;
+          padding-bottom: 0px;
+          border: none;   
+          border-radius: 5px;
+          font-size: 18px;
+          cursor: pointer;
+          color: #000;
+
+          &:hover {
+            background-color: transparent; 
+          }
+          
+
+          .accordion-button {
+            background-color: transparent;
+            color: #000;
+
+            &:focus {
+                background-color: transparent;
+                box-shadow: none !important; 
+                color: #000;
+                font-weight: 700;
+              }
+          }
+        }
+  
+        .accordion-body {
+          background-color: #fff;
+          color: #333;
+        //   padding: 15px;
+          border-radius: 5px;
+        //   margin-top: 5px;
+        }
+      }
+    }
+  }
+  

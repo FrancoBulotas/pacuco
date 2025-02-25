@@ -1,0 +1,154 @@
+
+
+.contenedor-tablas-productos {
+    padding-top: 50px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+    font-size: 18px;
+    height: auto;
+    background-color: #fff;
+}
+
+.contenedor-opciones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
+    gap: 20px; /* Space between items */
+    margin: 20px 0; /* Add some margin around the container */
+}
+
+.opcion {
+    width: 100%; /* Ensure each card takes up the full width of its grid cell */
+}
+
+.custom-select:focus {
+  border-color: rgb(211, 211, 211); /* Keep border color consistent */
+  box-shadow: none; /* Remove focus shadow */
+}
+.custom-select:hover {
+  border-color: rgb(211, 211, 211); /* Keep border color consistent */
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .contenedor-opciones {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .contenedor-opciones {
+      grid-template-columns: 1fr; /* 1 column on small screens */
+    }
+  }
+
+/* #tabla-de-productos {
+    width: 100%;
+    max-height: 500px;
+    overflow-y: scroll;
+    margin-top: 20px;
+    margin-bottom: 20px;
+} */
+
+
+.tabla-de-productos {
+    /*border: 1px solid #777; */
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px; 
+    /* background-color: #fff; */
+    padding: 10px;
+    /* border-collapse: collapse; */
+    border-radius: 6px;
+}
+
+
+.tr-tabla-productos {
+    height: 50px; 
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+    /* border: 1px solid #777;  */
+}
+
+.small-img-admin{
+    height: 50px;
+    width: 50px;
+}
+
+
+@media screen and (min-width: 630px) {
+     /* Administracion */
+     .contenedor-tablas-productos {
+        /* padding: 80px; */
+        padding-top: 50px;
+    }
+
+    .tr-fila-elegida {
+        width: 100%;
+        
+    }
+    .tr-tabla-productos {
+        height: 50px; 
+    }
+}
+
+
+@media screen and (min-width: 900px) {
+    
+    /* Administracion */
+    .contenedor-tablas-productos {
+        padding: 60px;
+        padding-top: 50px;
+    }
+    .tr-fila-elegida {
+        width: 100%;
+        /* border: 1px solid #777; */
+    }
+
+    .div-contenedor-td{
+        /* border: 1px solid #777;  */
+    }
+}
+
+
+/* General Tab Styles */
+.tabStyle {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Add Tab Button */
+  .add-tab-button {
+    background-color: #282829;
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-tab-button:hover {
+    background-color: #5a5858; /* Darker blue on hover */
+  }
+  
+  /* Header and Button Alignment */
+  .h4-change-config {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  /* Flex Container for Header and Button */
+  .div-change-config {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }

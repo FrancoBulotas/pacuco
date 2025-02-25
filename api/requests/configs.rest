@@ -1,0 +1,49 @@
+
+GET http://localhost:8080/api/config
+
+###
+PUT http://localhost:8080/api/config/67b52993dbc04bd626d36a75 HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOiI2NjcxYTVjOTY2ODNlNjNjZjg1ZGMwZGYiLCJpYXQiOjE3NDA1MTczNzUsImV4cCI6MTc0MDU0NjE3NX0.kxNKnlRHKJDpPeb6QRu0iuCA-nPlAo2LiJ1qDKnUsC8
+
+{
+    "aboutUs": {
+      "first": "Desde nuestra tienda en Wilde, Buenos Aires... Proveemos de Guardapolvos a Maestras de Nivel Inicial, Maestras De Escuelas Primarias, Maestras Especiales y a fines, para que luzcan Bellas con la última tendencia en uniformidades laborales. Además, desde hace más de 10 años disponemos de un servicio  personalizado, con un amplio surtido de tejidos donde juntas diseñamos el Pacuco como más te guste, brindando una respuesta a tus ideas para tus uniformes laborales.",
+      "second": "Ahora... Queremos que nos conozcan y que sepan quienes estamos día a día detrás de escena, diseñando, cortando, realizando la moldería, preparando el packaging, muchas veces entregando y todo todo con mucho Amor y dedicación! ♥️💓"
+    },
+    "cuentaDniDiscount": false,
+    "featuredProducts": [],
+    "frecuentQuestions": [
+      {
+        "mediosDePago": "Los medios de pago que utilizamos son: Mercado Pago, transferencia bancaria y Cuenta DNI.",
+        "cambios": "⭐ Podés solicitar el cambio por otro producto dentro de los 15 días de la compra. Los gastos de envío corren por cuenta del comprador.",
+        "diseñosPersonalizados": "PODES DISEÑAR TU GUARDAPOLVO COMO MAS TE GUSTE!! Vos elegís la base, los detalles y los vivos!!! 🙌🏼 Y si buscas una imágen exclusiva para tu bolsillo hablanos por privado y lo diseñamos juntas!",
+        "envios": "⭐ Los envíos se realizan mediante Correo Argentino o retiro a domicilio. Diseños personalizados: demoran entre 20 o 30 días en confeccionarse. Stock: Entrega inmediata. Una vez despachado demoran entre 3 y 10 días en llegar a tu domicilio o sucursal. 💌📮",
+        "cuidado": "Te recomendamos siempre lavar nuestros productos con agua fría, puede ser a mano o en el lavarropa automático. Nunca centrifugar!! Planchar con temperatura baja.",
+        "calidad": "⭐Trabajamos Únicamente con telas de INTA Industria Textil Argentina / ARCIEL. Lo que garantiza una Excelente calidad del producto y un Guardapolvo para muchos años de uso.!! DATO: 😱 Todos los guardapolvos ( Excepto el Cloe) llevan un bolsillo secreto interno de seguridad con un cierre de 14 cm. ideal para guardar pertenencias de valor."
+      }
+    ],
+    "cuentaDniDiscount": false,
+    "categories": 
+    { 
+      "Guardapolvo" :  {
+          "Nivel Inicial": { 
+              "table" : "" 
+              },
+          "Primaria": { 
+              "table" : "" 
+              }, 
+          "Stock": { 
+              "table" : "stock" 
+              }, 
+          "Niños": { 
+              "table" : "stock" 
+              }
+          }, 
+      "Accesorios" : {
+          "Totebag": { 
+              "table" : "stock" 
+            }
+        }
+    } 
+  }

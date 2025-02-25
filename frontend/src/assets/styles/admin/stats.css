@@ -1,0 +1,227 @@
+.stats-container {
+
+    min-height: 100vh;
+  
+    background-color: #ffffff;
+  
+    padding: 24px;
+  
+  }
+  
+  .stats-content {
+  
+    max-width: 1200px;
+  
+    margin: 0 auto;
+  
+  }
+  
+  .stats-header {
+  
+    margin-bottom: 32px;
+  
+  }
+  
+  .stats-badge {
+  
+    display: inline-flex;
+  
+    align-items: center;
+  
+    padding: 4px 12px;
+  
+    border-radius: 20px;
+  
+    background-color: #e9ecef;
+  
+    color: #495057;
+  
+    font-size: 14px;
+  
+    margin-bottom: 8px;
+  
+  }
+  
+  .stats-title {
+  
+    font-size: 32px;
+  
+    font-weight: 600;
+  
+    color: #212529;
+  
+    margin: 8px 0;
+  
+  }
+  
+  .stats-cards {
+  
+    display: grid;
+  
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  
+    gap: 24px;
+  
+    margin-bottom: 32px;
+  
+  }
+  
+  .stats-card {
+  
+    background-color: white;
+  
+    border-radius: 8px;
+  
+    padding: 24px;
+  
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  
+    transition: box-shadow 0.3s ease;
+  
+  }
+  
+  .stats-card:hover {
+  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+  }
+  
+  .stats-card-header {
+  
+    display: flex;
+  
+    justify-content: space-between;
+  
+    align-items: center;
+  
+    margin-bottom: 16px;
+  
+  }
+  
+  .stats-card-info {
+  
+    display: flex;
+  
+    flex-direction: column;
+  
+    gap: 4px;
+  
+  }
+  
+  .stats-card-label {
+  
+    font-size: 14px;
+  
+    color: #6c757d;
+  
+  }
+  
+  .stats-card-value {
+  
+    font-size: 24px;
+  
+    font-weight: 600;
+  
+    color: #212529;
+  
+  }
+  
+  .stats-card-icon {
+  
+    width: 48px;
+  
+    height: 48px;
+  
+    border-radius: 50%;
+  
+    background-color: #f8f9fa;
+  
+    display: flex;
+  
+    align-items: center;
+  
+    justify-content: center;
+  
+  }
+  
+  .stats-trend {
+  
+    display: flex;
+  
+    align-items: center;
+  
+    gap: 4px;
+  
+    margin-top: 16px;
+  
+  }
+  
+  .trend-up {
+  
+    color: #28a745;
+  
+  }
+  
+  .trend-down {
+  
+    color: #dc3545;
+  
+  }
+  
+  .chart-container-sales {
+  
+    background-color: white;
+  
+    border-radius: 8px;
+  
+    padding: 24px;
+  
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  
+  }
+  
+  .chart-title {
+  
+    font-size: 20px;
+  
+    font-weight: 600;
+  
+    color: #212529;
+  
+    margin-bottom: 24px;
+  
+  }
+  
+  .chart-wrapper {
+  
+    height: 400px;
+  
+    width: 100%;
+  
+  }
+  
+  @keyframes fadeIn {
+  
+    from {
+  
+      opacity: 0;
+  
+      transform: translateY(10px);
+  
+    }
+  
+    to {
+  
+      opacity: 1;
+  
+      transform: translateY(0);
+  
+    }
+  
+  }
+  
+  .animate-fade-in {
+  
+    animation: fadeIn 0.5s ease-out forwards;
+  
+  }

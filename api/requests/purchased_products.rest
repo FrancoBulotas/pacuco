@@ -1,0 +1,24 @@
+
+GET http://localhost:8080/api/purchasedProduct
+###
+GET http://localhost:8080/api/purchasedProduct/6675cf19ead6ece6d4482dce
+###
+DELETE http://localhost:8080/api/purchasedProduct/6683317de68ddb78136d7377
+###
+POST http://localhost:8080/api/purchasedProduct HTTP/1.1
+content-type: application/json
+
+{
+    "operationCode": "1234567",
+    "clientData": {"name":"franco"},
+    "totalPricePurchased": "90",
+    "time": "12:30"
+}
+
+###
+PUT http://localhost:8080/api/purchasedProduct/6686a836972366f029e4378a HTTP/1.1
+content-type: application/json
+
+{
+    "time": "3/5/2024, 10:39:38"
+}

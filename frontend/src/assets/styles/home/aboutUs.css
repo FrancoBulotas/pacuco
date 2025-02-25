@@ -1,0 +1,66 @@
+
+
+.section-sobre-nosotros-index {
+    background: #f1f1f1;
+    background-color: #fff;
+}
+
+.container-sobre-nosotros {
+    background: #f1f1f1;
+    background-color: #fff;
+}
+
+
+.container-flexible {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.container-flexible-img {
+    /* padding: 30px; */
+    align-items: top;
+}
+
+.section-img-flexible {
+    height: 300px;
+    width: 300px;
+}
+
+.h3-sobre-nosotros {
+    
+    font-family: 'Monaco', monospace;
+    font-weight: 600;
+    font-size: 30px;
+    text-align: center;
+    padding: 60px 15px;
+    padding-bottom: 30px;
+	margin: 0px;
+    /* cursor: pointer; */
+}
+
+.p-sobre-nosotros {
+    color: #000;
+    padding: 15px;
+    text-align: center;
+    font-size: 17px;
+    width: 95%;
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 300;
+}
+
+.container-sobre-nosotros:last-child {
+    padding-bottom: 20px;
+}
+
+.a-sobre-nosotros {
+    color: #ab6bb6;
+    text-decoration: none;
+}
+
+.a-sobre-nosotros:hover,
+.a-sobre-nosotros:focus {
+    text-decoration: underline;
+    color: #902da1;
+}

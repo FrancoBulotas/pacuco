@@ -1,0 +1,1 @@
+import{r as s,j as a}from"./index-C0OXIGzn.js";import{u as n}from"./users-Bdt_guTA.js";const u=()=>{const[t,e]=s.useState([]);s.useEffect(()=>{r()},[]);const r=async()=>{const o=await n.getAll();e(o)};return console.log(t),a.jsx("div",{})};export{u as default};

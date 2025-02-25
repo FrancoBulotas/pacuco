@@ -1,0 +1,70 @@
+
+.tabs-container {
+    .nav-tabs{
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 0px;
+
+      .nav-item {
+        
+        .nav-link {
+          border: 1px solid transparent;
+          border-top-left-radius: 0.25rem;
+          border-top-right-radius: 0.25rem;
+        //   padding: 0.5rem 1rem;
+        //   margin-bottom: -1px;
+          cursor: pointer;
+          color: #000;
+
+          &.active {
+            color: #000;
+            background-color: #ececec;
+            border-color: #dee2e6 #dee2e6 #fff;
+          }
+          &:hover {
+            border-color: #e9ecef #e9ecef #ddd;
+          }
+        }
+      }
+    }
+  
+    .tab-content {
+      border: 1px solid #dee2e6;
+      border-top: none;
+      padding: 1rem;
+      background-color: #fff;
+      .tab-pane {
+        &.active {
+          display: block;
+        }
+        &:not(.active) {
+          display: none;
+        }
+      }
+    }
+  }
+  
+
+  .form-select {
+    appearance: none;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #ccc;
+    color: #333;
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+        border-color: #aaa;
+    }
+
+    option {
+        background-color: #fff !important;
+        color: black !important;
+
+        option:hover,
+        option:focus,
+        option:active  {
+            background-color: white !important;
+            color: black !important;
+        }
+    }
+}

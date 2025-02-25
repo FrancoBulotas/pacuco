@@ -1,0 +1,14 @@
+
+
+.form-group {
+
+    .form-floating {
+        
+        .form-control {
+            border: 1px solid #d1d1d1;
+            &:focus{
+                box-shadow: none;
+            }
+        }
+    }
+}

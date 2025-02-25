@@ -1,0 +1,80 @@
+// Define variables for colors and other reusable styles
+$primary-color: #0c0c0c;
+$secondary-color: #111111;
+$background-color: #f8f9fa;
+$border-radius: 0.25rem;
+$padding: 1rem;
+$transition-time: 0.3s;
+
+.tab-container {
+    background-color: #c2bfbf !important;
+    .row {
+      padding: 10px;
+      background-color: #f3f3f3;
+
+      .col {
+
+        .nav-pills {
+          padding: $padding;
+          border-right:1px solid #9b9a9a;
+          .nav-link {
+            color: $secondary-color;
+            background-color: transparent;
+            border: 1px solid transparent;
+            border-radius: $border-radius;
+            padding: $padding;
+      
+            &:hover {
+              color: $primary-color;
+              background-color: $background-color;
+              border-color: $primary-color;
+              transition: background-color $transition-time ease-in-out;
+            }
+      
+            &.active {
+              color: #fff;
+              background-color: $primary-color  !important;
+              border-color: $primary-color !important;
+            }
+          }
+        }
+      
+        .tab-content {
+          background-color: #fff;
+          border: 1px solid #dee2e6;
+          border-radius: $border-radius;
+          padding: $padding;
+          // margin-top: $padding;
+          
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      
+          .tab-pane {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      
+        // Responsive adjustments
+        @media (max-width: 576px) {
+          .nav-pills {
+            flex-direction: row;
+            justify-content: center;
+            border-right: none;
+            border-bottom: 1px solid #9b9a9a ;
+            margin-bottom: 20px;
+
+            .nav-link {
+              margin: 0.5rem;
+              padding: 0.5rem;
+            }
+          }
+      
+          .tab-content {
+            padding: 0.5rem;
+          }
+        }
+      }
+    }
+}

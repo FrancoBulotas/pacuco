@@ -1,0 +1,82 @@
+
+.swiper-button-next, 
+.swiper-button-prev {
+  color: black; /* Cambia el color de las flechas */
+  display: none;
+}
+.swiper-pagination-bullet {
+    background-color: black; /* Cambia el color de los puntos */
+    opacity: 0.4; /* Ajusta la opacidad */
+    
+}
+
+.swiper-pagination-bullet-active {
+    background-color: black; /* Color del punto activo */
+    opacity: 1; /* Opacidad total para el activo */
+}
+  
+.swiper-button-next:hover, 
+.swiper-button-prev:hover {
+  color: #555; /* Color al pasar el mouse por encima */
+}
+
+.swiper-container {
+    /* position: relative; */
+  }
+  
+.swiper-pagination {
+    display: none;
+    /* position: absolute;
+    bottom: -50px; /* Ajusta esta distancia según sea necesario */
+    /* left: 50%; */
+    /*transform: translateY(40%); */
+    /*z-index: 10; Asegúrate de que la paginación esté sobre otros elementos */
+}
+
+
+
+
+.card {
+    object-fit: contain;
+    border: 2px solid #eeeeee; /* Cambia el color y grosor del borde */    
+    border-radius: 4px; /* Bordes redondeados */
+    transition: border-color 0.3s ease; /* Animación suave al cambiar el borde */
+}
+
+.card-body {
+    background-color: #fff;
+}
+
+.card-logo, .card-logo-hover {
+    width: 180px;
+    height: 180px;
+    transition: opacity 0.5s ease;
+    position: absolute;
+    top: 0;
+    left: 0;    
+}
+.card-logo-hover {
+    opacity: 0;
+}
+
+.card:hover .card-logo-hover {
+    opacity: 1;
+}
+
+.card:hover .card-logo {
+    opacity: 0;
+}
+
+.card-img-wrapper img{
+    display: block;
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+
+    border-radius: 100%;
+}
+
+.owl-prev span, .owl-next span {
+    font-size: 40px;
+    display: none;
+}

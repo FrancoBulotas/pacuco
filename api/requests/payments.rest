@@ -1,0 +1,21 @@
+GET http://localhost:8080/api/payments
+
+###
+POST http://localhost:8080/api/payments HTTP/1.1
+content-type: application/json
+
+###
+PUT http://localhost:8080/api/payments/66758b2b64c03ef4951806be HTTP/1.1
+content-type: application/json
+
+{
+    "cvu": "0000003100055807020379",
+    "aliasCvu": "pacuco.guardapolvos",
+    "cbu": ".",
+    "aliasCbu": "pacuco.guardapolvos",
+    "titularCuentaCbu": ".",
+    "titularCuentaCvu": ".",
+    "imgQr": "https://pacucostorage.blob.core.windows.net/common/1724379251192-729125368-IMG-20240623-WA0034.jpg",
+    "priceShipmentSucursal": "4700",
+    "priceShipmentDomicilio": "6300"
+}

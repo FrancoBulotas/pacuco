@@ -1,0 +1,52 @@
+
+// 
+@import './app.scss';
+@import './loadingScreen.css';
+@import './paginationProducts.scss';
+@import './product.css';
+@import './productsMenu.css';
+
+// administracion
+@import './admin/administration.css';
+@import './admin/htmlForTab.scss';
+@import './admin/htmlNoAcces.css';
+@import './admin/modals.scss';
+@import './admin/navBar.css';
+@import './admin/paymentAdministration.css';
+@import './admin/paymentAdministration.scss';
+@import './admin/purchaseHistory.scss';
+@import './admin/stockAdministration.css';
+@import './admin/stockAdministration.scss';
+@import './admin/contentAdministration.css';
+@import './admin/stats.css';
+@import './admin/salesChart.css';
+@import './admin/editCategoriesModal.scss';
+
+
+// buyProduct
+@import './buyProduct/buyProductForm.css';
+@import './buyProduct/buyProductForm.scss';
+@import './buyProduct/paymentOptions.scss';
+
+// guardapolvo
+@import './guardapolvo/guardapolvoOld.css';
+@import './guardapolvo/breadcrum.scss';
+@import './guardapolvo/filtersbar.scss';
+
+// home
+@import './home/aboutUs.css';
+@import './home/carousel.css';
+@import './home/carousel.scss';
+@import './home/frecuentQuestions.scss';
+@import './home/frecuentQuestions.css';
+@import './home/displayBrandName.css';
+
+// navBar 
+@import './navBar/navbar.css';
+@import './navBar/navbar.scss';
+
+// cart
+@import './cart/cart.css';
+
+// common
+@import './common/blur.css';

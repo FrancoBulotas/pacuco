@@ -1,0 +1,27 @@
+
+
+.breadcrumb-container {
+  padding-left: 0px;
+  padding: 0px;
+    .breadcrumb {
+      padding-top: 20px;
+      font-size: 16px;
+
+      .breadcrumb-item {
+        a {
+          color: #000 !important; // Color de texto para los ítems
+        //   text-decoration: none;
+  
+          &:hover {
+            color: #000 !important; // Color de texto al hacer hover
+          }
+        }
+  
+        &.active {
+          a {
+            color: #848f99 !important; // Color de texto para el ítem activo
+          }
+        }
+      }
+    }
+  }

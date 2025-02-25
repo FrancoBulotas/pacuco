@@ -1,0 +1,70 @@
+
+#divMedioDePago {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+  
+    @media (max-width: 600px) {
+      padding: 15px;
+    }
+  
+    fieldset {
+      border: none;
+      padding: 0;
+  
+      .MuiFormControlLabel-root {
+        margin-bottom: 10px;
+        color: #333;
+        font-size: 16px;
+        font-weight: 500;
+      }
+  
+      .MuiRadio-root {
+        color: #000;
+  
+        &.Mui-checked {
+          color: #dab5d6;
+        }
+      }
+    }
+  
+    .payment-options {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+  
+      @media (max-width: 600px) {
+        flex-direction: column;
+      }
+  
+      .pay-methods-display,
+      .div-img-qr {
+        display: none;
+  
+        &.show {
+          display: block;
+        }
+  
+        label {
+          display: block;
+          margin: 5px 0;
+          color: #555;
+          font-size: 19px;
+          text-align: center;
+        }
+  
+        img {
+          max-width: 200px;
+          height: auto;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+  

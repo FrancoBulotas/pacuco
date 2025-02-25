@@ -1,0 +1,31 @@
+
+
+.custom-pagination {
+    justify-content: center;
+    margin: 10px 0;
+  
+    .page-item {
+      &:hover,
+      &:focus {
+        .page-link {
+          color: #fff;
+        }
+      }
+  
+      &.active {
+        .page-link {
+          color: #fff;
+            background-color: #000;
+            border: 1px solid #000;
+        }
+      }
+  
+      .page-link {
+        color: #000;
+        &:hover,
+        &:focus {
+          color: #000;
+        }
+      }
+    }
+  }
