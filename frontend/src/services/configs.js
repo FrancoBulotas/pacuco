@@ -1,6 +1,6 @@
 
 import axios from 'axios'
-const baseUrl = '/api/config'
+const baseUrl = `${import.meta.env.VITE_API_URL}/api/config`
 
 
 const get = async () => {
