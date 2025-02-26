@@ -1,10 +1,6 @@
 
-
 {
     "rewrites": [
-      { "source": "/api/:path*", "destination": "https://pacuco-server.vercel.app/api/:path*" },
-      { "source": "/administracion/:path*", "destination": "https://pacuco-server.vercel.app/administracion/:path*" },
-      { "source": "/login/:path*", "destination": "https://pacuco-server.vercel.app/login/:path*" },
-      { "source": "/register/:path*", "destination": "https://pacuco-server.vercel.app/register/:path*" }
+      { "source": "/api/:path*", "destination": "https://pacuco-server.vercel.app/api/:path*" }
     ]
-  }
+}

@@ -19,6 +19,7 @@ import ScrollToTop from './components/common/ScrollToTop'
 import NavBar from './components/common/NavBar'
 import Home from './components/home/Home'
 import Footer from './components/common/Footer';
+import NotFoundPage from './components/common/NotFoundPage';
 // code splitting
 const Login = lazy(() => import('./components/common/Login'))
 const Register = lazy(() => import('./components/common/Register'))
@@ -118,7 +119,7 @@ function App() {
               <Route path='/administracion/contenido' element={<CheckPermissionsAdministration component={<AdminWithNavBar component={<ContentAdministration />} />} />}></Route> 
               <Route path='/administracion/guardapolvosDestacados' element={<CheckPermissionsAdministration component={<AdminWithNavBar component={<GuardapolvosFeatured />} />} />}></Route> 
               {/* Manejo de rutas 404 */}
-              <Route path="*" element={<h1>Página no encontrada</h1>} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
           <Footer /> 
