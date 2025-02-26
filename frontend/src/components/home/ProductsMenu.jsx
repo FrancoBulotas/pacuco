@@ -1,13 +1,13 @@
 
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import { Link } from 'react-router-dom';
 import '../../assets/styles/productsMenu.css';
 
 const ProductsMenu = () => {
-    const config = useSelector(state => state.config)
-
+    const config = useSelector(state => state.config);
+    const navigate = useNavigate();
     const [categoriesData, setCategoriesData] = useState(config != null ? config[0].categories : null)
 
     useEffect(() => {
@@ -28,16 +28,18 @@ const ProductsMenu = () => {
                         {Object.entries(subcategories).map(([type, details]) => (
                             type != 'notShow' &&
                             <a
-                            key={type}
-                            href={`/products?category=${category.toLowerCase()}&type=${type.toLowerCase().replace(' ', '_')}`}
-                            className={`subcategory-card`}
+                                key={type}
+                                onClick={() => navigate(`/products?category=${category.toLowerCase()}&type=${type.toLowerCase().replace(' ', '_')}`)}
+                                className={`subcategory-card`}
+                                style={{cursor:'pointer'}}
                             >
                             {type.toUpperCase()}
                             </a>
                         ))}
                         <a
-                            href={`/products?category=${category.toLowerCase()}`}
+                            onClick={() => navigate(`/products?category=${category.toLowerCase()}`)}
                             className="subcategory-card view-all"
+                            style={{cursor:'pointer'}}
                         >
                             VER TODOS
                         </a>

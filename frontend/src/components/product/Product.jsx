@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { addOneToCart, setShow } from '../../reducers/cartReducer.js'
-import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import ScrollToTop from '../common/ScrollToTop.js'
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
@@ -20,8 +20,6 @@ import '../../assets/styles/guardapolvo/guardapolvoOld.css'
 const Product = ({ navigateTo, product }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const location = useLocation()
-    const [searchParams] = useSearchParams();
 
     const cart = useSelector(state => state.cart.items)
     const [choosenSize, setChoosenSize] = useState('00')
