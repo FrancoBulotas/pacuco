@@ -25,7 +25,7 @@ const StockAdministration = () => {
     const [choosenTable, setChoosenTable] = useState('')
     const [choosenCategory, setChoosenCategory] = useState('')
     const [itemToShow, setItemToShow] = useState({})
-    const [config, setConfig] = useState(configuration ? configuration[0] : null);
+    const [config, setConfig] = useState(configuration ? configuration[0] : []);
 
     const [refreshKey, setRefreshKey] = useState(0);
 
