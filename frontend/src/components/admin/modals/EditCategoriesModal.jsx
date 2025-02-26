@@ -195,7 +195,7 @@ const EditCategoriesModal = (props) => {
                     <h6>Actuales:</h6>
                     {/* List Categories */}
                     <ul style={{ listStyle: 'none', padding: 0 }}>
-                        {Object.keys(categoriesData).map((category) => (
+                        {categoriesData && Object.keys(categoriesData).map((category) => (
                         <li key={category} className="d-flex justify-content-between align-items-center mb-2">
                             <span>{category}</span>
                             <div>
@@ -261,7 +261,7 @@ const EditCategoriesModal = (props) => {
                     onChange={(e) => setSelectedCategory(e.target.value)}
                     >
                     <option value="" className='option-choose-category'>Seleccione una categoría</option>
-                    {Object.keys(categoriesData).map((category) => (
+                    {categoriesData && Object.keys(categoriesData).map((category) => (
                         <option key={category} value={category}>
                             {category}
                         </option>
@@ -343,7 +343,7 @@ const EditCategoriesModal = (props) => {
                 {/* List Subcategories */}
                 {selectedCategory && (
                     <ul style={{ listStyle: 'none', padding: 0 }}>
-                    {Object.keys(categoriesData[selectedCategory]).map((subcategory) => (
+                    {categoriesData && Object.keys(categoriesData[selectedCategory]).map((subcategory) => (
                         (subcategory != 'notShow') && 
                         <li key={subcategory} className="d-flex justify-content-between align-items-center mb-2 li-subcategories">
                             <span>{subcategory}</span>
