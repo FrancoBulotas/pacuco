@@ -1,0 +1,11 @@
+
+
+{
+    "redirects": [
+      { "source": "/api/:path*", "destination": "https://pacuco-server.vercel.app/api/:path*", "permanent": true },
+      { "source": "/administracion/:path*", "destination": "https://pacuco-server.vercel.app/administracion/:path*", "permanent": true },
+      { "source": "/login/:path*", "destination": "https://pacuco-server.vercel.app/login/:path*", "permanent": true },
+      { "source": "/register/:path*", "destination": "https://pacuco-server.vercel.app/register/:path*", "permanent": true }
+    ]
+  }
+  
