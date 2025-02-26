@@ -2,8 +2,6 @@
 import axios from 'axios'
 const baseUrl = `${import.meta.env.VITE_API_URL}/api/config`
 
-console.log(import.meta.env.VITE_API_URL);
-
 const get = async () => {
     const response = await axios.get(baseUrl)
     return response.data
