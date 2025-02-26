@@ -1,14 +1,14 @@
 
-import axios from 'axios'
-const baseUrl = '/api/users'
+import api from './api';
+const baseUrl = '/api/users';
 
 const getAll = async () => {
-    const response = await axios.get(baseUrl);
+    const response = await api.get(baseUrl);
     return response.data;
 }
 
 const create = async credentials => {
-  const response = await axios.post(baseUrl + '/create', credentials);
+  const response = await api.post(baseUrl + '/create', credentials);
   return response.data;
 }
 

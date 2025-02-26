@@ -26,13 +26,3 @@ export default defineConfig(({ mode }) => ({
     include: ['simple-datatables'],
   },
 }));
-
-// export default defineConfig({
-//   plugins: [react()],
-//   define: {
-//     'import.meta.env.VITE_API_URL': JSON.stringify('https://pacuco-server.vercel.app'),
-//   },
-//   optimizeDeps: {
-//     include: ['simple-datatables'],
-//   },
-// })

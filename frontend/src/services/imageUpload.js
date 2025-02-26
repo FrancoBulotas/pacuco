@@ -1,14 +1,15 @@
 
 
-import axios from 'axios'
-const baseUrl = '/api/uploadImage'
+import api from './api';
+
+const baseUrl = '/api/uploadImage';
 
 const upload = async (data, token) => {
     const config = {    
         headers: { Authorization: token }, 
     }
 
-    const response = await axios.post(baseUrl, data, config)
+    const response = await api.post(baseUrl, data, config)
     return response.data
 }
 
