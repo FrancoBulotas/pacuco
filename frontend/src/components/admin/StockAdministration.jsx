@@ -35,8 +35,11 @@ const StockAdministration = () => {
 
     useEffect(() =>{
         setConfig(configuration[0]);
+        console.log(configuration);
+        console.log(config);
     }, [configuration])
 
+    console.log(configuration)
     // useEffect(() =>{
     //     if(categoryTabChoosen === 'accesorios') {         
     //         dispatch(setTypeTab('totebag'));
