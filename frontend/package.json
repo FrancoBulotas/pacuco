@@ -8,7 +8,8 @@
     "build": "vite build",
     "build:copy": "vite build && xcopy /s /e /y /i \"dist\" \"D:\\Usuario Franco\\Escritorio Franco\\pacuco\\pacuco-server\\dist\"",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "update:frontend": "xcopy /s /e /y /i \"D:\\Usuario Franco\\Escritorio Franco\\pacuco\\pacuco-client\\*\" \"frontend\\\""
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",

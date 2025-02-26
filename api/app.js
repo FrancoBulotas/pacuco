@@ -28,11 +28,7 @@ mongoose.connect(config.MONGODB_URI)
         console.log('error connecting to MongoDB:', error.message)
     })
 
-app.use(cors({
-    origin: 'https://pacuco-client.vercel.app/', // Reemplaza con la URL de tu frontend
-    credentials: true,
-}));
-
+app.use(cors());
 app.use(express.json())
 // app.use(express.static('dist'))
 app.use(express.static(path.join(__dirname, "dist")));
