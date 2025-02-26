@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-const baseUrl = `${import.meta.env.VITE_API_URL}/api/sendMessage`;
+const baseUrl = '/api/sendMessage';
 
 const sendMessage = async (phone, message) => {
     const response = await axios.post(baseUrl, {

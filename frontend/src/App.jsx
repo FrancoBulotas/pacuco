@@ -54,7 +54,6 @@ function App() {
     fetchConfig();
   }, [])
 
-
   // Seteamos guardapolvos en base a los parametros de busqueda en la URL
   useEffect(() => {
     const fetchProducts = async () => {

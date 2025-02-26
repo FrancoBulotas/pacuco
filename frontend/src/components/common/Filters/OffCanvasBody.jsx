@@ -19,7 +19,7 @@ const OffCanvasBody = ({ updateQueryParams, isCustom, isAccesory }) => {
     const divButtons = {display:'flex', flexWrap:'wrap'};
     const sizeButtonStyle = { fontSize: '15px', backgroundColor:'#f1f1f1',display:'flex', justifyContent:'center', alignItems:'center', border:'none', borderRadius:'6px', padding:'20px', margin:'6px', width:'60px', height:'20px',}
     const tableButtonStyle = { fontSize: '15px', backgroundColor:'#f1f1f1',display:'flex', justifyContent:'center', alignItems:'center', border:'none', borderRadius:'6px', padding:'10px', margin:'6px', width:'80px', }
-    const watchAllButtonStyle = { width:'100px', fontSize: '12px', backgroundColor:'#f1f1f1', border:'none', borderRadius:'6px', padding:'5px', margin:'6px', width:'60px', }
+    const watchAllButtonStyle = {fontSize: '12px', backgroundColor:'#f1f1f1', border:'none', borderRadius:'6px', padding:'5px', margin:'6px', width:'60px', }
     const tableButtonStyleDescripcion = { fontSize: '13px', backgroundColor:'#f1f1f1', display:'flex', justifyContent:'center', alignItems:'center', border:'none', borderRadius:'6px', padding:'10px', margin:'6px', width:'90px', }
 
     // const obtenerValoresUnicos = (campo) => {

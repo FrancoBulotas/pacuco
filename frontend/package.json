@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev:local": "cross-env NODE_ENV=development vite",
+    "dev": "cross-env NODE_ENV=production vite",
     "build": "vite build",
     "build:copy": "vite build && xcopy /s /e /y /i \"dist\" \"D:\\Usuario Franco\\Escritorio Franco\\pacuco\\pacuco-server\\dist\"",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",

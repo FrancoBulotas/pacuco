@@ -1,0 +1,1 @@
+import{k as e}from"./index-CLvEQOkU.js";const t="https://pacuco-server.vercel.app/api/users",r=async()=>(await e.get(t)).data,a=async s=>(await e.post(t+"/create",s)).data,n={getAll:r,create:a};export{n as u};

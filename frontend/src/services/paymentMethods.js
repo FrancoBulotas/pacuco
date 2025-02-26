@@ -1,7 +1,7 @@
 
 
 import axios from 'axios'
-const baseUrl = `${import.meta.env.VITE_API_URL}/api/payments`;
+const baseUrl = '/api/payments'
 
 const getAll = async () => {
   const response = await axios.get(baseUrl)

@@ -1,0 +1,1 @@
+import{k as o}from"./index-CLvEQOkU.js";const n="https://pacuco-server.vercel.app/api/login",t=async s=>(await o.post(n,s)).data,a=async s=>{const e={headers:{Authorization:s}};return(await o.post(n+"/checkUserSession",e)).data},i={login:t,checkActiveSession:a};export{i as l};
