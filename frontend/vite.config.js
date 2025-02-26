@@ -7,22 +7,30 @@ export default defineConfig(({ mode }) => ({
   server: {
     proxy: {
       '/api': {
-        target: mode === 'development' 
-          ? 'http://localhost:8080' 
-          : 'https://pacuco-server.vercel.app',
+        target: 'http://localhost:8080',
         changeOrigin: true,
         secure: false,
       },
-    },
+      '/administracion': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/login': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/register': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        secure: false,
+      }
+    }
   },
   define: {
     'import.meta.env.VITE_API_URL': JSON.stringify(
-      mode === 'development' 
-        ? 'http://localhost:8080' 
-        : 'https://pacuco-server.vercel.app'
+      mode === 'development' ? 'http://localhost:8080' : 'https://pacuco-server.vercel.app'
     ),
-  },
-  optimizeDeps: {
-    include: ['simple-datatables'],
-  },
+  }
 }));

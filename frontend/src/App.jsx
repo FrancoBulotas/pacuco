@@ -117,6 +117,8 @@ function App() {
               <Route path='/administracion/usuarios' element={<CheckPermissionsAdministration component={<AdminWithNavBar component={<UsersAdministration />} />} />}></Route> 
               <Route path='/administracion/contenido' element={<CheckPermissionsAdministration component={<AdminWithNavBar component={<ContentAdministration />} />} />}></Route> 
               <Route path='/administracion/guardapolvosDestacados' element={<CheckPermissionsAdministration component={<AdminWithNavBar component={<GuardapolvosFeatured />} />} />}></Route> 
+              {/* Manejo de rutas 404 */}
+              <Route path="*" element={<h1>Página no encontrada</h1>} />
             </Routes>
           </Suspense>
           <Footer /> 
