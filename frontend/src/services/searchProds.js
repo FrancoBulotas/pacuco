@@ -1,10 +1,10 @@
 
-import axios from 'axios';
+import api from './api';
 const baseUrl = `/api/products`;
 
 const getSearch = async (params) => {
     
-    const response = await axios.get(baseUrl, {
+    const response = await api.get(baseUrl, {
         params: {
             name: params.name,
             minPrice: params.minPrice,

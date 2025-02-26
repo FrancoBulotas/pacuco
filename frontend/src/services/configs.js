@@ -1,9 +1,10 @@
 
-import axios from 'axios'
-const baseUrl = `/api/config`
+
+import api from './api';
+const baseUrl = `/api/config`;
 
 const get = async () => {
-    const response = await axios.get(baseUrl)
+    const response = await api.get(baseUrl)
     return response.data
 }
 
@@ -12,7 +13,7 @@ const update = async (data, token) => {
         headers: { Authorization: token }, 
     }
     
-    const response = await axios.put(`${baseUrl}/${data.id}`, data, config);
+    const response = await api.put(`${baseUrl}/${data.id}`, data, config);
     return response.data;
 }
 
