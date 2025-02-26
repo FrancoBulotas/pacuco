@@ -1,0 +1,1 @@
+import{r as s,j as o}from"./index-CVe7Vign.js";import{u as a}from"./users-Dfqlgy_k.js";const u=()=>{const[i,t]=s.useState([]);s.useEffect(()=>{e()},[]);const e=async()=>{const r=await a.getAll();t(r)};return o.jsx("div",{})};export{u as default};
