@@ -13,6 +13,27 @@ export default defineConfig(({ mode }) => ({
         changeOrigin: true,
         secure: false,
       },
+      '/administracion': {
+        target: mode === 'development' 
+          ? 'http://localhost:8080' 
+          : 'https://pacuco-server.vercel.app',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/login': {
+        target: mode === 'development' 
+          ? 'http://localhost:8080' 
+          : 'https://pacuco-server.vercel.app',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/register': {
+        target: mode === 'development' 
+          ? 'http://localhost:8080' 
+          : 'https://pacuco-server.vercel.app',
+        changeOrigin: true,
+        secure: false,
+      },
     },
   },
   define: {
