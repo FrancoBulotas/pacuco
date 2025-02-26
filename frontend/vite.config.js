@@ -10,7 +10,7 @@ export default defineConfig({
         // target: 'http://localhost:8080' ,
         target: process.env.NODE_ENV === 'development'   
         ? 'http://localhost:8080'
-        : `${import.meta.env.VITE_API_URL}`,
+        : {'import.meta.env.VITE_API_URL': JSON.stringify('https://pacuco-server.vercel.app')},
         changeOrigin: true,
       },
     }
