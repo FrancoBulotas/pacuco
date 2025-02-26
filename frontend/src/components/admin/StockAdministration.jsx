@@ -33,6 +33,10 @@ const StockAdministration = () => {
         setRefreshKey(prevKey => prevKey + 1);
     }
 
+    useEffect(() =>{
+        setConfig(configuration[0]);
+    }, [configuration])
+
     // useEffect(() =>{
     //     if(categoryTabChoosen === 'accesorios') {         
     //         dispatch(setTypeTab('totebag'));
@@ -111,7 +115,7 @@ const StockAdministration = () => {
                             onSelect={handleCategorySelect}
                             >
                             {/* Generate category tabs */}
-                            {Object.entries(config.categories).map(([category, types]) => (
+                            {Object.entries(config?.categories).map(([category, types]) => (
                                 <Tab key={category} eventKey={category.toLowerCase()} title={category} style={tabStyle}>
                                     <div className='div-change-config' style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                                        Subcategorias
@@ -153,7 +157,7 @@ const StockAdministration = () => {
                     <EditModal item={itemToShow} show={editModalShow} table={choosenTable} onHide={() => setEditModalShow(false)} handleProductEdited={handleProduct} />
                     <CreateModal show={createModalShow} table={choosenTable} type={typeTabChoosen} category={choosenCategory} onHide={() => setCreateModalShow(false)} handleProductCreated={handleProduct} />        
                     <EditAllProductsModal show={editAllProductsModal} onHide={() => setEditAllProductsModal(false)} />
-                    <EditCategoriesModal show={editCategoriesModal} onHide={() => setEditCategoriesModal(false)} config={config} categories={config.categories} />
+                    <EditCategoriesModal show={editCategoriesModal} onHide={() => setEditCategoriesModal(false)} config={config} categories={config?.categories} />
                 </div>
             </div>
         </div>
