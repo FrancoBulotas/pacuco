@@ -2,9 +2,9 @@
 import React from 'react';
 import { HashLoader } from 'react-spinners';
 
-const LoadingScreen = () => {
+const LoadingScreen = ({home}) => {
   return (
-    <div className='spinner-container'><HashLoader color='#ffc8c8' size={30} /></div>
+    <div className={`${home ? 'spinner-container-home' : 'spinner-container'}`}><HashLoader color='#ffc8c8' size={30} /></div>
     // <div style={styles.loadingContainer}>
     //   <div style={styles.spinner}></div>      
     // </div>

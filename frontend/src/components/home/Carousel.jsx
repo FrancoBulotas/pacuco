@@ -13,6 +13,7 @@ import ImageComponent from '../common/Placeholders/ImageComponent';
 import CheckIfIsStockOrCustomizable from '../product/common/CheckIfIsStockOrCustomizable.jsx';
 import searchProdsService from '../../services/searchProds.js';
 import { setFeatured } from '../../reducers/guardapolvosReducer.js';
+import LoadingScreen from '../common/loaders/LoadingScreen';
 
 const CarouselProd = ({ title, table }) => {
   const [guardapolvos, setGuardapolvos] = useState([]);
@@ -79,7 +80,9 @@ const CarouselProd = ({ title, table }) => {
           }}
           className="product-swiper"
         >
-          {guardapolvos.map((item, i) => (
+          { guardapolvos.length === 0 
+          ? <LoadingScreen home={true} /> 
+          : guardapolvos.map((item, i) => (
             <SwiperSlide key={i} onClick={() => navigate(`/products?id=${item.id}`)}>
               <div className="product-card compact">
                 {item.table === 'stock' && item.amount === 0 && (
