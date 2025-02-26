@@ -1,6 +1,6 @@
 
 ###
-GET http://localhost:8080/api/products?category=guardapolvo
+GET http://localhost:8080/api/products?category=guardapolvo&type=nivel_inicial
 ###
 GET http://localhost:8080/api/products/guardapolvos/66c6248b94fcdcb275cfe304
 ###

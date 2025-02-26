@@ -15,7 +15,7 @@ import HtmlForTab from './stock/HtmlForTab'
 const StockAdministration = () => {
     const categoryTabChoosen = useSelector(state => state.administration.categoryTabChoosen);
     const typeTabChoosen = useSelector(state => state.administration.typeTabChoosen);
-    const configuration = useSelector(state => state.config[0]);
+    const configuration = useSelector(state => state.config);
     const dispatch = useDispatch();
 
     const [createModalShow, setCreateModalShow] = useState(false);
@@ -25,7 +25,7 @@ const StockAdministration = () => {
     const [choosenTable, setChoosenTable] = useState('')
     const [choosenCategory, setChoosenCategory] = useState('')
     const [itemToShow, setItemToShow] = useState({})
-    const [config, setConfig] = useState(configuration);
+    const [config, setConfig] = useState(configuration ? configuration[0] : null);
 
     const [refreshKey, setRefreshKey] = useState(0);
 

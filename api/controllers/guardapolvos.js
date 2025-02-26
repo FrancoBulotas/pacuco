@@ -87,25 +87,28 @@ guardapolvosRouter.post('/addTypeField', async (request, response) => {
 
     try {
         await Promise.all (guardapolvos.map(async (guardapolvo) => {
-            // if(guardapolvo.table === 'accesorios') {
-            //     await Guardapolvo.findByIdAndUpdate(guardapolvo.id,
-            //         { 
-            //             name: guardapolvo.name, amount: guardapolvo.amount, amountToBuy: guardapolvo.amountToBuy, 
-            //             size: guardapolvo.size, price: guardapolvo.price , discountPrice: guardapolvo.discountPrice, img: guardapolvo.img, img2: guardapolvo.img2, img3: guardapolvo.img3, 
-            //             table: 'stock', description: guardapolvo.description, type: 'totebag', category: 'accesorios'}, 
-            //         { runValidators: true, context: 'query' })
-            // }
+            if(guardapolvo.table === 'stock' && guardapolvo.type === 'nivel_inicial') {
+                // await Guardapolvo.findByIdAndUpdate(guardapolvo.id,
+                //     { 
+                //         name: guardapolvo.name, amount: guardapolvo.amount, amountToBuy: guardapolvo.amountToBuy, 
+                //         size: guardapolvo.size, price: guardapolvo.price , discountPrice: guardapolvo.discountPrice, 
+                //         img: guardapolvo.img, img2: guardapolvo.img2, img3: guardapolvo.img3, 
+                //         table: 'nivel_inicial', description: guardapolvo.description, type: guardapolvo.type, category: guardapolvo.category, 
+                //         show: guardapolvo.show
+                //     }, 
+                //     { runValidators: true, context: 'query' })
+            }
 
-            await Guardapolvo.findByIdAndUpdate(guardapolvo.id,
-                { 
-                    name: guardapolvo.name, amount: guardapolvo.amount, amountToBuy: guardapolvo.amountToBuy, 
-                    size: guardapolvo.size, price: guardapolvo.price , discountPrice: guardapolvo.discountPrice, 
-                    img: guardapolvo.img, img2: guardapolvo.img2, img3: guardapolvo.img3, 
-                    table: guardapolvo.table, description: guardapolvo.description, type: guardapolvo.type, category: guardapolvo.category, 
-                    show: true }, 
-                { runValidators: true, context: 'query' })
+            // await Guardapolvo.findByIdAndUpdate(guardapolvo.id,
+            //     { 
+            //         name: guardapolvo.name, amount: guardapolvo.amount, amountToBuy: guardapolvo.amountToBuy, 
+            //         size: guardapolvo.size, price: guardapolvo.price , discountPrice: guardapolvo.discountPrice, 
+            //         img: guardapolvo.img, img2: guardapolvo.img2, img3: guardapolvo.img3, 
+            //         table: guardapolvo.table, description: guardapolvo.description, type: guardapolvo.type, category: guardapolvo.category, 
+            //         show: true }, 
+            //     { runValidators: true, context: 'query' })
         }))
-        response.status(201).json({ message: 'Added successfully', ok: true });
+        response.status(201).json({ message: 'Added successfully', ok: true, prods: prods });
     } catch(error){
       response.status(501).json({ error: 'Error trying to add field', ok: false }).end()
     }
