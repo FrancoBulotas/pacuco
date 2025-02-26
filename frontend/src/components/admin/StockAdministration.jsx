@@ -115,7 +115,7 @@ const StockAdministration = () => {
                             onSelect={handleCategorySelect}
                             >
                             {/* Generate category tabs */}
-                            {Object.entries(config?.categories).map(([category, types]) => (
+                            {config && Object.entries(config.categories).map(([category, types]) => (
                                 <Tab key={category} eventKey={category.toLowerCase()} title={category} style={tabStyle}>
                                     <div className='div-change-config' style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                                        Subcategorias
