@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://pacuco-server.vercel.app/',
+        target: 'https://pacuco-server.vercel.app',
         changeOrigin: true,
       },
     }
