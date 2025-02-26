@@ -1,1 +1,0 @@
-import{j as t}from"./index-B7gCKMKK.js";/* empty css               */const e=({component:i})=>t.jsx("div",{className:"d-flex",children:t.jsx("div",{style:{width:"100%"},children:i})});export{e as default};
