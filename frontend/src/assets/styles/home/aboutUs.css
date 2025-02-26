@@ -1,6 +1,6 @@
 
 
-.section-sobre-nosotros-index {
+/* .section-sobre-nosotros-index {
     background: #f1f1f1;
     background-color: #fff;
 }
@@ -18,7 +18,6 @@
 }
 
 .container-flexible-img {
-    /* padding: 30px; */
     align-items: top;
 }
 
@@ -36,7 +35,7 @@
     padding: 60px 15px;
     padding-bottom: 30px;
 	margin: 0px;
-    /* cursor: pointer; */
+
 }
 
 .p-sobre-nosotros {
@@ -63,4 +62,177 @@
 .a-sobre-nosotros:focus {
     text-decoration: underline;
     color: #902da1;
-}
+} */
+
+
+/* About Us Section */
+.about-us-section {
+    padding: 5rem 1rem;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .about-us-container {
+    max-width: 1200px;
+    width: 100%;
+  }
+  
+  /* Header */
+  .about-us-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .about-us-title {
+    color: #222222;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 0 0 1rem 0;
+  }
+  
+  .about-us-divider {
+    background: linear-gradient(to right, #ffc8c8, #ff9eb6);
+    height: 3px;
+    width: 300px;
+    border-radius: 2px;
+    margin: 0 auto;
+  }
+  
+  /* Content Layout */
+  .about-us-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    align-items: center;
+  }
+  
+  .about-us-text {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .about-us-image {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Text Styling */
+  .about-us-paragraph {
+    color: #444444;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  
+  .about-us-paragraph:last-child {
+    margin-bottom: 0;
+  }
+  
+  .about-us-link {
+    color: #ff84a3;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+    position: relative;
+  }
+  
+  .about-us-link:hover {
+    color: #f55c99;
+  }
+  
+  .about-us-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #f55c99;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease;
+  }
+  
+  .about-us-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+  
+  /* Image Styling */
+  .image-frame {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.3s ease;
+    max-width: 400px;
+  }
+  
+  .image-frame::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: 10px;
+    bottom: 10px;
+    /* border: 2px solid #ff69b4; */
+    border-radius: 10px;
+    z-index: -1;
+    opacity: 0.4;
+  }
+  
+  .image-frame:hover {
+    transform: translateY(-10px);
+  }
+  
+  .about-us-img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    display: block;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .about-us-content {
+      flex-direction: column-reverse;
+      gap: 2rem;
+    }
+    
+    .about-us-title {
+      font-size: 1.8rem;
+    }
+    
+    .about-us-section {
+      padding: 3rem 1rem;
+    }
+    
+    .image-frame {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .about-us-section {
+      padding: 2rem 1rem;
+    }
+    
+    .about-us-title {
+      font-size: 1.5rem;
+    }
+    
+    .about-us-paragraph {
+      font-size: 0.95rem;
+    }
+    
+    .image-frame {
+      max-width: 100%;
+    }
+  }

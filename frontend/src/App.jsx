@@ -32,7 +32,7 @@ const PurchaseHistory = lazy(() => import('./components/admin/PurchaseHistory'))
 const UsersAdministration = lazy(() => import('./components/admin/UsersAdministration'))
 const ContentAdministration = lazy(() => import('./components/admin/ContentAdministration'))
 const Products = lazy(() => import('./components/product/Products'))
-const Guardapolvo = lazy(() => import('./components/product/Guardapolvo'))
+const Product = lazy(() => import('./components/product/Product'))
 const BuyProductForm = lazy(() => import('./components/product/BuyProduct/BuyProductForm'))
 
 import './assets/styles/index.scss'
@@ -92,7 +92,7 @@ function App() {
       if (!searchedGuardapolvo || Object.keys(searchedGuardapolvo).length === 0) {
         return <LoadingScreen />; 
       }
-      return <Guardapolvo navigateTo={searchedGuardapolvo?.table} guardapolvo={searchedGuardapolvo} />
+      return <Product navigateTo={searchedGuardapolvo?.table} product={searchedGuardapolvo} />
     } else {
       return <Products guardapolvos={filtredGuardapolvos} table={selectTable(queryParams)} />
     }

@@ -16,7 +16,38 @@ const ProductsMenu = () => {
 
     return (
         <>
-        {categoriesData != null && Object.entries(categoriesData).map(([category, subcategories]) => (
+        <div className="categories-wrapper">
+            {categoriesData != null && Object.entries(categoriesData).map(([category, subcategories]) => (
+                <div key={category} className="category-container">
+                <div className="category-section">
+                    <div className="category-header">
+                    <h3 className="category-title">{category.toUpperCase()}</h3>
+                    <div className="category-divider"></div>
+                    </div>
+                    <div className="subcategory-grid">
+                        {Object.entries(subcategories).map(([type, details]) => (
+                            type != 'notShow' &&
+                            <a
+                            key={type}
+                            href={`/products?category=${category.toLowerCase()}&type=${type.toLowerCase().replace(' ', '_')}`}
+                            className={`subcategory-card`}
+                            >
+                            {type.toUpperCase()}
+                            </a>
+                        ))}
+                        <a
+                            href={`/products?category=${category.toLowerCase()}`}
+                            className="subcategory-card view-all"
+                        >
+                            VER TODOS
+                        </a>
+                    </div>
+                </div>
+                </div>
+            ))}
+            </div>
+
+        {/* {categoriesData != null && Object.entries(categoriesData).map(([category, subcategories]) => (
             <div key={category} className="container-products">
             <div className="product-section">
                 <div className="section-header">
@@ -43,34 +74,7 @@ const ProductsMenu = () => {
                 </div>
             </div>
             </div>
-        ))}
-        {/* <div className="container-products">
-            <div className="product-section">
-                <div className="section-header">
-                    <h4 className="section-title">GUARDAPOLVOS</h4>
-                </div>
-                <div className="product-links">
-                    <a href="/products?category=guardapolvo&type=nivel_inicial" className="product-link">NIVEL INICIAL</a>
-                    <a href="/products?category=guardapolvo&type=primaria" className="product-link">PRIMARIA / COLOR</a>
-                    <a href="/products?category=guardapolvo&type=niños" className="product-link highlight">NIÑOS!</a>
-                    <a href="/products?category=guardapolvo&type=stock" className="product-link highlight">STOCK / ENTREGA INMEDIATA!</a>
-                    <a href="/products?category=guardapolvo" className="product-link view-all">VER TODOS</a>
-                </div>
-            </div>
-        </div>
-
-        <div className="container-products">
-            <div className="product-section upcoming">
-                <div className="section-header">
-                    <h4 className="section-title">ACCESORIOS</h4>
-                </div>
-                <div className="product-links">
-                    <a href="/products?type=totebag" className="product-link">Totebags</a>
-                    <a href="/products?category=accesorios" className="product-link view-all">VER TODOS</a>
-                </div>
-            </div>
-        </div> */}
-
+        ))} */}
         </>
     )
 }

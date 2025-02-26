@@ -29,7 +29,7 @@ const HtmlForFilterResuls = ({ guardapolvos: products }) => {
     }, [searchParams])
 
     const getLengthProductsToShow = () => {
-        let productsToShow = products.filter(prod => prod.show && subCategoriesData?.includes(prod.type));
+        let productsToShow = products.filter(prod => prod.show && subCategoriesData?.includes(prod.type.replace('_', ' ')));
         return productsToShow.length;
     }
 

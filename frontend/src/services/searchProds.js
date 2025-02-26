@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-const baseUrl = '/api/products';
+const baseUrl = `${import.meta.env.VITE_API_URL}/api/products`;
 
 const getSearch = async (params) => {
     

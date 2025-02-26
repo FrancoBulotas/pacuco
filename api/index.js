@@ -9,6 +9,7 @@ const path = require('path')
 // })
 
 const PORT = config.PORT || 3000;
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${config.PORT}`)
 })

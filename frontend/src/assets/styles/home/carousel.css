@@ -1,36 +1,27 @@
-
+/* 
 .swiper-button-next, 
 .swiper-button-prev {
-  color: black; /* Cambia el color de las flechas */
+  color: black;
   display: none;
 }
 .swiper-pagination-bullet {
-    background-color: black; /* Cambia el color de los puntos */
-    opacity: 0.4; /* Ajusta la opacidad */
+    background-color: black; 
+    opacity: 0.4;
     
 }
 
 .swiper-pagination-bullet-active {
-    background-color: black; /* Color del punto activo */
-    opacity: 1; /* Opacidad total para el activo */
+    background-color: black;
+    opacity: 1;
 }
   
 .swiper-button-next:hover, 
 .swiper-button-prev:hover {
-  color: #555; /* Color al pasar el mouse por encima */
+  color: #555;
 }
 
-.swiper-container {
-    /* position: relative; */
-  }
-  
 .swiper-pagination {
     display: none;
-    /* position: absolute;
-    bottom: -50px; /* Ajusta esta distancia según sea necesario */
-    /* left: 50%; */
-    /*transform: translateY(40%); */
-    /*z-index: 10; Asegúrate de que la paginación esté sobre otros elementos */
 }
 
 
@@ -38,9 +29,9 @@
 
 .card {
     object-fit: contain;
-    border: 2px solid #eeeeee; /* Cambia el color y grosor del borde */    
-    border-radius: 4px; /* Bordes redondeados */
-    transition: border-color 0.3s ease; /* Animación suave al cambiar el borde */
+    border: 2px solid #eeeeee; 
+    border-radius: 4px; 
+    transition: border-color 0.3s ease;
 }
 
 .card-body {
@@ -79,4 +70,328 @@
 .owl-prev span, .owl-next span {
     font-size: 40px;
     display: none;
-}
+} */
+
+/* Carousel Section */
+.product-carousel-section {
+    padding: 1rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  /* Header Styling */
+  .product-carousel-header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .product-carousel-title {
+    color: #222;
+    font-size: 1.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 0.8rem;
+    transition: color 0.2s ease;
+  }
+  
+  .product-carousel-title:hover {
+    color: #ffc8c8;
+  }
+  
+  .product-carousel-divider {
+    background: linear-gradient(to right, #ffc8c8, #fdb7c8);
+    height: 3px;
+    width: 150px;
+    border-radius: 2px;
+    margin: 0 auto;
+  }
+  
+  /* Carousel Container - new wrapper to position the arrows */
+  .carousel-container-prods {
+    position: relative;
+    margin: 0 40px; /* Make space for the side arrows */
+    padding: 1rem 0;
+  }
+  
+  /* Swiper Customization */
+  .product-swiper {
+    padding: 1rem 0;
+    /* overflow: visible; */
+  }
+  
+  /* Product Card - SMALLER SIZE */
+  .product-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Making products smaller overall */
+    max-width: 260px; 
+    margin: 0 auto;
+  }
+  
+  .product-card.compact {
+    /* Even smaller for the compact view */
+    max-width: 220px;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Out of Stock Badge */
+  .out-of-stock-badge {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    background-color: #222;
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    z-index: 10;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Product Image Container - SMALLER HEIGHT */
+  .product-image-container {
+    position: relative;
+    padding-top: 100%; /* Square aspect ratio (reduced from 120%) */
+    overflow: hidden;
+    background-color: #f8f8f8;
+  }
+  
+  .product-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .product-images {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  
+  .product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease;
+  }
+  
+  .product-image.primary {
+    opacity: 1;
+  }
+  
+  .product-image.secondary {
+    opacity: 0;
+  }
+  
+  .product-card:hover .product-image.primary {
+    opacity: 0;
+  }
+  
+  .product-card:hover .product-image.secondary {
+    opacity: 1;
+  }
+  
+  /* Product Details - SMALLER PADDING */
+  .product-details {
+    padding: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  
+  .product-name {
+    font-size: 0.85rem; /* Smaller font */
+    font-weight: 400;
+    color: #333;
+    margin-bottom: 0.6rem;
+    text-align: center;
+    line-height: 1.4;
+    /* Limit to 2 lines with ellipsis */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 2.8em;
+  }
+  
+  /* Price Styling - SMALLER FONTS */
+  .product-price {
+    margin-top: auto;
+    text-align: center;
+  }
+  
+  .price-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.4rem;
+  }
+  
+  .original-price {
+    font-size: 0.75rem; /* Smaller */
+    color: #888;
+    text-decoration: line-through;
+    margin-right: 0.5rem;
+  }
+  
+  .discount-badge {
+    background-color: #ffc8c8;
+    color: #000;
+    font-size: 0.75rem; /* Smaller */
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+  
+  .final-price {
+    font-size: 0.95rem; /* Smaller */
+    font-weight: 600;
+    color: #222;
+  }
+  
+  /* SIDE NAVIGATION ARROWS */
+  .side-arrow {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    /* Position absolutely relative to carousel container */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+  
+  .left-arrow {
+    left: -44px; /* Position left of the carousel */
+  }
+  
+  .right-arrow {
+    right: -44px; /* Position right of the carousel */
+  }
+  
+  .side-arrow:hover {
+    background-color: #ffeff5;
+  }
+  
+  .swiper-button-prev-custom:after,
+  .swiper-button-next-custom:after {
+    font-family: 'swiper-icons';
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .swiper-button-prev-custom:after {
+    content: 'prev';
+  }
+  
+  .swiper-button-next-custom:after {
+    content: 'next';
+  }
+  
+  /* Pagination below */
+  .pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+  
+  .swiper-pagination-custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .swiper-pagination-bullet-custom {
+    width: 8px;
+    height: 8px;
+    background-color: #ddd;
+    border-radius: 50%;
+    margin: 0 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .swiper-pagination-bullet-active-custom {
+    background-color: #ff69b4;
+    width: 12px;
+    height: 12px;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .product-carousel-section {
+      padding: 1rem 0.5rem;
+    }
+    
+    .carousel-container-prods {
+      margin: 0 32px; /* Slightly smaller margin on mobile */
+    }
+    
+    .left-arrow {
+      left: -32px;
+    }
+    
+    .right-arrow {
+      right: -32px;
+    }
+    
+    .side-arrow {
+      width: 32px;
+      height: 32px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .product-carousel-title {
+      font-size: 1.5rem;
+    }
+    
+    .carousel-container-prods {
+      margin: 0 28px; /* Even smaller margin on tiny screens */
+    }
+    
+    .left-arrow {
+      left: -28px;
+    }
+    
+    .right-arrow {
+      right: -28px;
+    }
+    
+    .side-arrow {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .swiper-button-prev-custom:after,
+    .swiper-button-next-custom:after {
+      font-size: 0.8rem;
+    }
+  }
