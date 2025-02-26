@@ -22,7 +22,8 @@ const middleware = require('./utils/middleware')
 mongoose.set('strictQuery', false)
 mongoose.connect(config.MONGODB_URI)
     .then(() => {
-    console.log(`connected to MongoDB`)
+        if(config.MONGODB_URI.includes('Dev')) console.log(`connected to MongoDB Development`)
+        else console.log(`connected to MongoDB Production`)
     })
     .catch((error) => {
         console.log('error connecting to MongoDB:', error.message)
@@ -30,8 +31,7 @@ mongoose.connect(config.MONGODB_URI)
 
 app.use(cors());
 app.use(express.json())
-// app.use(express.static('dist'))
-app.use(express.static(path.join(__dirname, "dist")));
+// app.use(express.static(path.join(__dirname, "dist")));
  
 app.use(middleware.tokenExtractor)
 app.use(middleware.userExtractor)
