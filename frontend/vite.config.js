@@ -8,9 +8,9 @@ export default defineConfig({
     proxy: {
       '/api': { 
         // target: 'http://localhost:8080' ,
-        target: process.env.NODE_ENV == 'development'   
+        target: process.env.NODE_ENV === 'development'   
         ? 'http://localhost:8080'
-        : 'https://pacuco-server.vercel.app',
+        : `${import.meta.env.VITE_API_URL}`,
         changeOrigin: true,
       },
     }
