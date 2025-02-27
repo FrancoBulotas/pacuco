@@ -36,7 +36,7 @@ const StockAdministration = () => {
     }
 
     useEffect(() =>{
-        setConfig(configuration[0]);
+        if(configuration) setConfig(configuration[0]);        
     }, [configuration])
 
     // useEffect(() =>{
