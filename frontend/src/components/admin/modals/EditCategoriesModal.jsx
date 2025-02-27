@@ -15,8 +15,6 @@ const EditCategoriesModal = (props) => {
     const userLogged = useSelector(state => state.login)
     const navigate = useNavigate()    
   
-    console.log(props.config);
-
     const [configData, setConfigData] = useState(props.config);
     const [categoriesData, setCategoriesData] = useState(props.categories);
     const [newCategoryName, setNewCategoryName] = useState('');

@@ -18,8 +18,6 @@ const StockAdministration = () => {
     const configuration = useSelector(state => state.config);
     const dispatch = useDispatch();
 
-    console.log(configuration);
-
     const [createModalShow, setCreateModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
     const [editAllProductsModal, setEditAllProductsModal] = useState(false);
