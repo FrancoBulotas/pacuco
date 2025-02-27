@@ -18,7 +18,6 @@ const purchasedProductsRouter = require('./controllers/purchased_products')
 const emailsRouter = require('./controllers/emails')
 const middleware = require('./utils/middleware')
 
-
 mongoose.set('strictQuery', false)
 mongoose.connect(config.MONGODB_URI)
     .then(() => {
