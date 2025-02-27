@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Routes, Route, useLocation, useSearchParams } from 'react-router-dom'
 
 // import { SpeedInsights } from "@vercel/speed-insights/next";
-// import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react"
 
 import { initializePaymentMethods } from './reducers/paymentMethodsReducer';
 import { setConfig } from './reducers/configReducer';
@@ -127,7 +127,7 @@ function App() {
           </Suspense>
           <Footer /> 
           {/* <SpeedInsights /> */}
-          {/* <Analytics /> */}
+          <Analytics />
         </div>
     </div>
   )
