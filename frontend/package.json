@@ -17,6 +17,7 @@
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.15.20",
     "@reduxjs/toolkit": "^2.2.5",
+    "@vercel/speed-insights": "^1.2.0",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.3",

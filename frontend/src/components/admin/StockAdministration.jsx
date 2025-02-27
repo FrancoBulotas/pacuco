@@ -18,6 +18,8 @@ const StockAdministration = () => {
     const configuration = useSelector(state => state.config);
     const dispatch = useDispatch();
 
+    console.log(configuration);
+
     const [createModalShow, setCreateModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
     const [editAllProductsModal, setEditAllProductsModal] = useState(false);
@@ -37,7 +39,6 @@ const StockAdministration = () => {
         setConfig(configuration[0]);
     }, [configuration])
 
-    console.log(config.categories);
     // useEffect(() =>{
     //     if(categoryTabChoosen === 'accesorios') {         
     //         dispatch(setTypeTab('totebag'));
@@ -108,62 +109,64 @@ const StockAdministration = () => {
 
                     <div style={{width:'100%', backgroundColor:'#fff', padding:'10px'}} className='tabs-container'>
                         Categorias
-                        <Tabs
-                            defaultActiveKey={categoryTabChoosen}
-                            id="uncontrolled-tab-example"
-                            className="mb-3"
-                            fill
-                            onSelect={handleCategorySelect}
-                            >
-                            {/* Generate category tabs */}
-                            { config.categories
-                            ? Object.entries(config.categories).map(([category, types]) => (
-                                <Tab key={category} eventKey={category.toLowerCase()} title={category} style={tabStyle}>
-                                    <div className='div-change-config' style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                                       Subcategorias
-                                    </div>
-                                    <Tabs
-                                        defaultActiveKey={typeTabChoosen}
-                                        id="uncontrolled-tab-example"
-                                        className="mb-3"
-                                        fill
-                                        onSelect={handleTypeSelect}
-                                    >
-                                    {/* Generate type tabs */}
-                                    {Object.entries(types).map(([type, details]) => (
-                                        (type != 'notShow') && 
-                                        <Tab
-                                            key={type}
-                                            eventKey={type.toLowerCase().replace(/\s+/g, '_')}
-                                            title={type}
-                                            style={tabStyle}
+                        {config.categories
+                            ?
+                            <Tabs
+                                defaultActiveKey={categoryTabChoosen}
+                                id="uncontrolled-tab-example"
+                                className="mb-3"
+                                fill
+                                onSelect={handleCategorySelect}
+                                >
+                                {/* Generate category tabs */}
+                                {  Object.entries(config.categories).map(([category, types]) => (
+                                    <Tab key={category} eventKey={category.toLowerCase()} title={category} style={tabStyle}>
+                                        <div className='div-change-config' style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                                        Subcategorias
+                                        </div>
+                                        <Tabs
+                                            defaultActiveKey={typeTabChoosen}
+                                            id="uncontrolled-tab-example"
+                                            className="mb-3"
+                                            fill
+                                            onSelect={handleTypeSelect}
                                         >
-                                            <HtmlForTab
-                                                title={type.toUpperCase()}
-                                                table={details.table || ''} // Use the table value from the data
-                                                category={category.toLowerCase()}
-                                                type={type.toLowerCase().replace(/\s+/g, '_')}
-                                                showCreateModal={() =>
-                                                    showCreateModal(details.table, category.toLowerCase())
-                                                }
-                                                showEditModal={showEditModal}
-                                                refreshKey={refreshKey}
-                                            />
-                                        </Tab>
-                                        ))}
-                                    </Tabs>
-                                </Tab>
-                            )) 
-                            : null}
+                                        {/* Generate type tabs */}
+                                        {Object.entries(types).map(([type, details]) => (
+                                            (type != 'notShow') && 
+                                            <Tab
+                                                key={type}
+                                                eventKey={type.toLowerCase().replace(/\s+/g, '_')}
+                                                title={type}
+                                                style={tabStyle}
+                                            >
+                                                <HtmlForTab
+                                                    title={type.toUpperCase()}
+                                                    table={details.table || ''} // Use the table value from the data
+                                                    category={category.toLowerCase()}
+                                                    type={type.toLowerCase().replace(/\s+/g, '_')}
+                                                    showCreateModal={() =>
+                                                        showCreateModal(details.table, category.toLowerCase())
+                                                    }
+                                                    showEditModal={showEditModal}
+                                                    refreshKey={refreshKey}
+                                                />
+                                            </Tab>
+                                            ))}
+                                        </Tabs>
+                                    </Tab>
+                                ))}
                             </Tabs>
-                    </div>
-                    <EditModal item={itemToShow} show={editModalShow} table={choosenTable} onHide={() => setEditModalShow(false)} handleProductEdited={handleProduct} />
-                    <CreateModal show={createModalShow} table={choosenTable} type={typeTabChoosen} category={choosenCategory} onHide={() => setCreateModalShow(false)} handleProductCreated={handleProduct} />        
-                    <EditAllProductsModal show={editAllProductsModal} onHide={() => setEditAllProductsModal(false)} />
-                    { config.categories 
-                        ? <EditCategoriesModal show={editCategoriesModal} onHide={() => setEditCategoriesModal(false)} config={config} categories={config.categories} /> 
-                        : null
-                    }
+                        : null    
+                        }
+                </div>
+                <EditModal item={itemToShow} show={editModalShow} table={choosenTable} onHide={() => setEditModalShow(false)} handleProductEdited={handleProduct} />
+                <CreateModal show={createModalShow} table={choosenTable} type={typeTabChoosen} category={choosenCategory} onHide={() => setCreateModalShow(false)} handleProductCreated={handleProduct} />        
+                <EditAllProductsModal show={editAllProductsModal} onHide={() => setEditAllProductsModal(false)} />
+                { config.categories 
+                    ? <EditCategoriesModal show={editCategoriesModal} onHide={() => setEditCategoriesModal(false)} config={config} categories={config.categories} /> 
+                    : null
+                }
                 </div>
             </div>
         </div>
