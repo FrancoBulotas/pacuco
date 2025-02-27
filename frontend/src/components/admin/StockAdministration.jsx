@@ -25,7 +25,7 @@ const StockAdministration = () => {
     const [choosenTable, setChoosenTable] = useState('')
     const [choosenCategory, setChoosenCategory] = useState('')
     const [itemToShow, setItemToShow] = useState({})
-    const [config, setConfig] = useState(configuration ? configuration[0] : []);
+    const [config, setConfig] = useState([]);
 
     const [refreshKey, setRefreshKey] = useState(0);
 
@@ -35,11 +35,9 @@ const StockAdministration = () => {
 
     useEffect(() =>{
         setConfig(configuration[0]);
-        console.log(configuration);
-        console.log(config);
     }, [configuration])
 
-    console.log(configuration)
+    console.log(config);
     // useEffect(() =>{
     //     if(categoryTabChoosen === 'accesorios') {         
     //         dispatch(setTypeTab('totebag'));
@@ -118,7 +116,7 @@ const StockAdministration = () => {
                             onSelect={handleCategorySelect}
                             >
                             {/* Generate category tabs */}
-                            {config && Object.entries(config.categories).map(([category, types]) => (
+                            {Object.entries(config.categories ?? {}).map(([category, types]) => (
                                 <Tab key={category} eventKey={category.toLowerCase()} title={category} style={tabStyle}>
                                     <div className='div-change-config' style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                                        Subcategorias
