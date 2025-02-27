@@ -37,7 +37,7 @@ const StockAdministration = () => {
         setConfig(configuration[0]);
     }, [configuration])
 
-    console.log(config);
+    console.log(config.categories);
     // useEffect(() =>{
     //     if(categoryTabChoosen === 'accesorios') {         
     //         dispatch(setTypeTab('totebag'));
@@ -116,7 +116,8 @@ const StockAdministration = () => {
                             onSelect={handleCategorySelect}
                             >
                             {/* Generate category tabs */}
-                            {Object.entries(config.categories ?? {}).map(([category, types]) => (
+                            { config.categories
+                            ? Object.entries(config.categories).map(([category, types]) => (
                                 <Tab key={category} eventKey={category.toLowerCase()} title={category} style={tabStyle}>
                                     <div className='div-change-config' style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                                        Subcategorias
@@ -152,13 +153,17 @@ const StockAdministration = () => {
                                         ))}
                                     </Tabs>
                                 </Tab>
-                            ))}
+                            )) 
+                            : null}
                             </Tabs>
                     </div>
                     <EditModal item={itemToShow} show={editModalShow} table={choosenTable} onHide={() => setEditModalShow(false)} handleProductEdited={handleProduct} />
                     <CreateModal show={createModalShow} table={choosenTable} type={typeTabChoosen} category={choosenCategory} onHide={() => setCreateModalShow(false)} handleProductCreated={handleProduct} />        
                     <EditAllProductsModal show={editAllProductsModal} onHide={() => setEditAllProductsModal(false)} />
-                    <EditCategoriesModal show={editCategoriesModal} onHide={() => setEditCategoriesModal(false)} config={config} categories={config?.categories} />
+                    { config.categories 
+                        ? <EditCategoriesModal show={editCategoriesModal} onHide={() => setEditCategoriesModal(false)} config={config} categories={config.categories} /> 
+                        : null
+                    }
                 </div>
             </div>
         </div>
