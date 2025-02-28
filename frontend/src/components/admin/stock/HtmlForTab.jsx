@@ -10,6 +10,8 @@ import { IconPlus } from '../../../assets/icons/icons';
 import SearchBar from '../../common/SearchBar'
 import LoadingScreen from '../../common/loaders/LoadingScreen.jsx'
 import { filterChange } from '../../../reducers/filterReducer'
+import Filters from '../common/Filters/Filters.jsx';
+import FiltersAplied from '../common/Filters/FiltersAplied.jsx';
 import Swal from 'sweetalert2';
 
 import '../../../assets/styles/admin/htmlForTab.scss'
@@ -17,24 +19,37 @@ import '../../../assets/styles/admin/htmlForTab.scss'
 
 const HtmlForTab = ({ title, table, type, category, showCreateModal, showEditModal, refreshKey }) => {
     const [isLoading, setIsLoading] = useState(false)
-    const [guardapolvos, setGuardapolvos] = useState([])
+    const [products, setProducts] = useState([])
 
-    useEffect(() => {
-        setProducts(); 
-    }, [type, refreshKey])
-
-    const setProducts = async () => {
-        const products = await searchProdsService.getSearch({'type': type , 'category': category});
-        setGuardapolvos(products);
-    }
-
+    const defaultSearchParams = {'type': type , 'category': category}
+    const [searchParams, setSearchParams] = useState(defaultSearchParams)
+    
     const filter = useSelector(state => state.filter.search.toLowerCase()) 
     const dispatch = useDispatch()
 
     const [currentPage, setCurrentPage] = useState(1)
     const productsPerPage = 6
-    const totalProducts = guardapolvos.length 
+    const totalProducts = products.length 
     const totalPages = Math.ceil(totalProducts / productsPerPage)
+
+    useEffect(() => {
+        updateProducts(searchParams); 
+    }, [type, refreshKey, searchParams])
+
+    const updateProducts = async (params) => {
+        const products = await searchProdsService.getSearch(params);
+        setProducts(products);
+    }
+
+    const resetFiltredProducts = (key) => {
+        setSearchParams({...searchParams, [key]:null});
+    }
+
+    const resetProducts = () => {
+        dispatch(filterChange(''));
+        setSearchParams(defaultSearchParams);
+        updateProducts(defaultSearchParams);
+    }
 
     const onPageChange = (page) => {
         setCurrentPage(page)
@@ -43,8 +58,8 @@ const HtmlForTab = ({ title, table, type, category, showCreateModal, showEditMod
     const getCurrentProducts = () => {
         const startIndex = (currentPage - 1) * productsPerPage;
         const endIndex = startIndex + productsPerPage;
-        if(guardapolvos.length > 0){
-            return guardapolvos.slice(startIndex, endIndex);
+        if(products.length > 0){
+            return products.slice(startIndex, endIndex);
         }
     }
 
@@ -52,46 +67,51 @@ const HtmlForTab = ({ title, table, type, category, showCreateModal, showEditMod
         setIsLoading(true)
 
         if(filter !== '') {
-            setCurrentPage(1)
-            const filtred = await searchProdsService.getSearch({'table': table, 'name': filter, 'type': type, 'category': category });
-            setGuardapolvos(filtred)
+            const newParams = {...searchParams, 'name': filter};
+            setCurrentPage(1);
+            const filtred = await searchProdsService.getSearch(newParams);
+            setSearchParams(newParams);
+            setProducts(filtred);
         } else {
-            resetGuardapolvos()
+            resetProducts();
         }
 
         setTimeout(() => {
-            setIsLoading(false)
+            setIsLoading(false);
         }, 1000)
     }
-
-    const resetGuardapolvos = () => {
-        dispatch(filterChange(''))
-        setProducts();
-    }
-    
+   
     const handleModalImage = (img) => {
         Swal.fire({ imageUrl: img, showConfirmButton: false })
     }
 
     const buttonStyle = {margin:'0px', fontSize: '16px', background:'inherit', border:'none'}
-    const searchBarStyle = { marginRight: '5px', cursor: 'pointer', fontSize:'13px', display:'flex', alignItems: 'center', backgroundColor:'#f3f3f3', padding:'4px', borderRadius:'6px' }
+    const searchBarStyle = { marginRight: '5px', cursor: 'pointer', fontSize:'13px', display:'flex', alignItems: 'center', backgroundColor:'#f3f3f3', padding:'6px', borderRadius:'6px' }
+
+
+    const paramKeys = Object.keys(searchParams);
+    // Check if the keys exactly match ['type', 'category']
+    const hasOnlyTypeAndCategory = 
+      paramKeys.length === 2 && 
+      paramKeys.includes('type') && 
+      paramKeys.includes('category');
 
     return (     
         <div>
             <div className='d-flex w-100'>
                 <h4 className="label-titulos">{title}</h4>
-                <div style={{marginLeft:'auto', display:'flex'}}>
-                    {/* {
-                        guardapolvos.length !== guardapolvosList.length 
-                        ? <div onClick={() => resetGuardapolvos()} style={searchBarStyle}>reiniciar</div>
-                        : null
-                    }                      */}
-                    <div onClick={() => resetGuardapolvos()} style={searchBarStyle}>reiniciar</div>
-                    <div><SearchBar displaySearch={displaySearch} filtrateSearch={null} /></div>
-                    <button onClick={() => showCreateModal(table)} style={buttonStyle}><IconPlus width={'20'} height={'20'} /></button>
+                <div style={{marginLeft:'auto', display:'flex',justifyContent:'center', alignItems:'center'}}>
+                    <div onClick={() => resetProducts()} style={searchBarStyle}>Reiniciar</div>
+                    
+                    <SearchBar displaySearch={displaySearch} filtrateSearch={null} />
+                    <Filters searchParams={searchParams} setSearchParams={setSearchParams} table={table} setCurrentPage={setCurrentPage} />
+                    <button onClick={() => showCreateModal(table)} style={buttonStyle}><IconPlus width={'30'} height={'30'} /></button>
                 </div>
-
             </div>
+            {                 
+                !hasOnlyTypeAndCategory &&
+                <FiltersAplied resetFiltredProducts={resetFiltredProducts} filters={searchParams} />
+            }
            { isLoading 
             ? <LoadingScreen />
             : <div className='tabla-container'>
@@ -123,7 +143,7 @@ const HtmlForTab = ({ title, table, type, category, showCreateModal, showEditMod
                         </tbody>
                     )}
                 </table>
-                <PaginationProducts currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
+                <PaginationProducts currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} admin={true} />
            </div>}
         </div>
     )

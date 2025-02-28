@@ -83,58 +83,6 @@ const OffCanvasBody = ({ updateQueryParams, isCustom, isAccesory }) => {
                 </div>
             </div>  
 
-            {/* <div style={divContainer}>
-                <h4 style={h4Title}>Guardapolvos</h4>
-                <div style={divLine}></div>
-                <div style={divButtons}>
-                    <button style={tableButtonStyle} onClick={() => navigate(updateQueryParams('type', 'nivel_inicial'))}>Nivel Inicial</button>
-                    <button style={tableButtonStyle} onClick={() => navigate(updateQueryParams('type', 'primaria'))}>Primaria</button>
-                    <button style={tableButtonStyle} onClick={() => navigate(updateQueryParams('type', 'stock'))}>Stock</button>
-                    <button style={tableButtonStyle} onClick={() => navigate(updateQueryParams('type', 'niños'))}>Niños</button>
-                </div>
-            </div>
-            <div style={divContainer}>
-                <h4 style={h4Title}>Accesorios</h4>
-                <div style={divLine}></div>
-                <div style={divButtons}>
-                    <button style={tableButtonStyle} onClick={() => navigate(updateQueryParams('type', 'totebag'))}>Totebags</button>
-                </div>
-            </div>
-            {
-                isCustom &&
-                <div style={divContainer}>
-                    <h4 style={h4Title}>Talle</h4>
-                    <div style={divLine}></div>
-                    <div style={divButtons}>
-                        <button style={sizeButtonStyle} onClick={() => navigate(updateQueryParams('size', '00'))}>00</button>
-                        <button style={sizeButtonStyle} onClick={() => navigate(updateQueryParams('size', '0'))}>0</button>
-                        <button style={sizeButtonStyle} onClick={() => navigate(updateQueryParams('size', '1'))}>1</button>
-                        <button style={sizeButtonStyle} onClick={() => navigate(updateQueryParams('size', '2'))}>2</button>
-                        <button style={sizeButtonStyle} onClick={() => navigate(updateQueryParams('size', '3'))}>3</button>
-                        <button style={sizeButtonStyle} onClick={() => navigate(updateQueryParams('size', '4'))}>4</button>
-                        <button style={sizeButtonStyle} onClick={() => navigate(updateQueryParams('size', '5'))}>5</button>
-                    </div>
-                </div>
-            }
-            {
-                isAccesory &&
-                <div style={divContainer}>
-                    <h4 style={h4Title}>Talle</h4>
-                    <div style={divLine}></div>
-                    <div style={divButtons}>
-                        <button style={sizeButtonStyle} onClick={() => navigate(updateQueryParams('size', 'M'))}>M</button>
-                        <button style={sizeButtonStyle} onClick={() => navigate(updateQueryParams('size', 'L'))}>L</button>
-                    </div>
-                </div>
-            } */}
-
-
-
-
-
-
-
-
 
 
 
