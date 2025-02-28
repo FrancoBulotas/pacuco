@@ -1,0 +1,11 @@
+
+Esto es en caso que tenga que volver al Cloud Run de google y no utilice vercel debido a que se llega al limite muy rapido.
+En cloud Run deje todo configurado, simplemente cambie las DNS desde cloudflare (no me deberia cobrar en Cloud Run).
+
+- Se unieron el front y el back en el mismo repositorio de GitHub: https://github.com/FrancoBulotas/pacuco
+- Se agregaron archivos vercel.json para configuracion de vercel y que funcione correctamente.
+- Se modifico archivo vite.config.js para que se pueda redirigir el trafico de /api al backend (tanto en dev como prod / para volver colocar el archivo del otro front).
+- Se agrego api.js a frontend/services para agregar la url del backend en todos los servicios y asi pueda obtener datos de alli (para volver creeria que dejando en '' el baseurl de api.js bastaria).
+- Del backend comparar index.js y app.js, despues los demas archivos se pueden pisar sin problema (para volver, no tienen nada que lo ate a vercel).
+- Del frontend evitar pisar los que mencione anteriormente, despues lo de assets, components, reducers y services (excepto api.js) no tienen nada propio de vercel.
+
