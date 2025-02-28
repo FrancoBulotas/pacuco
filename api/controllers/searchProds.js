@@ -5,7 +5,7 @@ const Guardapolvo = require('../models/guardapolvo');
 const { ObjectId } = require('mongodb');
 
 searchProdsRouter.get('/products', async (req, res) => {
-    const { name, minPrice, maxPrice, size, sortByPrice, table, all, description, stockAvailable, id, category, type } = req.query;
+    const { name, minPrice, maxPrice, size, sortByPrice, table, all, description, stockAvailable, id, category, type, withStock, withDiscount, onDisplay } = req.query;
     const filters = {};
   
     if (all) {
@@ -51,6 +51,36 @@ searchProdsRouter.get('/products', async (req, res) => {
         }
     }
     
+    // New filter for withStock
+    if (withStock !== null && withStock !== undefined) {
+      if (withStock === 'true') {
+          filters.amount = { $gt: 0 };
+      } else if (withStock === 'false') {
+          filters.amount = { $eq: 0 };
+      }
+    }
+    
+    if (withDiscount !== null && withDiscount !== undefined) {
+      if (withDiscount === 'true') {
+          filters.discountPrice = { $ne: null, $exists: true, $gt: 0 };
+      } else if (withDiscount === 'false') {
+          filters.$or = [
+              { discountPrice: null },
+              { discountPrice: { $exists: false } },
+              { discountPrice: 0 }
+          ];
+      }
+  }
+    
+    // New filter for onDisplay
+    if (onDisplay !== null && onDisplay !== undefined) {
+        if (onDisplay === 'true') {
+            filters.show = true;
+        } else if (onDisplay === 'false') {
+            filters.show = false;
+        }
+    }
+
     try {
       const sortOrder = sortByPrice === 'desc' ? -1 : 1;
 

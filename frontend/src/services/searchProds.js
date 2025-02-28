@@ -3,7 +3,7 @@ import api from './api';
 const baseUrl = `/api/products`;
 
 const getSearch = async (params) => {
-    
+    // console.log(params)
     const response = await api.get(baseUrl, {
         params: {
             name: params.name,
@@ -16,7 +16,10 @@ const getSearch = async (params) => {
             id: params.id,
             all: params.all,
             category: params.category,
-            type: params.type
+            type: params.type,
+            withStock: params.withStock,
+            withDiscount: params.withDiscount,
+            onDisplay: params.onDisplay
         }
     });
     return response.data;

@@ -7,6 +7,9 @@ URL: pacuco.com.ar
 
 TODO:
 
+- Agregar filtros a la pestaña de adminsitracion de productos (listo falta adaptarlo a mobile)
+- [x] ~~Que no se mueva para arriba la pantalla de administracion de prods cuando se pasa de pagina.~~
+- Mejorar la forma en la que se pueden ocultar guardapolvos del publico.
 - Agregar a la barra de navegacion los accesorios (intentar hacer == que lo que voy a implementar en administracion)
 - Corregir bug de la imagen que aparece cuando se ingresa al prod desde el carrito, se muestra una vieja.
 - Agregar en seccion admin que puedan editar los textos mas importantes. (que se haga la request en App.jsx y se guarde en un reducer)

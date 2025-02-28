@@ -3,26 +3,15 @@ import Pagination from 'react-bootstrap/Pagination'
 
 import '../../../assets/styles/paginationProducts.scss'
 
-const PaginationProducts = ({ currentPage, totalPages, onPageChange }) => {
+const PaginationProducts = ({ currentPage, totalPages, onPageChange, admin=false }) => {
     
   const scrollToTop = () => { window.scrollTo(0, 0) }
 
   const handleClick = (page) => {
-      onPageChange(page)
-      scrollToTop()
+      onPageChange(page);
+      if(!admin) scrollToTop();
   }
 
-  // const getPaginationItems = () => {
-  //   const items = []
-  //   for (let page = 1; page <= totalPages; page++) {
-  //     items.push(
-  //       <Pagination.Item key={page} active={page === currentPage} onClick={() => handleClick(page)}>
-  //         {page}
-  //       </Pagination.Item>
-  //     )
-  //   }
-  //   return items
-  // }
   const getPaginationItems = () => {
     const items = [];
   

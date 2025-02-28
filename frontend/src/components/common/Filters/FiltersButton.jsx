@@ -16,7 +16,7 @@ const FiltersButton = ({ resetProducts, filters }) => {
                             if(filterValue == 'asc') priceText = 'precio menor a mayor';
                             if(filterValue == 'desc') priceText = 'precio mayor a menor';
                             return (
-                                <div key={i} style={filtersContainerStyle}>
+                                filterValue != '' && <div key={i} style={filtersContainerStyle}>
                                     <div style={{padding:'8px 15px'}}>{filterKey === 'sortByPrice' ? priceText : filterValue}</div>
                                     <button onClick={() => resetProducts(filterKey)} className="badge bg-dark text-white position-absolute" style={xButtonStyle}>x</button>
                                 </div>

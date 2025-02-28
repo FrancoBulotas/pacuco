@@ -98,10 +98,10 @@ const FiltersBar = ({ setIsLoading, table }) => {
 
         let filtersUpdated = filters;
         filtersUpdated[choice] = null;
-        // para cuando no haya filtros que se busquen todos los guardapolvos
+        // para cuando no haya filtros que se busquen todos los prods
         const allNull = Object.values(filtersUpdated).every(value => value === null);
         if(allNull){
-            url.searchParams.append('category', 'guardapolvo');
+            url.searchParams.append('category', '');
         }
         window.location.href = url.toString();  
     }
