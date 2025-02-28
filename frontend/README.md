@@ -7,7 +7,6 @@ URL: pacuco.com.ar
 
 TODO:
 
-- Ver que pasa con la segunda pagina de los productos
 - Agregar a la barra de navegacion los accesorios (intentar hacer == que lo que voy a implementar en administracion)
 - Corregir bug de la imagen que aparece cuando se ingresa al prod desde el carrito, se muestra una vieja.
 - Agregar en seccion admin que puedan editar los textos mas importantes. (que se haga la request en App.jsx y se guarde en un reducer)
@@ -20,6 +19,7 @@ TODO:
 - Agregar mas filtros para los guardapolvos (por tabla / base / vivo / detalle / modelo, etc).
 - Agregar que puedan modificar los guardapolvos destacados.
 - Cambiar nombre que aparece al recibir el mail de compras@pacuco.com.ar
+- [x] ~~Ver que pasa con la segunda pagina de los productos~~
 - [x] ~~Agregar a servicio configs las categorias y demas para que puedan ser administradas desde la administrtacion~~
 - [x] ~~Corregir estilo de productos cuando no tienen descuento, quedan raros los espacios~~
 - [x] ~~Agregar que se pueda editar si un producto aparece cuando no tiene stock (una flag).~~
