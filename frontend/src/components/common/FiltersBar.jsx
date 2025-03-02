@@ -11,10 +11,8 @@ import OffCanvasBody from './Filters/OffCanvasBody'
 import FiltersButton from './Filters/FiltersButton'
 import { setChoosenPage } from '../../reducers/filterReducer'
 
-const FiltersBar = ({ setIsLoading, table }) => {
+const FiltersBar = ({ setIsLoading, table, isAdmin, searchParamsAdmin, setSearchParamsAdmin, setCurrentPageAdmin }) => {
     const [searchParams, setSearchParams] = useState({})
-    const [isCustom, setIsCustom] = useState(false)
-    const [isAccesory, setIsAccesory] = useState(false)
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();   
@@ -30,27 +28,13 @@ const FiltersBar = ({ setIsLoading, table }) => {
     const currentUrl = window.location.href;
     const url = new URL(currentUrl);
 
-    const handleClose = () => setShow(false)
-    const handleShow = () => {
-        setShow(true);
-        checkIsCustom();
-        checkIsAccesory();
-    }
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
      
     useEffect(() => {
         const params = new URLSearchParams(location.search)
         setSearchParams(params);
 
-        // no pueden estar simultaneamente la query all con table
-        // if(url.searchParams.get('all') && url.searchParams.get('table')) {
-        //     url.searchParams.delete('all');
-        //     window.location.href = url.toString();        
-        // }
-        // no pueden estar simultaneamente category=guardapolvo con type!=nivel_inicial, primaria o stock
-        // if(url.searchParams.get('category') === 'guardapolvo' && url.searchParams.get('type') === 'totebag') {
-        //     url.searchParams.delete('category');
-        //     window.location.href = url.toString();        
-        // }
         // no pueden estar la query size cuando table es == primaria || == nivel_inicial
         if(url.searchParams.get('size') && (url.searchParams.get('type') == 'primaria' || url.searchParams.get('type') == 'nivel_incial')) {
             url.searchParams.delete('size');
@@ -68,6 +52,10 @@ const FiltersBar = ({ setIsLoading, table }) => {
             }));
         // }
     }, [location.search])
+
+    const resetAdminProducts = (key) => {
+        setSearchParamsAdmin({...searchParamsAdmin, [key]:null});
+    }
 
     const resetProducts = (choice) => {
         handleClose();
@@ -126,17 +114,13 @@ const FiltersBar = ({ setIsLoading, table }) => {
         return `${location.pathname}?${searchParams.toString()}`;
     };
 
-    const checkIsCustom = () =>{
-        if(searchParams){
-            if(searchParams.get('type') === 'stock') setIsCustom(true)
-            else setIsCustom(false)
-        }
-    }
-
-    const checkIsAccesory = () =>{
-        if(searchParams){
-            if(searchParams.get('type') === 'totebag') setIsAccesory(true)
-            else setIsAccesory(false)
+    const handleClick = (key, value) => {
+        if(isAdmin) {
+            handleClose();
+            setCurrentPageAdmin(1);
+            setSearchParamsAdmin({...searchParamsAdmin, [key]: value});
+        } else {
+            navigate(updateQueryParamsOrderButton(key, value))
         }
     }
 
@@ -144,18 +128,18 @@ const FiltersBar = ({ setIsLoading, table }) => {
         <div>
             <div style={{display:'flex', height:'40px', marginLeft:'10px', marginRight:'10px', marginBottom:'5px', paddingTop:'5px'}}>
                 <Dropdown as={ButtonGroup} className="dropdown-custom">
-                    <Button variant="light" style={{backgroundColor:'#fff', color:'#000', padding:'5px 25px', fontSize:'16px'}}>Ordenar</Button>
+                    <Button variant="light" style={{backgroundColor:'#fff', color:'#000', padding:'5px 25px', fontSize:'16px', border:'1px solid #f1f1f1'}}>Ordenar</Button>
 
-                    <Dropdown.Toggle split variant="light" id="dropdown-split-basic" style={{backgroundColor:'#fff', color:'#000', padding:'5px 25px'}} />
+                    <Dropdown.Toggle split variant="light" id="dropdown-split-basic" style={{backgroundColor:'#fff', color:'#000', padding:'5px 25px', border:'1px solid #f1f1f1'}} />
 
                     <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => navigate(updateQueryParamsOrderButton('sortByPrice', 'asc'))}>Precio menor a mayor</Dropdown.Item>
-                        <Dropdown.Item onClick={() => navigate(updateQueryParamsOrderButton('sortByPrice', 'desc'))}>Precio mayor a menor</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleClick('sortByPrice', 'asc')}>Precio menor a mayor</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleClick('sortByPrice', 'desc')}>Precio mayor a menor</Dropdown.Item>
                         {/* <Dropdown.Item onClick={() => navigate(updateQueryParamsOrderButton('sortByName', 'asc'))}>Nombre</Dropdown.Item> */}
                     </Dropdown.Menu>
                 </Dropdown>
                 
-                <Button onClick={handleShow} variant="light" style={{marginLeft:'auto', backgroundColor:'#fff', color:'#000', padding:'5px 25px', fontSize:'16px'}}>
+                <Button onClick={handleShow} variant="light" style={{marginLeft:'auto', backgroundColor:'#fff', color:'#000', padding:'5px 25px', fontSize:'16px', border:'1px solid #f1f1f1'}}>
                     Filtrar <i className="bi bi-filter" style={{padding:'5px 5px'}}></i>
                 </Button>
 
@@ -164,17 +148,13 @@ const FiltersBar = ({ setIsLoading, table }) => {
                     <Offcanvas.Title>Filtrar</Offcanvas.Title>
                     </Offcanvas.Header>
                     <Offcanvas.Body>
-                        <OffCanvasBody updateQueryParams={updateQueryParamsFiltrerButton} isCustom={isCustom} isAccesory={isAccesory} />
+                        <OffCanvasBody updateQueryParams={updateQueryParamsFiltrerButton} isAdmin={isAdmin} table={table} 
+                        handleClose={handleClose} searchParams={searchParamsAdmin} setSearchParams={setSearchParamsAdmin} 
+                        setCurrentPage={setCurrentPageAdmin} />
                     </Offcanvas.Body>
                 </Offcanvas>
             </div>
-            {
-                // si son todos null devuelve true y no entra
-                !Object.values(filters).every(value => value === null)
-                ? 
-                <FiltersButton resetProducts={resetProducts} filters={filters} />
-                : null
-            } 
+            <FiltersButton resetProducts={resetProducts} resetAdminProducts={resetAdminProducts} filters={filters} searchParamsAdmin={searchParamsAdmin} />
         </div>
     )
 }

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-const OffCanvasBody = ({ updateQueryParams, isCustom, isAccesory }) => {
+const OffCanvasBody = ({ updateQueryParams, isAdmin,  searchParams, setSearchParams, table, setCurrentPage, handleClose }) => {
     const navigate = useNavigate();
     const config = useSelector(state => state.config)
 
@@ -12,6 +12,17 @@ const OffCanvasBody = ({ updateQueryParams, isCustom, isAccesory }) => {
     useEffect(() => {
         if(config != null) setCategoriesData(config[0].categories);
     }, [config])
+
+
+    const handleClick = (key, value) => {
+        if(isAdmin) {
+            handleClose();
+            setCurrentPage(1);
+            setSearchParams({...searchParams, [key]: value});
+        } else {
+            navigate(updateQueryParams(key, value))
+        }
+    }
 
     const divContainer = {border:'1px solid #e0e0e0', padding:'20px', borderRadius: '6px', marginBottom:'5px'};
     const h4Title = {padding:'0px', fontSize:'17px'};
@@ -36,17 +47,84 @@ const OffCanvasBody = ({ updateQueryParams, isCustom, isAccesory }) => {
         custom: ['00', '0', '1', '2', '3', '4', '5', 'S', 'M', 'L'],
     };
 
+
     return (
         <>
+                {isAdmin && table === 'stock' && <div style={divContainer}>
+                    <h4 style={h4Title}>Por cantidad</h4>
+                    <div style={divLine}></div>
+                    <div style={divButtons}>
+                        <button
+                            key={'withStock'}
+                            style={tableButtonStyle}
+                            onClick={() => handleClick('withStock', true)}
+                        >
+                            En stock
+                        </button>
+                        <button
+                            key={'withoutStock'}
+                            style={tableButtonStyle}
+                            onClick={() => handleClick('withStock', false)}
+                        >
+                            Sin stock
+                        </button>
+                    </div>
+                </div>}
+            {
+                isAdmin &&
+                    <>
+                <div style={divContainer}>
+                    <h4 style={h4Title}>Por descuento</h4>
+                    <div style={divLine}></div>
+                    <div style={divButtons}>
+                        <button
+                            key={'withDiscount'}
+                            style={tableButtonStyle}
+                            onClick={() => handleClick('withDiscount', true)}
+                        >
+                            Con descuento
+                        </button>
+                        <button
+                            key={'withoutDiscount'}
+                            style={tableButtonStyle}
+                            onClick={() => handleClick('withDiscount', false)}
+                        >
+                            Sin descuento
+                        </button>
+                    </div>
+                </div>
+                <div style={divContainer}>
+                    <h4 style={h4Title}>Por exposicion</h4>
+                    <div style={divLine}></div>
+                    <div style={divButtons}>
+                        <button
+                            key={'show'}
+                            style={tableButtonStyle}
+                            onClick={() => handleClick('onDisplay', true)}
+                        >
+                            Se estan mostrando
+                        </button>
+                        <button
+                            key={'notShow'}
+                            style={tableButtonStyle}
+                            onClick={() => handleClick('onDisplay', false)}
+                        >
+                            No se estan mostrando
+                        </button>
+                    </div>
+                </div>
+                </>
+            }
+
             {/* Render Categories and Subcategories */}
-            {Object.entries(categoriesData).map(([category, subcategories]) => (
+            {!isAdmin && Object.entries(categoriesData).map(([category, subcategories]) => (
                 <div key={category} style={divContainer}>
                 <h4 style={h4Title}>
                     {category}
                     <button
                         key={category}
                         style={watchAllButtonStyle}
-                        onClick={() => navigate(updateQueryParams('category', category.toLowerCase().replace(' ', '_')))}
+                        onClick={() => handleClick('category', category.toLowerCase().replace(' ', '_'))}
                     >
                         ver todos
                     </button>
@@ -59,7 +137,7 @@ const OffCanvasBody = ({ updateQueryParams, isCustom, isAccesory }) => {
                     <button
                         key={type}
                         style={tableButtonStyle}
-                        onClick={() => navigate(updateQueryParams('type', type.toLowerCase().replace(' ', '_')))}
+                        onClick={() => handleClick('type', type.toLowerCase().replace(' ', '_'))}
                     >
                         {type}
                     </button>
@@ -75,7 +153,7 @@ const OffCanvasBody = ({ updateQueryParams, isCustom, isAccesory }) => {
                     <button
                         key={size}
                         style={sizeButtonStyle}
-                        onClick={() => navigate(updateQueryParams('size', size))}
+                        onClick={() => handleClick('size', size)}
                     >
                         {size}
                     </button>
