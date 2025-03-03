@@ -167,7 +167,7 @@
     position: relative;
     padding-top: 100%; /* Square aspect ratio (reduced from 120%) */
     overflow: hidden;
-    background-color: #f8f8f8;
+    background-color: #fff;
   }
   
   .product-image-wrapper {

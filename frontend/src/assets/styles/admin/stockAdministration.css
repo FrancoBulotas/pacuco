@@ -67,7 +67,7 @@
 
 .tr-tabla-productos {
     height: 50px; 
-    padding: 8px;
+    /* padding: 8px; */
     text-align: center;
     vertical-align: middle;
     /* border: 1px solid #777;  */
@@ -92,7 +92,7 @@
     }
     .tr-tabla-productos {
         height: 50px; 
-    }
+    }    
 }
 
 

@@ -97,7 +97,7 @@ function App() {
       }
       return <Product navigateTo={searchedGuardapolvo?.table} product={searchedGuardapolvo} />
     } else {
-      return <Products guardapolvos={filtredGuardapolvos} table={selectTable(queryParams)} />
+      return <Products products={filtredGuardapolvos} table={selectTable(queryParams)} />
     }
   }
 

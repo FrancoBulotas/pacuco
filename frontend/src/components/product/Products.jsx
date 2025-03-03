@@ -13,22 +13,20 @@ import HtmlForFilterResuls from './common/HtmlForFilterResult'
 
 import '../../assets/styles/product.css'
 
-const Products = ({ guardapolvos: products, table }) => {    
+const Products = ({ products, table }) => {    
     const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(false)
 
     const currentPage = useSelector(state => state.filter.choosenPage[table.replace(' ', '_')])
     const productsPerPage = 20
-    const totalProducts = products?.length
-    const totalPages = Math.ceil(totalProducts / productsPerPage)
 
     const config = useSelector(state => state.config)
     const [subCategoriesData, setSubCategoriesData] = useState(config != null ? Object.values(config[0].categories).flatMap(category => Object.keys(category).map(key => key.toLowerCase())) : null)
 
     useEffect(() => {
         if(config != null) {
-        setSubCategoriesData(Object.values(config[0].categories)
-            .flatMap(category => Object.keys(category)).map(key => key.toLowerCase()));
+            setSubCategoriesData(Object.values(config[0].categories)
+                .flatMap(category => Object.keys(category)).map(key => key.toLowerCase()));
         }
     }, [config])
 
@@ -36,16 +34,28 @@ const Products = ({ guardapolvos: products, table }) => {
         dispatch(setChoosenPage({ page: page, table: table.replace(' ', '_') }))
     }
 
+    const getFiltredProds = () => {
+        let filtredProds = products?.map((prod) => {
+            if(prod.show && subCategoriesData?.includes(prod.type.replace('_', ' ')) && prod.amount !== 0){
+                return prod
+            }
+        }).filter(prod => prod != undefined);
+
+        return filtredProds;
+    }
+
+    const getCurrentLength = () => {
+        const totalProducts = getFiltredProds().length;
+        const totalPages = Math.ceil(totalProducts / productsPerPage);
+
+        return totalPages;
+    }
+ 
     const getCurrentProducts = () => {
         const startIndex = (currentPage - 1) * productsPerPage;
         const endIndex = startIndex + productsPerPage;
         
-        let filtredProds = products?.map((prod) => {
-            if(prod.show && subCategoriesData?.includes(prod.type.replace('_', ' '))){
-                return prod
-            }
-        }).filter(prod => prod != undefined)
-
+        const filtredProds = getFiltredProds();
 
         return filtredProds.slice(startIndex, endIndex);
     }
@@ -54,13 +64,13 @@ const Products = ({ guardapolvos: products, table }) => {
         <div className='margin-auto width-90'>
             <ProductsBreadcrumb type={table.replace('_', ' ')} />
             <FiltersBar setIsLoading={setIsLoading} table={table} />
-            <HtmlForFilterResuls guardapolvos={products} />
+            <HtmlForFilterResuls products={products} />
             <ScrollToTop />
             {isLoading 
             ? <LoadingScreen /> 
             :   <div>
                     <LoadProducts products={getCurrentProducts()} table={table} />
-                    <PaginationProducts currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
+                    <PaginationProducts currentPage={currentPage} totalPages={getCurrentLength()} onPageChange={onPageChange} />
                 </div>
             }
         </div>

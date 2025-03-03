@@ -4,14 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import searchProdsService from '../../../services/searchProds'
 
-import { guardapolvosFilter, validateIfItemHasDiscount } from '../../common/functions.js'
+import { validateIfItemHasDiscount } from '../../common/functions.js'
 import PaginationProducts from '../../product/common/PaginationProductos'
 import { IconPlus } from '../../../assets/icons/icons';
 import SearchBar from '../../common/SearchBar'
 import LoadingScreen from '../../common/loaders/LoadingScreen.jsx'
 import { filterChange } from '../../../reducers/filterReducer'
-import Filters from '../common/Filters/Filters.jsx';
-import FiltersAplied from '../common/Filters/FiltersAplied.jsx';
+import FiltersBar from '../../common/FiltersBar.jsx';
 import Swal from 'sweetalert2';
 
 import '../../../assets/styles/admin/htmlForTab.scss'
@@ -41,9 +40,6 @@ const HtmlForTab = ({ title, table, type, category, showCreateModal, showEditMod
         setProducts(products);
     }
 
-    const resetFiltredProducts = (key) => {
-        setSearchParams({...searchParams, [key]:null});
-    }
 
     const resetProducts = () => {
         dispatch(filterChange(''));
@@ -88,14 +84,6 @@ const HtmlForTab = ({ title, table, type, category, showCreateModal, showEditMod
     const buttonStyle = {margin:'0px', fontSize: '16px', background:'inherit', border:'none'}
     const searchBarStyle = { marginRight: '5px', cursor: 'pointer', fontSize:'13px', display:'flex', alignItems: 'center', backgroundColor:'#f3f3f3', padding:'6px', borderRadius:'6px' }
 
-
-    const paramKeys = Object.keys(searchParams);
-    // Check if the keys exactly match ['type', 'category']
-    const hasOnlyTypeAndCategory = 
-      paramKeys.length === 2 && 
-      paramKeys.includes('type') && 
-      paramKeys.includes('category');
-
     return (     
         <div>
             <div className='d-flex w-100'>
@@ -104,15 +92,14 @@ const HtmlForTab = ({ title, table, type, category, showCreateModal, showEditMod
                     <div onClick={() => resetProducts()} style={searchBarStyle}>Reiniciar</div>
                     
                     <SearchBar displaySearch={displaySearch} filtrateSearch={null} />
-                    <Filters searchParams={searchParams} setSearchParams={setSearchParams} table={table} setCurrentPage={setCurrentPage} />
-                    <button onClick={() => showCreateModal(table)} style={buttonStyle}><IconPlus width={'30'} height={'30'} /></button>
+                    {/* <Filters searchParams={searchParams} setSearchParams={setSearchParams} table={table} setCurrentPage={setCurrentPage} /> */}
+                    <button onClick={() => showCreateModal(table)} style={buttonStyle}><IconPlus width={'25'} height={'25'} /></button>
                 </div>
             </div>
-            {                 
-                !hasOnlyTypeAndCategory &&
-                <FiltersAplied resetFiltredProducts={resetFiltredProducts} filters={searchParams} />
-            }
-           { isLoading 
+
+            <FiltersBar setIsLoading={setIsLoading} table={table} isAdmin={true} searchParamsAdmin={searchParams} setSearchParamsAdmin={setSearchParams} setCurrentPageAdmin={setCurrentPage} />
+            <p style={{fontSize:'14px', margin:'0px 0px 0px 12px', color:'#333'}}>{products?.length} resultados</p>
+            { isLoading 
             ? <LoadingScreen />
             : <div className='tabla-container'>
                 <table className='tabla-de-productoss'>
