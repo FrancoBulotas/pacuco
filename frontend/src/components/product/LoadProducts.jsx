@@ -15,6 +15,7 @@ export const LoadProducts = ({ products, table }) => {
                 products?.length === 0 
                 ? <HtmlForNoMatches />
                 : products?.map((prod, i) =>   
+                    (table === 'stock' || table === 'guardapolvos' || table === 'busqueda') && prod.amount !== 0  && 
                     <Link className='producto' key={i} to={`/products?id=${prod.id}`}>
                         <div className="a-contenedor-productos">
                             {(table === 'stock' || table === 'guardapolvos' || table === 'busqueda') && prod.amount === 0 

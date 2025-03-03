@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
 
-const HtmlForFilterResuls = ({ guardapolvos: products }) => {
+const HtmlForFilterResuls = ({ products }) => {
     const previusSearch = useSelector(state => state.filter.previusSearch.toLowerCase()) 
 
     const [searchParams] = useSearchParams();
@@ -29,7 +29,7 @@ const HtmlForFilterResuls = ({ guardapolvos: products }) => {
     }, [searchParams])
 
     const getLengthProductsToShow = () => {
-        let productsToShow = products.filter(prod => prod.show && subCategoriesData?.includes(prod.type.replace('_', ' ')));
+        let productsToShow = products.filter(prod => prod.show && subCategoriesData?.includes(prod.type.replace('_', ' ')) && prod.amount !== 0);
         return productsToShow.length;
     }
 
