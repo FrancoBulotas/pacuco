@@ -69,6 +69,11 @@ const NavBar = () => {
         }, 800)
     }
 
+    const handleClick = (query) => {
+        handleToggleNav();
+        navigateTo(`/products?${query}`);
+    }
+
     return (
         <div>
             { isLoading 
@@ -93,10 +98,14 @@ const NavBar = () => {
                                     <Nav.Link onClick={() => navigateTo('/')}>INICIO</Nav.Link>
                                     {/* <Nav.Link href="/">SOBRE NOSOTRAS</Nav.Link> */}
                                     <NavDropdown title="GUARDAPOLVOS" id="basic-nav-dropdown"className='drop-down-menu-custom'>
-                                        <NavDropdown.Item onClick={() => navigateTo('/products?table=nivel_inicial')}>Nivel Inicial</NavDropdown.Item>
-                                        <NavDropdown.Item onClick={() => navigateTo('/products?table=primaria')}>Primaria / Color</NavDropdown.Item>
-                                        <NavDropdown.Item onClick={() => navigateTo('/products?table=stock')}>Stock / Entrega inmediata</NavDropdown.Item>
-                                        <NavDropdown.Item onClick={() => navigateTo('/products?all=true')}>Ver todos los guardapolvos</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleClick('type=nivel_inicial')}>Nivel Inicial</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleClick('type=primaria')}>Primaria / Color</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleClick('type=stock')}>Stock / Entrega inmediata</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleClick('category=guardapolvo')}>Ver todos los guardapolvos</NavDropdown.Item>
+                                    </NavDropdown>
+                                    <NavDropdown title="ACCESORIOS" id="basic-nav-dropdown"className='drop-down-menu-custom'>
+                                        <NavDropdown.Item onClick={() => handleClick('type=totebag')}>Totebags</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleClick('category=accesorios')}>Ver todos los accesorios</NavDropdown.Item>
                                     </NavDropdown>
 
                                     <div className="d-none d-lg-block" style={{marginLeft:'5px'}}>

@@ -10,7 +10,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { initializePaymentMethods } from './reducers/paymentMethodsReducer';
 import { setConfig } from './reducers/configReducer';
 import CheckPermissionsAdministration from './components/admin/common/CheckPermissionsAdministration';
-import { setFiltredGuardapolvos, setStaticFiltredGuardapolvos, setSearchedGuardapolvo } from './reducers/guardapolvosReducer'
+import { setFiltredGuardapolvos, setStaticFiltredGuardapolvos, setSearchedGuardapolvo, setProducts } from './reducers/guardapolvosReducer'
 import searchProdsService from './services/searchProds'
 import configService from './services/configs'
 
@@ -49,13 +49,18 @@ function App() {
   const filtredGuardapolvos = useSelector(state => state.guardapolvos.filtred);
   const searchedGuardapolvo = useSelector(state => state.guardapolvos.searched);
  
-  // obtenemos config y la guardamos en reducer
+  // obtenemos config y guardapolvos por primera vez y la guardamos en reducer
   useEffect(() => {
     const fetchConfig = async () => {
       const config = await configService.get();
       dispatch(setConfig(config));
     }    
+    const fetchProducts = async () => {
+      const response = await searchProdsService.getSearch({'category': ''});
+      dispatch(setProducts(response));
+    }
     fetchConfig();
+    fetchProducts();
   }, [])
 
   // Seteamos guardapolvos en base a los parametros de busqueda en la URL

@@ -86,7 +86,7 @@ const PurchaseHistory = () => {
             html: `${isProductFromStock(item) ? `
                     <div style="text-align: left;">
                         <input type="checkbox" id="confirmCheckbox">
-                        <label for="confirmCheckbox">Agregar nuevamente los guardapolvos al stock</label>
+                        <label for="confirmCheckbox">Agregar nuevamente el producto al stock</label>
                     </div>
                     ` : ''
                 } `,
@@ -153,7 +153,7 @@ const PurchaseHistory = () => {
                 <h3>Historial de ventas</h3>
                 <div className='d-flex gap-2 w-100' style={{marginLeft: '7%', alignItems:'center', marginBottom:'20px'}}>
                     <div style={{backgroundColor:'#eed6e5', width: '40px', height: '20px', borderRadius:'8px'}}></div>
-                    <p style={{fontSize:'13px', margin:'0px'}}>Guardapolvos comprados del stock</p>
+                    <p style={{fontSize:'13px', margin:'0px'}}>Productos comprados del stock</p>
                 </div>
                 <div className='filters-table-container'>
                     <PurchaseFilterBar purchasedProducts={purchasedProducts} 
