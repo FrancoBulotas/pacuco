@@ -3,6 +3,7 @@
 import { createSlice, current } from '@reduxjs/toolkit'
 
 const initialState = {
+  products: [],
   searched : [],
   filtred : [],
   filtredStatic : [],
@@ -13,6 +14,9 @@ const guardapolvosSlice = createSlice({
   name : 'guardapolvos',
   initialState,
   reducers : {
+    setProducts(state, action) { 
+      return { ...state, products: action.payload }
+    },
     setSearchedGuardapolvo(state, action) { 
       return { ...state, searched: action.payload }
     },
@@ -46,6 +50,6 @@ const dispatchGuardapolvosByTable = (table, guardapolvos, dispatch) => {
   }
 }
 
-export const { setSearchedGuardapolvo, setFiltredGuardapolvos, setStaticFiltredGuardapolvos, setFeatured } = guardapolvosSlice.actions
+export const { setProducts, setSearchedGuardapolvo, setFiltredGuardapolvos, setStaticFiltredGuardapolvos, setFeatured } = guardapolvosSlice.actions
 export default guardapolvosSlice.reducer
 

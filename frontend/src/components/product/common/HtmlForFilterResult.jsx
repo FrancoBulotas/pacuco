@@ -37,10 +37,11 @@ const HtmlForFilterResuls = ({ products }) => {
 
     return(
         <div>
-            { Object.keys(params).includes('name')
+            <div style={styleResults}> {getLengthProductsToShow()} resultado{getLengthProductsToShow() === 1 ? '' : 's'}</div>
+            {/* { Object.keys(params).includes('name')
                 ? <div style={styleResults}> {getLengthProductsToShow()} resultado{getLengthProductsToShow() === 1 ? '' : 's'} para "{previusSearch}"</div>
                 : <div style={styleResults}> {getLengthProductsToShow()} resultado{getLengthProductsToShow() === 1 ? '' : 's'}</div>
-            }
+            } */}
         </div>
     )
 }

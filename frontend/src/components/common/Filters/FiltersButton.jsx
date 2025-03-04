@@ -30,7 +30,6 @@ const FiltersButton = ({ resetProducts, resetAdminProducts, filters, searchParam
                     Object.entries(searchParamsAdmin).map(([filterKey, filterValue], i) => {
                         if(filterValue != null && filterKey != 'type' && filterKey != 'category') {
                             let text = filterValue;
-                            console.log(filterKey)
                             if(filterKey == 'withStock') {
                                 if(filterValue) text = 'En stock';
                                 else if(!filterValue) text = 'Sin stock';

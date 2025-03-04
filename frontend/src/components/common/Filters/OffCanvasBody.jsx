@@ -5,9 +5,21 @@ import { useSelector } from 'react-redux';
 
 const OffCanvasBody = ({ updateQueryParams, isAdmin,  searchParams, setSearchParams, table, setCurrentPage, handleClose }) => {
     const navigate = useNavigate();
-    const config = useSelector(state => state.config)
+    const config = useSelector(state => state.config);
+    const products = useSelector(state => state.guardapolvos.products);
 
     const [categoriesData, setCategoriesData] = useState(config != null ? config[0].categories : null)
+    const [uniqueNames, setUniqueNames] = useState([])
+
+    useEffect(() => {
+        const filtredProds = products.map((product) => {
+            if(product.show && product.amount != 0) return product
+        }).filter(prod => prod != undefined);
+        
+        const names = [...new Set(filtredProds.map(product => product.name.toUpperCase()))].sort();
+        
+        setUniqueNames(names);
+    }, [])
 
     useEffect(() => {
         if(config != null) setCategoriesData(config[0].categories);
@@ -30,8 +42,10 @@ const OffCanvasBody = ({ updateQueryParams, isAdmin,  searchParams, setSearchPar
     const divButtons = {display:'flex', flexWrap:'wrap'};
     const sizeButtonStyle = { fontSize: '15px', backgroundColor:'#f1f1f1',display:'flex', justifyContent:'center', alignItems:'center', border:'none', borderRadius:'6px', padding:'20px', margin:'6px', width:'60px', height:'20px',}
     const tableButtonStyle = { fontSize: '15px', backgroundColor:'#f1f1f1',display:'flex', justifyContent:'center', alignItems:'center', border:'none', borderRadius:'6px', padding:'10px', margin:'6px', width:'80px', }
+    const namesButtonStyle = {fontSize: '13px', backgroundColor:'#f1f1f1',display:'flex', justifyContent:'center', alignItems:'center', border:'none', borderRadius:'6px', padding:'10px', margin:'6px', width:'80px'}
     const watchAllButtonStyle = {fontSize: '12px', backgroundColor:'#f1f1f1', border:'none', borderRadius:'6px', padding:'5px', margin:'6px', width:'60px', }
     const tableButtonStyleDescripcion = { fontSize: '13px', backgroundColor:'#f1f1f1', display:'flex', justifyContent:'center', alignItems:'center', border:'none', borderRadius:'6px', padding:'10px', margin:'6px', width:'90px', }
+
 
     // const obtenerValoresUnicos = (campo) => {
     //     const valores = guardapolvos.map(producto => producto.description[campo]);
@@ -161,6 +175,21 @@ const OffCanvasBody = ({ updateQueryParams, isAdmin,  searchParams, setSearchPar
                 </div>
             </div>  
 
+            <div style={divContainer}>
+                <h4 style={h4Title}>Modelos</h4>
+                <div style={divLine}></div>
+                <div style={divButtons}>
+                    {uniqueNames && uniqueNames.map((name) => (
+                    <button
+                        key={name}
+                        style={namesButtonStyle}
+                        onClick={() => handleClick('name', name)}
+                    >
+                        {name}
+                    </button>
+                    ))}
+                </div>
+            </div>  
 
 
 
