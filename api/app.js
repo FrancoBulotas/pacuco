@@ -32,14 +32,14 @@ app.use(cors());
 app.use(express.json())
 
 app.use((req, res, next) => {
-    res.set('Cache-Control', 'public, max-age=1800, stale-while-revalidate=86400'); // 1 hora de caché
+    res.set('Cache-Control', 'public, max-age=600, stale-while-revalidate=86400'); // 10 min de cache
     next();
 });
-app.use((req, res, next) => {
-    res.set('ETag', 'W/"123456"'); // Cambia este valor si los datos cambian
-    res.set('Last-Modified', new Date().toUTCString());
-    next();
-});
+// app.use((req, res, next) => {
+//     res.set('ETag', 'W/"123456"'); // Cambia este valor si los datos cambian
+//     res.set('Last-Modified', new Date().toUTCString());
+//     next();
+// });
 // app.use(express.static(path.join(__dirname, "dist")));
  
 app.use(middleware.tokenExtractor)
