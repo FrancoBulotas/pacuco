@@ -32,7 +32,7 @@ app.use(cors());
 app.use(express.json())
 
 app.use((req, res, next) => {
-    res.set('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400'); // 1 hora de caché
+    res.set('Cache-Control', 'public, max-age=1800, stale-while-revalidate=86400'); // 1 hora de caché
     next();
 });
 app.use((req, res, next) => {
