@@ -29,7 +29,6 @@ const Product = ({ navigateTo, product }) => {
     const [imageLoaded, setImageLoaded] = useState(false)
 
     useEffect(() => {
-        console.log(change)
         setChoosenImg(product.img);
     }, [product])
 
