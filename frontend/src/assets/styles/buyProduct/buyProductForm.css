@@ -50,21 +50,31 @@
     display: inline-block;
 }
 
+.table>thead {
+    border-radius: 18px;
+    vertical-align: middle;
+}
+
 .thead-carrito th {
     background-color: #333; /* Negro */
     color: #fff; /* Blanco */
     padding: 10px;
     text-align: left;
+    
 }
 .tr-precio-total th {
     text-align: right;
     font-size: 16px;
-    color: #333; /* Gris oscuro */
+    color: #333; 
+}
+.tr-precio-total{
+    font-weight: 700;
 }
 .text-right{
     display: flex;
     text-align: center;
     justify-content: space-between;
+    width: 160px;
 }
 .img-carrito{
     width:140px;
@@ -121,6 +131,7 @@
     .simulacion-body-comprar-carrito {
         padding: 20px 0px;
     }
+    
 
     .thead-carrito th,
     .table th,
@@ -128,14 +139,16 @@
         padding: 3px;
         font-size: 12px;
     }
+    
     .tr-precio-total th {
         font-size: 14px;
     }
+
     .text-right{
         display: flex;
         text-align: center;
         justify-content: space-between;
-        width: 120px;
+        
     }
     .img-carrito{
         width: 80px;
@@ -148,7 +161,8 @@
     }
     .div-tipo-envio p,
     .divAclaracion p {
-        font-size: 14px;
+        font-size: 19px;
+        font-weight: 500;
     }
     .thead-carrito th,
     .table th,

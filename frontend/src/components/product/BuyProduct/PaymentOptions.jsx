@@ -15,7 +15,7 @@ const PaymentOptions = ({ selectedOption, handleOptionChange, choosenCbu, choose
       >
         <FormControlLabel value="Mercado Pago" control={<Radio />} label="Mercado Pago" />
         <FormControlLabel value="Transferencia Bancaria" control={<Radio />} label="Transferencia Bancaria" />
-        <FormControlLabel value="Cuenta DNI" control={<Radio />} label="Cuenta DNI" />
+        {/* <FormControlLabel value="Cuenta DNI" control={<Radio />} label="Cuenta DNI" /> */}
       </RadioGroup>
     </FormControl>
     <div className="payment-options">
