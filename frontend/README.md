@@ -7,8 +7,7 @@ URL: pacuco.com.ar
 
 TODO:
 
-- Mejorar la pantalla de finalizar compra.
-- Agregar filtros a la pestaña de adminsitracion de productos (listo falta adaptarlo a mobile)
+- (URGENTE) Mejorar invocacion de funciones de vercel 
 - Mejorar la forma en la que se pueden ocultar guardapolvos del publico.
 - Agregar a la barra de navegacion los accesorios (intentar hacer == que lo que voy a implementar en administracion)
 - Corregir bug de la imagen que aparece cuando se ingresa al prod desde el carrito, se muestra una vieja.
@@ -22,6 +21,8 @@ TODO:
 - Agregar mas filtros para los guardapolvos (por tabla / base / vivo / detalle / modelo, etc).
 - Agregar que puedan modificar los guardapolvos destacados.
 - Cambiar nombre que aparece al recibir el mail de compras@pacuco.com.ar
+- [x] ~~Agregar filtros a la pestaña de adminsitracion de productos (listo falta adaptarlo a mobile)~~
+- [x] ~~Mejorar la pantalla de finalizar compra.~~
 - [x] ~~Que no se mueva para arriba la pantalla de administracion de prods cuando se pasa de pagina.~~
 - [x] ~~Ver que pasa con la segunda pagina de los productos~~
 - [x] ~~Agregar a servicio configs las categorias y demas para que puedan ser administradas desde la administrtacion~~
