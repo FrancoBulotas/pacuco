@@ -1,10 +1,20 @@
 
 const searchProdsRouter = require('express').Router()
-//const mongoose = require('mongoose');
 const Guardapolvo = require('../models/guardapolvo');
 const { ObjectId } = require('mongodb');
+const NodeCache = require('node-cache');
+const cache = new NodeCache({ stdTTL: 3600, checkperiod: 600 });
+
+searchProdsRouter.post('/products/clearCache', (req, res) => {
+    cache.flushAll(); // Borra toda la caché
+    console.log("🗑 Caché de productos eliminada");
+    res.json({ message: "Cache cleared" });
+})
 
 searchProdsRouter.get('/products', async (req, res) => {
+    const cacheKey = `products:${JSON.stringify(req.query)}`; // Clave única basada en los parámetros de la URL
+    let cachedProducts = cache.get(cacheKey);
+
     const { name, minPrice, maxPrice, size, sortByPrice, table, all, description, stockAvailable, id, category, type, withStock, withDiscount, onDisplay } = req.query;
     const filters = {};
   
@@ -82,35 +92,44 @@ searchProdsRouter.get('/products', async (req, res) => {
     }
 
     try {
-      const sortOrder = sortByPrice === 'desc' ? -1 : 1;
 
-      const products = await Guardapolvo.aggregate([
-        { $match: filters },
-        {
-          $addFields: {
-            effectivePrice: {
-              $cond: {
-                if: { $gt: ['$discountPrice', 0] },
-                then: '$discountPrice',
-                else: '$price'
+      if (!cachedProducts) {
+          console.log(`⚡ No hay caché para: ${cacheKey}, obteniendo datos de la BD...`);
+          
+          const sortOrder = sortByPrice === 'desc' ? -1 : 1;
+
+          const products = await Guardapolvo.aggregate([
+            { $match: filters },
+            {
+              $addFields: {
+                effectivePrice: {
+                  $cond: {
+                    if: { $gt: ['$discountPrice', 0] },
+                    then: '$discountPrice',
+                    else: '$price'
+                  }
+                }
               }
-            }
-          }
-        },
-        { $sort: { effectivePrice: sortOrder } }
-      ]);
-      
-      // Aplicar transformación manual para cada producto
-      const transformedProducts = products.map(product => {
-        return {
-          ...product,
-          id: product._id.toString(),
-          _id: undefined, // O puedes usar delete product._id;
-          __v: undefined  // O puedes usar delete product.__v;
-        };
-      });
+            },
+            { $sort: { effectivePrice: sortOrder } }
+          ]);
+          
+          // Aplicar transformación manual para cada producto
+          cachedProducts = products.map(product => {
+            return {
+              ...product,
+              id: product._id.toString(),
+              _id: undefined, 
+              __v: undefined  
+            };
+          });
 
-      res.json(transformedProducts);
+          cache.set(cacheKey, cachedProducts); // Guarda en caché
+      } else {
+          console.log("Usando productos desde caché...");
+      }
+      
+      res.json(cachedProducts);
     } catch (error) {
       res.status(500).send('Error al buscar productos');
     }

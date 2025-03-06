@@ -15,7 +15,7 @@ import searchProdsService from '../../services/searchProds.js';
 import { setFeatured } from '../../reducers/guardapolvosReducer.js';
 import LoadingScreen from '../common/loaders/LoadingScreen';
 
-const CarouselProd = ({ title, table }) => {
+const CarouselProd = ({ title, type }) => {
   const [guardapolvos, setGuardapolvos] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -25,10 +25,10 @@ const CarouselProd = ({ title, table }) => {
     const initializeGuardapolvos = async () => {
       if (searchParams && searchParams.size === 0) {
         try {
-          const everyGuardapolvos = await searchProdsService.getSearch(table);
+          const everyGuardapolvos = await searchProdsService.getSearch(type);
           let stockGuardapolvos = []
           
-          if(table.table === 'stock'){
+          if(type.type === 'stock'){
             stockGuardapolvos = everyGuardapolvos.filter(item => item.amount > 0 && item.category === 'guardapolvo');
             setGuardapolvos(stockGuardapolvos.slice(0, 15));
           } else {
@@ -47,7 +47,7 @@ const CarouselProd = ({ title, table }) => {
   return (
     <div className="product-carousel-section">
       <div className="product-carousel-header">
-        <h2 className="product-carousel-title" onClick={() => navigate(`/products?type=${table.table}`)}>
+        <h2 className="product-carousel-title" onClick={() => navigate(`/products?type=${type.type}`)}>
           {title}
         </h2>
         <div className="product-carousel-divider"></div>

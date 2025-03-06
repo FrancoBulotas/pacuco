@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import configsService  from '../../../services/configs'
+import searchProdsService from '../../../services/searchProds'
 import { setToken } from '../../../services/token'
 import { useNavigate } from 'react-router-dom'
 
@@ -124,7 +125,6 @@ const EditCategoriesModal = (props) => {
       setCategoriesData(updatedCategories);
     };
 
-
     const updateConfigData = () => {
         setConfigData((prevConfigData) => ({
           ...prevConfigData, // Spread the existing configData
@@ -143,6 +143,7 @@ const EditCategoriesModal = (props) => {
                         console.log(configData);
 
                         const response = await configsService.update(configData, token)
+                        await searchProdsService.clearCache();
                     
                     } catch(error){
                         console.log(error)

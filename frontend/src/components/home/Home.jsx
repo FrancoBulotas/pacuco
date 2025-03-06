@@ -11,9 +11,9 @@ const Home = () => {
         <>
             <DisplayBrandName />
             {/* <CarouselProd title={''} table={{'all': true}} /> */}
-            <CarouselProd title={'EN STOCK!!'} table={{'table': 'stock'}} /> 
-            <CarouselProd title={'NIVEL INICIAL!'} table={{'table': 'nivel_inicial'}}/>
-            <CarouselProd title={'PRIMARIA!'} table={{'table': 'primaria'}}/>
+            <CarouselProd title={'EN STOCK!!'} type={{'type': 'stock'}} /> 
+            <CarouselProd title={'NIVEL INICIAL!'} type={{'type': 'nivel_inicial'}}/>
+            <CarouselProd title={'PRIMARIA!'} type={{'type': 'primaria'}}/>
             <ProductsMenu />
             <FrecuentQuestions />
             <AboutUs />
