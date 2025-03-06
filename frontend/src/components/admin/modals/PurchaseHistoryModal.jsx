@@ -11,6 +11,7 @@ import '../../../assets/styles/admin/administration.css'
 import { formatNumber } from '../../product/common/functions'
 import { useNavigate } from 'react-router-dom'
 import purchasedProductsService from '../../../services/purchasedProduct'
+import searchProdsService from '../../../services/searchProds'
 import Swal from 'sweetalert2'
 
 const PurchaseHistoryModal = (props) => {
@@ -40,6 +41,8 @@ const PurchaseHistoryModal = (props) => {
     const handleSaleConfirmedStatus = async (state) => {
         try {
             await purchasedProductsService.update(props.item.id, {saleConfirmed: state})
+            await searchProdsService.clearCache();
+            
             Swal.fire({title:'Modificado correctamente!', text:`Modificaste el estado de: ${props.item.operationCode}`, icon:'success', confirmButtonText:'Aceptar', confirmButtonColor:'#000'})
             .then((result) => {
                 if (result.isConfirmed) {

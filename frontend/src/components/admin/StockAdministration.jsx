@@ -37,13 +37,13 @@ const StockAdministration = () => {
         if(configuration) setConfig(configuration[0]);        
     }, [configuration])
 
-    // useEffect(() =>{
-    //     if(categoryTabChoosen === 'accesorios') {         
-    //         dispatch(setTypeTab('totebag'));
-    //     } else if (categoryTabChoosen === 'guardapolvo'){
-    //         dispatch(setTypeTab('nivel_inicial'));
-    //     }
-    // }, [categoryTabChoosen])
+    useEffect(() =>{
+        if(categoryTabChoosen === 'accesorios') {         
+            dispatch(setTypeTab('totebag'));
+        } else if (categoryTabChoosen === 'guardapolvo'){
+            dispatch(setTypeTab('nivel_inicial'));
+        }
+    }, [categoryTabChoosen])
 
     const showEditModal = (item, table) => {
         setEditModalShow(true)
@@ -63,7 +63,6 @@ const StockAdministration = () => {
     }
 
     const handleTypeSelect = (key) => {
-        
         dispatch(setTypeTab(key));
     }
     const handleCategorySelect = (key) => {
@@ -72,7 +71,7 @@ const StockAdministration = () => {
     }
 
     const stockAdministrationOptions = [
-        { title: "Administrar todos los productos", onClick: () => showEditAllProductsModal()},
+        // { title: "Administrar todos los productos", onClick: () => showEditAllProductsModal()},
         { title: "Editar categorias y/o subcategorias", onClick: () => showEditCategoriesModal()},
     ];
 

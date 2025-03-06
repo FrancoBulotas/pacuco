@@ -2,6 +2,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import imageService from '../../../services/imageUpload'
 import guardapolvosService from '../../../services/guardapolvos'
+import searchProdsService from '../../../services/searchProds'
 import { initializeGuardapolvosByTable } from '../../../reducers/guardapolvosReducer'
 
 import { setToken } from '../../../services/token'
@@ -156,6 +157,8 @@ const EditModal = (props) => {
                             imageData.forEach(image => data.append('images', image))                    
                             await imageService.upload(data, token)
                         }
+
+                        await searchProdsService.clearCache();
                     } catch (error){
                         console.log(error)
                         if(error.response.status === 401){
@@ -217,6 +220,8 @@ const EditModal = (props) => {
                         // genero la lista de todos los guardapolvos eliminando el guardapolvo pasado por parametro
                         const guardapolvosUpdated = guardapolvos.filter(guardapolvo => guardapolvo.id !== props.item.id)
                         dispatch(initializeGuardapolvosByTable(props.item.table, guardapolvosUpdated.filter(guardapolvo => guardapolvo.table === props.item.table)))
+
+                        await searchProdsService.clearCache();
 
                         Swal.fire({title:'Guardapolvo eliminado correctamente!', icon:'success', confirmButtonText: 'Aceptar', confirmButtonColor: '#000',})
                         .then((result)=>{

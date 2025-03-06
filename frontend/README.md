@@ -7,6 +7,7 @@ URL: pacuco.com.ar
 
 TODO:
 
+- Corregit EditAllProductsModal.jsx
 - (URGENTE) Mejorar invocacion de funciones de vercel 
 - Mejorar la forma en la que se pueden ocultar guardapolvos del publico.
 - Agregar a la barra de navegacion los accesorios (intentar hacer == que lo que voy a implementar en administracion)

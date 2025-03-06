@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import imageService from '../../../services/imageUpload'
 import { useState } from 'react'
 import guardapolvosService from '../../../services/guardapolvos'
+import searchProdsService from '../../../services/searchProds'
 import { setToken } from '../../../services/token'
 import { URL_GUARDAPOLVOS_IMAGES_AZURE } from '../../common/consts'
 import { useNavigate } from 'react-router-dom'
@@ -151,8 +152,9 @@ const CreateModal = (props) => {
                         imageData.forEach(image => {
                             data.append('images', image)
                         })
-                        await imageService.upload(data, token) 
+                        await imageService.upload(data, token);
 
+                        await searchProdsService.clearCache();
                     } catch (error){
                         console.error(error)
                         if(error.response.status === 401){

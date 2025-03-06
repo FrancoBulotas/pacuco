@@ -61,6 +61,7 @@ function App() {
     }
     fetchConfig();
     fetchProducts();
+    dispatch(initializePaymentMethods());
   }, [])
 
   // Seteamos guardapolvos en base a los parametros de busqueda en la URL
@@ -91,7 +92,6 @@ function App() {
     };
 
     fetchProducts();
-    dispatch(initializePaymentMethods())
   }, [searchParams, dispatch, location.search]);
 
   // se encarga de determinar si lo que se va a mostrar es el guardapolvo individual o todos los productos

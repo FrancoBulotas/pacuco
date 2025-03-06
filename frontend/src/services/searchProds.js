@@ -25,4 +25,10 @@ const getSearch = async (params) => {
     return response.data;
 }
 
-export default { getSearch }
+const clearCache = async () => {
+    const response = await api.post(baseUrl + '/clearCache');
+    console.log(response);
+    return response;
+}
+
+export default { getSearch, clearCache }

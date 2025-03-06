@@ -31,10 +31,10 @@ mongoose.connect(config.MONGODB_URI)
 app.use(cors());
 app.use(express.json())
 
-app.use((req, res, next) => {
-    res.set('Cache-Control', 'public, max-age=600, s-maxage=600, stale-while-revalidate=86400');
-    next();
-});
+// app.use((req, res, next) => {
+//     res.set('Cache-Control', 'public, max-age=900, s-maxage=900, stale-while-revalidate=86400');
+//     next();
+// });
 
 // app.use((req, res, next) => {
 //     res.set('ETag', 'W/"123456"'); // Cambia este valor si los datos cambian
