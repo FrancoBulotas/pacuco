@@ -1,7 +1,8 @@
 /* Remove hover effects from ListGroup items */
 .product-group-list .list-group-item:hover {
-    background-color: #000;
-    color: #fff;
+    background-color: #e0e0e0;
+    color: #000000;
+    cursor: pointer;
   }
   
   /* Custom styling for selected group */
@@ -56,7 +57,7 @@
   .groups-list-container:focus, 
   .filters-list-container:hover, 
   .filters-list-container:focus {
-    background-color: #eeeeee;
+    background-color: #f8f8f8;
   }
 
 

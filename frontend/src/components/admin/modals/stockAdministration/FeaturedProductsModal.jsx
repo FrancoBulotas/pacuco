@@ -135,10 +135,12 @@ const FeaturedProductsModal = (props) => {
     
     // Custom style for selected group item
     const selectedGroupStyle = {
-        backgroundColor: '#e9e9e9',
-        color: '#000',
+        backgroundColor: '#000',
+        color: '#fff',
         border: '1px solid #ced4da'
     };
+
+    const titleStyle = { fontWeight: '700' }
 
     return (
         <Modal
@@ -149,14 +151,15 @@ const FeaturedProductsModal = (props) => {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Editar productos destacados mostrados en página inicial
+                    Editar productos destacados mostrados en página inicial                          
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Row className="mb-3">
                     <Col md={4}>
-                        <Card style={{marginTop:'32px'}}>
-                            <Card.Header>Grupos de productos</Card.Header>
+                    {/* <h5>Editando grupo: {selectedGroup}</h5> */}
+                        <Card>
+                            <Card.Header style={titleStyle}>Grupos de productos</Card.Header>
                             <Card.Body className="groups-list-container">
                                 <InputGroup className="mb-3">
                                     <Form.Control
@@ -164,7 +167,7 @@ const FeaturedProductsModal = (props) => {
                                         value={newGroupName}
                                         onChange={(e) => setNewGroupName(e.target.value)}
                                     />
-                                    <Button variant="outline-dark" onClick={addGroup}>
+                                    <Button variant="dark" onClick={addGroup}>
                                         Añadir
                                     </Button>
                                 </InputGroup>
@@ -196,7 +199,7 @@ const FeaturedProductsModal = (props) => {
                             </Card.Body>
                         </Card>
                         <Card style={{marginTop:'25px'}}>
-                            <Card.Header>Filtros</Card.Header>
+                            <Card.Header style={titleStyle}>Filtros</Card.Header>
                             <Card.Body className="filters-list-container">
                                 <Form.Group className="mb-3">
                                     <Form.Label>Buscar por nombre</Form.Label>
@@ -215,8 +218,8 @@ const FeaturedProductsModal = (props) => {
                                         onChange={(e) => setCategoryFilter(e.target.value)}
                                     >
                                         {categories.map(category => (
-                                            <option key={category} value={category}>
-                                                {category === 'all' ? 'Todas las categorías' : category}
+                                            <option key={category} value={category} style={{fontSize:'14px'}}>
+                                                {category === 'all' ? 'Todas las categorías' : category.toUpperCase().replace('_', ' ')}
                                             </option>
                                         ))}
                                     </Form.Select>
@@ -228,8 +231,8 @@ const FeaturedProductsModal = (props) => {
                                             onChange={(e) => setTypeFilter(e.target.value)}
                                         >
                                             {types.map(type => (
-                                                <option key={type} value={type}>
-                                                    {type === 'all' ? 'Todas las subcategorías' : type}
+                                                <option key={type} value={type} style={{fontSize:'14px'}}>
+                                                    {type === 'all' ? 'Todas las subcategorías' : type.toUpperCase().replace('_', ' ')}
                                                 </option>
                                             ))}
                                     </Form.Select>
@@ -255,11 +258,10 @@ const FeaturedProductsModal = (props) => {
                     </Col>
                     <Col md={8}>
                         <DragDropContext onDragEnd={onDragEnd}>
-                            <h5>Editando grupo: {selectedGroup}</h5>
                             <Row>
                                 <Col md={6}>
                                     <Card>
-                                        <Card.Header>{filteredProducts.length} Productos disponibles </Card.Header>
+                                        <Card.Header style={titleStyle}>{filteredProducts.length} Productos disponibles </Card.Header>
                                         <Card.Body className="product-list-container">
                                             <Droppable droppableId="availableProducts">
                                                 {(provided) => (
@@ -325,7 +327,7 @@ const FeaturedProductsModal = (props) => {
                                 </Col>
                                 <Col md={6}>
                                     <Card>
-                                        <Card.Header>Productos seleccionados</Card.Header>
+                                        <Card.Header style={titleStyle}>{productGroups[selectedGroup] && productGroups[selectedGroup].length} Productos seleccionados en {selectedGroup}</Card.Header>
                                         <Card.Body className="product-list-container">
                                             <Droppable droppableId="selectedProducts">
                                                 {(provided) => (

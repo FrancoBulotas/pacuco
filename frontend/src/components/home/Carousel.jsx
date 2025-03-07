@@ -4,15 +4,12 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { formatNumber } from '../product/common/functions';
 import { validateIfItemHasDiscount, checkDiscountPorcentage } from '../common/functions';
 import ImageComponent from '../common/Placeholders/ImageComponent';
 import CheckIfIsStockOrCustomizable from '../product/common/CheckIfIsStockOrCustomizable.jsx';
-import searchProdsService from '../../services/searchProds.js';
-import { setFeatured } from '../../reducers/guardapolvosReducer.js';
 import LoadingScreen from '../common/loaders/LoadingScreen';
 
 const CarouselProd = ({ title, prods }) => {

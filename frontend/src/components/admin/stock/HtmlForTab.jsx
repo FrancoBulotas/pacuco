@@ -40,7 +40,6 @@ const HtmlForTab = ({ title, table, type, category, showCreateModal, showEditMod
         setProducts(products);
     }
 
-
     const resetProducts = () => {
         dispatch(filterChange(''));
         setSearchParams(defaultSearchParams);

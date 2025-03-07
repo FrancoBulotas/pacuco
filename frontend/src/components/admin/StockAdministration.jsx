@@ -107,9 +107,6 @@ const StockAdministration = () => {
     ];
 
     const tabStyle = { width:'100%' }
-
-    // console.log('categoryChoosen', categoryTabChoosen);
-    // console.log('typeChoosen', typeTabChoosen);
     
     return (
         <div>
