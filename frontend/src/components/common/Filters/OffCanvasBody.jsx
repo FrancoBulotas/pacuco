@@ -41,7 +41,7 @@ const OffCanvasBody = ({ updateQueryParams, isAdmin,  searchParams, setSearchPar
     const divLine = {margin:'10px 0px', border:'1px solid #e0e0e0', width:'100%'};
     const divButtons = {display:'flex', flexWrap:'wrap'};
     const sizeButtonStyle = { fontSize: '15px', backgroundColor:'#f1f1f1',display:'flex', justifyContent:'center', alignItems:'center', border:'none', borderRadius:'6px', padding:'20px', margin:'6px', width:'60px', height:'20px',}
-    const tableButtonStyle = { fontSize: '15px', backgroundColor:'#f1f1f1',display:'flex', justifyContent:'center', alignItems:'center', border:'none', borderRadius:'6px', padding:'10px', margin:'6px', width:'80px', }
+    const tableButtonStyle = { fontSize: '13px', backgroundColor:'#f1f1f1',display:'flex', justifyContent:'center', alignItems:'center', border:'none', borderRadius:'6px', padding:'10px', margin:'6px', width:'80px', }
     const namesButtonStyle = {fontSize: '13px', backgroundColor:'#f1f1f1',display:'flex', justifyContent:'center', alignItems:'center', border:'none', borderRadius:'6px', padding:'10px', margin:'6px', width:'80px'}
     const watchAllButtonStyle = {fontSize: '12px', backgroundColor:'#f1f1f1', border:'none', borderRadius:'6px', padding:'5px', margin:'6px', width:'60px', }
     const tableButtonStyleDescripcion = { fontSize: '13px', backgroundColor:'#f1f1f1', display:'flex', justifyContent:'center', alignItems:'center', border:'none', borderRadius:'6px', padding:'10px', margin:'6px', width:'90px', }
@@ -73,14 +73,14 @@ const OffCanvasBody = ({ updateQueryParams, isAdmin,  searchParams, setSearchPar
                             style={tableButtonStyle}
                             onClick={() => handleClick('withStock', true)}
                         >
-                            En stock
+                            EN STOCK
                         </button>
                         <button
                             key={'withoutStock'}
                             style={tableButtonStyle}
                             onClick={() => handleClick('withStock', false)}
                         >
-                            Sin stock
+                            SIN STOCK
                         </button>
                     </div>
                 </div>}
@@ -96,14 +96,14 @@ const OffCanvasBody = ({ updateQueryParams, isAdmin,  searchParams, setSearchPar
                             style={tableButtonStyle}
                             onClick={() => handleClick('withDiscount', true)}
                         >
-                            Con descuento
+                            CON DESCUENTO
                         </button>
                         <button
                             key={'withoutDiscount'}
                             style={tableButtonStyle}
                             onClick={() => handleClick('withDiscount', false)}
                         >
-                            Sin descuento
+                            SIN DESCUENTO
                         </button>
                     </div>
                 </div>
@@ -116,14 +116,14 @@ const OffCanvasBody = ({ updateQueryParams, isAdmin,  searchParams, setSearchPar
                             style={tableButtonStyle}
                             onClick={() => handleClick('onDisplay', true)}
                         >
-                            Se estan mostrando
+                            SE ESTAN MOSTRANDO
                         </button>
                         <button
                             key={'notShow'}
                             style={tableButtonStyle}
                             onClick={() => handleClick('onDisplay', false)}
                         >
-                            No se estan mostrando
+                            NO SE ESTAN MOSTRANDO
                         </button>
                     </div>
                 </div>
@@ -153,7 +153,7 @@ const OffCanvasBody = ({ updateQueryParams, isAdmin,  searchParams, setSearchPar
                         style={tableButtonStyle}
                         onClick={() => handleClick('type', type.toLowerCase().replace(' ', '_'))}
                     >
-                        {type}
+                        {type.toUpperCase()}
                     </button>
                     ))}
                 </div>

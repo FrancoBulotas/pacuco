@@ -10,6 +10,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas'
 import OffCanvasBody from './Filters/OffCanvasBody'
 import FiltersButton from './Filters/FiltersButton'
 import { setChoosenPage } from '../../reducers/filterReducer'
+import Swal from 'sweetalert2';
 
 const FiltersBar = ({ setIsLoading, table, isAdmin, searchParamsAdmin, setSearchParamsAdmin, setCurrentPageAdmin }) => {
     const [searchParams, setSearchParams] = useState({})
@@ -36,21 +37,28 @@ const FiltersBar = ({ setIsLoading, table, isAdmin, searchParamsAdmin, setSearch
         setSearchParams(params);
 
         // no pueden estar la query size cuando table es == primaria || == nivel_inicial
-        if(url.searchParams.get('size') && (url.searchParams.get('type') == 'primaria' || url.searchParams.get('type') == 'nivel_incial')) {
-            url.searchParams.delete('size');
-            window.location.href = url.toString();        
+        if(url.searchParams.get('size') && (url.searchParams.get('type') == 'primaria' || url.searchParams.get('type') == 'nivel_inicial')) {
+            url.searchParams.delete('size');            
+            Swal.fire({ 
+                title: `Para productos de ${url.searchParams.get('type').replace('_', ' ')}`, 
+                text: 'Antes de agregarlo al carrito, podes elegir el talle que quieras! No es necesario que lo filtres.',
+                icon:'info', confirmButtonText: 'Aceptar', confirmButtonColor: '#000', })       
+            .then((result) => {
+                if(result.isConfirmed) window.location.href = url.toString(); 
+            })
         }
 
-        // if(url.searchParams.get('size')){
-            setFilters((prevFilters) => ({ 
-                ...prevFilters, 
-                size: url.searchParams.get('size'), 
-                type: url.searchParams.get('type'), 
-                sortByPrice: url.searchParams.get('sortByPrice'), 
-                name: url.searchParams.get('name'), 
-                category: url.searchParams.get('category'), 
-            }));
-        // }
+        setFilters((prevFilters) => ({ 
+            ...prevFilters, 
+            size: url.searchParams.get('size'), 
+            type: url.searchParams.get('type'), 
+            sortByPrice: url.searchParams.get('sortByPrice'), 
+            name: url.searchParams.get('name'), 
+            category: url.searchParams.get('category'), 
+        }));
+    
+        dispatch(setChoosenPage({ page: 1 }))
+    
     }, [location.search])
 
     const resetAdminProducts = (key) => {
@@ -59,7 +67,7 @@ const FiltersBar = ({ setIsLoading, table, isAdmin, searchParamsAdmin, setSearch
 
     const resetProducts = (choice) => {
         handleClose();
-        dispatch(setChoosenPage({ page: 1, table: table }))
+        dispatch(setChoosenPage({ page: 1 }))
 
         // Eliminar el parámetro 'size'
         if(choice == 'size'){
@@ -103,7 +111,7 @@ const FiltersBar = ({ setIsLoading, table, isAdmin, searchParamsAdmin, setSearch
         handleClose();
         setIsLoading(true);
 
-        dispatch(setChoosenPage({ page: 1, table: table.replace(' ', '_') }))
+        dispatch(setChoosenPage({ page: 1 }))
 
         searchParams.set(key, value);
 

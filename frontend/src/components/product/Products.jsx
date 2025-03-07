@@ -13,11 +13,11 @@ import HtmlForFilterResuls from './common/HtmlForFilterResult'
 
 import '../../assets/styles/product.css'
 
-const Products = ({ products, table }) => {    
+const Products = ({ products, type = ''}) => {    
     const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(false)
 
-    const currentPage = useSelector(state => state.filter.choosenPage[table.replace(' ', '_')])
+    const currentPage = useSelector(state => state.filter.choosenPage)
     const productsPerPage = 20
 
     const config = useSelector(state => state.config)
@@ -31,7 +31,7 @@ const Products = ({ products, table }) => {
     }, [config])
 
     const onPageChange = (page) => {
-        dispatch(setChoosenPage({ page: page, table: table.replace(' ', '_') }))
+        dispatch(setChoosenPage({ page: page }))
     }
 
     const getFiltredProds = () => {
@@ -62,14 +62,14 @@ const Products = ({ products, table }) => {
 
     return(
         <div className='margin-auto width-90'>
-            <ProductsBreadcrumb type={table.replace('_', ' ')} />
-            <FiltersBar setIsLoading={setIsLoading} table={table} />
+            <ProductsBreadcrumb type={type.replace('_', ' ')} />
+            <FiltersBar setIsLoading={setIsLoading} table={type} />
             <HtmlForFilterResuls products={products} />
             <ScrollToTop />
             {isLoading 
             ? <LoadingScreen /> 
             :   <div>
-                    <LoadProducts products={getCurrentProducts()} table={table} />
+                    <LoadProducts products={getCurrentProducts()} type={type} />
                     <PaginationProducts currentPage={currentPage} totalPages={getCurrentLength()} onPageChange={onPageChange} />
                 </div>
             }

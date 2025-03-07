@@ -47,7 +47,7 @@ const CarouselProd = ({ title, type }) => {
   return (
     <div className="product-carousel-section">
       <div className="product-carousel-header">
-        <h2 className="product-carousel-title" onClick={() => navigate(`/products?type=${type.type}`)}>
+        <h2 className="product-carousel-title" onClick={() => navigate(`/products?category=guardapolvo&type=${type.type}`)}>
           {title}
         </h2>
         <div className="product-carousel-divider"></div>

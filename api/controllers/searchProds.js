@@ -3,11 +3,12 @@ const searchProdsRouter = require('express').Router()
 const Guardapolvo = require('../models/guardapolvo');
 const { ObjectId } = require('mongodb');
 const NodeCache = require('node-cache');
+
 const cache = new NodeCache({ stdTTL: 3600, checkperiod: 600 });
 
 searchProdsRouter.post('/products/clearCache', (req, res) => {
     cache.flushAll(); // Borra toda la caché
-    console.log("🗑 Caché de productos eliminada");
+    console.log("🗑 Caché eliminada");
     res.json({ message: "Cache cleared" });
 })
 
@@ -126,7 +127,7 @@ searchProdsRouter.get('/products', async (req, res) => {
 
           cache.set(cacheKey, cachedProducts); // Guarda en caché
       } else {
-          console.log("Usando productos desde caché...");
+          console.log(`Usando ${cacheKey} desde caché...`);
       }
       
       res.json(cachedProducts);
