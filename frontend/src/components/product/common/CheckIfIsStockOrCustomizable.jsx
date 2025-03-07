@@ -1,16 +1,16 @@
 
 
-export const checkIfIsStockOrCustomizable = ({guardapolvo, navigateTo, loadGuardapolvos=false, cart=false}) => {
+export const checkIfIsStockOrCustomizable = ({guardapolvo: prod, navigateTo, loadGuardapolvos=false, cart=false}) => {
     const table = navigateTo.replace('/', '')
 
-    if (guardapolvo.table === 'stock' ){ 
+    if (prod.table === 'stock' &&  prod.amount !== 0){ 
         return <div className={`badge text-black tag-stock ${loadGuardapolvos ? "position-absolute" : null}`}
             style={{
                 fontSize: cart ? '10px' : '11px',
                 backgroundColor: " pink", 
                 zIndex:'100'
         }}>Entrega Inmediata!</div>
-    } else if ((guardapolvo.table === 'nivel_inicial' || guardapolvo.table === 'primaria' || guardapolvo.table === 'guardapolvos' || guardapolvo.table === 'busqueda') && guardapolvo.amount != 0){
+    } else if ((prod.table === 'nivel_inicial' || prod.table === 'primaria' || prod.table === 'guardapolvos' || prod.table === 'busqueda') && prod.amount != 0){
         return <div className={`badge text-black tag-stock ${loadGuardapolvos ? "position-absolute" : null}`} 
             style={{
                 fontSize: cart ? '10px' : '11px',

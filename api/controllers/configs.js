@@ -1,13 +1,23 @@
 
 const configsRouter = require('express').Router()
 const Config = require('../models/config')
-
 const jwt = require('jsonwebtoken')
+const NodeCache = require('node-cache');
 
+const cache = new NodeCache({ stdTTL: 3600, checkperiod: 600 });
 
 configsRouter.get('/', async (request, response) =>{
-    const config = await Config.find({})    
-    response.json(config)   
+    let configs = cache.get("configs");
+
+    if (!configs) {
+        console.log("Obteniendo config de la base de datos...");
+        configs = await Config.find({})    
+        cache.set("configs", configs); 
+    } else {
+        console.log("Usando config desde caché...");
+    }
+
+    response.json(configs);
 })
 
 

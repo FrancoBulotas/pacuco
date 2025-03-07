@@ -5,9 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Tab from 'react-bootstrap/Tab'
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
-import Header from './common/Header'
 import { URL_COMMON_IMAGES_AZURE } from '../common/consts'
-import AdminNavBar from './common/NavBar'
 
 import { setToken } from '../../services/token'
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,6 +13,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { reloadPage } from './common/commonFunctions'
 import { setNewPaymentMethods } from '../../reducers/paymentMethodsReducer'
+
+import searchProdsService from '../../services/searchProds'
 import imageService from '../../services/imageUpload'
 import Swal from 'sweetalert2'
 
@@ -95,8 +95,10 @@ const PaymentAdministration = () => {
                 }
             }   
             imageFile = false
-            dispatch(setNewPaymentMethods(paymentMethods.id, data))
-            setNewValues({ aliasCbu: '', aliasCvu: '', cbu: '', cvu: '', titularCuentaCbu: '', titularCuentaCvu: '', image: null, sucursal: '', domicilio: ''})
+            dispatch(setNewPaymentMethods(paymentMethods.id, data));
+            await searchProdsService.clearCache();
+            
+            setNewValues({ aliasCbu: '', aliasCvu: '', cbu: '', cvu: '', titularCuentaCbu: '', titularCuentaCvu: '', image: null, sucursal: '', domicilio: ''});
             e.stopPropagation()
         } catch (error) {
             console.log(error)

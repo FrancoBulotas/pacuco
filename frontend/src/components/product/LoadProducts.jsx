@@ -8,21 +8,20 @@ import CheckIfIsStockOrCustomizable from './common/CheckIfIsStockOrCustomizable.
 
 import '../../assets/styles/product.css'
 
-export const LoadProducts = ({ products, table }) => {
+export const LoadProducts = ({ products }) => {  
     return (
         <div className='products-container'>
             {
                 products?.length === 0 
                 ? <HtmlForNoMatches />
                 : products?.map((prod, i) =>   
-                    (table === 'stock' || table === 'guardapolvos' || table === 'busqueda') && prod.amount !== 0  && 
                     <Link className='producto' key={i} to={`/products?id=${prod.id}`}>
                         <div className="a-contenedor-productos">
-                            {(table === 'stock' || table === 'guardapolvos' || table === 'busqueda') && prod.amount === 0 
+                            {prod.type === 'stock' && prod.amount === 0 
                             ? <div className="badge bg-dark text-white position-absolute tag-stock">Sin Stock</div> 
                             : null }
 
-                            <CheckIfIsStockOrCustomizable guardapolvo={prod} navigateTo={table} loadGuardapolvos={true} />
+                            <CheckIfIsStockOrCustomizable guardapolvo={prod} navigateTo={prod.type} loadGuardapolvos={true} />
                             
                             <div className='contenedor-imgs'>
                                 <div className="contenedor-img-carrito" style={{marginTop:'20px'}}>

@@ -19,7 +19,7 @@ const FiltersButton = ({ resetProducts, resetAdminProducts, filters, searchParam
 
                             return (
                                 filterValue != '' && <div key={i} style={filtersContainerStyle}>
-                                    <div style={{padding:'8px 15px'}}>{text}</div>
+                                    <div style={{padding:'8px 15px', fontSize:'12px'}}>{text.replace('_', ' ').toUpperCase()}</div>
                                     <button onClick={() => resetProducts(filterKey)} className="badge bg-dark text-white position-absolute" style={xButtonStyle}>x</button>
                                 </div>
                             )
@@ -49,7 +49,7 @@ const FiltersButton = ({ resetProducts, resetAdminProducts, filters, searchParam
 
                             return (
                                 <div key={i} style={filtersContainerStyle}>
-                                    <div style={{padding:'10px 15px'}}>{text}</div>
+                                    <div style={{padding:'10px 15px', fontSize:'12px'}}>{text.replace('_', ' ').toUpperCase()}</div>
                                     <button onClick={() => resetAdminProducts(filterKey)} className="badge bg-dark text-white position-absolute" style={xButtonStyle}>x</button>
                                 </div>
                             )

@@ -2,11 +2,27 @@
 const axios  = require('axios')
 const paymentsRouter = require('express').Router()
 const Payment = require('../models/payment')
+const NodeCache = require('node-cache');
 
+const cache = new NodeCache({ stdTTL: 3600, checkperiod: 600 });
 
 paymentsRouter.get('/', async (req, res) => {
-    const paymentsMethods = await Payment.find({})
-    res.json(paymentsMethods)
+    let paymentMethods = cache.get("paymentMethods");
+
+    if (!paymentMethods) {
+        console.log("Obteniendo medios de pago de la base de datos...");
+        paymentMethods = await Payment.find({})
+        cache.set("paymentMethods", paymentMethods); 
+    } else {
+        console.log("Usando medios de pago desde caché...");
+    }
+
+    res.json(paymentMethods)
+})
+
+paymentsRouter.put('/:id', async (request, response) => {
+    const paymentMethod = await Payment.findByIdAndUpdate(request.params.id, request.body, { new: true })
+    response.json(paymentMethod)
 })
 
 // paymentsRouter.post('/', async (request, response) => {
@@ -24,10 +40,7 @@ paymentsRouter.get('/', async (req, res) => {
 //     response.status(201).json(savedPayment)
 // })
 
-paymentsRouter.put('/:id', async (request, response) => {
-    const paymentMethod = await Payment.findByIdAndUpdate(request.params.id, request.body, { new: true })
-    response.json(paymentMethod)
-})
+
 
 
 module.exports = paymentsRouter

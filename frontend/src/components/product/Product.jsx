@@ -81,7 +81,7 @@ const Product = ({ navigateTo, product }) => {
                 <section className="py-2">
                     <Breadcrumb className="container px-4 px-lg-5 my-3 breadcrumb-container" style={{marginTop:'0px'}}>
                         <Breadcrumb.Item onClick={() => navigate('/')}>Inicio</Breadcrumb.Item>
-                        <Breadcrumb.Item active> {navigateTo.replace('_', ' ').replace('/', '')} </Breadcrumb.Item> {/*onClick={() => navigate(`/products?table=${navigateTo.replace(' ','_')}`)}*/}
+                        <Breadcrumb.Item onClick={() => navigate(`/products?type=${navigateTo.replace('/', '')}`)}> {navigateTo.replace('_', ' ').replace('/', '')} </Breadcrumb.Item> {/*onClick={() => navigate(`/products?table=${navigateTo.replace(' ','_')}`)}*/}
                         <Breadcrumb.Item active>{product.name}</Breadcrumb.Item>
                     </Breadcrumb>
                     <div className="container px-4 px-lg-5 my-5">

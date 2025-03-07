@@ -1,6 +1,7 @@
 
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
+import searchProdsService from '../../services/searchProds'
 
 const ContentAdministration = () => {
     const [config, setConfig] = useState({
@@ -61,7 +62,12 @@ const ContentAdministration = () => {
     };
 
     // Save config (mock function)
-    const saveConfig = () => {
+    const saveConfig = async () => {
+
+        // cuando se implemente usar esto !!!
+        await searchProdsService.clearCache();
+        
+
         console.log("Updated Data:", config);
         alert("Datos guardados exitosamente!");
     };

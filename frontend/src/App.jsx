@@ -14,7 +14,7 @@ import { setFiltredGuardapolvos, setStaticFiltredGuardapolvos, setSearchedGuarda
 import searchProdsService from './services/searchProds'
 import configService from './services/configs'
 
-import { selectTable } from './components/common/functions'
+import { selectType } from './components/common/functions'
 
 import LoadingScreen from './components/common/loaders/LoadingScreen';
 import ScrollToTop from './components/common/ScrollToTop'
@@ -42,7 +42,7 @@ const BuyProductForm = lazy(() => import('./components/product/BuyProduct/BuyPro
 import './assets/styles/index.scss'
 
 function App() {  
-  const [queryParams, setQueryParams] = useState({table:''});
+  const [queryParams, setQueryParams] = useState({type:''});
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -102,7 +102,7 @@ function App() {
       }
       return <Product navigateTo={searchedGuardapolvo?.table} product={searchedGuardapolvo} />
     } else {
-      return <Products products={filtredGuardapolvos} table={selectTable(queryParams)} />
+      return <Products products={filtredGuardapolvos} type={selectType(queryParams)} />
     }
   }
 

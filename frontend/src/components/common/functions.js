@@ -103,15 +103,10 @@ export const orderByDate = (prods, recentFirst) => {
 }
 
 // devuelve la tabla que se esta eligiendo, depende de la consulta que se este realizando
-export const selectTable = (queryParams) => {
-    if(queryParams.table){
-      return queryParams.table.replace('_', ' ')
-    } else if (queryParams.all)
-      return 'guardapolvos'
-    else {
-      return 'busqueda'
-    }
-    // queryParams.table ? queryParams.table.replace('_', ' ') : 'busqueda'
+export const selectType = (queryParams) => {
+    if(queryParams.type){
+      return queryParams.type.replace('_', ' ')
+    } 
 }
 
 export function formatNumber(num) {

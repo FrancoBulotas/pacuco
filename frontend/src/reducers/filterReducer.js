@@ -6,13 +6,7 @@ const initialState = {
     previusSearch: '',
     choosenSize: '',
     choosenTable: '',
-    choosenPage: {
-        nivel_inicial: 1,
-        primaria: 1,
-        stock: 1,
-        guardapolvos: 1,
-        busqueda: 1,
-    }
+    choosenPage: 1
 }
 
 const filterSlice = createSlice({
@@ -33,11 +27,9 @@ const filterSlice = createSlice({
         },
         setChoosenPage(state, action) {
             const page = action.payload.page
-            const table = action.payload.table
 
             return {...state, 
-                choosenPage: {
-                ...state.choosenPage, [table]: page}
+                choosenPage: page
             }
         }
     }
