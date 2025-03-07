@@ -9,29 +9,27 @@ import { Analytics } from "@vercel/analytics/react";
 
 import { initializePaymentMethods } from './reducers/paymentMethodsReducer';
 import { setConfig } from './reducers/configReducer';
+import { setFiltredGuardapolvos, setStaticFiltredGuardapolvos, setSearchedGuardapolvo, setProducts } from './reducers/guardapolvosReducer';
+import searchProdsService from './services/searchProds';
+import configService from './services/configs';
+
 import CheckPermissionsAdministration from './components/admin/common/CheckPermissionsAdministration';
-import { setFiltredGuardapolvos, setStaticFiltredGuardapolvos, setSearchedGuardapolvo, setProducts } from './reducers/guardapolvosReducer'
-import searchProdsService from './services/searchProds'
-import configService from './services/configs'
 
-import { selectType } from './components/common/functions'
-
+import { selectType } from './components/common/functions';
 import LoadingScreen from './components/common/loaders/LoadingScreen';
-import ScrollToTop from './components/common/ScrollToTop'
-
-import NavBar from './components/common/NavBar'
-import Home from './components/home/Home'
+import ScrollToTop from './components/common/ScrollToTop';
+import NavBar from './components/common/NavBar';
+import Home from './components/home/Home';
 import Footer from './components/common/Footer';
 import NotFoundPage from './components/common/NotFoundPage';
+
 // code splitting
 const Login = lazy(() => import('./components/common/Login'))
 const Register = lazy(() => import('./components/common/Register'))
-//const Administration = lazy(() => import('./components/admin/Administration'))
 const Main = lazy(() => import('./components/admin/common/Main'))
 const AdminWithNavBar = lazy(() => import('./components/admin/common/AdminWithNavBar'))
 const StockAdministration = lazy(() => import('./components/admin/StockAdministration'))
 const PaymentAdministration = lazy(() => import('./components/admin/PaymentAdministration'))
-const GuardapolvosFeatured = lazy(() => import('./components/admin/GuardapolvosFeatured'))
 const PurchaseHistory = lazy(() => import('./components/admin/PurchaseHistory'))
 const UsersAdministration = lazy(() => import('./components/admin/UsersAdministration'))
 const ContentAdministration = lazy(() => import('./components/admin/ContentAdministration'))
@@ -39,7 +37,7 @@ const Products = lazy(() => import('./components/product/Products'))
 const Product = lazy(() => import('./components/product/Product'))
 const BuyProductForm = lazy(() => import('./components/product/BuyProduct/BuyProductForm'))
 
-import './assets/styles/index.scss'
+import './assets/styles/index.scss';
 
 function App() {  
   const [queryParams, setQueryParams] = useState({type:''});
@@ -49,7 +47,7 @@ function App() {
   const filtredGuardapolvos = useSelector(state => state.guardapolvos.filtred);
   const searchedGuardapolvo = useSelector(state => state.guardapolvos.searched);
  
-  // obtenemos config y guardapolvos por primera vez y la guardamos en reducer
+  // obtenemos config, guardapolvos por primera vez y metodos de pago y los guardamos en reducer
   useEffect(() => {
     const fetchConfig = async () => {
       const config = await configService.get();
@@ -67,8 +65,6 @@ function App() {
   // Seteamos guardapolvos en base a los parametros de busqueda en la URL
   useEffect(() => {
     const fetchProducts = async () => {
-      // setEveryGuardapolvo(await searchProdsService.getSearch({'all': true}));
-
       if(searchParams && searchParams.size > 0){
         const params = {};
         searchParams.forEach((value, key) => {
@@ -125,7 +121,6 @@ function App() {
               <Route path='/administracion/historial' element={<CheckPermissionsAdministration component={<AdminWithNavBar component={<PurchaseHistory />} />} />}></Route> 
               <Route path='/administracion/usuarios' element={<CheckPermissionsAdministration component={<AdminWithNavBar component={<UsersAdministration />} />} />}></Route> 
               <Route path='/administracion/contenido' element={<CheckPermissionsAdministration component={<AdminWithNavBar component={<ContentAdministration />} />} />}></Route> 
-              <Route path='/administracion/guardapolvosDestacados' element={<CheckPermissionsAdministration component={<AdminWithNavBar component={<GuardapolvosFeatured />} />} />}></Route> 
               {/* Manejo de rutas 404 */}
               <Route path="*" element={<NotFoundPage />} />
             </Routes>

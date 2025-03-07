@@ -1,16 +1,16 @@
 
 import { useSelector, useDispatch } from 'react-redux'
-import imageService from '../../../services/imageUpload'
-import guardapolvosService from '../../../services/guardapolvos'
-import searchProdsService from '../../../services/searchProds'
-import { initializeGuardapolvosByTable } from '../../../reducers/guardapolvosReducer'
+import imageService from '../../../../services/imageUpload'
+import guardapolvosService from '../../../../services/guardapolvos'
+import searchProdsService from '../../../../services/searchProds'
+import { initializeGuardapolvosByTable } from '../../../../reducers/guardapolvosReducer'
 
-import { setToken } from '../../../services/token'
+import { setToken } from '../../../../services/token'
 import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
-import { URL_GUARDAPOLVOS_IMAGES_AZURE } from '../../common/consts'
+import { URL_GUARDAPOLVOS_IMAGES_AZURE } from '../../../common/consts'
 import { useNavigate } from 'react-router-dom'
-import { InputsForStock } from './common'
+import { InputsForStock } from '.././common'
 
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
@@ -19,8 +19,8 @@ import Form from 'react-bootstrap/Form'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
 
-import '../../../assets/styles/admin/modals.scss'
-import { isValidNumber } from '../../common/functions'
+import '../../../../assets/styles/admin/modals.scss'
+import { isValidNumber } from '../../../common/functions'
 
 const EditModal = (props) => {
     const userLogged = useSelector(state => state.login)

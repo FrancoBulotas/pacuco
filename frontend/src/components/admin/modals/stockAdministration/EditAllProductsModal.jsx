@@ -1,13 +1,13 @@
 
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import guardapolvosService  from '../../../services/guardapolvos'
-import { setToken } from '../../../services/token'
+import guardapolvosService  from '../../../../services/guardapolvos'
+import { setToken } from '../../../../services/token'
 import { useNavigate } from 'react-router-dom'
 
-import searchProdsService from '../../../services/searchProds'
+import searchProdsService from '../../../../services/searchProds'
 
-import { reloadPage } from '../common/commonFunctions'
+import { reloadPage } from '../../common/commonFunctions'
 import Swal from 'sweetalert2'
 
 import Modal from 'react-bootstrap/Modal'

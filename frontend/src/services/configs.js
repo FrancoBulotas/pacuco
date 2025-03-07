@@ -17,5 +17,10 @@ const update = async (data, token) => {
     return response.data;
 }
 
-export default { get, update }
+const clearCache = async () => {
+    const response = await api.post(baseUrl + '/clearCache');
+    return response;
+}
+
+export default { get, update, clearCache }
 

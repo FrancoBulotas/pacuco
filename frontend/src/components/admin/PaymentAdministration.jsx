@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router-dom'
 import { reloadPage } from './common/commonFunctions'
 import { setNewPaymentMethods } from '../../reducers/paymentMethodsReducer'
 
-import searchProdsService from '../../services/searchProds'
 import imageService from '../../services/imageUpload'
 import Swal from 'sweetalert2'
 
@@ -96,7 +95,6 @@ const PaymentAdministration = () => {
             }   
             imageFile = false
             dispatch(setNewPaymentMethods(paymentMethods.id, data));
-            await searchProdsService.clearCache();
             
             setNewValues({ aliasCbu: '', aliasCvu: '', cbu: '', cvu: '', titularCuentaCbu: '', titularCuentaCvu: '', image: null, sucursal: '', domicilio: ''});
             e.stopPropagation()

@@ -11,7 +11,6 @@ TODO:
 - (URGENTE) Mejorar invocacion de funciones de vercel (Cache agregado, ver si funciona bien sino buscar otras alternativas)
 - Mejorar la forma en la que se pueden ocultar guardapolvos del publico.
 - Agregar a la barra de navegacion los accesorios (intentar hacer == que lo que voy a implementar en administracion)
-- Corregir bug de la imagen que aparece cuando se ingresa al prod desde el carrito, se muestra una vieja.
 - Agregar en seccion admin que puedan editar los textos mas importantes. (que se haga la request en App.jsx y se guarde en un reducer)
 - Ver si hay API del correo argentino para simplificar la eleccion de sucursal.
 - Ver como hacer para implementar el whatsapp una vez re realice una compra en lugar de un mail
@@ -22,6 +21,7 @@ TODO:
 - Agregar mas filtros para los guardapolvos (por tabla / base / vivo / detalle / modelo, etc).
 - Agregar que puedan modificar los guardapolvos destacados.
 - Cambiar nombre que aparece al recibir el mail de compras@pacuco.com.ar
+- [x] ~~Corregir bug de la imagen que aparece cuando se ingresa al prod desde el carrito, se muestra una vieja.~~
 - [x] ~~Agregar filtros a la pestaña de adminsitracion de productos (listo falta adaptarlo a mobile)~~
 - [x] ~~Mejorar la pantalla de finalizar compra.~~
 - [x] ~~Que no se mueva para arriba la pantalla de administracion de prods cuando se pasa de pagina.~~

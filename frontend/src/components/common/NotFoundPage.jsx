@@ -48,13 +48,13 @@ const styles = {
     padding: '20px',
   },
   title: {
-    fontSize: '8rem',
+    fontSize: '6rem',
     fontWeight: 'bold',
     color: '#333',
     margin: 0,
   },
   subtitle: {
-    fontSize: '2.5rem',
+    fontSize: '2rem',
     color: '#555',
     margin: '40px 0',
     marginBottom: '80px',

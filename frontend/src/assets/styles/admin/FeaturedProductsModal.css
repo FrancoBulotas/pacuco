@@ -1,0 +1,63 @@
+/* Remove hover effects from ListGroup items */
+.product-group-list .list-group-item:hover {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  /* Custom styling for selected group */
+  .product-group-list .selected-group {
+    background-color: #e9e9e9;
+    color: #000;
+    border: 1px solid #ced4da;
+  }
+  
+  /* Remove hover effects from all group items */
+  .group-item {
+    cursor: pointer;
+  }
+  
+  .group-item:hover {
+    background-color: transparent !important;
+  }
+  
+  /* Product lists styling */
+  .product-list-container {
+    height: 520px;
+    overflow-y: auto;
+  }
+  
+  .product-drop-area {
+    min-height: 100%;
+  }
+  
+  .product-item {
+    padding: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  
+  /* Remove hover effects from draggable items */
+  .product-item:hover {
+    background-color: #fff;
+  }
+  
+  
+  .product-category {
+    font-size: 0.8rem;
+    color: #6c757d;
+  }
+  
+  /* Ensure no hover effects on Bootstrap components */
+  .product-list-container:hover, 
+  .product-list-container:focus,
+  .groups-list-container:hover, 
+  .groups-list-container:focus, 
+  .filters-list-container:hover, 
+  .filters-list-container:focus {
+    background-color: #eeeeee;
+  }
+
+
+

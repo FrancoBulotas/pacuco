@@ -13,4 +13,10 @@ const update = async (id, content) => {
     return response.data
 }
 
-export default { getAll, update }
+const clearCache = async () => {
+  const response = await api.post(baseUrl + '/clearCache');
+  console.log(response);
+  return response;
+}
+
+export default { getAll, update, clearCache }

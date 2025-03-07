@@ -90,7 +90,7 @@
     color: #222;
     font-size: 1.8rem;
     font-weight: 600;
-    cursor: pointer;
+    /* cursor: pointer; */
     margin-bottom: 0.8rem;
     transition: color 0.2s ease;
   }

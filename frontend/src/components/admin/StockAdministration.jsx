@@ -3,29 +3,37 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { setTypeTab, setCategoryTab } from '../../reducers/adminReducer'
 
-import EditModal from './modals/EditModal'
-import CreateModal from './modals/CreateModal'
-import EditAllProductsModal from './modals/EditAllProductsModal'
-import EditCategoriesModal from './modals/EditCategoriesModal'
+import EditModal from './modals/stockAdministration/EditModal'
+import CreateModal from './modals/stockAdministration/CreateModal'
+import EditAllProductsModal from './modals/stockAdministration/EditAllProductsModal'
+import EditCategoriesModal from './modals/stockAdministration/EditCategoriesModal'
+import FeaturedProductsModal from './modals/stockAdministration/FeaturedProductsModal'
+
+import configsService from '../../services/configs'
+import { setToken } from '../../services/token'
 
 import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
 import HtmlForTab from './stock/HtmlForTab'
+import Swal from 'sweetalert2'
 
 const StockAdministration = () => {
     const categoryTabChoosen = useSelector(state => state.administration.categoryTabChoosen);
     const typeTabChoosen = useSelector(state => state.administration.typeTabChoosen);
     const configuration = useSelector(state => state.config);
+    const allProducts = useSelector(state => state.guardapolvos.products);
     const dispatch = useDispatch();
 
     const [createModalShow, setCreateModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
     const [editAllProductsModal, setEditAllProductsModal] = useState(false);
     const [editCategoriesModal, setEditCategoriesModal] = useState(false);
+    const [featuredProductsModal, setFeaturedProductsModal] = useState(false);
     const [choosenTable, setChoosenTable] = useState('')
     const [choosenCategory, setChoosenCategory] = useState('')
     const [itemToShow, setItemToShow] = useState({})
     const [config, setConfig] = useState([]);
+    const userLogged = useSelector(state => state.login)
 
     const [refreshKey, setRefreshKey] = useState(0);
 
@@ -58,8 +66,13 @@ const StockAdministration = () => {
     const showEditAllProductsModal = () => {
         setEditAllProductsModal(true)
     }
+
     const showEditCategoriesModal = () => {
         setEditCategoriesModal(true)
+    }
+
+    const showFeaturedProductsModal = () => {
+        setFeaturedProductsModal(true)
     }
 
     const handleTypeSelect = (key) => {
@@ -70,16 +83,34 @@ const StockAdministration = () => {
         dispatch(setCategoryTab(key));
     }
 
+    const handleSave = async (updatedFeaturedProducts) => {
+        Swal.fire({ title: `Estas segura que queres realizar la modificacion?`, icon: 'question', confirmButtonText: 'Aceptar', confirmButtonColor: '#000', showDenyButton: true, denyButtonText: 'Cancelar', })
+        .then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const token = setToken(userLogged.token);
+                    await configsService.update({...config, featuredProducts: updatedFeaturedProducts}, token);
+                    await configsService.clearCache();
+        
+                    setFeaturedProductsModal(false);
+                }
+                catch (e){
+                    console.error(e);
+                }
+            }})
+    };
+
     const stockAdministrationOptions = [
         // { title: "Administrar todos los productos", onClick: () => showEditAllProductsModal()},
         { title: "Editar categorias y/o subcategorias", onClick: () => showEditCategoriesModal()},
+        { title: "Editar productos destacados mostrados en pagina inicial", onClick: () => showFeaturedProductsModal()},
     ];
 
     const tabStyle = { width:'100%' }
 
     // console.log('categoryChoosen', categoryTabChoosen);
     // console.log('typeChoosen', typeTabChoosen);
-
+    
     return (
         <div>
             <div >
@@ -161,7 +192,21 @@ const StockAdministration = () => {
                 <CreateModal show={createModalShow} table={choosenTable} type={typeTabChoosen} category={choosenCategory} onHide={() => setCreateModalShow(false)} handleProductCreated={handleProduct} />        
                 <EditAllProductsModal show={editAllProductsModal} onHide={() => setEditAllProductsModal(false)} />
                 { config.categories 
-                    ? <EditCategoriesModal show={editCategoriesModal} onHide={() => setEditCategoriesModal(false)} config={config} categories={config.categories} /> 
+                    ? <EditCategoriesModal 
+                        show={editCategoriesModal} 
+                        onHide={() => setEditCategoriesModal(false)} 
+                        config={config} 
+                        categories={config.categories} /> 
+                    : null
+                }
+                { config.featuredProducts 
+                    ? <FeaturedProductsModal 
+                        show={featuredProductsModal} 
+                        onHide={() => setFeaturedProductsModal(false)} 
+                        featuredProducts={config.featuredProducts}
+                        allProducts={allProducts}
+                        onSave={handleSave}
+                      /> 
                     : null
                 }
                 </div>
