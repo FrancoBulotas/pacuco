@@ -18,7 +18,7 @@ const FiltersBar = ({ setIsLoading, table, isAdmin, searchParamsAdmin, setSearch
     const location = useLocation();
     const dispatch = useDispatch();   
     const timeToLoad = 1000;
-    const [show, setShow] = useState(false)
+    const [showOffcanvas, setShowOffcanvas] = useState(false)
     const [filters, setFilters] = useState({
         size: null,
         table: null,
@@ -29,8 +29,10 @@ const FiltersBar = ({ setIsLoading, table, isAdmin, searchParamsAdmin, setSearch
     const currentUrl = window.location.href;
     const url = new URL(currentUrl);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleClose = () => setShowOffcanvas(false);
+    const handleShow = () => {
+        setShowOffcanvas(true);
+    }
      
     useEffect(() => {
         const params = new URLSearchParams(location.search)
@@ -151,7 +153,7 @@ const FiltersBar = ({ setIsLoading, table, isAdmin, searchParamsAdmin, setSearch
                     Filtrar <i className="bi bi-filter" style={{padding:'5px 5px'}}></i>
                 </Button>
 
-                <Offcanvas show={show} onHide={handleClose}>
+                <Offcanvas show={showOffcanvas} onHide={handleClose}>
                     <Offcanvas.Header closeButton>
                     <Offcanvas.Title>Filtrar</Offcanvas.Title>
                     </Offcanvas.Header>

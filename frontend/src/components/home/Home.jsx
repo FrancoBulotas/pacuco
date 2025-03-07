@@ -12,8 +12,6 @@ const Home = () => {
 
     const featuredProducts = config ? config[0].featuredProducts : [];
 
-    console.log(featuredProducts)
-
     return(
         <>
             <DisplayBrandName />
@@ -22,9 +20,6 @@ const Home = () => {
                     <CarouselProd key={title} title={title} prods={prods} /> 
                 ))
             }
-             {/* <CarouselProd title={'EN STOCK!!'} type={{'type': 'stock'}} />  */}
-             {/* <CarouselProd title={'NIVEL INICIAL!'} type={{'type': 'nivel_inicial'}}/> */}
-             {/* <CarouselProd title={'PRIMARIA!'} type={{'type': 'primaria'}}/> */}
             <ProductsMenu />
             <FrecuentQuestions />
             <AboutUs />
