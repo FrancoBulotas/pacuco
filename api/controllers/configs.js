@@ -6,9 +6,15 @@ const NodeCache = require('node-cache');
 
 const cache = new NodeCache({ stdTTL: 3600, checkperiod: 600 });
 
+configsRouter.post('/clearCache', (req, res) => {
+    cache.flushAll(); 
+    console.log("🗑 Caché eliminada");
+    res.json({ message: "Cache cleared" });
+})
+
 configsRouter.get('/', async (request, response) =>{
     let configs = cache.get("configs");
-
+    
     if (!configs) {
         console.log("Obteniendo config de la base de datos...");
         configs = await Config.find({})    
@@ -16,7 +22,6 @@ configsRouter.get('/', async (request, response) =>{
     } else {
         console.log("Usando config desde caché...");
     }
-
     response.json(configs);
 })
 

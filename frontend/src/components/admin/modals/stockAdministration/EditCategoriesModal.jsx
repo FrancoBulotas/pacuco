@@ -1,13 +1,13 @@
 
 
 import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import configsService  from '../../../services/configs'
-import searchProdsService from '../../../services/searchProds'
-import { setToken } from '../../../services/token'
+import { useSelector } from 'react-redux'
+import configsService  from '../../../../services/configs'
+import searchProdsService from '../../../../services/searchProds'
+import { setToken } from '../../../../services/token'
 import { useNavigate } from 'react-router-dom'
 
-import { reloadPage } from '../common/commonFunctions'
+import { reloadPage } from '../../common/commonFunctions'
 import Swal from 'sweetalert2'
 
 import { Modal, Button, Form, InputGroup, Accordion } from 'react-bootstrap';

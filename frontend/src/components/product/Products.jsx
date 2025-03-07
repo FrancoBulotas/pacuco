@@ -69,7 +69,7 @@ const Products = ({ products, type = ''}) => {
             {isLoading 
             ? <LoadingScreen /> 
             :   <div>
-                    <LoadProducts products={getCurrentProducts()} type={type} />
+                    <LoadProducts products={getCurrentProducts()} />
                     <PaginationProducts currentPage={currentPage} totalPages={getCurrentLength()} onPageChange={onPageChange} />
                 </div>
             }

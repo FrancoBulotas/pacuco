@@ -4,9 +4,10 @@ const mongoose = require('mongoose')
 const configSchema = new mongoose.Schema({
     frecuentQuestions: Array,
     aboutUs: Object,
-    featuredProducts: Array,
+    featuredProducts: Object,
     cuentaDniDiscount: Boolean,
     categories: Object,
+    styles: Object
 }, { collection: 'config' })
 
 

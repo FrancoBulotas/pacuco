@@ -22,7 +22,8 @@ export const initializePaymentMethods = () => {
 
 export const setNewPaymentMethods = (id, content) => {
     return async dispatch => {
-        const methods = await paymentMethodsService.update(id, content)
+        const methods = await paymentMethodsService.update(id, content);
+        await paymentMethodsService.clearCache();
         dispatch(setMethods(methods))
     }
 }

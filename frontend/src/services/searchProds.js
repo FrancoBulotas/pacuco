@@ -27,7 +27,6 @@ const getSearch = async (params) => {
 
 const clearCache = async () => {
     const response = await api.post(baseUrl + '/clearCache');
-    console.log(response);
     return response;
 }
 
