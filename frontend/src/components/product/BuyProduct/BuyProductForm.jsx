@@ -256,8 +256,9 @@ const BuyProductForm = () => {
         else if(shippingOption === 'Retiro'){
             return (
                 <div className="contenido-eleccion-retiro" id="contenido-eleccion-retiro">
-                    <p>SHOWROOM WILDE / Dirección: San isidro y Bahia Blanca.
-                        Días y horarios de atención: coordinar al 1169401968 (Aldi) o al 1163601162 (Adry) aclarando el numero de pedido. 
+                    <p><strong>SHOWROOM WILDE / Dirección:</strong> San isidro y Bahia Blanca.</p>
+                    <p>   
+                        <strong>Días y horarios de atención:</strong> Los sabados coordinar con Aldi al 1169401968 y de Lunes a Viernes con Adry al 1163601162, aclarando el numero de pedido. 
                         (Aguardar confirmación vía Whatsapp para retiro)
                     </p>
                 </div>
