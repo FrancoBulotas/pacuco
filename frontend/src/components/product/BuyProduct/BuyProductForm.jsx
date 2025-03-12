@@ -2,10 +2,10 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { clearCart, removeFromCart, setShippingPrice, setFormData, setTotalPrice } from '../../../reducers/cartReducer'
+import { setShippingPrice, setFormData, setTotalPrice } from '../../../reducers/cartReducer'
 
 import { checkStock } from './checkStock'
-import sendWhatsAppService from '../../../services/sendWhatsapp'
+// import sendWhatsAppService from '../../../services/sendWhatsapp'
 
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import { Form, Col, Dropdown, Alert, Button } from 'react-bootstrap'
