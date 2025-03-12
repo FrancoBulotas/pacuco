@@ -14,6 +14,7 @@ import searchProdsService from './services/searchProds';
 import configService from './services/configs';
 
 import CheckPermissionsAdministration from './components/admin/common/CheckPermissionsAdministration';
+import { updateFeaturedProducts } from './components/common/functions';
 
 import { selectType } from './components/common/functions';
 import LoadingScreen from './components/common/loaders/LoadingScreen';
@@ -36,6 +37,8 @@ const ContentAdministration = lazy(() => import('./components/admin/ContentAdmin
 const Products = lazy(() => import('./components/product/Products'))
 const Product = lazy(() => import('./components/product/Product'))
 const BuyProductForm = lazy(() => import('./components/product/BuyProduct/BuyProductForm'))
+const Success = lazy(() => import('./components/product/BuyProduct/Success'))
+const Failure = lazy(() => import('./components/product/BuyProduct/Failure'))
 
 import './assets/styles/index.scss';
 
@@ -46,17 +49,20 @@ function App() {
   const location = useLocation();
   const filtredGuardapolvos = useSelector(state => state.guardapolvos.filtred);
   const searchedGuardapolvo = useSelector(state => state.guardapolvos.searched);
- 
+  const products = useSelector(state => state.guardapolvos.products);
+  const configuration = useSelector(state => state.config);
+
+  const fetchConfig = async () => {
+    const config = await configService.get();
+    dispatch(setConfig(config));
+  }    
+  const fetchProducts = async () => {
+    const response = await searchProdsService.getSearch({'category': ''});
+    dispatch(setProducts(response));
+  }
+
   // obtenemos config, guardapolvos por primera vez y metodos de pago y los guardamos en reducer
   useEffect(() => {
-    const fetchConfig = async () => {
-      const config = await configService.get();
-      dispatch(setConfig(config));
-    }    
-    const fetchProducts = async () => {
-      const response = await searchProdsService.getSearch({'category': ''});
-      dispatch(setProducts(response));
-    }
     fetchConfig();
     fetchProducts();
     dispatch(initializePaymentMethods());
@@ -90,6 +96,11 @@ function App() {
     fetchProducts();
   }, [searchParams, dispatch, location.search]);
 
+  // updateamos los productos destacados cuando cambian los productos
+  useEffect(() => {
+    if(configuration) updateFeaturedProducts(configuration[0].featuredProducts, products, configuration[0], dispatch);
+  }, [products])
+
   // se encarga de determinar si lo que se va a mostrar es el guardapolvo individual o todos los productos
   const showByIdOrNot = () => {
     if (queryParams.id) {
@@ -112,6 +123,8 @@ function App() {
               <Route path='/' element={<Home />}></Route>   
               <Route path='/products' element={showByIdOrNot()}></Route>
               <Route path='/finalizarCompra' element={<BuyProductForm />}></Route>
+              <Route path='/finalizarCompra/success' element={<Success />}></Route>
+              <Route path='/failure' element={<Failure />}></Route>
               {/* Administracion */}
               <Route path='/login' element={<Login />}></Route>
               <Route path='/register' element={<Register />}></Route>

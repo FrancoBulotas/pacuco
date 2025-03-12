@@ -8,7 +8,7 @@ const cache = new NodeCache({ stdTTL: 3600, checkperiod: 600 });
 
 paymentsRouter.post('/clearCache', (req, res) => {
     cache.flushAll(); // Borra toda la caché
-    console.log("🗑 Caché eliminada");
+    console.log("🗑 Caché Payment Methods eliminada");
     res.json({ message: "Cache cleared" });
 })
 

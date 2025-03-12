@@ -1,7 +1,6 @@
 
 
 export const checkIfIsStockOrCustomizable = ({guardapolvo: prod, navigateTo, loadGuardapolvos=false, cart=false}) => {
-    const table = navigateTo.replace('/', '')
 
     if (prod.table === 'stock' &&  prod.amount !== 0){ 
         return <div className={`badge text-black tag-stock ${loadGuardapolvos ? "position-absolute" : null}`}

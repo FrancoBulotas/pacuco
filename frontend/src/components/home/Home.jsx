@@ -5,12 +5,18 @@ import ProductsMenu from './ProductsMenu'
 import FrecuentQuestions from './FrecuentQuestions'
 import AboutUs from './AboutUs'
 import { useSelector } from 'react-redux'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const Home = () => {
     const config = useSelector(state => state.config);
+    const [featuredProducts, setFeaturedProducts] = useState([])
 
-    const featuredProducts = config ? config[0].featuredProducts : [];
+    useEffect(() => {
+        if(config){
+            setFeaturedProducts(config[0].featuredProducts);
+        } 
+        
+    }, [config]);
 
     return(
         <>

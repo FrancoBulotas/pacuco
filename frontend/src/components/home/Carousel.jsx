@@ -4,7 +4,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { formatNumber } from '../product/common/functions';
 import { validateIfItemHasDiscount, checkDiscountPorcentage } from '../common/functions';
@@ -13,10 +13,8 @@ import CheckIfIsStockOrCustomizable from '../product/common/CheckIfIsStockOrCust
 import LoadingScreen from '../common/loaders/LoadingScreen';
 
 const CarouselProd = ({ title, prods }) => {
-  const [products, setProducts] = useState(prods);
+  const [featuredProducts, setFeaturedProducts] = useState(prods);
   const navigate = useNavigate();
-
-  console.log(products)
 
   return (
     <div className="product-carousel-section">
@@ -54,10 +52,10 @@ const CarouselProd = ({ title, prods }) => {
           }}
           className="product-swiper"
         >
-          { products.length === 0 
+          { featuredProducts.length === 0 
           ? <LoadingScreen home={true} /> 
-          : products.map((item, i) => (
-            <SwiperSlide key={i} onClick={() => navigate(`/products?id=${item.id}`)}>
+          : featuredProducts.map((item, i) => (
+             item.amount !== 0 && <SwiperSlide key={i} onClick={() => navigate(`/products?id=${item.id}`)}>
               <div className="product-card compact">
                 {item.table === 'stock' && item.amount === 0 && (
                   <div className="out-of-stock-badge">Sin Stock</div>

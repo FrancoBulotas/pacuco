@@ -6,7 +6,7 @@ api/.wwebjs_cache/
 api/private
 
 
-frontend/.env
+
 frontend/logs
 frontend/*.log
 frontend/npm-debug.log*
@@ -16,6 +16,7 @@ frontend/pnpm-debug.log*
 frontend/lerna-debug.log*
 
 frontend/node_modules
+frontend/.env
 # frontend/dist
 # frontend/dist-ssr
 frontend/*.local

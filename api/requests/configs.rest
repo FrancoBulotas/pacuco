@@ -2,6 +2,9 @@
 GET http://localhost:8080/api/config
 
 ###
+POST http://localhost:8080/api/config/clearCache
+
+###
 PUT http://localhost:8080/api/config/67b4e12cd70902032cb70da3 HTTP/1.1
 content-type: application/json
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOiI2NjcxYTVjOTY2ODNlNjNjZjg1ZGMwZGYiLCJpYXQiOjE3NDA1MTczNzUsImV4cCI6MTc0MDU0NjE3NX0.kxNKnlRHKJDpPeb6QRu0iuCA-nPlAo2LiJ1qDKnUsC8
