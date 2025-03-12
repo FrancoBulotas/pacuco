@@ -93,7 +93,6 @@ searchProdsRouter.get('/products', async (req, res) => {
     }
 
     try {
-
       if (!cachedProducts) {
           console.log(`⚡ No hay caché para: ${cacheKey}, obteniendo datos de la BD...`);
           
@@ -127,7 +126,7 @@ searchProdsRouter.get('/products', async (req, res) => {
 
           cache.set(cacheKey, cachedProducts); // Guarda en caché
       } else {
-          console.log(`Usando ${cacheKey} desde caché...`);
+          console.log(`♻️ Usando ${cacheKey} desde caché...`);
       }
       
       res.json(cachedProducts);

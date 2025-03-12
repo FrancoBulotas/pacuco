@@ -143,7 +143,7 @@ export const updateFeaturedProducts = async (featuredLists, updatedProducts, con
         if(JSON.stringify(featuredLists) !== JSON.stringify(updatedFeaturedLists)){ 
             dispatch(setConfig([{...config, featuredProducts: updatedFeaturedLists}]));
             await configsService.update({...config, featuredProducts: updatedFeaturedLists});
-            await configsService.clearCache();
+            // await configsService.clearCache();
         }
     } catch(e){
         console.error(e);

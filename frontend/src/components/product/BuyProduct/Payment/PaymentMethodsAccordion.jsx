@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Accordion, Button, Card, Spinner } from 'react-bootstrap';
-import { FaCreditCard, FaUniversity, FaCheck, FaCopy } from 'react-icons/fa';
+import { FaUniversity, FaCheck, FaCopy } from 'react-icons/fa';
 import { setFormData} from '../../../../reducers/cartReducer'
 
 import '../../../../assets/styles/buyProduct/paymentMethodsAccordion.css';

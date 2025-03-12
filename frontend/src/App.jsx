@@ -56,6 +56,7 @@ function App() {
     const config = await configService.get();
     dispatch(setConfig(config));
   }    
+  
   const fetchProducts = async () => {
     const response = await searchProdsService.getSearch({'category': ''});
     dispatch(setProducts(response));
@@ -124,7 +125,7 @@ function App() {
               <Route path='/products' element={showByIdOrNot()}></Route>
               <Route path='/finalizarCompra' element={<BuyProductForm />}></Route>
               <Route path='/finalizarCompra/success' element={<Success />}></Route>
-              <Route path='/failure' element={<Failure />}></Route>
+              {/* <Route path='/failure' element={<Failure />}></Route> */}
               {/* Administracion */}
               <Route path='/login' element={<Login />}></Route>
               <Route path='/register' element={<Register />}></Route>

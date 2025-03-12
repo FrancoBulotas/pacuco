@@ -23,38 +23,9 @@ const Success = () => {
     return (
         <div className="success-page">
        
-        {/* {formData.paymentMethod === 'Mercado Pago' ? 
-            (<h1 className="success-title">¡Compra realizada con éxito!</h1>) 
-            : (<h1 className="success-title">¡Encargo realizado con éxito!</h1>) 
-        } */}
         <h1 className="success-title">¡Encargo realizado con éxito!</h1>
-        {/* Contenedor Principal */}
+
         <div className="success-content">
-            {/* Mensaje según el método de pago */}
-            {/* {formData.paymentMethod === 'Mercado Pago' ? (
-            <div>
-                <p className="success-message">
-                Muchas gracias por tu compra {formData.fullName}! Porfavor revisa el correo electronico: <strong>{formData.email}</strong>, ahi vas a ver el detalle de tu compra. 
-                </p>
-                <p className="success-message"> Una vez realizado el pago te pedimos que nos adjuntes el comprobante correspondiente al siguiente numero de Whatsapp: <strong>11 2322-3048</strong>
-                </p>
-                <p className="success-message">
-                (tenes hasta 48 hs de realizada la compra para efectuarla).
-                Estamos esperando la confirmación del pago, que puede demorar hasta 48 hs hábiles (esto puede variar dependiendo del medio de pago elegido).</p>
-                <p className="success-message">
-                Te recordamos que el tiempo de demora en caso de haber comprado un guardapolvo personalizado es entre 30 a 40 dias. En caso de ser stock, la entrega es inmediata.
-                Si tu compra es con envío por Correo Argentino, LOS TIEMPOS DE ENVÍO SON APARTE DE LA DEMORA DE CONFECCIÓN.
-                </p>
-                <a               
-                    href={`https://wa.me/${whatsappNumber}?`}
-                    className="whatsapp-link"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    <i className="fa fa-whatsapp" aria-hidden="true" style={{marginRight:'5px'}}></i>
-                    Ir al chat: 11 2322-3048
-                </a>
-            </div>
-            ) : ( */}
             <div>
                 <p className="success-message">
                 {formData.fullName} muchas gracias por confiar en nosotras! Porfavor revisa el correo electronico: <strong>{formData.email}</strong>, ahi vas a ver el detalle de tu compra.
@@ -180,12 +151,6 @@ const Success = () => {
                 Te recordamos que el tiempo de demora en caso de haber comprado un guardapolvo personalizado es entre 30 a 40 dias. En caso de ser stock, la entrega es inmediata.
                 Si tu compra es con envío por Correo Argentino, LOS TIEMPOS DE ENVÍO SON APARTE DE LA DEMORA DE CONFECCIÓN.
                 </p>
-                
-                {/* <p className="success-message">
-                Una vez que hayas realizado la transferencia, adjunta el comprobante de pago al siguiente número de WhatsApp:
-                </p> */}
-                
-                
             </div>
             <button className="home-button" onClick={() => window.location.href = '/'}>
             Volver al Inicio

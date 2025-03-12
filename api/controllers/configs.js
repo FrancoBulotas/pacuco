@@ -8,7 +8,7 @@ const cache = new NodeCache({ stdTTL: 3600, checkperiod: 600 });
 
 configsRouter.post('/clearCache', (req, res) => {
     cache.flushAll(); 
-    console.log("🗑 Caché de config eliminada");
+    console.log("🗑  Caché de config eliminada");
     res.json({ message: "Cache cleared" });
 })
 
@@ -16,11 +16,11 @@ configsRouter.get('/', async (request, response) =>{
     let configs = cache.get("configs");
     
     if (!configs) {
-        console.log("Obteniendo config de la base de datos...");
+        console.log("⚡ Obteniendo config de la base de datos...");
         configs = await Config.find({})    
         cache.set("configs", configs); 
     } else {
-        console.log("Usando config desde caché...");
+        console.log("♻️ Usando config desde caché...");
     }
     response.json(configs);
 })
@@ -34,6 +34,9 @@ configsRouter.put('/:id', async (request, response) => {
     // if (!decodedToken.id) {    
     //     return response.status(401).json({ error: 'token invalid' })  
     // }  
+    
+    cache.flushAll(); 
+    console.log("🗑  Caché de config eliminada");
 
     const res = await Config.findByIdAndUpdate(request.params.id, data, { new:true });
 

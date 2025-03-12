@@ -1,7 +1,5 @@
 
 
-
-
 const emailToAdmiTemplateHtml = ( formData, totalPrice, operationCode, cart ) => {
     
     return (
