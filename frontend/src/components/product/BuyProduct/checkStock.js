@@ -1,42 +1,36 @@
 
 import guardapolvosService from '../../../services/guardapolvos'
+import { removeFromCart } from '../../../reducers/cartReducer'
+import { setProducts } from '../../../reducers/guardapolvosReducer'
+import Swal from 'sweetalert2'
 
-export const checkStock = async (stockCart) => {
-    let error = false
-    let text = ''
-    let product = {}
+export const checkStock = async (stockCart, dispatch) => {
+    const products = await guardapolvosService.getAll();
+    dispatch(setProducts(products));
 
-    if (stockCart.length !== 0){
-        const guardapolvos = await guardapolvosService.getAll()
-        
-        stockCart.map(async (item) => {
-            try {
-                const guardapolvo = guardapolvos.find(product => product.id === item.id)
+    stockCart.map(async (item) => {
+        try {
+            const guardapolvo = products.find(product => product.id === item.id)
 
-                if(guardapolvo && guardapolvo.amount > 0 && guardapolvo.amount >= item.amountToBuy){
-                    try { 
-                        await guardapolvosService.update(item.id, {...item, amountToBuy: 1, amount: item.amount - item.amountToBuy })
-                        error = false
-                        text = ''
+            if(guardapolvo && guardapolvo.amount <= 0) {
+                Swal.fire({ title: `${item.name} se elimino del carrito ya que no hay stock disponible`, icon:'error', confirmButtonText: 'Aceptar', confirmButtonColor: '#000', })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        dispatch(removeFromCart(item));
+                        return;
                     }
-                    catch(error) { 
-                        error = true
-                        text = 'Error'  
-                        product = item
-                    }    
-                } else {
-                    error = true
-                    text = `No hay stock disponible para ${item.name}`
-                    product = item
-                }
-            } catch (error) {
-                console.log(error)
-                error = true
-                text = `No hay stock disponible para ${item.name}`
-                product = item
+                }) 
             }
-        })
-    }      
-     
-    return { error, text, product }
+        } catch (error) {
+            console.log(error)
+            Swal.fire({ title: `${item.name} se elimino del carrito ya que no hay stock disponible`, icon:'error', confirmButtonText: 'Aceptar', confirmButtonColor: '#000', })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    dispatch(removeFromCart(item));
+                    return;
+                }
+            }) 
+        }
+    })
+    
 }

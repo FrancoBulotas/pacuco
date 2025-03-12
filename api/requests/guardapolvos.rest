@@ -7,6 +7,10 @@ GET http://localhost:8080/api/products/guardapolvos/66c6248b94fcdcb275cfe304
 GET http://localhost:8080/api/products?type=cartucheras
 
 ###
+POST http://localhost:8080/api/products/clearCache
+
+
+###
 DELETE http://localhost:8080/api/products/guardapolvos/668af0509583f9a6591cab48
 Authorization: Beared eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOiI2Njg1ZTUzNmVjYTI0Y2Q0ZWIyM2ZlYmQiLCJpYXQiOjE3MjAzODExMjEsImV4cCI6MTcyMDQwOTkyMX0.YOyQkUq0_s-wdhOzcq9qL5j_E9Uk2dqcissIPcpH8Gw
 ###

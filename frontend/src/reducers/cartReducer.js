@@ -4,6 +4,21 @@ import { createRoutesFromElements } from 'react-router-dom'
 
 const initialState = {
   items: [],
+  formData: {
+    fullName : '',
+    email: '',
+    dni: '',
+    phone: '',
+    province: '',
+    city: '',
+    address: '',
+    zipCode: '',
+    shipMethod: 'Sucursal',
+    sucursal: '',
+    paymentMethod: '',
+  },
+  totalPrice: 0,
+  shippingPrice: 0,
   show: false,
 }
 
@@ -11,6 +26,15 @@ const cartSlice = createSlice({
   name : 'cart',
   initialState,
   reducers : {
+    setFormData(state, action) {
+      state.formData = action.payload
+    },
+    setTotalPrice(state, action) {
+      state.totalPrice = action.payload
+    },
+    setShippingPrice(state, action) {
+      state.shippingPrice = action.payload
+    },
     remove(state, action){
       const itemToDelete = action.payload
       state.items = state.items.filter(item => item.id !== itemToDelete.id || item.size !== itemToDelete.size)
@@ -77,5 +101,5 @@ export const setShow = status => {
   }
 }
 
-export const { addOne, remove, removeOne, setShowStatus, clear } = cartSlice.actions
+export const { addOne, remove, removeOne, setShowStatus, clear, setFormData, setTotalPrice, setShippingPrice } = cartSlice.actions
 export default cartSlice.reducer

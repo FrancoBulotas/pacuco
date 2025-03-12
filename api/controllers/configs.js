@@ -8,7 +8,7 @@ const cache = new NodeCache({ stdTTL: 3600, checkperiod: 600 });
 
 configsRouter.post('/clearCache', (req, res) => {
     cache.flushAll(); 
-    console.log("🗑 Caché eliminada");
+    console.log("🗑 Caché de config eliminada");
     res.json({ message: "Cache cleared" });
 })
 
@@ -28,12 +28,12 @@ configsRouter.get('/', async (request, response) =>{
 
 // como el id es fijo, ponerlo en .env y que lo tome de ahi
 configsRouter.put('/:id', async (request, response) => {
-    const data = request.body    
+    const data = request.body;
 
-    const decodedToken = jwt.verify(request.token, process.env.SECRET)  
-    if (!decodedToken.id) {    
-      return response.status(401).json({ error: 'token invalid' })  
-    }  
+    // const decodedToken = jwt.verify(request.token, process.env.SECRET)  
+    // if (!decodedToken.id) {    
+    //     return response.status(401).json({ error: 'token invalid' })  
+    // }  
 
     const res = await Config.findByIdAndUpdate(request.params.id, data, { new:true });
 

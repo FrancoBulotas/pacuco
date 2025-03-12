@@ -163,7 +163,7 @@ const Product = ({ navigateTo, product }) => {
                                     }
                                     <div className='d-flex align-items-center' style={{marginLeft:'8px'}}>
                                         {
-                                            product.table === 'stock' ?
+                                            (product.table === 'stock' || product.table === 'accesorios') && product.amount !== 0 ?
                                             <div> {product.amount} en stock</div> :
                                             ''
                                         }

@@ -1,0 +1,55 @@
+/* Payment Accordion Styles */
+.payment-accordion .accordion-button {
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+  
+  .payment-accordion .accordion-button:not(.collapsed) {
+    background-color: rgba(13, 110, 253, 0.05);
+    box-shadow: none;
+  }
+  
+  .payment-accordion .accordion-body {
+    padding: 1.25rem;
+  }
+  
+  .payment-accordion .card {
+    transition: all 0.3s ease;
+  }
+  
+  .payment-accordion .card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .bank-details {
+    border-left: 3px solid #bebebe;
+  }
+  
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .email-link {
+    color: #da8cda;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  
+  .email-link:hover {
+    color: #2d3035;
+    text-decoration: underline;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 576px) {
+    .detail-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .detail-row div {
+      margin-top: 0.25rem;
+    }
+  }

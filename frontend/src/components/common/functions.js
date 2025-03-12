@@ -112,3 +112,40 @@ export const selectType = (queryParams) => {
 export function formatNumber(num) {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
+import configsService from '../../services/configs';
+import { setConfig } from '../../reducers/configReducer';
+
+export const updateFeaturedProducts = async (featuredLists, updatedProducts, config, dispatch) => {
+    const updatedFeaturedLists = {};
+
+    try {
+        // Itera sobre cada categoría destacada
+        for (const category in featuredLists) {
+            if (featuredLists.hasOwnProperty(category)) {
+            // Actualiza los productos de esta categoría
+            updatedFeaturedLists[category] = featuredLists[category].map((featuredProduct) => {
+                const updatedProduct = updatedProducts.find(
+                (product) => product.id === featuredProduct.id
+                );
+
+                // Si hay un producto actualizado y es diferente, reemplaza el destacado
+                if (updatedProduct && JSON.stringify(updatedProduct) !== JSON.stringify(featuredProduct)) {
+                    return updatedProduct;
+                }
+
+                // Si no hay cambios, mantiene el producto destacado original
+                return featuredProduct;
+            });
+            }
+        }
+
+        if(JSON.stringify(featuredLists) !== JSON.stringify(updatedFeaturedLists)){ 
+            dispatch(setConfig([{...config, featuredProducts: updatedFeaturedLists}]));
+            await configsService.update({...config, featuredProducts: updatedFeaturedLists});
+            await configsService.clearCache();
+        }
+    } catch(e){
+        console.error(e);
+    }
+}
