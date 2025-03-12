@@ -3,25 +3,22 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { clearCart, removeFromCart, setShippingPrice, setFormData, setTotalPrice } from '../../../reducers/cartReducer'
-import { sendEmailJS } from './SendEmail'
+
 import { checkStock } from './checkStock'
 import sendWhatsAppService from '../../../services/sendWhatsapp'
 
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import { Form, Col, Dropdown, Alert, Button } from 'react-bootstrap'
 
+import PaymentOptions from './payment/PaymentOptions'
+
+import { formatNumber, createMessage, validatePhoneNumber } from '../common/functions'
+import Swal from 'sweetalert2'
 
 import '../../../assets/styles/buyProduct/buyProductForm.css'
 import '../../../assets/styles/buyProduct/buyProductForm.scss'
 import '../../../assets/styles/buyProduct/multiStepCheckout.css'
 
-import PaymentOptions from './Payment/PaymentOptions'
-
-import ScrollToTop from '../../common/ScrollToTop'
-import { formatNumber, createMessage, validatePhoneNumber } from '../common/functions'
-import Swal from 'sweetalert2'
-import Spinner from '../../common/Spinner'
-// import CheckIfIsStockOrCustomizable from '../common/CheckIfIsStockOrCustomizable.jsx'
 
 const BuyProductForm = () => {
     const paymentMethods = useSelector(state => state.paymentMethods);
@@ -114,22 +111,6 @@ const BuyProductForm = () => {
           [name]: value,
         }));
     }
-
-    // const sendMessageAndResetState = async (num) => {
-    //     const result = await sendEmailJS(formData, cart, totalPrice + shippingPrice, shippingPrice);
-    //     // const result = await sendWhatsAppService.sendMessage(`549${num}`, createMessage(formData, cart, totalPrice + shippingPrice, shippingPrice));
-    //     if(result) {
-    //         Swal.fire({ title:'Compra realizada con exito!', text:`Porfavor revisa el correo electronico: ${formData.email}, ahi vas a ver el detalle de tu compra, y como proceder. Muchas gracias por elegirnos!!`, icon:'success', confirmButtonText: 'Aceptar', confirmButtonColor: '#000', })
-    //         .then((result) =>{
-    //             if(result.isConfirmed){
-    //                 setFormData({ fullName : '', email: '', dni: '', phone: '', province: '', city: '', address: '', zipCode: '', shipMethod: 'Sucursal', sucursal: '', paymentMethod: '',})
-    //                 dispatch(clearCart())
-    //             }
-    //         })
-    //     } else {
-    //         Swal.fire({ title:'Hubo un problema con tu compra.', text:'intentalo de nuevo mas tarde', icon:'error', confirmButtonText: 'Aceptar', confirmButtonColor: '#000', })
-    //     }
-    // }
 
     const handleDataForm = (event) => {
         event.preventDefault();

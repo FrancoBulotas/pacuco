@@ -16,11 +16,11 @@ paymentsRouter.get('/', async (req, res) => {
     let paymentMethods = cache.get("paymentMethods");
 
     if (!paymentMethods) {
-        console.log("Obteniendo medios de pago de la base de datos...");
+        console.log("⚡ Obteniendo medios de pago de la base de datos...");
         paymentMethods = await Payment.find({})
         cache.set("paymentMethods", paymentMethods); 
     } else {
-        console.log("Usando medios de pago desde caché...");
+        console.log("♻️ Usando medios de pago desde caché...");
     }
 
     res.json(paymentMethods)
@@ -28,6 +28,10 @@ paymentsRouter.get('/', async (req, res) => {
 
 paymentsRouter.put('/:id', async (request, response) => {
     const paymentMethod = await Payment.findByIdAndUpdate(request.params.id, request.body, { new: true })
+
+    cache.flushAll(); // Borra toda la caché
+    console.log("🗑 Caché Payment Methods eliminada");
+    
     response.json(paymentMethod)
 })
 

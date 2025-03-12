@@ -91,7 +91,7 @@ const PurchaseHistoryModal = (props) => {
             <Modal.Body>
                 <Accordion>
                     <Accordion.Item eventKey="0">
-                        <Accordion.Header><strong>Informacion del cliente</strong></Accordion.Header>
+                        <Accordion.Header>Informacion del cliente</Accordion.Header>
                         <Accordion.Body>
                             <div><strong>Nombre:</strong> {clientData.fullName}</div>
                             <div><strong>Mail:</strong> {clientData.email}</div>
@@ -107,7 +107,7 @@ const PurchaseHistoryModal = (props) => {
                         </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="1">
-                        <Accordion.Header><strong>Informacion productos comprados</strong></Accordion.Header>
+                        <Accordion.Header>Informacion productos comprados</Accordion.Header>
                         <Accordion.Body>
                             <Table hover variant="light" className='tabla-de-productos'>
                                 <thead>
@@ -131,7 +131,7 @@ const PurchaseHistoryModal = (props) => {
                         </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="2">
-                        <Accordion.Header><strong>Estado comprobante</strong></Accordion.Header>
+                        <Accordion.Header>Estado comprobante</Accordion.Header>
                         <Accordion.Body>
                         <div style={{padding:'10px'}}>
                             Estado actual:

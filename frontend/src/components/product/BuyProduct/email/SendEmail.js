@@ -1,7 +1,6 @@
 
-import emailjs from 'emailjs-com'
-import purchasedProductService from '../../../services/purchasedProduct'
-import emailService from '../../../services/emails'
+import purchasedProductService from '../../../../services/purchasedProduct'
+import emailService from '../../../../services/emails'
 import emailTemplateHtml from './emailTemplateHtml'
 import emailToAdminTemplateHtml from './emailToAdminTemplateHtml'
 

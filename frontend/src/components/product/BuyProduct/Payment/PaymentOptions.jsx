@@ -3,15 +3,11 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { Button } from 'react-bootstrap'
-import Spinner from '../../../common/Spinner'
-
-// import PaymentButtonMP from './PaymentButtonMP';
 import PaymentMethodsAccordion from './PaymentMethodsAccordion';
 
 import searchProdsService from '../../../../services/searchProds';
 import guardapolvosService from '../../../../services/guardapolvos';
-import { sendEmailJS } from '../SendEmail';
+import { sendEmailJS } from '../email/SendEmail';
 
 import { clearCart, setShippingPrice, setFormData, setTotalPrice } from '../../../../reducers/cartReducer'
 import { setProducts } from '../../../../reducers/guardapolvosReducer'
@@ -86,13 +82,9 @@ const PaymentOptions = ({ loading }) => {
     }
 
     const handleClick = () => {
-
-
       const result = handleSubmit();
-
       if(result) navigate('/finalizarCompra/success');
     }
-
 
     return(
       <div className="payment-section">
@@ -101,63 +93,6 @@ const PaymentOptions = ({ loading }) => {
           loading={loading} 
           handleClick={handleClick} 
         />
-        {/* Contenedor de Opciones */}
-        {/* <div className="payment-options">
-          <div className="payment-option">
-            <h3 className="option-title">Mercado Pago</h3>
-            <p className="option-description">
-              Realiza una transferencia por Mercado Pago a la siguiente cuenta:
-
-            </p>
-            <div className="bank-details">
-              <p><strong>Titular de Cuenta:</strong> {paymentMethods.titularCuentaCvu}</p>
-              <p><strong>CBU:</strong> {paymentMethods.cvu}</p>
-              <p><strong>Alias:</strong> {paymentMethods.aliasCvu}</p>
-            </div>
-            <p className="option-note">
-              Una vez realizada la transferencia, envíanos el comprobante al correo electrónico{' '}
-              <a href="mailto:compras@pacuco.com.ar" className="email-link">
-                compras@pacuco.com.ar
-              </a>{' '}
-              para confirmar tu compra.
-            </p>
-
-            <Button 
-                variant="dark" 
-                onClick={() => handleClick('Mercado Pago')}
-                style={{width:'100%'}}
-            >
-                {loading ? <Spinner /> : 'Encargar pedido'}
-            </Button>
-          </div>
-
-          <div className="payment-option">
-            <h3 className="option-title">Transferencia Bancaria</h3>
-            <p className="option-description">
-              Realiza una transferencia bancaria a la siguiente cuenta:
-            </p>
-            <div className="bank-details">
-              <p><strong>Titular de Cuenta:</strong> {paymentMethods.titularCuentaCbu}</p>
-              <p><strong>CBU:</strong> {paymentMethods.cbu}</p>
-              <p><strong>Alias:</strong> {paymentMethods.aliasCbu}</p>
-            </div>
-            <p className="option-note">
-              Una vez realizada la transferencia, envíanos el comprobante al correo electrónico{' '}
-              <a href="mailto:compras@pacuco.com.ar" className="email-link">
-                compras@pacuco.com.ar
-              </a>{' '}
-              para confirmar tu compra.
-            </p>
-
-            <Button 
-                variant="dark" 
-                onClick={() => handleClick('Transferencia Bancaria')}
-                style={{width:'100%'}}
-            >
-                {loading ? <Spinner /> : 'Encargar pedido'}
-            </Button>
-          </div>
-        </div> */}
       </div>
     )
   }
