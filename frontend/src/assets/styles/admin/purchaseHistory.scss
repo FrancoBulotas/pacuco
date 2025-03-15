@@ -29,7 +29,7 @@
 }
 
 .contenedor-tabla {
-    height: 500px;
+    // height: 500px;
     overflow-y: auto;
     background-color: #f8f9fa;
 
@@ -55,6 +55,9 @@
   .hide-on-mobile {
       display: none;
   }
+  .filters-table-container{
+    margin: 5px;
+  }
 }
 
 
@@ -66,7 +69,9 @@
 
 
 
-
+// .modal-content {
+//   font-size: 14px;
+// }
 
 
 

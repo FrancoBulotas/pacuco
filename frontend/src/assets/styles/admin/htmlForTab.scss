@@ -27,10 +27,12 @@
     border-collapse: none !important;
     margin: 1rem 0;
 
-    thead {
+    .thead-tabla-productos-admin {
       background-color: #282829;
       color: #fff;
-      text-align: left;
+      text-align: center;
+      font-size: 14px;
+
       th {
         padding: 0.75rem;
         border-bottom: 2px solid #dee2e6;
@@ -38,14 +40,18 @@
     }
   
     tbody {
-      tr {
+      .tr-tabla-productos {
+        text-align: center;
+        vertical-align: middle;
+        height: 60px;
+
         &:hover {
           background-color: #f1f1f1;
         }
       }
   
       td {
-        padding: 0.75rem;
+        padding: 0rem;
         border-top: 1px solid #dee2e6;
       }
 
@@ -93,19 +99,19 @@
       // }
 
       tbody {
-        tr {
+        .tr-tabla-productos {
           // display: block;
           margin-bottom: 1rem;
           border: 1px solid #dee2e6;
           border-radius: 0.25rem;
-        
-
+          height: 60px;
+          font-size: 14px;
 
           td {
             // display: flex;
             // justify-content: space-between;
             // align-items: center;
-            padding: 0.75rem;
+            padding: 0.2rem;
             border: none;
             border-bottom: 1px solid #dee2e6;
   
@@ -124,6 +130,22 @@
   }
   
 }
+
+.nav-item {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .display-none-mobile {
+    display: none;
+  }
+
+  .nav-item {
+    font-size: 14px;
+  }
+}
+
+
 
 .resaltado {
   background-color: #fae3eb;

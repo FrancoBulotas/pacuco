@@ -26,3 +26,11 @@
         color: #555;
     }
 }
+
+
+@media (max-width: 768px) {
+    .modal-body {
+        font-size: 14px;
+    }
+    
+}

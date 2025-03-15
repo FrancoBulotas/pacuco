@@ -1,8 +1,9 @@
 
 
 .contenedor-tablas-productos {
+    margin-top: 30px;
     padding-top: 50px;
-    padding: 20px;
+    padding: 0px;
     display: flex;
     flex-direction: column;
     justify-content: left;
@@ -20,7 +21,8 @@
 }
 
 .opcion {
-    width: 100%; /* Ensure each card takes up the full width of its grid cell */
+    width: 100%;
+    font-size: 15px;
 }
 
 .custom-select:focus {
@@ -35,6 +37,7 @@
 @media (max-width: 992px) {
     .contenedor-opciones {
       grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+      padding: 20px;
     }
   }
   
@@ -57,21 +60,13 @@
     /*border: 1px solid #777; */
     width: 100%;
     margin-top: 10px;
-    margin-bottom: 20px; 
+    /* margin-bottom: 20px;  */
     /* background-color: #fff; */
     padding: 10px;
     /* border-collapse: collapse; */
     border-radius: 6px;
 }
 
-
-.tr-tabla-productos {
-    height: 50px; 
-    /* padding: 8px; */
-    text-align: center;
-    vertical-align: middle;
-    /* border: 1px solid #777;  */
-}
 
 .small-img-admin{
     height: 50px;
@@ -82,7 +77,7 @@
 @media screen and (min-width: 630px) {
      /* Administracion */
      .contenedor-tablas-productos {
-        /* padding: 80px; */
+        padding: 20px;
         padding-top: 50px;
     }
 
@@ -90,9 +85,9 @@
         width: 100%;
         
     }
-    .tr-tabla-productos {
+    /* .tr-tabla-productos {
         height: 50px; 
-    }    
+    }     */
 }
 
 
@@ -100,7 +95,7 @@
     
     /* Administracion */
     .contenedor-tablas-productos {
-        padding: 60px;
+        padding: 20px;
         padding-top: 50px;
     }
     .tr-fila-elegida {

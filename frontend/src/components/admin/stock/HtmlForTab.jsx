@@ -27,7 +27,7 @@ const HtmlForTab = ({ title, table, type, category, showCreateModal, showEditMod
     const dispatch = useDispatch()
 
     const [currentPage, setCurrentPage] = useState(1)
-    const productsPerPage = 6
+    const productsPerPage = 8;
     const totalProducts = products.length 
     const totalPages = Math.ceil(totalProducts / productsPerPage)
 
@@ -102,15 +102,15 @@ const HtmlForTab = ({ title, table, type, category, showCreateModal, showEditMod
             ? <LoadingScreen />
             : <div className='tabla-container'>
                 <table className='tabla-de-productoss'>
-                    <thead>
+                    <thead className='thead-tabla-productos-admin'>
                         { table === 'stock' 
                             ?
                             <tr className='tr-tabla-productos'>
-                                <th>Nombre</th><th>Precio</th><th>Cantidad</th><th>Talle</th><th>Frente</th><th>Dorso</th><th style={{width:'50px'}}>Descuento</th><th></th>
+                                <th>Nombre</th><th>Precio</th><th>Cantidad</th><th>Talle</th><th>Frente</th><th className='display-none-mobile'>Dorso</th><th>Desc.</th><th>Editar</th>
                             </tr> 
                             :
                             <tr className='tr-tabla-productos'>
-                                <th>Nombre</th><th>Precio</th><th>Frente</th><th>Dorso</th><th style={{width:'50px'}}>Descuento</th><th>Editar</th>
+                                <th>Nombre</th><th>Precio</th><th>Frente</th><th className='display-none-mobile'>Dorso</th><th>Desc.</th><th>Editar</th>
                             </tr>
                         }
                     </thead>
@@ -122,7 +122,7 @@ const HtmlForTab = ({ title, table, type, category, showCreateModal, showEditMod
                                 { table === 'stock' ? <td>{item.amount}</td> : '' }
                                 { table === 'stock' ? <td>{item.size}</td> : '' }
                                 <td><img src={item.img} onClick={() => handleModalImage(item.img)} alt={item.description.general} className="small-img-admin" style={{ cursor: 'pointer' }}></img></td>
-                                <td><img src={item.img2} onClick={() => handleModalImage(item.img2)} alt={item.description.general} className="small-img-admin" style={{ cursor: 'pointer'}}></img></td>
+                                <td className='display-none-mobile'><img src={item.img2} onClick={() => handleModalImage(item.img2)} alt={item.description.general} className="small-img-admin" style={{ cursor: 'pointer'}}></img></td>
                                 <td>{ validateIfItemHasDiscount(item) ? <i className="bi bi-check-lg" style={{color:'green'}}></i> : <i className="bi bi-x-lg" style={{color:'red'}}></i>}</td>
                                 <td onClick={() => showEditModal(item, table)} style={{ cursor: 'pointer'}}><i className="bi bi-pencil-square"></i></td>
                             </tr>

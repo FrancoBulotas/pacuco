@@ -7,6 +7,7 @@ URL: pacuco.com.ar
 
 TODO:
 
+- Corregir bug que en admin de productos toma datos del cache desp de modificar
 - Corregir EditAllProductsModal.jsx
 - (URGENTE) Mejorar invocacion de funciones de vercel (Cache agregado, ver si funciona bien sino buscar otras alternativas)
 - Mejorar la forma en la que se pueden ocultar guardapolvos del publico.

@@ -3,3 +3,42 @@
     background-color: #000;
     color: #fff;
 }
+
+.main-container-payment {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center ; 
+    flex-direction:  column ;
+    background-color: #fff ;
+    min-height:  60vh 
+}
+
+.second-container-payment {
+    /* width: 80% ;  */
+    padding: 20px 
+}
+
+.haeder-container-payment {
+    width: 100% ; 
+    margin:  auto ;
+    padding-top: 20px ;
+}
+
+
+@media (max-width: 768px) {
+    .main-container-payment {
+        /* margin: 20px; */
+    }
+
+    .second-container-payment {
+        /* width: 90%; */
+        padding: 5px;
+        margin: 10px;
+
+    }
+
+    .tab-container {
+        margin: 10px;
+    }
+}

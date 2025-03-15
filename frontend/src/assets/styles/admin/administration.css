@@ -1,4 +1,23 @@
 
+.container-fluid{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+@media (max-width: 768px) {
+    .container-fluid  {
+        padding: 0px;
+        font-size: 14px;
+    }
+
+    .chart {
+        
+    }
+  }
+  
+
+
+
 .admin-card {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
