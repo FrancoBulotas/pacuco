@@ -138,7 +138,7 @@ const FiltersBar = ({ setIsLoading, table, isAdmin, searchParamsAdmin, setSearch
         <div>
             <div style={{display:'flex', height:'40px', marginLeft:'10px', marginRight:'10px', marginBottom:'5px', paddingTop:'5px'}}>
                 <Dropdown as={ButtonGroup} className="dropdown-custom">
-                    <Button variant="light" style={{backgroundColor:'#fff', color:'#000', padding:'5px 25px', fontSize:'16px', border:'1px solid #f1f1f1'}}>Ordenar</Button>
+                    <Button variant="light" style={{backgroundColor:'#fff', color:'#000', padding:'5px 25px', fontSize:'14px', border:'1px solid #f1f1f1'}}>Ordenar</Button>
 
                     <Dropdown.Toggle split variant="light" id="dropdown-split-basic" style={{backgroundColor:'#fff', color:'#000', padding:'5px 25px', border:'1px solid #f1f1f1'}} />
 
@@ -149,7 +149,7 @@ const FiltersBar = ({ setIsLoading, table, isAdmin, searchParamsAdmin, setSearch
                     </Dropdown.Menu>
                 </Dropdown>
                 
-                <Button onClick={handleShow} variant="light" style={{marginLeft:'auto', backgroundColor:'#fff', color:'#000', padding:'5px 25px', fontSize:'16px', border:'1px solid #f1f1f1'}}>
+                <Button onClick={handleShow} variant="light" style={{marginLeft:'auto', backgroundColor:'#fff', color:'#000', padding:'5px 25px', fontSize:'14px', border:'1px solid #f1f1f1'}}>
                     Filtrar <i className="bi bi-filter" style={{padding:'5px 5px'}}></i>
                 </Button>
 

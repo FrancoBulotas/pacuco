@@ -250,6 +250,11 @@ const EditModal = (props) => {
         </Tooltip>
     )
 
+    const redirectToProduct = (id) => {
+        const url = `/products?id=${id}`;
+        window.open(url, '_blank');
+    }
+
     return (
         <Modal
             {...props}
@@ -264,7 +269,7 @@ const EditModal = (props) => {
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit} encType="multipart/form-data">
-                    <Form.Group className="mb-3">
+                    <Form.Group className="mb-1" style={{display:'flex'}}>
                         <Form.Check
                             type="checkbox"
                             label="Mostrar al publico"
@@ -274,6 +279,7 @@ const EditModal = (props) => {
                                 target: { name: "show", value: e.target.checked }
                             })}
                         />
+                        <p style={{textDecoration:'underline', cursor:'pointer', marginTop:'1px', fontSize:'15px', marginLeft:'auto'}} onClick={() => redirectToProduct(props.item.id)}>Ver publicacion</p>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="controlInput1">
                         <Form.Label><strong>Nombre actual:</strong> {props.item.name}</Form.Label>
@@ -335,7 +341,7 @@ const EditModal = (props) => {
                             </div>
                             </> : null
                         }
-                        <Form.Control as="textarea" placeholder="nueva descripcion" name="general" onChange={handleInputChange} value={formData.description.general} rows={4} />
+                        <Form.Control as="textarea" placeholder="nueva descripcion" name="general" onChange={handleInputChange} value={formData.description.general} rows={4} style={{fontSize:'14px'}} />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formFile">
                         <Form.Label><strong>Imagen Frente</strong></Form.Label>                    

@@ -151,7 +151,7 @@ const PurchaseHistory = () => {
             <div className="contenedor-tablas-productos">                
                 {/* <Header /> */}                
                 <h3>Historial de ventas</h3>
-                <div className='d-flex gap-2 w-100' style={{marginLeft: '7%', alignItems:'center', marginBottom:'20px'}}>
+                <div className='d-flex gap-2 w-100' style={{marginLeft: '2%', alignItems:'center', marginBottom:'20px'}}>
                     <div style={{backgroundColor:'#eed6e5', width: '40px', height: '20px', borderRadius:'8px'}}></div>
                     <p style={{fontSize:'13px', margin:'0px'}}>Productos comprados del stock</p>
                 </div>
@@ -164,7 +164,7 @@ const PurchaseHistory = () => {
                         <Table hover variant="light" className='tabla-de-productos'>
                             <thead>
                                 <tr className='tr-tabla-productos'>
-                                    <th>#</th><th className='hide-on-mobile'>Codigo de operacion</th><th>Cliente</th><th className='hide-on-mobile'>Total Compra</th><th >Fecha de compra</th><th>Comprobante</th><th>*</th><th>*</th>
+                                    <th>#</th><th className='hide-on-mobile'>Codigo de operacion</th><th>Cliente</th><th className='hide-on-mobile'>Total Compra</th><th >Fecha de compra</th><th>Compr.</th><th>*</th><th>*</th>
                                 </tr>
                             </thead>
                             {getCurrentProducts()?.map((item, i) =>       

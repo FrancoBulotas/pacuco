@@ -127,7 +127,7 @@ const StockAdministration = () => {
                             </div>
                         ))}
                     </div>
-                    <div className='d-flex gap-2 w-100' style={{marginLeft: '1%', alignItems:'center', marginBottom:'20px'}}>
+                    <div className='d-flex gap-2 w-100' style={{marginLeft: '5%', alignItems:'center', marginBottom:'20px'}}>
                         <div style={{backgroundColor:'#fae3eb', width: '40px', height: '20px', borderRadius:'5px'}}></div>
                         <p style={{fontSize:'14px', margin:'0px'}}>Productos que NO se estan mostrando en la pagina</p>
                     </div>

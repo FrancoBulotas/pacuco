@@ -53,7 +53,7 @@ const Main = () => {
 
     return (
         <main>
-            <div className="container-fluid px-4">
+            <div className="container-fluid">
                 <Container fluid className="px-4 mt-4">
                     <h1 className="mb-4">Menu</h1>
                     <Row className="g-4">

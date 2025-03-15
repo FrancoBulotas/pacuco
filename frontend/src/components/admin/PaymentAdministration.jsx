@@ -196,39 +196,11 @@ const PaymentAdministration = () => {
         )
     }
 
-    const mainContainer = { 
-        width: '100%',
-        display:'flex', 
-        justifyContent:'center', 
-        alignItems:'center', 
-        flexDirection: 'column',
-        backgroundColor:'#fff',
-        minHeight: '60vh'
-    }
-    const secondContainer = { 
-        width:'80%', 
-        // height:'55vh', 
-        padding:'20px'
-    }
-
-    const containerHeaderStyle = {
-        width:'100%', 
-        margin: 'auto',
-        paddingTop:'20px'
-    }
-
-    const containerFormStyle = {
-        padding: '1rem',
-        backgroundColor: '#f8f9fa',
-        borderRadius: '0.25rem',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    };
-
     return (
         <div>
-            <div style={mainContainer}>
-                <div style={secondContainer}> 
-                    <div style={containerHeaderStyle}>
+            <div className='main-container-payment'>
+                <div className='second-container-payment'> 
+                    <div className='haeder-container-payment'>
                         {/* <Header /> */}
                         <h3>Modificar Medios de Pago</h3>
                     </div>
