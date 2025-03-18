@@ -72,9 +72,9 @@ const StockAdministration = () => {
     }
 
     const showFeaturedProductsModal = () => {
-        setFeaturedProductsModal(true)
+        setFeaturedProductsModal(true);
     }
-
+    
     const handleTypeSelect = (key) => {
         dispatch(setTypeTab(key));
     }
@@ -195,17 +195,14 @@ const StockAdministration = () => {
                         config={config} 
                         categories={config.categories} /> 
                     : null
-                }
-                { config.featuredProducts 
-                    ? <FeaturedProductsModal 
-                        show={featuredProductsModal} 
-                        onHide={() => setFeaturedProductsModal(false)} 
-                        featuredProducts={config.featuredProducts}
-                        allProducts={allProducts}
-                        onSave={handleSave}
-                      /> 
-                    : null
-                }
+                }            
+                <FeaturedProductsModal 
+                    show={featuredProductsModal} 
+                    onHide={() => setFeaturedProductsModal(false)} 
+                    featuredProducts={config.featuredProducts}
+                    allProducts={allProducts}
+                    onSave={handleSave}
+                /> 
                 </div>
             </div>
         </div>

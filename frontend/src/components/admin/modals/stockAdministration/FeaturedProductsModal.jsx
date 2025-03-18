@@ -10,7 +10,7 @@ import '../../../../assets/styles/admin/FeaturedProductsModal.css';
 
 const FeaturedProductsModal = (props) => {
     const { featuredProducts, allProducts, onSave, ...modalProps } = props;
-
+    
     const config = useSelector(state => state.config)
     const [subCategoriesData, setSubCategoriesData] = useState(config != null ? Object.values(config[0].categories).flatMap(category => Object.keys(category).map(key => key.toLowerCase())) : null)
     useEffect(() => {
