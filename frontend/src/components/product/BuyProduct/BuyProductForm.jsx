@@ -49,9 +49,8 @@ const BuyProductForm = () => {
         }
         if(shippingOption !== 'Sucursal'){
             dispatch(setFormData({...formData, sucursal: '', }));
-
         }
-    }, [currentStep])
+    }, [currentStep, shippingOption])
 
     useEffect(() => {
         if(cart.length === 0){
