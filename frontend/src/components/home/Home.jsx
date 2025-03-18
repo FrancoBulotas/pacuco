@@ -12,7 +12,7 @@ const Home = () => {
     const [featuredProducts, setFeaturedProducts] = useState([])
 
     useEffect(() => {
-        if(config){
+        if(config && featuredProducts){
             setFeaturedProducts(config[0].featuredProducts);
         } 
         
@@ -22,7 +22,7 @@ const Home = () => {
         <>
             <DisplayBrandName />
             {
-                Object.entries(featuredProducts).map(([title, prods]) => (
+                featuredProducts && Object.entries(featuredProducts).map(([title, prods]) => (
                     <CarouselProd key={title} title={title} prods={prods} /> 
                 ))
             }
