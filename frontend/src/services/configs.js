@@ -8,12 +8,11 @@ const get = async () => {
     return response.data
 }
 
-const update = async (data, token) => {
-    const config = {    
-        headers: { Authorization: token }, 
-    }
-    
-    const response = await api.put(`${baseUrl}/${data.id}`, data, config);
+const update = async (data) => {
+    // const config = {    
+    //     headers: { Authorization: token }, 
+    // }
+    const response = await api.put(`${baseUrl}/${data.id}`, data);
     return response.data;
 }
 

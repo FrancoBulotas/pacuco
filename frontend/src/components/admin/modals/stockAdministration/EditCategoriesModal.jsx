@@ -140,9 +140,7 @@ const EditCategoriesModal = (props) => {
             .then(async (result) => { 
                 if (result.isConfirmed) {
                     try{
-                        console.log(configData);
-
-                        const response = await configsService.update(configData, token)
+                        const response = await configsService.update(configData)
                         await searchProdsService.clearCache();
                     
                     } catch(error){

@@ -16,7 +16,7 @@ import configService from './services/configs';
 import CheckPermissionsAdministration from './components/admin/common/CheckPermissionsAdministration';
 import { updateFeaturedProducts } from './components/common/functions';
 
-import { selectType } from './components/common/functions';
+import { selectType, fetchProducts } from './components/common/functions';
 import LoadingScreen from './components/common/loaders/LoadingScreen';
 import ScrollToTop from './components/common/ScrollToTop';
 import NavBar from './components/common/NavBar';
@@ -52,50 +52,66 @@ function App() {
   const products = useSelector(state => state.guardapolvos.products);
   const configuration = useSelector(state => state.config);
 
-  const fetchConfig = async () => {
-    const config = await configService.get();
-    dispatch(setConfig(config));
-  }    
+  // const fetchConfig = async () => {
+  //   const config = await configService.get();
+  //   dispatch(setConfig(config));
+  // }    
   
-  const fetchProducts = async () => {
-    const response = await searchProdsService.getSearch({'category': ''});
-    dispatch(setProducts(response));
-  }
+  // const fetchProducts = async () => {
+  //   const response = await searchProdsService.getSearch({'category': ''});
+  //   dispatch(setProducts(response));
+  // }
 
+  // // obtenemos config, guardapolvos por primera vez y metodos de pago y los guardamos en reducer
+  // useEffect(() => {
+  //   fetchConfig();
+  //   fetchProducts();
+  //   dispatch(initializePaymentMethods());
+  // }, [])
+  
   // obtenemos config, guardapolvos por primera vez y metodos de pago y los guardamos en reducer
   useEffect(() => {
+    const fetchConfig = async () => {
+      const config = await configService.get();
+      console.log(config);
+      dispatch(setConfig(config));
+    }    
+    const fetchAllProducts = async () => {
+      const response = await searchProdsService.getSearch({'category': ''});
+      dispatch(setProducts(response));
+    }
+
     fetchConfig();
-    fetchProducts();
+    fetchAllProducts();
     dispatch(initializePaymentMethods());
   }, [])
 
   // Seteamos guardapolvos en base a los parametros de busqueda en la URL
   useEffect(() => {
-    const fetchProducts = async () => {
-      if(searchParams && searchParams.size > 0){
-        const params = {};
-        searchParams.forEach((value, key) => {
-            params[key] = value;
-        });
-        setQueryParams(params);
-        try {
-            const response = await searchProdsService.getSearch(params);
-            if(response.length === 1){
-              dispatch(setFiltredGuardapolvos(response));
-              dispatch(setSearchedGuardapolvo(response[0]));
-            }
-            else if(response != undefined) {
-              dispatch(setFiltredGuardapolvos(response));
-              dispatch(setStaticFiltredGuardapolvos(response));
-            }
-        } catch (err) {
-            console.error(err.message);
-        }
-      }
-    };
-
-    fetchProducts();
-  }, [searchParams, dispatch, location.search]);
+    // const fetchProducts = async () => {
+    //   if(searchParams && searchParams.size > 0){
+    //     const params = {};
+    //     searchParams.forEach((value, key) => {
+    //         params[key] = value;
+    //     });
+    //     setQueryParams(params);
+    //     try {
+    //         const response = await searchProdsService.getSearch(params);
+    //         if(response.length === 1){
+    //           dispatch(setFiltredGuardapolvos(response));
+    //           dispatch(setSearchedGuardapolvo(response[0]));
+    //         }
+    //         else if(response != undefined) {
+    //           dispatch(setFiltredGuardapolvos(response));
+    //           dispatch(setStaticFiltredGuardapolvos(response));
+    //         }
+    //     } catch (err) {
+    //         console.error(err.message);
+    //     }
+    //   }
+    // };
+     fetchProducts(searchParams, setQueryParams, products, dispatch);
+  }, [searchParams, dispatch, location.search, products]);
 
   // updateamos los productos destacados cuando cambian los productos
   useEffect(() => {
