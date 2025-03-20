@@ -89,7 +89,7 @@ const StockAdministration = () => {
             if (result.isConfirmed) {
                 try {
                     const token = setToken(userLogged.token);
-                    await configsService.update({...config, featuredProducts: updatedFeaturedProducts}, token);
+                    await configsService.update({...config, featuredProducts: updatedFeaturedProducts});
                     await configsService.clearCache();
         
                     setFeaturedProductsModal(false);
