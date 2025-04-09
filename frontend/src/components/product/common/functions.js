@@ -1,5 +1,9 @@
 
 export function formatNumber(num) {
+    if(num === undefined || num === null) {
+        return num;
+    }
+    // Convertir el número a una cadena y eliminar los decimales
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
