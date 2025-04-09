@@ -73,7 +73,6 @@ function App() {
   useEffect(() => {
     const fetchConfig = async () => {
       const config = await configService.get();
-      console.log(config);
       dispatch(setConfig(config));
     }    
     const fetchAllProducts = async () => {

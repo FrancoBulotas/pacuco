@@ -8,7 +8,7 @@
     background-color: rgba(13, 110, 253, 0.05);
     box-shadow: none;
   }
-  
+
   .payment-accordion .accordion-body {
     padding: 1.25rem;
   }
@@ -17,10 +17,19 @@
     transition: all 0.3s ease;
   }
   
+  .payment-accordion .card .accordion-item {
+    margin: 0px;
+  }
+
   .payment-accordion .card:hover {
     transform: translateY(-2px);
   }
   
+  .selected-payment-method{
+    margin: 20px;
+    margin-left: 0;  
+  }
+
   .bank-details {
     border-left: 3px solid #bebebe;
   }
@@ -53,3 +62,58 @@
       margin-top: 0.25rem;
     }
   }
+
+.payment-methods-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.payment-methods-title {
+    font-size: 1rem;
+    
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.payment-method-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.payment-method-option:hover {
+    background-color: #f0f0f0;
+    border-color: #bbb;
+}
+
+.payment-method-option input[type="radio"] {
+    margin-right: 10px;
+    accent-color: #2c2c2c;
+    transform: scale(1.2);
+}
+
+.payment-method-option label {
+    font-size: 1rem;
+    color: #555;
+    cursor: pointer;
+}
+
+.payment-method-option input[type="radio"]:checked + img + label {
+    font-weight: bold;
+    color: #2c2c2c;
+}
+
+.payment-method-option input[type="radio"]:checked + svg + label {
+  font-weight: bold;
+  color: #2c2c2c;
+}

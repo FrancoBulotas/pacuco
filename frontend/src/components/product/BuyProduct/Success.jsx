@@ -33,86 +33,41 @@ const Success = () => {
                 <div className="success-message">
                     {formData.paymentMethod === 'Mercado Pago' ? 
                     'Los productos fueron reservados, pero aún debes realizar la transferencia de Mercado Pago a:'
-                    : 'Los productos fueron reservados, pero aún debes realizar la transferencia bancaria a:'
+                    : formData.paymentMethod === 'Transferencia Bancaria' ? 'Los productos fueron reservados, pero aún debes realizar la transferencia bancaria a:' 
+                    : 'Los productos fueron reservados, pero aún debes realizar el pago en efectivo, para coordinarlo comunicarse con el siguiente número:'
                     }
                     
-                    <div className="bank-details bg-light p-3 rounded mb-3">
+                    { (formData.paymentMethod === 'Mercado Pago' || formData.paymentMethod === 'Transferencia Bancaria') &&
+                        <div className="bank-details bg-light p-3 rounded mb-3">
                         {formData.paymentMethod === 'Mercado Pago' ? 
                             (
-                            <>
-                                        <div className="detail-row mb-2">
-                                            <span className="fw-bold">Titular de Cuenta:</span>
-                                            <div className="d-flex align-items-center">
-                                            <span className="ms-2">{paymentMethods.titularCuentaCvu}</span>
-                                            <Button 
-                                                variant="link" 
-                                                size="sm" 
-                                                className="ms-2 p-0"
-                                                onClick={() => copyToClipboard(paymentMethods.titularCuentaCvu, 'titularCvu')}
-                                            >
-                                                {copied === 'titularCvu' ? <FaCheck className="text-success" /> : <FaCopy className='text-secondary' />}
-                                            </Button>
-                                            </div>
-                                        </div>
-                                        
-                                        <div className="detail-row mb-2">
-                                            <span className="fw-bold">CVU:</span>
-                                            <div className="d-flex align-items-center">
-                                            <span className="ms-2">{paymentMethods.cvu}</span>
-                                            <Button 
-                                                variant="link" 
-                                                size="sm" 
-                                                className="ms-2 p-0"
-                                                onClick={() => copyToClipboard(paymentMethods.cvu, 'cvu')}
-                                            >
-                                                {copied === 'cvu' ? <FaCheck className="text-success" /> : <FaCopy className='text-secondary' />}
-                                            </Button>
-                                            </div>
-                                        </div>
-                                        
-                                        <div className="detail-row">
-                                            <span className="fw-bold">Alias:</span>
-                                            <div className="d-flex align-items-center">
-                                            <span className="ms-2">{paymentMethods.aliasCvu}</span>
-                                            <Button 
-                                                variant="link" 
-                                                size="sm" 
-                                                className="ms-2 p-0"
-                                                onClick={() => copyToClipboard(paymentMethods.aliasCvu, 'aliasCvu')}
-                                            >
-                                                {copied === 'aliasCvu' ? <FaCheck className="text-success" /> : <FaCopy className='text-secondary' />}
-                                            </Button>
-                                            </div>
-                                        </div>
-                            </>) 
-                            : ( 
-                                <>                   
-                                   <div className="detail-row mb-2">
+                                <>
+                                    <div className="detail-row mb-2">
                                         <span className="fw-bold">Titular de Cuenta:</span>
                                         <div className="d-flex align-items-center">
-                                        <span className="ms-2">{paymentMethods.titularCuentaCbu}</span>
+                                        <span className="ms-2">{paymentMethods.titularCuentaCvu}</span>
                                         <Button 
                                             variant="link" 
                                             size="sm" 
                                             className="ms-2 p-0"
-                                            onClick={() => copyToClipboard(paymentMethods.titularCuentaCbu, 'titularCbu')}
+                                            onClick={() => copyToClipboard(paymentMethods.titularCuentaCvu, 'titularCvu')}
                                         >
-                                            {copied === 'titularCbu' ? <FaCheck className="text-success" /> : <FaCopy className='text-secondary' />}
+                                            {copied === 'titularCvu' ? <FaCheck className="text-success" /> : <FaCopy className='text-secondary' />}
                                         </Button>
                                         </div>
                                     </div>
                                     
                                     <div className="detail-row mb-2">
-                                        <span className="fw-bold">CBU:</span>
+                                        <span className="fw-bold">CVU:</span>
                                         <div className="d-flex align-items-center">
-                                        <span className="ms-2">{paymentMethods.cbu}</span>
+                                        <span className="ms-2">{paymentMethods.cvu}</span>
                                         <Button 
                                             variant="link" 
                                             size="sm" 
                                             className="ms-2 p-0"
-                                            onClick={() => copyToClipboard(paymentMethods.cbu, 'cbu')}
+                                            onClick={() => copyToClipboard(paymentMethods.cvu, 'cvu')}
                                         >
-                                            {copied === 'cbu' ? <FaCheck className="text-success" /> : <FaCopy className='text-secondary' />}
+                                            {copied === 'cvu' ? <FaCheck className="text-success" /> : <FaCopy className='text-secondary' />}
                                         </Button>
                                         </div>
                                     </div>
@@ -120,25 +75,78 @@ const Success = () => {
                                     <div className="detail-row">
                                         <span className="fw-bold">Alias:</span>
                                         <div className="d-flex align-items-center">
-                                        <span className="ms-2">{paymentMethods.aliasCbu}</span>
+                                        <span className="ms-2">{paymentMethods.aliasCvu}</span>
                                         <Button 
                                             variant="link" 
                                             size="sm" 
                                             className="ms-2 p-0"
-                                            onClick={() => copyToClipboard(paymentMethods.aliasCbu, 'aliasCbu')}
+                                            onClick={() => copyToClipboard(paymentMethods.aliasCvu, 'aliasCvu')}
                                         >
-                                            {copied === 'aliasCbu' ? <FaCheck className="text-success" /> : <FaCopy className='text-secondary' />}
+                                            {copied === 'aliasCvu' ? <FaCheck className="text-success" /> : <FaCopy className='text-secondary' />}
                                         </Button>
                                         </div>
                                     </div>
-                                </>
-                            ) 
-                        }
+                                </>) 
+                                : formData.paymentMethod === 'Transferencia Bancaria' ? ( 
+                                    <>                   
+                                    <div className="detail-row mb-2">
+                                            <span className="fw-bold">Titular de Cuenta:</span>
+                                            <div className="d-flex align-items-center">
+                                            <span className="ms-2">{paymentMethods.titularCuentaCbu}</span>
+                                            <Button 
+                                                variant="link" 
+                                                size="sm" 
+                                                className="ms-2 p-0"
+                                                onClick={() => copyToClipboard(paymentMethods.titularCuentaCbu, 'titularCbu')}
+                                            >
+                                                {copied === 'titularCbu' ? <FaCheck className="text-success" /> : <FaCopy className='text-secondary' />}
+                                            </Button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="detail-row mb-2">
+                                            <span className="fw-bold">CBU:</span>
+                                            <div className="d-flex align-items-center">
+                                            <span className="ms-2">{paymentMethods.cbu}</span>
+                                            <Button 
+                                                variant="link" 
+                                                size="sm" 
+                                                className="ms-2 p-0"
+                                                onClick={() => copyToClipboard(paymentMethods.cbu, 'cbu')}
+                                            >
+                                                {copied === 'cbu' ? <FaCheck className="text-success" /> : <FaCopy className='text-secondary' />}
+                                            </Button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="detail-row">
+                                            <span className="fw-bold">Alias:</span>
+                                            <div className="d-flex align-items-center">
+                                            <span className="ms-2">{paymentMethods.aliasCbu}</span>
+                                            <Button 
+                                                variant="link" 
+                                                size="sm" 
+                                                className="ms-2 p-0"
+                                                onClick={() => copyToClipboard(paymentMethods.aliasCbu, 'aliasCbu')}
+                                            >
+                                                {copied === 'aliasCbu' ? <FaCheck className="text-success" /> : <FaCopy className='text-secondary' />}
+                                            </Button>
+                                            </div>
+                                        </div>
+                                    </>
+                                ) :
+                                null
+                            }
 
-                    </div>
+                        </div>
+                    }
                 </div>
-                <p className="success-message"> Una vez realizado el pago te pedimos que nos adjuntes el comprobante correspondiente al siguiente numero de Whatsapp: <strong>11 2322-3048</strong>
-                </p>
+                {
+                    formData.paymentMethod === 'Mercado Pago' || formData.paymentMethod === 'Transferencia Bancaria' &&
+                    <p className="success-message"> 
+                        Una vez realizado el pago te pedimos que nos adjuntes el comprobante correspondiente al siguiente numero de Whatsapp: <strong>11 2322-3048</strong>
+                    </p>
+                }
                 <a               
                     href={`https://wa.me/${whatsappNumber}?`}
                     className="whatsapp-link"

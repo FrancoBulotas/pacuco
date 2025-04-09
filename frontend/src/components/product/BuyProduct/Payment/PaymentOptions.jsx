@@ -9,10 +9,13 @@ import searchProdsService from '../../../../services/searchProds';
 import guardapolvosService from '../../../../services/guardapolvos';
 import { sendEmailJS } from '../email/SendEmail';
 
+import { Button, Spinner } from 'react-bootstrap';
+
 import { clearCart, setShippingPrice, setFormData, setTotalPrice } from '../../../../reducers/cartReducer'
 import { setProducts } from '../../../../reducers/guardapolvosReducer'
 
 import '../../../../assets/styles/buyProduct/paymentOptions.scss';
+import Swal from 'sweetalert2';
 
 
 const PaymentOptions = ({ loading }) => {
@@ -26,8 +29,6 @@ const PaymentOptions = ({ loading }) => {
     const totalPrice = useSelector(state => state.cart.totalPrice);
     const shippingPrice = useSelector(state => state.cart.shippingPrice);
   
-    console.log(formData);
-
     const handleSubmit = async () => {   
         // const resultPhoneValidation = validatePhoneNumber(formData.phone);       
         try {
@@ -82,6 +83,18 @@ const PaymentOptions = ({ loading }) => {
     }
 
     const handleClick = () => {
+
+      if(!formData.paymentMethod) {
+        Swal.fire({ 
+          title:'Debes seleccionar un metodo de pago!', 
+          text:'Porfavor selecciona un metodo de pago para continuar con tu compra.', 
+          icon:'warning', 
+          confirmButtonText: 'Aceptar', 
+          confirmButtonColor: '#000', 
+        })
+        return
+      }
+      
       const result = handleSubmit();
       if(result) navigate('/finalizarCompra/success');
     }
@@ -93,6 +106,15 @@ const PaymentOptions = ({ loading }) => {
           loading={loading} 
           handleClick={handleClick} 
         />
+
+        <Button
+          variant="primary"
+          onClick={() => handleClick()}
+          className="w-100 py-2 btn-dark"
+          style={{marginTop: '20px'}}
+          >
+          {loading ? <Spinner animation="border" size="sm" /> : 'Encargar pedido'}
+        </Button>
       </div>
     )
   }

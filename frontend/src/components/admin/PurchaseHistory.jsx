@@ -39,7 +39,7 @@ const PurchaseHistory = () => {
         shipMethod: '',
         sucursal: '',
     }})
-
+    
     const [currentPage, setCurrentPage] = useState(1)
     const productsPerPage = 7
     const totalProducts = purchasedProducts.length 
