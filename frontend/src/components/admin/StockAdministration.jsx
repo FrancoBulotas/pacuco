@@ -103,7 +103,7 @@ const StockAdministration = () => {
     const stockAdministrationOptions = [
         // { title: "Administrar todos los productos", onClick: () => showEditAllProductsModal()},
         { title: "Editar categorias y/o subcategorias", onClick: () => showEditCategoriesModal()},
-        { title: "Editar productos destacados mostrados en pagina inicial", onClick: () => showFeaturedProductsModal()},
+        // { title: "Editar productos destacados mostrados en pagina inicial", onClick: () => showFeaturedProductsModal()},
     ];
 
     const tabStyle = { width:'100%' }

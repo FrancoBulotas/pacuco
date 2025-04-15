@@ -260,15 +260,15 @@ export const fetchProducts = async (searchParams, setQueryParams, products, disp
           });
         }
 
-        console.log('🔍 Usando filtrado local con parámetros:', params);
-        console.log('📊 Productos encontrados:', filteredProducts.length);
+        // console.log('🔍 Usando filtrado local con parámetros:', params);
+        // console.log('📊 Productos encontrados:', filteredProducts.length);
         dispatch(setFiltredGuardapolvos(filteredProducts));
         dispatch(setStaticFiltredGuardapolvos(filteredProducts));
         return;
       }
 
       // Si no podemos filtrar localmente o no hay resultados, hacemos la request al backend
-      console.log('🌐 Haciendo request al backend con parámetros:', params);
+      // console.log('🌐 Haciendo request al backend con parámetros:', params);
       try {
           const response = await searchProdsService.getSearch(params);
           if(response.length === 1){
