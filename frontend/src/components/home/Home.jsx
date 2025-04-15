@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
 const Home = () => {
-    const config = useSelector(state => state.config);
+    // const config = useSelector(state => state.config);
     const [featuredProducts, setFeaturedProducts] = useState([])
 
     // useEffect(() => {
@@ -16,6 +16,20 @@ const Home = () => {
     //         setFeaturedProducts(config[0].featuredProducts);
     //     } 
     // }, [config]);
+
+    useEffect(() => { 
+        const fetchFeaturedProducts = async () => {
+            try {
+                const response = await fetch('/api/products/featured');
+                const data = await response.json();
+                setFeaturedProducts({'!DESTACADOS!': data});
+            } catch (error) {
+                console.error('Error fetching featured products:', error);
+            }
+        };
+
+        fetchFeaturedProducts();
+    }, [])  
 
     return(
         <>
