@@ -2,6 +2,11 @@
 import api from './api';
 const baseUrl = `/api/products`;
 
+const getFeatured = async () => {
+    const response = await api.get(baseUrl + '/featured');
+    return response.data;
+}
+
 const getSearch = async (params) => {
     // console.log(params)
     const response = await api.get(baseUrl, {
@@ -30,4 +35,4 @@ const clearCache = async () => {
     return response;
 }
 
-export default { getSearch, clearCache }
+export default { getSearch, clearCache, getFeatured }

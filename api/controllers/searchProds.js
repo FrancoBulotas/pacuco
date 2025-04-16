@@ -8,13 +8,14 @@ const cache = new NodeCache({ stdTTL: 3600, checkperiod: 600 });
 
 searchProdsRouter.get('/products/featured', async (req, res) => {
     const cacheKey = 'featuredProducts'; // Clave única para los productos destacados
+
     let cachedFeaturedProducts = cache.get(cacheKey);
 
     if (!cachedFeaturedProducts) {
         console.log(`⚡ No hay caché para: ${cacheKey}, obteniendo datos de la BD...`);
         
         try {
-            const products = await Guardapolvo.find({ show: true, amount: { $gt: 0 }, type: 'stock' }).limit(12) // Cambia el límite según tus necesidades
+            const products = await Guardapolvo.find({ show: true, amount: { $gt: 0 }, type: 'stock' }).limit(24) 
             
             // Aplicar transformación manual para cada producto
             cachedFeaturedProducts = products.map(product => {
@@ -24,7 +25,17 @@ searchProdsRouter.get('/products/featured', async (req, res) => {
                     _id: undefined, 
                     __v: undefined  
                 };
+
+
             });
+
+            const firstHalf = cachedFeaturedProducts.slice(0, Math.ceil(products.length / 2));
+            const secondHalf = cachedFeaturedProducts.slice(Math.ceil(products.length / 2));  
+
+            cachedFeaturedProducts = {
+                '¡DESTACADOS!': firstHalf,
+                '¡EN STOCK!': secondHalf
+            };
 
             cache.set(cacheKey, cachedFeaturedProducts); // Guarda en caché
         } catch (error) {
