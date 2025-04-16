@@ -6,6 +6,7 @@ import FrecuentQuestions from './FrecuentQuestions'
 import AboutUs from './AboutUs'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
+import searchProdsService from '../../services/searchProds'
 
 const Home = () => {
     // const config = useSelector(state => state.config);
@@ -20,9 +21,9 @@ const Home = () => {
     useEffect(() => { 
         const fetchFeaturedProducts = async () => {
             try {
-                const response = await fetch('/api/products/featured');
-                const data = await response.json();
-                setFeaturedProducts({'!DESTACADOS!': data});
+                const data = await searchProdsService.getFeatured();
+                
+                setFeaturedProducts(data);
             } catch (error) {
                 console.error('Error fetching featured products:', error);
             }
