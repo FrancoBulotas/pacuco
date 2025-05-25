@@ -6,6 +6,8 @@ URL: pacuco.com.ar
 
 
 TODO:
+- Agregar en metodos de pago, que al seleccionar Mercado Pago y/o Banco Frances, luego de realizar el encargo, se redirija a pantalla success
+y ahi aparezca, el boton de pago con Mercado Pago y el QR para pagar con Banco Frances.
 
 - Corregir bug que en admin de productos toma datos del cache desp de modificar
 - Corregir EditAllProductsModal.jsx

@@ -3,7 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import PaymentMethodsAccordion from './PaymentMethodsAccordion';
+import PaymentMethodsAccordion from '../payment/PaymentMethodsAccordion';
 
 import searchProdsService from '../../../../services/searchProds';
 import guardapolvosService from '../../../../services/guardapolvos';

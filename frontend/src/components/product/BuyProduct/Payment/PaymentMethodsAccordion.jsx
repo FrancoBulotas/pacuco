@@ -4,6 +4,7 @@ import { setFormData } from '../../../../reducers/cartReducer';
 import { FaUniversity } from 'react-icons/fa';
 
 import '../../../../assets/styles/buyProduct/paymentMethodsAccordion.css';
+import PaymentButtonMP from './PaymentButtonMP';
 
 const PaymentMethodsAccordion = () => {
     const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const PaymentMethodsAccordion = () => {
                 />
                 <label htmlFor="mercado-pago">Mercado Pago</label>
             </div>
+            {/* <PaymentButtonMP shippingPrice={formData.shippingPrice} onClick={() => handleSelection('Mercado Pago')} /> */}
             <div className="payment-method-option">
                 <input
                     type="radio"
@@ -46,6 +48,18 @@ const PaymentMethodsAccordion = () => {
                 />
                 <FaUniversity className="me-2 text-dark" size={20} />
                 <label htmlFor="transferencia-bancaria" style={{marginLeft:'5px'}}>Transferencia Bancaria</label>
+            </div>
+            <div className="payment-method-option">
+                <input
+                    type="radio"
+                    id="transferencia-bancaria"
+                    name="paymentMethod"
+                    value="Transferencia Bancaria"
+                    checked={selectedMethod === 'Transferencia Bancaria'}
+                    onChange={() => handleSelection('Transferencia Bancaria')}
+                />
+                <img src="https://pacucostorage.blob.core.windows.net/common/logo-banco-frances.webp" alt="" style={{width:'23px', height:'23px', marginRight:'10px'}} />
+                <label htmlFor="transferencia-bancaria" style={{marginLeft:'5px'}}>Banco Francés</label>
             </div>
             <div className="payment-method-option">
                 <input
