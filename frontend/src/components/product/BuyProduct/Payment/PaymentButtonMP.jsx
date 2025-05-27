@@ -48,10 +48,10 @@ const PaymentButtonMP = ({ shippingPrice }) => {
                 initialization={{ preferenceId }} 
                 customization={{
                     texts: { valueProp: 'smart_option' },
-                    visual: {
-                        buttonBackground: 'black',
-                        borderRadius: '8px',
-                    }
+                    // visual: {
+                    //     buttonBackground: 'black',
+                    //     borderRadius: '8px',
+                    // }
                 }} />
             )}
         </div>

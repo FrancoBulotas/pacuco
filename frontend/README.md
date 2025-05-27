@@ -6,6 +6,9 @@ URL: pacuco.com.ar
 
 
 TODO:
+
+- Agregar que se pueda aumentar nuevamente el valor de los prods en conjunto segun %
+- Agregar que segun opcion elegida cambie el monto a pagar.
 - Agregar en metodos de pago, que al seleccionar Mercado Pago y/o Banco Frances, luego de realizar el encargo, se redirija a pantalla success
 y ahi aparezca, el boton de pago con Mercado Pago y el QR para pagar con Banco Frances.
 

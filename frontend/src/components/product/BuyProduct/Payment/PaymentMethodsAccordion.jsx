@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from '../../../../reducers/cartReducer';
 import { FaUniversity } from 'react-icons/fa';
 
 import '../../../../assets/styles/buyProduct/paymentMethodsAccordion.css';
-import PaymentButtonMP from './PaymentButtonMP';
 
 const PaymentMethodsAccordion = () => {
     const dispatch = useDispatch();
@@ -21,7 +20,7 @@ const PaymentMethodsAccordion = () => {
 
     return (
         <div className="payment-methods-container">
-            <div className="payment-method-option">
+            <div className="payment-method-option" onClick={() => handleSelection('Mercado Pago')}>
                 <input
                     type="radio"
                     id="mercado-pago"
@@ -36,8 +35,7 @@ const PaymentMethodsAccordion = () => {
                 />
                 <label htmlFor="mercado-pago">Mercado Pago</label>
             </div>
-            {/* <PaymentButtonMP shippingPrice={formData.shippingPrice} onClick={() => handleSelection('Mercado Pago')} /> */}
-            <div className="payment-method-option">
+            <div className="payment-method-option" onClick={() => handleSelection('Transferencia Bancaria')}>
                 <input
                     type="radio"
                     id="transferencia-bancaria"
@@ -49,19 +47,31 @@ const PaymentMethodsAccordion = () => {
                 <FaUniversity className="me-2 text-dark" size={20} />
                 <label htmlFor="transferencia-bancaria" style={{marginLeft:'5px'}}>Transferencia Bancaria</label>
             </div>
-            <div className="payment-method-option">
+            <div className="payment-method-option" onClick={() => handleSelection('Banco Frances')}>
                 <input
                     type="radio"
-                    id="transferencia-bancaria"
+                    id="banco-frances"
                     name="paymentMethod"
-                    value="Transferencia Bancaria"
-                    checked={selectedMethod === 'Transferencia Bancaria'}
-                    onChange={() => handleSelection('Transferencia Bancaria')}
+                    value="Banco Frances"
+                    checked={selectedMethod === 'Banco Frances'}
+                    onChange={() => handleSelection('Banco Frances')}
                 />
                 <img src="https://pacucostorage.blob.core.windows.net/common/logo-banco-frances.webp" alt="" style={{width:'23px', height:'23px', marginRight:'10px'}} />
-                <label htmlFor="transferencia-bancaria" style={{marginLeft:'5px'}}>Banco Francés</label>
+                <label htmlFor="banco-frances" style={{marginLeft:'5px'}}>Banco Francés</label>
             </div>
-            <div className="payment-method-option">
+            <div className="payment-method-option" onClick={() => handleSelection('Cuenta DNI')}>
+                <input
+                    type="radio"
+                    id="cuenta-dni"
+                    name="paymentMethod"
+                    value="Cuenta DNI"
+                    checked={selectedMethod === 'Cuenta DNI'}
+                    onChange={() => handleSelection('Cuenta DNI')}
+                />
+                <img src="https://pacucostorage.blob.core.windows.net/common/cuenta-dni-banco-provincia-logo.png" alt="" style={{width:'50px', height:'15px', marginRight:'10px'}} />
+                <label htmlFor="cuenta-dni" style={{marginLeft:'5px'}}>Cuenta DNI</label>
+            </div>
+            <div className="payment-method-option" onClick={() => handleSelection('Efectivo')}>
                 <input
                     type="radio"
                     id="efectivo"

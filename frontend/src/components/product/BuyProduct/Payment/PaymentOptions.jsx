@@ -32,14 +32,13 @@ const PaymentOptions = ({ loading }) => {
     const handleSubmit = async () => {   
         // const resultPhoneValidation = validatePhoneNumber(formData.phone);       
         try {
-          const result = await sendEmailJS(formData, cart, totalPrice + shippingPrice, shippingPrice);
+          const [result, operationCode] = await sendEmailJS(formData, cart, totalPrice + shippingPrice, shippingPrice);
           // const result = await sendWhatsAppService.sendMessage(`549${num}`, createMessage(formData, cart, totalPrice + shippingPrice, shippingPrice));
           if(result) {
-              // dispatch(setFormData({ fullName : '', email: '', dni: '', phone: '', province: '', city: '', address: '', zipCode: '', shipMethod: 'Sucursal', sucursal: '', paymentMethod: '',}));
-              dispatch(setTotalPrice(0));
-              dispatch(setShippingPrice(0));
-              dispatch(clearCart()); 
-
+              dispatch(setFormData({
+                  ...formData,
+                  operationCode: operationCode,
+              }));
               updateProductsFromStock();
               await searchProdsService.clearCache();
 
@@ -115,6 +114,10 @@ const PaymentOptions = ({ loading }) => {
           >
           {loading ? <Spinner animation="border" size="sm" /> : 'Encargar pedido'}
         </Button>
+        <p className='p-details'>
+          Una vez encargado el pedido, te llegara un correo electronico con el detalle del pedido y seras dirigida a sección con el detalle del Pago
+          a realizar segun el metodo de pago seleccionado..
+        </p>
       </div>
     )
   }
