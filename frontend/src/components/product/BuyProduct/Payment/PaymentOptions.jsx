@@ -1,9 +1,8 @@
 
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import PaymentMethodsAccordion from '../payment/PaymentMethodsAccordion';
+import PaymentMethodsAccordion from '../Payment/PaymentMethodsAccordion';
 
 import searchProdsService from '../../../../services/searchProds';
 import guardapolvosService from '../../../../services/guardapolvos';
@@ -11,7 +10,7 @@ import { sendEmailJS } from '../email/SendEmail';
 
 import { Button, Spinner } from 'react-bootstrap';
 
-import { clearCart, setShippingPrice, setFormData, setTotalPrice } from '../../../../reducers/cartReducer'
+import { setFormData } from '../../../../reducers/cartReducer'
 import { setProducts } from '../../../../reducers/guardapolvosReducer'
 
 import '../../../../assets/styles/buyProduct/paymentOptions.scss';
