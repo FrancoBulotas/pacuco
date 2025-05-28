@@ -10,7 +10,7 @@ import { checkStock } from './checkStock'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import { Form, Col, Dropdown, Alert, Button } from 'react-bootstrap'
 
-import PaymentOptions from './payment/PaymentOptions';
+import PaymentOptions from './Payment/PaymentOptions';
 
 import { formatNumber, createMessage, validatePhoneNumber, roundNumber } from '../common/functions'
 import Swal from 'sweetalert2'
