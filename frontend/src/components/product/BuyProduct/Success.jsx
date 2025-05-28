@@ -5,7 +5,7 @@ import { Button} from 'react-bootstrap';
 import { FaCheck, FaCopy } from 'react-icons/fa';
 
 import { clearCart, setShippingPrice, setTotalPrice } from '../../../reducers/cartReducer'
-import PaymentButtonMP from './payment/PaymentButtonMP';
+import PaymentButtonMP from './Payment/PaymentButtonMP';
 import { formatNumber } from '../../common/functions';
 
 import '../../../assets/styles/buyProduct/multiStepCheckout.css'
