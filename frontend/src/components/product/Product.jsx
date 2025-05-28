@@ -128,7 +128,7 @@ const Product = ({ navigateTo, product }) => {
                                                 </p>
                                                 <div>
                                                     <span style={{ color: 'gray', marginRight: '8px', textDecoration: 'line-through' }}>
-                                                        Precio de lista: $ {formatNumber(roundNumber(product.price * 1.06))}
+                                                        Precio de lista: $ {formatNumber(product.listedPrice)}
                                                     </span>
                                                     <span className='porcentajeProductoOff'>
                                                         {checkDiscountPorcentage(product)}% OFF
@@ -138,7 +138,7 @@ const Product = ({ navigateTo, product }) => {
                                         ) : (
                                             <>
                                                 <p style={{ margin: '0px'}}>
-                                                    <strong style={{fontSize: '26px'}}>$ {formatNumber(roundNumber(product.price * 1.06))} </strong>
+                                                    <strong style={{fontSize: '26px'}}>$ {formatNumber(product.listedPrice)} </strong>
                                                     <span style={{ color: 'gray'}}>precio de lista</span>
                                                 </p>
                                                 <p style={{ margin: '0px'}}>

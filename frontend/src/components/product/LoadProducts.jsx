@@ -35,12 +35,12 @@ export const LoadProducts = ({ products }) => {
                                     {validateIfItemHasDiscount(prod)
                                         ?   <>
                                                 <div>
-                                                    <span className="text-decoration-line-through" style={{marginRight:'8px', color:'gray'}}>$ {formatNumber(roundNumber(prod.price *1.06))}</span>
+                                                    <span className="text-decoration-line-through" style={{marginRight:'8px', color:'gray'}}>$ {formatNumber(prod.listedPrice)}</span>
                                                     <span className='porcentajeProductoOff'>{checkDiscountPorcentage(prod)}% OFF</span>        
                                                 </div>
-                                                <span className="precioProducto">${formatNumber(prod.discountPrice)}</span> 
+                                                <span className="precioProducto">$ {formatNumber(prod.discountPrice)}</span> 
                                             </>
-                                        : <p className="precioProducto">$ {formatNumber(roundNumber(prod.price *1.06))}</p>
+                                        : <p className="precioProducto">$ {formatNumber(prod.listedPrice)}</p>
                                     }
                                 </div>
                                 <div>

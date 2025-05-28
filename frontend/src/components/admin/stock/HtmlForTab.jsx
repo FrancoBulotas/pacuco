@@ -118,7 +118,7 @@ const HtmlForTab = ({ title, table, type, category, showCreateModal, showEditMod
                         <tbody key={i}>
                             <tr className={`tr-tabla-productos ${item.show ? '' : 'resaltado'}`} >
                                 <td>{item.name}</td>
-                                <td>$ {validateIfItemHasDiscount(item) ? item.discountPrice : item.price}</td>
+                                <td>$ {validateIfItemHasDiscount(item) ? item.discountPrice : item.listedPrice}</td>
                                 { table === 'stock' ? <td>{item.amount}</td> : '' }
                                 { table === 'stock' ? <td>{item.size}</td> : '' }
                                 <td><img src={item.img} onClick={() => handleModalImage(item.img)} alt={item.description.general} className="small-img-admin" style={{ cursor: 'pointer' }}></img></td>

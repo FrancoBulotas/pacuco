@@ -42,7 +42,7 @@ const Cart = () => {
     const totalInCart = () => {
         let sum = 0
         // recorremos el carrito, y si existe un prod con descuento se multiplica ese valor, y no el total
-        cart.map(item => sum += ((item.discountPrice || item.discountPrice > 0 ? item.discountPrice : roundNumber(item.price * 1.06)) * item.amountToBuy))
+        cart.map(item => sum += ((item.discountPrice || item.discountPrice > 0 ? item.discountPrice : item.listedPrice) * item.amountToBuy))
         return formatNumber(sum)
     }
 
@@ -77,7 +77,7 @@ const Cart = () => {
                             </div>
                             <div className="detalles-prod-carrito">
                                 <p className="nombre-producto">{item.name}</p>
-                                <p>Precio: $ {item.discountPrice || item.discountPrice > 0 ? formatNumber(item.discountPrice) : formatNumber(roundNumber(item.price * 1.06))}</p>
+                                <p>Precio: $ {item.discountPrice || item.discountPrice > 0 ? formatNumber(item.discountPrice) : formatNumber(item.listedPrice)}</p>
                                 <p> 
                                     <button onClick={() => deleteOneItem(item)} className="boton-restar-uno">-</button>
                                     <span id="cantidad">{item.amountToBuy}</span>

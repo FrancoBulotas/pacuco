@@ -9,22 +9,14 @@ import '../../../../assets/styles/buyProduct/paymentMethodsAccordion.css';
 const PaymentMethodsAccordion = () => {
     const dispatch = useDispatch();
     const formData = useSelector(state => state.cart.formData);
-    // const totalPrice = useSelector(state => state.cart.totalPrice);
     const cart = useSelector(state => state.cart.items);
     const [selectedMethod, setSelectedMethod] = useState(formData.paymentMethod || '');
-    let totalPrice = 0;
 
     useEffect(() => {
-        if(cart) {
-            let sum = 0
-            cart.map(item => sum += (((item.discountPrice || item.discountPrice > 0) ? item.discountPrice : item.price) * item.amountToBuy))
-            totalPrice = sum;
-        }
-
         if(formData.paymentMethod === 'Efectivo' || formData.paymentMethod === 'Transferencia Bancaria') {
-            dispatch(setTotalPrice(Math.ceil((totalPrice) / 100) * 100)); 
+            dispatch(setTotalPrice(cart.reduce((acc, item) =>  acc +  ((item.discountPrice || item.discountPrice > 0 ? item.discountPrice : item.price) * item.amountToBuy), 0))); 
         } else {
-            dispatch(setTotalPrice(Math.ceil((totalPrice * 1.06) / 100) * 100)); 
+            dispatch(setTotalPrice(cart.reduce((acc, item) =>  acc +  ((item.discountPrice || item.discountPrice > 0 ? item.discountPrice : item.listedPrice) * item.amountToBuy), 0))); 
         }
 
     }, [selectedMethod, dispatch]);

@@ -21,6 +21,8 @@ import Tooltip from 'react-bootstrap/Tooltip'
 
 import '../../../../assets/styles/admin/modals.scss'
 import { isValidNumber } from '../../../common/functions'
+import { roundNumber } from '../../../product/common/functions'
+
 
 const EditModal = (props) => {
     const userLogged = useSelector(state => state.login)
@@ -33,6 +35,7 @@ const EditModal = (props) => {
         id: '', 
         name: '', 
         price: '', 
+        listedPrice: '', 
         type: '', 
         category: '', 
         discountPrice: '', 
@@ -107,7 +110,7 @@ const EditModal = (props) => {
         }
 
         // validamos que el precio sea un numero
-        if(!isValidNumber(formData.price) && formData.price !== ''){
+        if(!isValidNumber(formData.listedPrice) && formData.listedPrice !== ''){
             Swal.fire({ title:'Ingresa un precio valido!', icon:'error', confirmButtonText: 'Aceptar', confirmButtonColor: '#000', })
             return
         }
@@ -120,7 +123,8 @@ const EditModal = (props) => {
             img2 : formData.img2 !== '' ? `${URL_GUARDAPOLVOS_IMAGES_AZURE}${devMode}/${uniqueSuffix}-${formData.img2}` : props.item.img2,
             img3 : formData.img3 !== '' ? `${URL_GUARDAPOLVOS_IMAGES_AZURE}${devMode}/${uniqueSuffix}-${formData.img3}` : props.item.img3,
             name : formData.name !== '' ? formData.name : props.item.name,
-            price : formData.price !== '' ? Number(formData.price) : Number(props.item.price),
+            price : formData.listedPrice !== '' ? Number(formData.listedPrice) : Number(props.item.listedPrice),
+            listedPrice : formData.listedPrice !== '' ? Number(formData.listedPrice) : Number(props.item.listedPrice),
             discountPrice : formData.discountPrice !== '' ? formData.discountPrice : props.item.discountPrice,
             amount : formData.amount !== '' ? formData.amount : props.item.amount,
             size : formData.size !== '' ? formData.size : props.item.size,
@@ -182,6 +186,7 @@ const EditModal = (props) => {
                                 id: '', 
                                 name: '', 
                                 price: '', 
+                                listedPrice: '', 
                                 type: '', 
                                 category: '', 
                                 discountPrice: '', 
@@ -287,8 +292,8 @@ const EditModal = (props) => {
                     </Form.Group>
                     <div style={styleContainer}>
                         <Form.Group className="mb-3" controlId="controlInput2" style={{width:'50%'}}>
-                            <Form.Label><strong>Precio actual:</strong> $ {props.item.price}</Form.Label>
-                            <Form.Control type="text" name="price" placeholder="nuevo precio" value={formData.price} onChange={handleInputChange} />
+                            <Form.Label><strong>Precio actual:</strong> $ {props.item.listedPrice}</Form.Label>
+                            <Form.Control type="text" name="listedPrice" placeholder="nuevo precio de lista" value={formData.listedPrice} onChange={handleInputChange} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="controlInput3" style={{width:'50%'}}>
                             <div style={{display:'flex', justifyContent:'space-between'}}>

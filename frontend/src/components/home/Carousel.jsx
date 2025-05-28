@@ -78,13 +78,13 @@ const CarouselProd = ({ title, prods }) => {
                     {validateIfItemHasDiscount(item) ? (
                       <>
                         <div className="price-container">
-                          <span className="original-price">$ {formatNumber(roundNumber(item.price *1.06))}</span>
+                          <span className="original-price">$ {formatNumber(item.listedPrice)}</span>
                           <span className="discount-badge">{checkDiscountPorcentage(item)}% OFF</span>
                         </div>
                         <span className="final-price">$ {formatNumber(item.discountPrice)}</span>
                       </>
                     ) : (
-                      <span className="final-price">$ {formatNumber(roundNumber(item.price *1.06))}</span>
+                      <span className="final-price">$ {formatNumber(item.listedPrice)}</span>
                     )}
                   </div>
                 </div>
