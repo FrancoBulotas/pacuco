@@ -7,6 +7,14 @@ export function formatNumber(num) {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
+// redondea un numero al mas cercano 100
+export const roundNumber = (num) => {
+    if(num === undefined || num === null) {
+        return num;
+    }
+    return Math.ceil(num / 100) * 100;
+}
+
 export function validatePhoneNumber(num) {    
     // Eliminar todos los caracteres que no sean dígitos
     const justNumbers = num.replace(/\D/g, '');

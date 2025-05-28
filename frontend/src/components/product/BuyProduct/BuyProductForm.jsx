@@ -12,7 +12,7 @@ import { Form, Col, Dropdown, Alert, Button } from 'react-bootstrap'
 
 import PaymentOptions from './payment/PaymentOptions';
 
-import { formatNumber, createMessage, validatePhoneNumber } from '../common/functions'
+import { formatNumber, createMessage, validatePhoneNumber, roundNumber } from '../common/functions'
 import Swal from 'sweetalert2'
 
 import '../../../assets/styles/buyProduct/buyProductForm.css'
@@ -202,10 +202,10 @@ const BuyProductForm = () => {
                     <img src={item.img} alt={item.name} className="cart-item-image" onClick={() => navigate(`/products?id=${item.id}`)}/>
                     <div className="cart-item-details">
                         <h3>{item.name}</h3>
-                        <p>Precio: $ {formatNumber(item.discountPrice > 0 ? item.discountPrice : item.price)}</p>
+                        <p>Precio: $ {formatNumber(roundNumber(item.discountPrice > 0 ? item.discountPrice : (item.price * 1.06)))}</p>
                         <p>Cantidad: {item.amountToBuy}</p>
                         <p>Talle: {item.size}</p>
-                        <p>Subtotal: $ {formatNumber((item.discountPrice > 0 ? item.discountPrice : item.price) * item.amountToBuy)}</p>
+                        <p>Subtotal: $ {formatNumber(roundNumber((item.discountPrice > 0 ? item.discountPrice : (item.price * 1.06)) * item.amountToBuy))}</p>
                     </div>
                 </div>
             ))}
@@ -354,7 +354,7 @@ const BuyProductForm = () => {
                 <div className="cart-summary">
                     <div className="cart-summary-item">
                         <span>Subtotal:</span>
-                        <span>$ {formatNumber(totalPrice)}</span>
+                        <span>$ {formatNumber(roundNumber(totalPrice * 1.06))}</span>
                     </div>
                     <div className="cart-summary-item">
                         <span>Envío:</span>
@@ -362,7 +362,7 @@ const BuyProductForm = () => {
                     </div>
                     <div className="cart-summary-item total">
                         <span>Total:</span>
-                        <span>$ {formatNumber(totalPrice + shippingPrice)}</span>
+                        <span>$ {formatNumber(roundNumber((totalPrice * 1.06) + shippingPrice))}</span>
                     </div>
                 </div>
 

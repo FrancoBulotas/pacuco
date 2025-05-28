@@ -30,8 +30,9 @@ guardapolvosRouter.post('/', async (request, response) => {
         amount: body.amount,
         amountToBuy: body.amountToBuy,
         price: body.price,
-        type: body.type,
+        listedPrice: body.listedPrice,
         discountPrice: body.discountPrice,
+        type: body.type,
         size: body.size,
         img: body.img,
         img2: body.img2,
@@ -82,41 +83,25 @@ guardapolvosRouter.post('/changePriceByPorcentage', async (request, response) =>
 })
 
 // lo hice para agregar el campo type:guardapolvo por primera vez en todos los guardapolvos
-guardapolvosRouter.post('/addTypeField', async (request, response) => {
-    const guardapolvos = await Guardapolvo.find({}) 
-
+guardapolvosRouter.post('/updateField', async (request, response) => {
+    
     try {
-        await Promise.all (guardapolvos.map(async (guardapolvo) => {
-            if(guardapolvo.table === 'stock' && guardapolvo.type === 'nivel_inicial') {
-                // await Guardapolvo.findByIdAndUpdate(guardapolvo.id,
-                //     { 
-                //         name: guardapolvo.name, amount: guardapolvo.amount, amountToBuy: guardapolvo.amountToBuy, 
-                //         size: guardapolvo.size, price: guardapolvo.price , discountPrice: guardapolvo.discountPrice, 
-                //         img: guardapolvo.img, img2: guardapolvo.img2, img3: guardapolvo.img3, 
-                //         table: 'nivel_inicial', description: guardapolvo.description, type: guardapolvo.type, category: guardapolvo.category, 
-                //         show: guardapolvo.show
-                //     }, 
-                //     { runValidators: true, context: 'query' })
-            }
-
-            // await Guardapolvo.findByIdAndUpdate(guardapolvo.id,
-            //     { 
-            //         name: guardapolvo.name, amount: guardapolvo.amount, amountToBuy: guardapolvo.amountToBuy, 
-            //         size: guardapolvo.size, price: guardapolvo.price , discountPrice: guardapolvo.discountPrice, 
-            //         img: guardapolvo.img, img2: guardapolvo.img2, img3: guardapolvo.img3, 
-            //         table: guardapolvo.table, description: guardapolvo.description, type: guardapolvo.type, category: guardapolvo.category, 
-            //         show: true }, 
-            //     { runValidators: true, context: 'query' })
-        }))
-        response.status(201).json({ message: 'Added successfully', ok: true, prods: prods });
-    } catch(error){
-      response.status(501).json({ error: 'Error trying to add field', ok: false }).end()
+        const result = await Guardapolvo.updateMany(
+            { listedPrice: { $exists: false } }, // Solo documentos que ya tengan listedPrice
+            [{ $set: { listedPrice: { $add: ["$price", 4000] } } } ]
+        );
+        console.log('Documentos actualizados:', result.modifiedCount);
+        response.status(201).json({ message: 'Added successfully', ok: true });
+    } catch (err) {
+        console.error('Error actualizando documentos:', err);
+        response.status(501).json({ error: 'Error trying to add field', ok: false });
     }
 })
 
 // PUT
 guardapolvosRouter.put('/:id', async (request, response) => {
-    const { name, type, amount, amountToBuy, size, price, discountPrice, img, img2, img3, table, description, category, show } = request.body
+    const { name, type, amount, amountToBuy, size, price, listedPrice,
+        discountPrice, img, img2, img3, table, description, category, show } = request.body
 
     // const decodedToken = jwt.verify(request.token, process.env.SECRET)  
     // if (!decodedToken.id) {    
@@ -124,7 +109,7 @@ guardapolvosRouter.put('/:id', async (request, response) => {
     // }  
 
     response.json(await Guardapolvo.findByIdAndUpdate(request.params.id,
-    { name, type, amount, amountToBuy, size, price, discountPrice, img, img2, img3, table, description, category, show }, 
+    { name, type, amount, amountToBuy, size, price, listedPrice, discountPrice, img, img2, img3, table, description, category, show }, 
     { new: true, runValidators: true, context: 'query' }))
 })
 

@@ -74,7 +74,7 @@ export const validateIfItemHasDiscount = (item) => {
  * @returns retorna el % de descuento que se esta aplicando sobre un producto
  */ 
 export const checkDiscountPorcentage = (item) => {
-    const totalPrice = item.price
+    const totalPrice = item.price;
     const discountPrice = item.discountPrice
 
     return Math.floor(100 - ((discountPrice * 100) / totalPrice))

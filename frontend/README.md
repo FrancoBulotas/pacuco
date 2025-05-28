@@ -8,9 +8,6 @@ URL: pacuco.com.ar
 TODO:
 
 - Agregar que se pueda aumentar nuevamente el valor de los prods en conjunto segun %
-- Agregar que segun opcion elegida cambie el monto a pagar.
-- Agregar en metodos de pago, que al seleccionar Mercado Pago y/o Banco Frances, luego de realizar el encargo, se redirija a pantalla success
-y ahi aparezca, el boton de pago con Mercado Pago y el QR para pagar con Banco Frances.
 
 - Corregir bug que en admin de productos toma datos del cache desp de modificar
 - Corregir EditAllProductsModal.jsx
@@ -27,6 +24,8 @@ y ahi aparezca, el boton de pago con Mercado Pago y el QR para pagar con Banco F
 - Agregar mas filtros para los guardapolvos (por tabla / base / vivo / detalle / modelo, etc).
 - Agregar que puedan modificar los guardapolvos destacados.
 - Cambiar nombre que aparece al recibir el mail de compras@pacuco.com.ar
+- [x] ~~Agregar que segun opcion elegida cambie el monto a pagar.~~
+- [x] ~~Agregar en metodos de pago, que al seleccionar Mercado Pago y/o Banco Frances, luego de realizar el encargo, se redirija a pantalla success y ahi aparezca, el boton de pago con Mercado Pago y el QR para pagar con Banco Frances.~~
 - [x] ~~Corregir bug de la imagen que aparece cuando se ingresa al prod desde el carrito, se muestra una vieja.~~
 - [x] ~~Agregar filtros a la pestaña de adminsitracion de productos (listo falta adaptarlo a mobile)~~
 - [x] ~~Mejorar la pantalla de finalizar compra.~~
