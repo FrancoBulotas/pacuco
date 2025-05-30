@@ -10,11 +10,11 @@ import imageService from '../../services/imageUpload'
 import Swal from 'sweetalert2'
 import { CreditCard, Building2, FileText, MapPin, Truck, Check } from "lucide-react"
 
-import DataForMP from './Payment/dataForMP';
-import DataForTransferencia from './Payment/DataForTransferencia';
-import DataForBancoFrances from './Payment/DataForBancoFrances';
-import DataForSucursal from './Payment/DataForSucursal';
-import DataForDomicilio from './Payment/DataForDomicilio';
+import DataForMP from '../admin/payment/dataForMP';
+import DataForTransferencia from '../admin/payment/DataForTransferencia';
+import DataForBancoFrances from '../admin/payment/DataForBancoFrances';
+import DataForSucursal from '../admin/payment/DataForSucursal';
+import DataForDomicilio from '../admin/payment/DataForDomicilio';
 
 import '../../assets/styles/admin/paymentAdministration.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
