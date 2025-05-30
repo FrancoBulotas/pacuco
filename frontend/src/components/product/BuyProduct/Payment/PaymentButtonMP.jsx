@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from '../../../../reducers/cartReducer'
 
 // Inicializa Mercado Pago con tu clave pública ALDI
-initMercadoPago('APP_USR-bb648458-1be1-4bbc-b563-ea881bdd1e0c', { locale: 'es-AR' }); 
+initMercadoPago('APP_USR-30e5d751-8056-4181-ad59-423b5d0813df', { locale: 'es-AR' }); 
 // Mi public key de prueba (Usuario comprador de mi cuenta): APP_USR-bb648458-1be1-4bbc-b563-ea881bdd1e0c 
 // Public Key de Aldi: APP_USR-30e5d751-8056-4181-ad59-423b5d0813df
 const PaymentButtonMP = ({ shippingPrice }) => {

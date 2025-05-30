@@ -45,6 +45,7 @@ guardapolvosRouter.post('/', async (request, response) => {
         price: roundNumber(body.price * 0.94),
         listedPrice: body.listedPrice,
         discountPrice: body.discountPrice,
+        discountListedPrice: body.discountListedPrice,
         type: body.type,
         size: body.size,
         img: body.img,
@@ -56,6 +57,8 @@ guardapolvosRouter.post('/', async (request, response) => {
         show: body.show
     })
 
+    console.log('Guardapolvo to save:', guardapolvo);
+
     const savedGuguardapolvo = await guardapolvo.save()
     response.status(201).json(savedGuguardapolvo)
 })
@@ -63,20 +66,26 @@ guardapolvosRouter.post('/', async (request, response) => {
 // PUT
 guardapolvosRouter.put('/:id', async (request, response) => {
     // price viene === al listedPrice, por lo que se le aplica un descuento del 6% al precio
-    const { name, type, amount, amountToBuy, size, price, listedPrice,
+    const { name, type, amount, amountToBuy, size, price, listedPrice, discountListedPrice,
         discountPrice, img, img2, img3, table, description, category, show } = request.body
 
     // const decodedToken = jwt.verify(request.token, process.env.SECRET)  
     // if (!decodedToken.id) {    
     //   return response.status(401).json({ error: 'token invalid' })  
     // }  
-    const newPrice = roundNumber(price * 0.94)
+    const newPrice = roundNumber(price * 0.94);
+    const newDiscountPrice = roundNumber(discountPrice * 0.94);
+
+    console.log('newDiscountPrice', newDiscountPrice);
+
+    console.log({ name, type, amount, amountToBuy, size, price: newPrice, listedPrice, discountPrice: newDiscountPrice, discountListedPrice, 
+        img, img2, img3, table, description, category, show })
 
     response.json(await Guardapolvo.findByIdAndUpdate(request.params.id,
-    { name, type, amount, amountToBuy, size, price: newPrice, listedPrice, discountPrice, img, img2, img3, table, description, category, show }, 
+    { name, type, amount, amountToBuy, size, price: newPrice, listedPrice, discountPrice: newDiscountPrice, discountListedPrice, 
+        img, img2, img3, table, description, category, show }, 
     { new: true, runValidators: true, context: 'query' }))
 })
-
 
 
 // DELETE
@@ -128,8 +137,8 @@ guardapolvosRouter.post('/updateField', async (request, response) => {
     
     try {
         const result = await Guardapolvo.updateMany(
-            { listedPrice: { $exists: false } },
-            [{ $set: { listedPrice: { $multiply: [ { $ceil: { $divide: [ { $multiply: ["$price", 1.06] }, 100 ] } }, 100 ] } } } ]
+            { discountListedPrice: { $exists: false } },
+            [{ $set: { discountListedPrice: { $multiply: [ { $ceil: { $divide: [ { $multiply: ["$discountPrice", 1.06] }, 100 ] } }, 100 ] } } } ]
         );
         console.log('Documentos actualizados:', result.modifiedCount);
         response.status(201).json({ message: 'Added successfully', ok: true });

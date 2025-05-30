@@ -99,12 +99,7 @@ const PaymentOptions = ({ loading }) => {
 
     return(
       <div className="payment-section">
-        <PaymentMethodsAccordion 
-          paymentMethods={paymentMethods} 
-          loading={loading} 
-          handleClick={handleClick} 
-        />
-
+        <PaymentMethodsAccordion  />
         <Button
           variant="primary"
           onClick={() => handleClick()}

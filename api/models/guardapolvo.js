@@ -15,6 +15,7 @@ const guardapolvoSchema = new mongoose.Schema({
         required: true
     },
     discountPrice: Number,
+    discountListedPrice: Number,
     listedPrice: Number,
     size: String,
     img: String,

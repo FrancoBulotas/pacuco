@@ -127,6 +127,7 @@ const CreateModal = (props) => {
         newObject.price = formData.listedPrice;
         newObject.category = props.category;
         newObject.discountPrice = undefined;
+        newObject.discountListedPrice = undefined;
         newObject.show = true;
 
         const data = new FormData()

@@ -1,3 +1,4 @@
+
 GET http://localhost:8080/api/payments
 
 ###
@@ -5,17 +6,26 @@ POST http://localhost:8080/api/payments HTTP/1.1
 content-type: application/json
 
 ###
-PUT http://localhost:8080/api/payments/66758b2b64c03ef4951806be HTTP/1.1
+PUT http://localhost:8080/api/payments/6685fad08053115930d87b29 HTTP/1.1
 content-type: application/json
 
 {
-    "cvu": "0000003100055807020379",
-    "aliasCvu": "pacuco.guardapolvos",
-    "cbu": ".",
-    "aliasCbu": "pacuco.guardapolvos",
-    "titularCuentaCbu": ".",
-    "titularCuentaCvu": ".",
-    "imgQr": "https://pacucostorage.blob.core.windows.net/common/1724379251192-729125368-IMG-20240623-WA0034.jpg",
+    "transferencia": {
+        "cbu": "0000003100055807020379",
+        "aliasCbu": "juan.arca.meme",
+        "titularCuentaCbu": "Prueba Juan Arca"
+    },
+    "mercadoPago": {
+        "currentUser": "Prueba Juan Arca",
+        "currentUserPublicKey": "ASDF_NSIDF23084093284293084092"
+    },
+    "bancoFrances": {
+        "imgQr": "https://pacucostorage.blob.core.windows.net/common/qr-pago-banco-frances.png"
+    },
     "priceShipmentSucursal": "4700",
     "priceShipmentDomicilio": "6300"
 }
+
+###
+PATCH http://localhost:8080/api/payments/clean/6685fad08053115930d87b29 HTTP/1.1
+content-type: application/json

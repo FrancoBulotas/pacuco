@@ -84,7 +84,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 15px;
-    padding: 10px 5px;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 6px;
     transition: all 0.3s ease;
@@ -108,12 +108,12 @@
     cursor: pointer;
 }
 
-.payment-method-option input[type="radio"]:checked + img + label {
+.payment-method-option input[type="radio"]:checked + img + div  {
     font-weight: bold;
     color: #2c2c2c;
 }
 
-.payment-method-option input[type="radio"]:checked + svg + label {
+.payment-method-option input[type="radio"]:checked + svg + div  {
   font-weight: bold;
   color: #2c2c2c;
 }
@@ -123,4 +123,12 @@
     color: #808080;
     margin-left: 10px;
     font-weight: bold;
+}
+
+.container-labels-payment-methods {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;    
+    width: 100%;
+    margin-left: 20px;
 }

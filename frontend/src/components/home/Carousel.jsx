@@ -81,7 +81,7 @@ const CarouselProd = ({ title, prods }) => {
                           <span className="original-price">$ {formatNumber(item.listedPrice)}</span>
                           <span className="discount-badge">{checkDiscountPorcentage(item)}% OFF</span>
                         </div>
-                        <span className="final-price">$ {formatNumber(item.discountPrice)}</span>
+                        <span className="final-price">$ {formatNumber(item.discountListedPrice)}</span>
                       </>
                     ) : (
                       <span className="final-price">$ {formatNumber(item.listedPrice)}</span>

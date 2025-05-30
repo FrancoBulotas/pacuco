@@ -38,7 +38,7 @@ export const LoadProducts = ({ products }) => {
                                                     <span className="text-decoration-line-through" style={{marginRight:'8px', color:'gray'}}>$ {formatNumber(prod.listedPrice)}</span>
                                                     <span className='porcentajeProductoOff'>{checkDiscountPorcentage(prod)}% OFF</span>        
                                                 </div>
-                                                <span className="precioProducto">$ {formatNumber(prod.discountPrice)}</span> 
+                                                <span className="precioProducto">$ {formatNumber(prod.discountListedPrice)}</span> 
                                             </>
                                         : <p className="precioProducto">$ {formatNumber(prod.listedPrice)}</p>
                                     }

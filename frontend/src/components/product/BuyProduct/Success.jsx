@@ -17,7 +17,7 @@ const Success = () => {
     const totalPrice = useSelector(state => state.cart.totalPrice);
     const shippingPrice = useSelector(state => state.cart.shippingPrice);
 
-    const whatsappNumber = "5491123223048"; 
+    const whatsappNumber = formData.paymentMethod === 'Cuenta DNI' ? '5491163601162' : "5491123223048";
     const whatsappMessage = encodeURIComponent("Hola, quiero adjuntar mi comprobante de pago."); 
 
     const [copied, setCopied] = useState(null);
@@ -70,12 +70,12 @@ const Success = () => {
                 <div className="detail-row mb-2 mt-4 p-2">
                     <span className="fw-bold">Titular de Cuenta:</span>
                     <div className="d-flex align-items-center">
-                    <span className="ms-2">{paymentMethods.titularCuentaCbu}</span>
+                    <span className="ms-2">{paymentMethods?.transferencia.titularCuentaCbu}</span>
                     <Button 
                         variant="link" 
                         size="sm" 
                         className="ms-2 p-0"
-                        onClick={() => copyToClipboard(paymentMethods.titularCuentaCbu, 'titularCbu')}
+                        onClick={() => copyToClipboard(paymentMethods?.transferencia.titularCuentaCbu, 'titularCbu')}
                     >
                         {copied === 'titularCbu' ? <FaCheck className="text-success" /> : <FaCopy className='text-secondary' />}
                     </Button>
@@ -85,12 +85,12 @@ const Success = () => {
                 <div className="detail-row mb-2 p-2">
                     <span className="fw-bold">CBU:</span>
                     <div className="d-flex align-items-center">
-                    <span className="ms-2">{paymentMethods.cbu}</span>
+                    <span className="ms-2">{paymentMethods?.transferencia.cbu}</span>
                     <Button 
                         variant="link" 
                         size="sm" 
                         className="ms-2 p-0"
-                        onClick={() => copyToClipboard(paymentMethods.cbu, 'cbu')}
+                        onClick={() => copyToClipboard(paymentMethods?.transferencia.cbu, 'cbu')}
                     >
                         {copied === 'cbu' ? <FaCheck className="text-success" /> : <FaCopy className='text-secondary' />}
                     </Button>
@@ -100,12 +100,12 @@ const Success = () => {
                 <div className="detail-row p-2">
                     <span className="fw-bold">Alias:</span>
                     <div className="d-flex align-items-center">
-                    <span className="ms-2">{paymentMethods.aliasCbu}</span>
+                    <span className="ms-2">{paymentMethods?.transferencia.aliasCbu}</span>
                     <Button 
                         variant="link" 
                         size="sm" 
                         className="ms-2 p-0"
-                        onClick={() => copyToClipboard(paymentMethods.aliasCbu, 'aliasCbu')}
+                        onClick={() => copyToClipboard(paymentMethods?.transferencia.aliasCbu, 'aliasCbu')}
                     >
                         {copied === 'aliasCbu' ? <FaCheck className="text-success" /> : <FaCopy className='text-secondary' />}
                     </Button>
@@ -118,7 +118,7 @@ const Success = () => {
                 <p className="success-message"> 
                     Para realizar el pago con QR al Banco Frances, escanea el siguiente código QR con tu aplicación de banco o billetera digital.
                 </p>
-                <img src="https://pacucostorage.blob.core.windows.net/common/qr-pago-banco-frances.png" alt="" />
+                <img src={paymentMethods?.bancoFrances?.imgQr} alt="" style={{height:'150px', width:'150px'}} />
             </div>;
         }
         else if(formData.paymentMethod === 'Cuenta DNI') {
@@ -153,7 +153,7 @@ const Success = () => {
         else if (formData.paymentMethod === 'Cuenta DNI') {
             return (
                 <p className="success-message"> 
-                    Para poder realizar el pago deberas coordinar con el siguiente numero de Whatsapp: <strong>11 2322-3048 </strong> 
+                    Para poder realizar el pago deberas coordinar con el siguiente numero de Whatsapp: <strong>11 6360-1162 </strong> 
                     indicando el codigo de operacion: <strong>#{formData.operationCode}</strong>
                 </p>
             );
@@ -197,7 +197,7 @@ const Success = () => {
                     target="_blank"
                     rel="noopener noreferrer">
                     <i className="fa fa-whatsapp" aria-hidden="true" style={{marginRight:'5px'}}></i>
-                    Ir al chat: 11 2322-3048
+                    Ir al chat: {formData.paymentMethod === 'Cuenta DNI' ? '11 6360-1162' : '11 2322-3048'}
                 </a>
                 <p className="success-message">
                 Te recordamos que el tiempo de demora en caso de haber comprado un guardapolvo personalizado es entre 30 a 40 dias. En caso de ser stock, la entrega es inmediata.

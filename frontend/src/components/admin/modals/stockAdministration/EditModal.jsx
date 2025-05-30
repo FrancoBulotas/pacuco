@@ -39,6 +39,7 @@ const EditModal = (props) => {
         type: '', 
         category: '', 
         discountPrice: '', 
+        discountListedPrice: '', 
         amount: '', 
         size: '', 
         description: { 
@@ -114,6 +115,13 @@ const EditModal = (props) => {
             Swal.fire({ title:'Ingresa un precio valido!', icon:'error', confirmButtonText: 'Aceptar', confirmButtonColor: '#000', })
             return
         }
+         if(!isValidNumber(formData.discountListedPrice) && formData.discountListedPrice !== ''){
+            Swal.fire({ title:'Ingresa un precio de descuento valido!', icon:'error', confirmButtonText: 'Aceptar', confirmButtonColor: '#000', })
+            return
+        }
+
+        const filtredPrice = formData.listedPrice.replace('.', '').replace(',', ''); 
+        const filtredDiscountListedPrice = formData.discountListedPrice.replace('.', '').replace(',', ''); 
 
         const newObject = {
             id: props.item.id,
@@ -123,9 +131,10 @@ const EditModal = (props) => {
             img2 : formData.img2 !== '' ? `${URL_GUARDAPOLVOS_IMAGES_AZURE}${devMode}/${uniqueSuffix}-${formData.img2}` : props.item.img2,
             img3 : formData.img3 !== '' ? `${URL_GUARDAPOLVOS_IMAGES_AZURE}${devMode}/${uniqueSuffix}-${formData.img3}` : props.item.img3,
             name : formData.name !== '' ? formData.name : props.item.name,
-            price : formData.listedPrice !== '' ? Number(formData.listedPrice) : Number(props.item.listedPrice),
-            listedPrice : formData.listedPrice !== '' ? Number(formData.listedPrice) : Number(props.item.listedPrice),
-            discountPrice : formData.discountPrice !== '' ? formData.discountPrice : props.item.discountPrice,
+            price : filtredPrice !== '' ? Number(filtredPrice) : Number(props.item.listedPrice),
+            listedPrice : filtredPrice !== '' ? Number(filtredPrice) : Number(props.item.listedPrice),
+            discountPrice : filtredDiscountListedPrice !== '' ? Number(filtredDiscountListedPrice) : Number(props.item.discountListedPrice),
+            discountListedPrice : filtredDiscountListedPrice !== '' ? Number(filtredDiscountListedPrice) : Number(props.item.discountListedPrice),
             amount : formData.amount !== '' ? formData.amount : props.item.amount,
             size : formData.size !== '' ? formData.size : props.item.size,
             type : formData.type !== '' ? formData.type : props.item.type,
@@ -190,6 +199,7 @@ const EditModal = (props) => {
                                 type: '', 
                                 category: '', 
                                 discountPrice: '', 
+                                discountListedPrice: '', 
                                 amount: '', 
                                 size: '', 
                                 description: { 
@@ -292,12 +302,12 @@ const EditModal = (props) => {
                     </Form.Group>
                     <div style={styleContainer}>
                         <Form.Group className="mb-3" controlId="controlInput2" style={{width:'50%'}}>
-                            <Form.Label><strong>Precio actual:</strong> $ {props.item.listedPrice}</Form.Label>
+                            <Form.Label><strong>Precio de lista actual:</strong> $ {props.item.listedPrice}</Form.Label>
                             <Form.Control type="text" name="listedPrice" placeholder="nuevo precio de lista" value={formData.listedPrice} onChange={handleInputChange} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="controlInput3" style={{width:'50%'}}>
                             <div style={{display:'flex', justifyContent:'space-between'}}>
-                                <Form.Label><strong>Descuento actual:</strong> $ {props.item.discountPrice || props.item.discountPrice > 0 ? props.item.discountPrice : '0'}</Form.Label>
+                                <Form.Label><strong>Descuento actual:</strong> $ {props.item.discountListedPrice || props.item.discountListedPrice > 0 ? props.item.discountListedPrice : '0'}</Form.Label>
                                 <OverlayTrigger
                                     placement="right"
                                     delay={{ show: 250, hide: 400 }}
@@ -306,7 +316,7 @@ const EditModal = (props) => {
                                     <div><i className="bi bi-info-circle" style={{marginRight:'auto', width:'100%'}}></i></div>
                                 </OverlayTrigger>
                             </div>
-                            <Form.Control type="text" name="discountPrice" placeholder="nuevo descuento" value={formData.discountPrice} onChange={handleInputChange} />
+                            <Form.Control type="text" name="discountListedPrice" placeholder="nuevo descuento" value={formData.discountListedPrice} onChange={handleInputChange} />
                         </Form.Group>
                     </div>
                     {props.item.table === 'stock' 

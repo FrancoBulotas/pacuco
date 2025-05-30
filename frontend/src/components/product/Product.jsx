@@ -107,24 +107,12 @@ const Product = ({ navigateTo, product }) => {
                             </div>
                             <div className="col-md-6" >
                                 <h1 className="display-5" style={{fontSize:'35px'}}>{product.name}</h1>
-                                {/* <div className="fs-5 mb-4 mt-4" style={{maxHeight:'70px'}}>
-                                    {validateIfItemHasDiscount(product)
-                                        ?   <>
-                                                <div>
-                                                    <span className="text-decoration-line-through" style={{marginRight:'8px', color:'gray'}}>$ {formatNumber(product.price)}</span>
-                                                    <span className='porcentajeProductoOff'>{checkDiscountPorcentage(product)}% OFF</span>        
-                                                </div>
-                                                <p className='fw-bolder' style={{marginTop:'10px'}}>$ {formatNumber(product.discountPrice)}</p> 
-                                            </>
-                                        : <span className='fw-bolder'>$ {formatNumber(product.price)}</span>
-                                    }
-                                </div> */}
                                 <div className="" style={{maxHeight:'70px', margin: '10px 0px'}}>
                                     {
                                         validateIfItemHasDiscount(product) ? (
                                             <>
                                                 <p style={{ margin: '0px'}}>
-                                                    <strong style={{fontSize: '26px'}}>$ {formatNumber(product.discountPrice)} </strong>
+                                                    <strong style={{fontSize: '26px'}}>$ {formatNumber(product.discountListedPrice)} </strong>
                                                 </p>
                                                 <div>
                                                     <span style={{ color: 'gray', marginRight: '8px', textDecoration: 'line-through' }}>
@@ -157,7 +145,6 @@ const Product = ({ navigateTo, product }) => {
                                     <img style={{width:'30px', height:'30px'}} src='https://pacucostorage.blob.core.windows.net/common/bill-image.png' alt='medio de pago efectivo'></img>
                                 </div>
                                 <div style={{marginBottom:'20px', fontSize:'12px', color:'green'}}></div>
-                                {/* <div style={{marginBottom:'20px', fontSize:'12px', color:'green'}}>PAGANDO CON CUENTA DNI DE LUNES A VIERNES 20% DE DESCUENTO</div> */}
 
                                 <div className="d-flex">
                                     <div className='d-flex align-items-center' style={{padding:'10px', border:'1px solid #000', borderRadius:'6px', marginRight:'5px'}}>
