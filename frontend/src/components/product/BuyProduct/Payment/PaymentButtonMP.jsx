@@ -5,6 +5,7 @@ import axios from 'axios';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from '../../../../reducers/cartReducer'
+import { checkWhichPriceToShow } from '../../../common/functions';
 
 // Inicializa Mercado Pago con tu clave pública ALDI
 initMercadoPago('APP_USR-30e5d751-8056-4181-ad59-423b5d0813df', { locale: 'es-AR' }); 
@@ -29,7 +30,7 @@ const PaymentButtonMP = ({ shippingPrice }) => {
             const response = await axios.post('/api/mp/create-preference', {
                 items: cart.map((item) => ({
                     name: item.name,
-                    price: item.discountPrice || item.discountPrice > 0 ? item.discountPrice : item.price,
+                    price: checkWhichPriceToShow(item),
                     quantity: item.amountToBuy,
                 })),
                 backUrl: "https://pacuco.loca.lt", 

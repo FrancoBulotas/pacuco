@@ -7,7 +7,6 @@ mercadopagoRouter.post('/create-preference', async (req, res) => {
     try {
         const { items, backUrl, shippingPrice } = req.body;
 
-
         // Crear los ítems del carrito
         const cartItems = items.map((item) => ({
             title: item.name,

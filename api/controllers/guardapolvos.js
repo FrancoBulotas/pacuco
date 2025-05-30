@@ -76,11 +76,6 @@ guardapolvosRouter.put('/:id', async (request, response) => {
     const newPrice = roundNumber(price * 0.94);
     const newDiscountPrice = roundNumber(discountPrice * 0.94);
 
-    console.log('newDiscountPrice', newDiscountPrice);
-
-    console.log({ name, type, amount, amountToBuy, size, price: newPrice, listedPrice, discountPrice: newDiscountPrice, discountListedPrice, 
-        img, img2, img3, table, description, category, show })
-
     response.json(await Guardapolvo.findByIdAndUpdate(request.params.id,
     { name, type, amount, amountToBuy, size, price: newPrice, listedPrice, discountPrice: newDiscountPrice, discountListedPrice, 
         img, img2, img3, table, description, category, show }, 
