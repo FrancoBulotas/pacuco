@@ -1,12 +1,4 @@
 
-import Col from 'react-bootstrap/Col'
-import Nav from 'react-bootstrap/Nav'
-import Row from 'react-bootstrap/Row'
-import Tab from 'react-bootstrap/Tab'
-import Form from 'react-bootstrap/Form'
-import FloatingLabel from 'react-bootstrap/FloatingLabel'
-import { URL_COMMON_IMAGES_AZURE } from '../common/consts'
-
 import { setToken } from '../../services/token'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
@@ -18,11 +10,11 @@ import imageService from '../../services/imageUpload'
 import Swal from 'sweetalert2'
 import { CreditCard, Building2, FileText, MapPin, Truck, Check } from "lucide-react"
 
-import DataForMP from './payment/dataForMP';
-import DataForTransferencia from './payment/DataForTransferencia';
-import DataForBancoFrances from './payment/DataForBancoFrances';
-import DataForSucursal from './payment/DataForSucursal';
-import DataForDomicilio from './payment/DataForDomicilio';
+import DataForMP from './Payment/dataForMP';
+import DataForTransferencia from './Payment/DataForTransferencia';
+import DataForBancoFrances from './Payment/DataForBancoFrances';
+import DataForSucursal from './Payment/DataForSucursal';
+import DataForDomicilio from './Payment/DataForDomicilio';
 
 import '../../assets/styles/admin/paymentAdministration.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -38,7 +30,8 @@ const PaymentAdministration = () => {
         transferencia: {
             cbu: '',
             aliasCbu: '',
-            titularCuentaCbu: ''
+            titularCuentaCbu: '',
+            savedProfiles: ''
         },
         mercadoPago: {
             currentUser: '',
@@ -50,99 +43,6 @@ const PaymentAdministration = () => {
         priceShipmentSucursal: '',
         priceShipmentDomicilio: '',
     })
-
-    const handleInputChange = (name, value) => {
-        setNewValues({
-            ...newValues,
-            [name]: value,
-        })
-    }
-
-    const handleFileChange = (name, value) => {
-        // setNewValues({...newValues, image: e.target.files[0]})
-        setNewValues({
-            ...newValues,
-            [name]: value,
-        })
-    }
-
-    console.log(paymentMethodsFromState);
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()  
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-
-        const data = {
-            transferencia: {
-                cbu: newValues.transferencia.cbu !== '' ?  newValues.transferencia.cbu :  paymentMethodsFromState.transferencia.cbu,
-                aliasCbu: newValues.transferencia.aliasCbu !== '' ?  newValues.transferencia.aliasCbu :  paymentMethodsFromState.transferencia.aliasCbu,
-                titularCuentaCbu: newValues.transferencia.titularCuentaCbu !== '' ?  newValues.transferencia.titularCuentaCbu :  paymentMethodsFromState.transferencia.titularCuentaCbu
-            },
-            mercadoPago: {
-                currentUser: newValues.mercadoPago.currentUser !== '' ?  newValues.mercadoPago.currentUser :  paymentMethodsFromState.mercadoPago.currentUser,
-                currentUserPublicKey: newValues.mercadoPago.currentUserPublicKey !== '' ?  newValues.mercadoPago.currentUserPublicKey :  paymentMethodsFromState.mercadoPago.currentUserPublicKey,
-            },
-            bancoFrances: {
-                imgQr: newValues.bancoFrances.imgQr !== '' ?  `https://pacucostorage.blob.core.windows.net/guardapolvos-dev/${uniqueSuffix}-${newValues.bancoFrances.imgQr.name}` :  paymentMethodsFromState.bancoFrances.imgQr,
-            },
-            priceShipmentSucursal: newValues.priceShipmentSucursal !== '' ?  newValues.priceShipmentSucursal :  paymentMethodsFromState.priceShipmentSucursal,
-            priceShipmentDomicilio: newValues.priceShipmentDomicilio !== '' ?  newValues.priceShipmentDomicilio :  paymentMethodsFromState.priceShipmentDomicilio,
-        }
-
-        let imageFile = { image: newValues.bancoFrances.imgQr !== null ? newValues.bancoFrances.imgQr : false }
-              
-        try {
-            const token = setToken(userLogged.token)
-            if (imageFile.image !== false) {
-                const formData = new FormData();
-                formData.append('images', imageFile.image)
-                formData.append('blobName', uniqueSuffix)
-                formData.append('containerName', 'common')
-
-                try { 
-                    await imageService.upload(formData, token) 
-                    reloadPage(1)                    
-                }
-                catch (error) {
-                    console.log(error)
-                    if (error.response.data.error === 'token expired') { 
-                        Swal.fire({title:'Se cerro tu sesion!', text:'Deberas iniciar sesion nuevamente', icon:'error', confirmButtonText: 'Aceptar', confirmButtonColor: '#000',})
-                        .then((result) => {
-                            if(result.isConfirmed){ navigate('/login') }
-                        })
-                    } else {
-                        Swal.fire({title:'Error al subir imagen', text:'Intentalo de nuevo mas tarde!', icon:'error', confirmButtonText: 'Aceptar', confirmButtonColor: '#000',})
-                        .then(() => { return })
-                    }
-                }
-            }   
-            imageFile = false;
-
-            dispatch(setNewPaymentMethods(paymentMethodsFromState._id || paymentMethodsFromState.id, data));
-            
-            console.log(data);
-
-            setNewValues({
-                transferencia: {
-                    cbu: '',
-                    aliasCbu: '',
-                    titularCuentaCbu: ''
-                },
-                mercadoPago: {
-                    currentUser: '',
-                    currentUserPublicKey: ''
-                },
-                bancoFrances: {
-                    imgQr: ''
-                },
-                priceShipmentSucursal: '',
-                priceShipmentDomicilio: '',
-            });
-            e.stopPropagation()
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
     const paymentMethods = [
         // {
@@ -177,6 +77,89 @@ const PaymentAdministration = () => {
         },
     ]
 
+    const handleInputChange = (name, value) => {
+        setNewValues({
+            ...newValues,
+            [name]: value,
+        })
+    }
+
+    const handleSubmit = async (e) => {
+        e?.preventDefault()  
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+
+        const data = {
+            transferencia: {
+                cbu: newValues.transferencia.cbu !== '' ?  newValues.transferencia.cbu :  paymentMethodsFromState.transferencia.cbu,
+                aliasCbu: newValues.transferencia.aliasCbu !== '' ?  newValues.transferencia.aliasCbu :  paymentMethodsFromState.transferencia.aliasCbu,
+                titularCuentaCbu: newValues.transferencia.titularCuentaCbu !== '' ?  newValues.transferencia.titularCuentaCbu :  paymentMethodsFromState.transferencia.titularCuentaCbu,
+                savedProfiles: newValues.transferencia.savedProfiles !== '' ?  newValues.transferencia.savedProfiles :  paymentMethodsFromState.transferencia.savedProfiles
+
+            },
+            mercadoPago: {
+                currentUser: newValues.mercadoPago.currentUser !== '' ?  newValues.mercadoPago.currentUser :  paymentMethodsFromState.mercadoPago.currentUser,
+                currentUserPublicKey: newValues.mercadoPago.currentUserPublicKey !== '' ?  newValues.mercadoPago.currentUserPublicKey :  paymentMethodsFromState.mercadoPago.currentUserPublicKey,
+            },
+            bancoFrances: {
+                imgQr: newValues.bancoFrances.imgQr !== '' ?  `https://pacucostorage.blob.core.windows.net/guardapolvos-dev/${uniqueSuffix}-${newValues.bancoFrances.imgQr.name}` :  paymentMethodsFromState.bancoFrances.imgQr,
+            },
+            priceShipmentSucursal: newValues.priceShipmentSucursal !== '' ?  newValues.priceShipmentSucursal :  paymentMethodsFromState.priceShipmentSucursal,
+            priceShipmentDomicilio: newValues.priceShipmentDomicilio !== '' ?  newValues.priceShipmentDomicilio :  paymentMethodsFromState.priceShipmentDomicilio,
+        }
+
+        let imageFile = { image: newValues.bancoFrances.imgQr !== "" ? newValues.bancoFrances.imgQr : false }
+             
+        console.log(data)
+
+        try {
+            const token = setToken(userLogged.token);
+            if (imageFile.image !== false) {
+                const formData = new FormData();
+                formData.append('images', imageFile.image);
+                formData.append('blobName', uniqueSuffix);
+                formData.append('containerName', 'common');
+
+                try { 
+                    await imageService.upload(formData, token);
+                }
+                catch (error) {
+                    console.log(error)
+                    if (error.response.data.error === 'token expired') { 
+                        Swal.fire({title:'Se cerro tu sesion!', text:'Deberas iniciar sesion nuevamente', icon:'error', confirmButtonText: 'Aceptar', confirmButtonColor: '#000',})
+                        .then((result) => {
+                            if(result.isConfirmed){ navigate('/login') }
+                        })
+                    } else {
+                        Swal.fire({title:'Error al subir imagen', text:'Intentalo de nuevo mas tarde!', icon:'error', confirmButtonText: 'Aceptar', confirmButtonColor: '#000',})
+                        .then(() => { return })
+                    }
+                }
+            }   
+            dispatch(setNewPaymentMethods(paymentMethodsFromState._id || paymentMethodsFromState.id, data));
+            setNewValues({
+                transferencia: {
+                    cbu: '',
+                    aliasCbu: '',
+                    titularCuentaCbu: '',
+                    savedProfiles: ''
+                },
+                mercadoPago: {
+                    currentUser: '',
+                    currentUserPublicKey: ''
+                },
+                bancoFrances: {
+                    imgQr: ''
+                },
+                priceShipmentSucursal: '',
+                priceShipmentDomicilio: '',
+            });
+            e?.stopPropagation()
+        } catch (error) {
+            console.log(error);
+            Swal.fire({title:'Error al modificar los datos.', text:'Intentalo de nuevo mas tarde!', icon:'error', confirmButtonText: 'Aceptar', confirmButtonColor: '#000',}).then(() => { return })
+        }
+    }
+
     const checkWhichPaymentMethodToShow = () => {
         switch (selectedMethod) {
             case "mercado-pago":
@@ -184,7 +167,7 @@ const PaymentAdministration = () => {
             case "transferencia-bancaria":
                 return <DataForTransferencia formData={newValues} currentData={paymentMethodsFromState} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
             case "banco-frances":
-                return <DataForBancoFrances formData={newValues} currentData={paymentMethodsFromState} handleFileChange={handleFileChange} handleSubmit={handleSubmit} />
+                return <DataForBancoFrances formData={newValues} currentData={paymentMethodsFromState} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
             case "envio-sucursal":
                 return <DataForSucursal formData={newValues} currentData={paymentMethodsFromState} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
             case "envio-domicilio":

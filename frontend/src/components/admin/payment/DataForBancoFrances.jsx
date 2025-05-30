@@ -1,7 +1,7 @@
 
 import Form from 'react-bootstrap/Form'
 
-const DataForBancoFrances = ({ formData, currentData, handleFileChange, handleSubmit }) => {
+const DataForBancoFrances = ({ formData, currentData, handleInputChange, handleSubmit }) => {
 
     return (
             <div className="lg:col-span-2 space-y-6">
@@ -23,7 +23,7 @@ const DataForBancoFrances = ({ formData, currentData, handleFileChange, handleSu
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
                             <label className="text-sm font-medium text-gray-700 mb-2 block">Cargar nuevo QR</label>
-                            <Form.Control type="file"name='image' onChange={(e) => handleFileChange("bancoFrances", { ...formData.bancoFrances, imgQr: e.target.files[0] })} style={{marginBottom:'10px'}} />                            
+                            <Form.Control type="file"name='image' onChange={(e) => handleInputChange("bancoFrances", { ...formData.bancoFrances, imgQr: e.target.files[0] })} style={{marginBottom:'10px'}} />                            
                         </div>
                     </div>
 

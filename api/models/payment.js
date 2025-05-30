@@ -5,7 +5,8 @@ const paymentSchema = new mongoose.Schema({
     transferencia: {
         cbu: String,
         aliasCbu: String,
-        titularCuentaCbu: String
+        titularCuentaCbu: String,
+        savedProfiles: Object
     },
     mercadoPago: {
         currentUser: String,
