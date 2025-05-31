@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import ScrollToTop from '../common/ScrollToTop.js'
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import Swal from 'sweetalert2';
-import { formatNumber } from './common/functions.js'
+import { formatNumber, roundNumber } from './common/functions.js'
 import { validateIfItemHasDiscount, checkDiscountPorcentage} from '../common/functions.js'
 import ImageComponent from '../common/Placeholders/ImageComponent.jsx'
 import CheckIfIsStockOrCustomizable from './common/CheckIfIsStockOrCustomizable.jsx'
@@ -37,7 +37,7 @@ const Product = ({ navigateTo, product }) => {
         img.onload = () => {
             setImageLoaded(true)
         } 
-    }, [])
+    }, [])    
 
     const saveItem = (prod) => {
         const guardapolvoWithChoosenSize = {...prod, size: prod.table === 'stock' ? prod.size : choosenSize}
@@ -107,26 +107,44 @@ const Product = ({ navigateTo, product }) => {
                             </div>
                             <div className="col-md-6" >
                                 <h1 className="display-5" style={{fontSize:'35px'}}>{product.name}</h1>
-                                <div className="fs-5 mb-4 mt-4" style={{maxHeight:'70px'}}>
-                                    {validateIfItemHasDiscount(product)
-                                        ?   <>
+                                <div className="" style={{maxHeight:'70px', margin: '10px 0px'}}>
+                                    {
+                                        validateIfItemHasDiscount(product) ? (
+                                            <>
+                                                <p style={{ margin: '0px'}}>
+                                                    <strong style={{fontSize: '26px'}}>$ {formatNumber(product.discountListedPrice)} </strong>
+                                                </p>
                                                 <div>
-                                                    <span className="text-decoration-line-through" style={{marginRight:'8px', color:'gray'}}>$ {formatNumber(product.price)}</span>
-                                                    <span className='porcentajeProductoOff'>{checkDiscountPorcentage(product)}% OFF</span>        
+                                                    <span style={{ color: 'gray', marginRight: '8px', textDecoration: 'line-through' }}>
+                                                        Precio de lista: $ {formatNumber(product.listedPrice)}
+                                                    </span>
+                                                    <span className='porcentajeProductoOff'>
+                                                        {checkDiscountPorcentage(product)}% OFF
+                                                    </span>
                                                 </div>
-                                                <p className='fw-bolder' style={{marginTop:'10px'}}>$ {formatNumber(product.discountPrice)}</p> 
                                             </>
-                                        : <span className='fw-bolder'>$ {formatNumber(product.price)}</span>
+                                        ) : (
+                                            <>
+                                                <p style={{ margin: '0px'}}>
+                                                    <strong style={{fontSize: '26px'}}>$ {formatNumber(product.listedPrice)} </strong>
+                                                    <span style={{ color: 'gray'}}>precio de lista</span>
+                                                </p>
+                                                <p style={{ margin: '0px'}}>
+                                                    <span style={{color: 'gray'}}>$ {formatNumber(product.price)} </span>
+                                                    <span style={{ color: 'gray'}}>con transferencia o efectivo</span>
+                                                </p>
+                                            </>
+                                        )
                                     }
                                 </div>
                                 <span>Medios de pago</span>
-                                <div >
+                                <div className="d-flex justify-content-start align-items-center" style={{gap:'5px'}}>
                                     <img style={{width:'45px', height:'25px'}} src='https://pacucostorage.blob.core.windows.net/common/CUENTA-DNI.png' alt='medio de pago cuenta DNI'></img>
+                                    <img style={{width:'35px', height:'25px'}} src='https://pacucostorage.blob.core.windows.net/common/logo-banco-frances.webp' alt='medio de pago banco frances'></img>
                                     <img style={{width:'50px', height:'30px'}} src='https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/new_logos_payment/mercadopago@2x.png' alt='medio de pago mercado pago'></img>
                                     <img style={{width:'30px', height:'30px'}} src='https://pacucostorage.blob.core.windows.net/common/bill-image.png' alt='medio de pago efectivo'></img>
                                 </div>
                                 <div style={{marginBottom:'20px', fontSize:'12px', color:'green'}}></div>
-                                {/* <div style={{marginBottom:'20px', fontSize:'12px', color:'green'}}>PAGANDO CON CUENTA DNI DE LUNES A VIERNES 20% DE DESCUENTO</div> */}
 
                                 <div className="d-flex">
                                     <div className='d-flex align-items-center' style={{padding:'10px', border:'1px solid #000', borderRadius:'6px', marginRight:'5px'}}>

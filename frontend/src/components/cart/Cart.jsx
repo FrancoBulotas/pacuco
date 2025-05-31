@@ -2,13 +2,14 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { formatNumber } from '../product/common/functions';
+import { formatNumber, roundNumber } from '../product/common/functions';
 
 import Swal from 'sweetalert2';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { addOneToCart, removeFromCart, removeOneFromCart, setShow, clearCart } from '../../reducers/cartReducer';
 import { IconCart } from '../../assets/icons/icons';
 import CheckIfIsStockOrCustomizable from '../product/common/CheckIfIsStockOrCustomizable.jsx'
+import { checkWhichPriceToShow } from '../common/functions.js';
 
 const Cart = () => {
     const dispatch = useDispatch()
@@ -40,10 +41,8 @@ const Cart = () => {
     }
 
     const totalInCart = () => {
-        let sum = 0
-        // recorremos el carrito, y si existe un prod con descuento se multiplica ese valor, y no el total
-        cart.map(item => sum += ((item.discountPrice || item.discountPrice > 0 ? item.discountPrice : item.price) * item.amountToBuy))
-        return formatNumber(sum)
+        const total = cart.reduce((acc, item) => acc + ((checkWhichPriceToShow(item)) * item.amountToBuy), 0);
+        return formatNumber(total);
     }
 
     const buyProduct = () => {
@@ -77,7 +76,7 @@ const Cart = () => {
                             </div>
                             <div className="detalles-prod-carrito">
                                 <p className="nombre-producto">{item.name}</p>
-                                <p>Precio: $ {item.discountPrice || item.discountPrice > 0 ? formatNumber(item.discountPrice) : formatNumber(item.price)}</p>
+                                <p>Precio: $ {formatNumber(checkWhichPriceToShow(item))}</p>
                                 <p> 
                                     <button onClick={() => deleteOneItem(item)} className="boton-restar-uno">-</button>
                                     <span id="cantidad">{item.amountToBuy}</span>
@@ -90,10 +89,10 @@ const Cart = () => {
                             </div>
                         </div>
                     )}
-                    <p className="precioProducto">Precio total: $ {totalInCart()}</p>
+                    <p className="precioProducto" style={{marginBottom: '10px'}}>Precio total: $ {totalInCart()}</p>
                     <div>
                         <button onClick={() => dispatch(clearCart())} className="btn btn-light" >Vaciar carrito</button>
-                        <button onClick={() => buyProduct()} className="boton-comprar">Finalizar compra</button >
+                        <button onClick={() => buyProduct()} className="btn btn-dark boton-comprar">Finalizar compra</button >
                     </div>
                     <button onClick={() => handleCart()} style={buttonKeepBuying}>Seguir comprando</button>
                 </Offcanvas.Body>

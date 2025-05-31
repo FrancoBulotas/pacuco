@@ -1,3 +1,4 @@
+
 GET http://localhost:8080/api/payments
 
 ###
@@ -5,17 +6,38 @@ POST http://localhost:8080/api/payments HTTP/1.1
 content-type: application/json
 
 ###
-PUT http://localhost:8080/api/payments/66758b2b64c03ef4951806be HTTP/1.1
+PUT http://localhost:8080/api/payments/6685fad08053115930d87b29 HTTP/1.1
 content-type: application/json
 
 {
-    "cvu": "0000003100055807020379",
-    "aliasCvu": "pacuco.guardapolvos",
-    "cbu": ".",
-    "aliasCbu": "pacuco.guardapolvos",
-    "titularCuentaCbu": ".",
-    "titularCuentaCvu": ".",
-    "imgQr": "https://pacucostorage.blob.core.windows.net/common/1724379251192-729125368-IMG-20240623-WA0034.jpg",
-    "priceShipmentSucursal": "4700",
-    "priceShipmentDomicilio": "6300"
+  "priceShipmentSucursal": "5000",
+  "priceShipmentDomicilio": "8000",
+  "bancoFrances": {
+    "imgQr": "https://pacucostorage.blob.core.windows.net/guardapolvos-dev/1748616136456-431255556-qr-pago-banco-frances.png"
+  },
+  "mercadoPago": {
+    "currentUser": "Prueba Juan Arca",
+    "currentUserPublicKey": "ASDF_NSIDF23084093284293084092"
+  },
+  "transferencia": {
+    "cbu": "1289409218309",
+    "aliasCbu": "eppe-pep",
+    "titularCuentaCbu": "juan carlos",
+    "savedProfiles": {
+      "Adry": {
+          "cbu": "1289409218309",
+          "aliasCbu": "eppe.pep",
+          "titularCuentaCbu": "juan carlos" 
+      },
+      "Aldi": {
+          "cbu": "123498371298",
+          "aliasCbu": "lucas.poepoe",
+          "titularCuentaCbu": "Aldana"
+      }
+    }
+  }
 }
+
+###
+PATCH http://localhost:8080/api/payments/clean/6685fad08053115930d87b29 HTTP/1.1
+content-type: application/json

@@ -23,6 +23,7 @@ const CreateModal = (props) => {
     const [formData, setFormData] = useState({
         name: '',
         price: '',
+        listedPrice: '',
         type: '',
         category: '',
         description: { general:'', base:'', detalle:'', vivos:'', bolsillos:'' },
@@ -81,7 +82,7 @@ const CreateModal = (props) => {
         if(formData.name === ''){
             setAlertStatus({display:'block', text:'Ingresar nombre'})
             return
-        } else if(formData.price === ''){
+        } else if(formData.listedPrice === ''){
             setAlertStatus({display:'block', text:'Ingresar precio'})
             return
         } 
@@ -123,8 +124,10 @@ const CreateModal = (props) => {
         newObject.img3 = formData.img3 !== '' ? `${URL_GUARDAPOLVOS_IMAGES_AZURE}${devMode}/${uniqueSuffix}-${formData.img3}` : undefined
         newObject.table = props.table;
         newObject.type = props.type;
+        newObject.price = formData.listedPrice;
         newObject.category = props.category;
         newObject.discountPrice = undefined;
+        newObject.discountListedPrice = undefined;
         newObject.show = true;
 
         const data = new FormData()
@@ -175,6 +178,7 @@ const CreateModal = (props) => {
                             setFormData({
                                 name: '',
                                 price: '',
+                                listedPrice: '',
                                 type: '',
                                 category: '',
                                 description: { general:'', base:'', detalle:'', vivos:'', bolsillos:'' },
@@ -218,8 +222,8 @@ const CreateModal = (props) => {
                         <Form.Control type="text" name="name" placeholder="nuevo nombre" value={formData.name} onChange={handleInputChange} />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="controlInput2">
-                        <Form.Label><strong>Precio</strong></Form.Label>
-                        <Form.Control type="text" name="price" placeholder="nuevo precio" value={formData.price} onChange={handleInputChange} />
+                        <Form.Label><strong>Precio de lista</strong></Form.Label>
+                        <Form.Control type="text" name="listedPrice" placeholder="nuevo precio" value={formData.listedPrice} onChange={handleInputChange} />
                     </Form.Group>
                     {/* <Form.Group className="mb-3" controlId="controlInput3">
                         <Form.Label><strong>Categoria</strong></Form.Label>                        

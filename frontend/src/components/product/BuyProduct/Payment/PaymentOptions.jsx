@@ -1,9 +1,8 @@
 
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import PaymentMethodsAccordion from './PaymentMethodsAccordion';
+import PaymentMethodsAccordion from '../Payment/PaymentMethodsAccordion';
 
 import searchProdsService from '../../../../services/searchProds';
 import guardapolvosService from '../../../../services/guardapolvos';
@@ -11,7 +10,7 @@ import { sendEmailJS } from '../email/SendEmail';
 
 import { Button, Spinner } from 'react-bootstrap';
 
-import { clearCart, setShippingPrice, setFormData, setTotalPrice } from '../../../../reducers/cartReducer'
+import { setFormData } from '../../../../reducers/cartReducer'
 import { setProducts } from '../../../../reducers/guardapolvosReducer'
 
 import '../../../../assets/styles/buyProduct/paymentOptions.scss';
@@ -32,14 +31,13 @@ const PaymentOptions = ({ loading }) => {
     const handleSubmit = async () => {   
         // const resultPhoneValidation = validatePhoneNumber(formData.phone);       
         try {
-          const result = await sendEmailJS(formData, cart, totalPrice + shippingPrice, shippingPrice);
+          const [result, operationCode] = await sendEmailJS(formData, cart, totalPrice + shippingPrice, shippingPrice);
           // const result = await sendWhatsAppService.sendMessage(`549${num}`, createMessage(formData, cart, totalPrice + shippingPrice, shippingPrice));
           if(result) {
-              // dispatch(setFormData({ fullName : '', email: '', dni: '', phone: '', province: '', city: '', address: '', zipCode: '', shipMethod: 'Sucursal', sucursal: '', paymentMethod: '',}));
-              dispatch(setTotalPrice(0));
-              dispatch(setShippingPrice(0));
-              dispatch(clearCart()); 
-
+              dispatch(setFormData({
+                  ...formData,
+                  operationCode: operationCode,
+              }));
               updateProductsFromStock();
               await searchProdsService.clearCache();
 
@@ -101,12 +99,7 @@ const PaymentOptions = ({ loading }) => {
 
     return(
       <div className="payment-section">
-        <PaymentMethodsAccordion 
-          paymentMethods={paymentMethods} 
-          loading={loading} 
-          handleClick={handleClick} 
-        />
-
+        <PaymentMethodsAccordion  />
         <Button
           variant="primary"
           onClick={() => handleClick()}
@@ -115,6 +108,10 @@ const PaymentOptions = ({ loading }) => {
           >
           {loading ? <Spinner animation="border" size="sm" /> : 'Encargar pedido'}
         </Button>
+        <p className='p-details'>
+          Una vez encargado el pedido, te llegara un correo electronico con el detalle del pedido y seras dirigida a sección con el detalle del Pago
+          a realizar segun el metodo de pago seleccionado..
+        </p>
       </div>
     )
   }

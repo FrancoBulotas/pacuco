@@ -50,6 +50,20 @@ export const checkIfImagesAreLoaded = (blurDivs) => {
 }
 
 /**
+ * @param {Object} item producto a evaluar
+ * @returns retorna el precio que se debe mostrar, si tiene descuento se muestra el discountListedPrice, si no tiene se muestra el listedPrice 
+*/
+export const checkWhichPriceToShow = (item) => {
+    if(item.discountListedPrice && item.discountListedPrice > 0){
+        return item.discountListedPrice;
+    } else if(item.listedPrice && item.listedPrice > 0){
+        return item.listedPrice;
+    } else {
+        return 0;
+    }
+}
+
+/**
  * 
  * @param {String} str 
  * @returns true si la string pasada es un numero, false si no lo es
@@ -65,7 +79,7 @@ export const isValidNumber = (str) => {
  * @returns true si el item tiene un descuento aplicado (si es != de undefined, si es > 0 y si es != de '0'), o false si no lo tiene
  */
 export const validateIfItemHasDiscount = (item) => {
-    return item.discountPrice && (item.discountPrice !== "0" || item.discountPrice > 0)
+    return item.discountListedPrice && (item.discountListedPrice !== "0" || item.discountListedPrice > 0)
 }
 
 /**
@@ -74,8 +88,8 @@ export const validateIfItemHasDiscount = (item) => {
  * @returns retorna el % de descuento que se esta aplicando sobre un producto
  */ 
 export const checkDiscountPorcentage = (item) => {
-    const totalPrice = item.price
-    const discountPrice = item.discountPrice
+    const totalPrice = item.listedPrice;
+    const discountPrice = item.discountListedPrice
 
     return Math.floor(100 - ((discountPrice * 100) / totalPrice))
 }
@@ -110,6 +124,8 @@ export const selectType = (queryParams) => {
 }
 
 export function formatNumber(num) {
+    if(!num) return '0';
+
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 

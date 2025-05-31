@@ -11,13 +11,12 @@ export const sendEmailJS = async (formData, cart, totalPrice, shippingPrice) => 
     
     sendPurchaseDataToDB(operationCode, formData, totalPrice, cart)
     const response = await sendEmail(formData, totalPrice, operationCode, cart, shippingPrice)
-    return response
+    return [response, operationCode]
 }
 
 
 const sendEmail = async (formData, totalPrice, operationCode, cart, shippingPrice) => {
     try {
-        // const html = emailTemplateHtml(formData, totalPrice, operationCode, cart)
         const msgToClient = {
             to: formData.email, 
             from: 'compras@pacuco.com.ar',
@@ -41,17 +40,6 @@ const sendEmail = async (formData, totalPrice, operationCode, cart, shippingPric
         return false
     }    
 }
-
-// const createCartForDisplay = (cart) => {
-//     let cartForDisplay = ''
-//     cart.forEach((product) => {
-//         cartForDisplay = cartForDisplay + "- " + product['name'] + 
-//                             " | Cantidad: " + product['amountToBuy'] +
-//                             " | Precio: " + product['price'] + 
-//                             " | Talle: " + product['size'] +"\n\n"
-//     })
-//     return cartForDisplay
-// }
 
 const generateOperationCode = () => {
     const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';

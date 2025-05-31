@@ -32,7 +32,7 @@ const emailToAdmiTemplateHtml = ( formData, totalPrice, operationCode, cart ) =>
                     <p>Cantidad: ${item.amountToBuy}</p>
                     <p>Talle: ${item.size}</p>
                     <p>Tipo: ${item.table === 'stock' ? `Stock` : 'Pedido'}</p>
-                    <p>Valor unidad: $ ${item.price}</p>
+                    <p>Valor unidad: $ ${item.discountPrice && (item.discountPrice !== "0" || item.discountPrice > 0) ? item.discountPrice : item.price}</p>
                 </div>
                 </div>
                 `

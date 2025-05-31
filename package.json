@@ -1,0 +1,17 @@
+{
+  "name": "pacuco",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run dev:local --prefix ./frontend\" \"npm run dev --prefix ./api\"",
+    "dev:prod": "concurrently \"npm run dev:local --prefix ./frontend\" \"npm start --prefix ./api\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^1.5.0",
+    "concurrently": "^8.2.2"
+  }
+}

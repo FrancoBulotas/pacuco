@@ -1,10 +1,10 @@
 
 ###
-GET http://localhost:8080/api/products?category=guardapolvo&type=nivel_inicial
+GET http://localhost:8080/api/products?category=guardapolvo
 ###
 GET http://localhost:8080/api/products/guardapolvos/66c6248b94fcdcb275cfe304
 ###
-GET http://localhost:8080/api/products?type=cartucheras
+GET http://localhost:5173/api/products?id=68387e212126558b5189665d
 
 ###
 POST http://localhost:8080/api/products/clearCache
@@ -48,8 +48,16 @@ content-type: application/json
 }
 
 ###
-POST http://localhost:8080/api/products/guardapolvos/addTypeField HTTP/1.1
+POST http://localhost:8080/api/products/guardapolvos/updateField HTTP/1.1
 content-type: application/json
+
+###
+POST http://localhost:8080/api/products/guardapolvos/deleteField HTTP/1.1
+content-type: application/json
+
+{
+  "field": "listedPrice"
+}
 
 ###
 POST http://localhost:8080/api/products/guardapolvos/changePriceByPorcentage HTTP/1.1

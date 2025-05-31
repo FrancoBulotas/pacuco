@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { formatNumber } from '../product/common/functions';
+import { formatNumber, roundNumber } from '../product/common/functions';
 import { validateIfItemHasDiscount, checkDiscountPorcentage } from '../common/functions';
 import ImageComponent from '../common/Placeholders/ImageComponent';
 import CheckIfIsStockOrCustomizable from '../product/common/CheckIfIsStockOrCustomizable.jsx';
@@ -78,13 +78,13 @@ const CarouselProd = ({ title, prods }) => {
                     {validateIfItemHasDiscount(item) ? (
                       <>
                         <div className="price-container">
-                          <span className="original-price">$ {formatNumber(item.price)}</span>
+                          <span className="original-price">$ {formatNumber(item.listedPrice)}</span>
                           <span className="discount-badge">{checkDiscountPorcentage(item)}% OFF</span>
                         </div>
-                        <span className="final-price">$ {formatNumber(item.discountPrice)}</span>
+                        <span className="final-price">$ {formatNumber(item.discountListedPrice)}</span>
                       </>
                     ) : (
-                      <span className="final-price">$ {formatNumber(item.price)}</span>
+                      <span className="final-price">$ {formatNumber(item.listedPrice)}</span>
                     )}
                   </div>
                 </div>

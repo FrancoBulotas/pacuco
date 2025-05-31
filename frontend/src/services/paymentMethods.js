@@ -15,7 +15,6 @@ const update = async (id, content) => {
 
 const clearCache = async () => {
   const response = await api.post(baseUrl + '/clearCache');
-  console.log(response);
   return response;
 }
 

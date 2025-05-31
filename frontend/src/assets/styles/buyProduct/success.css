@@ -71,6 +71,65 @@
     background-color: #4b4b4b; /* Azul más oscuro al pasar el cursor */
   }
   
+  .cart-items-success {
+    margin: 20px 0;
+    /* border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd; */
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+  }
+  .cart-item-success {
+    display: flex;
+    margin: 15px 0 ;
+    
+  }
+  .cart-item-image-success {
+
+    height: 100%;
+  }
+
+  .cart-item-image-success {
+    width: 60px; 
+    height: 60px;     
+  }
+
+  .cart-item-details-success {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea a la izquierda */
+    
+  }
+  .cart-item-info-success{
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* Centra verticalmente */
+    align-items: flex-start; /* Alinea a la izquierda */
+    gap: 15px; /* Espacio entre los elementos */
+  }
+
+  .cart-item-info-p-success {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+  }
+
+  .cart-item-info-p-success p {    
+    margin: 0;
+  }
+  
+
+  .total-price-success {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 16px;
+  }
+  .total-price-success p {
+    margin: 0;
+  }
+
   /* Media Query para Pantallas Pequeñas */
   @media (max-width: 768px) {
     .success-title {

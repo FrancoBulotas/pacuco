@@ -10,7 +10,7 @@ import { checkStock } from './checkStock'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import { Form, Col, Dropdown, Alert, Button } from 'react-bootstrap'
 
-import PaymentOptions from './Payment/PaymentOptions'
+import PaymentOptions from './Payment/PaymentOptions';
 
 import { formatNumber, createMessage, validatePhoneNumber } from '../common/functions'
 import Swal from 'sweetalert2'
@@ -18,6 +18,7 @@ import Swal from 'sweetalert2'
 import '../../../assets/styles/buyProduct/buyProductForm.css'
 import '../../../assets/styles/buyProduct/buyProductForm.scss'
 import '../../../assets/styles/buyProduct/multiStepCheckout.css'
+import { checkWhichPriceToShow } from '../../common/functions'
 
 
 const BuyProductForm = () => {
@@ -42,6 +43,8 @@ const BuyProductForm = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    console.log(formData);
+    
     useEffect(() => {
         // para poner el precio del envio a sucursal ya que es el default
         if(shippingPrice === 0 && shippingOption === 'Sucursal'){
@@ -59,10 +62,9 @@ const BuyProductForm = () => {
                 navigate('/')
             }, 2000)
         }
-
-        let sum = 0
-        cart.map(item => sum += ((item.discountPrice || item.discountPrice > 0 ? item.discountPrice : item.price) * item.amountToBuy))
-        dispatch(setTotalPrice(sum));
+        
+        const totalOnCart = cart.reduce((acc, item) =>  acc +  ((checkWhichPriceToShow(item)) * item.amountToBuy), 0);
+        dispatch(setTotalPrice(totalOnCart));
     }, [cart])
 
     useEffect(() => {
@@ -202,13 +204,19 @@ const BuyProductForm = () => {
                     <img src={item.img} alt={item.name} className="cart-item-image" onClick={() => navigate(`/products?id=${item.id}`)}/>
                     <div className="cart-item-details">
                         <h3>{item.name}</h3>
-                        <p>Precio: $ {formatNumber(item.discountPrice > 0 ? item.discountPrice : item.price)}</p>
+                        <p>Precio: $ {formatNumber(checkWhichPriceToShow(item))}</p>
                         <p>Cantidad: {item.amountToBuy}</p>
                         <p>Talle: {item.size}</p>
-                        <p>Subtotal: $ {formatNumber((item.discountPrice > 0 ? item.discountPrice : item.price) * item.amountToBuy)}</p>
+                        <p>Subtotal: $ {formatNumber((checkWhichPriceToShow(item)) * item.amountToBuy)}</p>
                     </div>
                 </div>
             ))}
+        </div>
+        <div className="cart-summary">
+            <div className="cart-summary-item total" style={{border: 'none'}}>
+                <span>Total:</span>
+                <span>$ {formatNumber((totalPrice))}</span>
+            </div>
         </div>
         <div className="step-navigation">
             <Button variant="secondary" onClick={() => navigate('/products?category=')}>
@@ -362,7 +370,7 @@ const BuyProductForm = () => {
                     </div>
                     <div className="cart-summary-item total">
                         <span>Total:</span>
-                        <span>$ {formatNumber(totalPrice + shippingPrice)}</span>
+                        <span>$ {formatNumber((totalPrice + shippingPrice))}</span>
                     </div>
                 </div>
 

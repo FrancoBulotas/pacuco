@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom'
-import { formatNumber } from './common/functions.js'
+import { formatNumber, roundNumber } from './common/functions.js'
 import HtmlForNoMatches from './common/HtmlForNoMatches.jsx'
 import { validateIfItemHasDiscount, checkDiscountPorcentage } from '../common/functions.js'
 import ImageComponent  from '../common/Placeholders/ImageComponent.jsx'
@@ -35,12 +35,12 @@ export const LoadProducts = ({ products }) => {
                                     {validateIfItemHasDiscount(prod)
                                         ?   <>
                                                 <div>
-                                                    <span className="text-decoration-line-through" style={{marginRight:'8px', color:'gray'}}>$ {formatNumber(prod.price)}</span>
+                                                    <span className="text-decoration-line-through" style={{marginRight:'8px', color:'gray'}}>$ {formatNumber(prod.listedPrice)}</span>
                                                     <span className='porcentajeProductoOff'>{checkDiscountPorcentage(prod)}% OFF</span>        
                                                 </div>
-                                                <span className="precioProducto">${formatNumber(prod.discountPrice)}</span> 
+                                                <span className="precioProducto">$ {formatNumber(prod.discountListedPrice)}</span> 
                                             </>
-                                        : <p className="precioProducto">$ {formatNumber(prod.price)}</p>
+                                        : <p className="precioProducto">$ {formatNumber(prod.listedPrice)}</p>
                                     }
                                 </div>
                                 <div>

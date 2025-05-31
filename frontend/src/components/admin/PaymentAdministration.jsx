@@ -1,21 +1,19 @@
 
-import Col from 'react-bootstrap/Col'
-import Nav from 'react-bootstrap/Nav'
-import Row from 'react-bootstrap/Row'
-import Tab from 'react-bootstrap/Tab'
-import Form from 'react-bootstrap/Form'
-import FloatingLabel from 'react-bootstrap/FloatingLabel'
-import { URL_COMMON_IMAGES_AZURE } from '../common/consts'
-
 import { setToken } from '../../services/token'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { reloadPage } from './common/commonFunctions'
 import { setNewPaymentMethods } from '../../reducers/paymentMethodsReducer'
 
 import imageService from '../../services/imageUpload'
 import Swal from 'sweetalert2'
+import { CreditCard, Building2, FileText, MapPin, Truck, Check } from "lucide-react"
+
+import DataForMP from './payment/DataForMP';
+import DataForTransferencia from './payment/DataForTransferencia';
+import DataForBancoFrances from './payment/DataForBancoFrances';
+import DataForSucursal from './payment/DataForSucursal';
+import DataForDomicilio from './payment/DataForDomicilio';
 
 import '../../assets/styles/admin/paymentAdministration.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -24,61 +22,102 @@ import '../../assets/styles/admin/paymentAdministration.scss'
 const PaymentAdministration = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const paymentMethods = useSelector(state => state.paymentMethods) 
-    const userLogged = useSelector(state => state.login)
+    const paymentMethodsFromState = useSelector(state => state.paymentMethods) 
+    const userLogged = useSelector(state => state.login);
+    const [selectedMethod, setSelectedMethod] = useState("transferencia-bancaria");
     const [newValues, setNewValues] = useState({
-        aliasCbu: '',
-        aliasCvu: '',
-        cbu: '',
-        cvu: '',
-        titularCuentaCbu: '',
-        titularCuentaCvu: '',
-        image: null,
-        sucursal: '',
-        domicilio: '',
+        transferencia: {
+            cbu: '',
+            aliasCbu: '',
+            titularCuentaCbu: '',
+            savedProfiles: ''
+        },
+        mercadoPago: {
+            currentUser: '',
+            currentUserPublicKey: ''
+        },
+        bancoFrances: {
+            imgQr: ''
+        },
+        priceShipmentSucursal: '',
+        priceShipmentDomicilio: '',
     })
 
-    const handleChangeInput = (e) => {
-        const { name, value } = e.target
+    const paymentMethods = [
+        // {
+        //     id: "mercado-pago",
+        //     name: "Mercado Pago",
+        //     icon: CreditCard,
+        //     description: "Pagos digitales",
+        // },
+        {
+            id: "transferencia-bancaria",
+            name: "Transferencia Bancaria",
+            icon: Building2,
+            description: "Transferencia directa",
+        },
+        {
+            id: "banco-frances",
+            name: "Banco Francés",
+            icon: FileText,
+            description: "Banco Francés para pagos",
+        },
+        {
+            id: "envio-sucursal",
+            name: "Envío a Sucursal",
+            icon: MapPin,
+            description: "Retiro en sucursal",
+        },
+        {
+            id: "envio-domicilio",
+            name: "Envío a Domicilio",
+            icon: Truck,
+            description: "Entrega a domicilio",
+        },
+    ]
+
+    const handleInputChange = (name, value) => {
         setNewValues({
             ...newValues,
             [name]: value,
         })
     }
 
-    const handleFileChange = (e) => {
-        setNewValues({...newValues, image: e.target.files[0]})
-    }
-
     const handleSubmit = async (e) => {
-        e.preventDefault()  
+        e?.preventDefault()  
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
 
         const data = {
-            aliasCbu: newValues.aliasCbu !== '' ?  newValues.aliasCbu :  paymentMethods.aliasCbu,
-            cbu: newValues.cbu !== '' ?  newValues.cbu :  paymentMethods.cbu,
-            aliasCvu: newValues.aliasCvu !== '' ?  newValues.aliasCvu :  paymentMethods.aliasCvu,
-            cvu: newValues.cvu !== '' ?  newValues.cvu :  paymentMethods.cvu,
-            titularCuentaCbu: newValues.titularCuentaCbu !== '' ?  newValues.titularCuentaCbu :  paymentMethods.titularCuentaCbu,
-            titularCuentaCvu: newValues.titularCuentaCvu !== '' ?  newValues.titularCuentaCvu :  paymentMethods.titularCuentaCvu,
-            priceShipmentSucursal: newValues.sucursal !== '' ?  newValues.sucursal :  paymentMethods.priceShipmentSucursal,
-            priceShipmentDomicilio: newValues.domicilio !== '' ?  newValues.domicilio :  paymentMethods.priceShipmentDomicilio,
-            imgQr: newValues.image !== null ? `${URL_COMMON_IMAGES_AZURE}/${uniqueSuffix}-${newValues.image.name}` : paymentMethods.imgQr,
+            transferencia: {
+                cbu: newValues.transferencia.cbu !== '' ?  newValues.transferencia.cbu :  paymentMethodsFromState.transferencia.cbu,
+                aliasCbu: newValues.transferencia.aliasCbu !== '' ?  newValues.transferencia.aliasCbu :  paymentMethodsFromState.transferencia.aliasCbu,
+                titularCuentaCbu: newValues.transferencia.titularCuentaCbu !== '' ?  newValues.transferencia.titularCuentaCbu :  paymentMethodsFromState.transferencia.titularCuentaCbu,
+                savedProfiles: newValues.transferencia.savedProfiles !== '' ?  newValues.transferencia.savedProfiles :  paymentMethodsFromState.transferencia.savedProfiles
+
+            },
+            mercadoPago: {
+                currentUser: newValues.mercadoPago.currentUser !== '' ?  newValues.mercadoPago.currentUser :  paymentMethodsFromState.mercadoPago.currentUser,
+                currentUserPublicKey: newValues.mercadoPago.currentUserPublicKey !== '' ?  newValues.mercadoPago.currentUserPublicKey :  paymentMethodsFromState.mercadoPago.currentUserPublicKey,
+            },
+            bancoFrances: {
+                imgQr: newValues.bancoFrances.imgQr !== '' ?  `https://pacucostorage.blob.core.windows.net/guardapolvos-dev/${uniqueSuffix}-${newValues.bancoFrances.imgQr.name}` :  paymentMethodsFromState.bancoFrances.imgQr,
+            },
+            priceShipmentSucursal: newValues.priceShipmentSucursal !== '' ?  newValues.priceShipmentSucursal :  paymentMethodsFromState.priceShipmentSucursal,
+            priceShipmentDomicilio: newValues.priceShipmentDomicilio !== '' ?  newValues.priceShipmentDomicilio :  paymentMethodsFromState.priceShipmentDomicilio,
         }
 
-        let imageFile = { image: newValues.image !== null ? newValues.image : false }
-              
+        let imageFile = { image: newValues.bancoFrances.imgQr !== "" ? newValues.bancoFrances.imgQr : false }
+             
         try {
-            const token = setToken(userLogged.token)
+            const token = setToken(userLogged.token);
             if (imageFile.image !== false) {
                 const formData = new FormData();
-                formData.append('images', imageFile.image)
-                formData.append('blobName', uniqueSuffix)
-                formData.append('containerName', 'common')
+                formData.append('images', imageFile.image);
+                formData.append('blobName', uniqueSuffix);
+                formData.append('containerName', 'common');
 
                 try { 
-                    await imageService.upload(formData, token) 
-                    reloadPage(1)
+                    await imageService.upload(formData, token);
                 }
                 catch (error) {
                     console.log(error)
@@ -93,155 +132,109 @@ const PaymentAdministration = () => {
                     }
                 }
             }   
-            imageFile = false
-            dispatch(setNewPaymentMethods(paymentMethods.id, data));
-            
-            setNewValues({ aliasCbu: '', aliasCvu: '', cbu: '', cvu: '', titularCuentaCbu: '', titularCuentaCvu: '', image: null, sucursal: '', domicilio: ''});
-            e.stopPropagation()
+            dispatch(setNewPaymentMethods(paymentMethodsFromState._id || paymentMethodsFromState.id, data));
+            setNewValues({
+                transferencia: {
+                    cbu: '',
+                    aliasCbu: '',
+                    titularCuentaCbu: '',
+                    savedProfiles: ''
+                },
+                mercadoPago: {
+                    currentUser: '',
+                    currentUserPublicKey: ''
+                },
+                bancoFrances: {
+                    imgQr: ''
+                },
+                priceShipmentSucursal: '',
+                priceShipmentDomicilio: '',
+            });
+            e?.stopPropagation()
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            Swal.fire({title:'Error al modificar los datos.', text:'Intentalo de nuevo mas tarde!', icon:'error', confirmButtonText: 'Aceptar', confirmButtonColor: '#000',}).then(() => { return })
         }
     }
 
-    const divPayment = {
-        display:'flex', 
-        flexDirection:'column'
-    }
-
-    const htmlMercadoPago = () => {
-        return (
-            <form style={divPayment} onSubmit={handleSubmit}>
-                <h6>Datos actuales</h6>
-                <label>Titular: {paymentMethods.titularCuentaCvu}</label>
-                <label>Alias: {paymentMethods.aliasCvu}</label>
-                <label>CVU: {paymentMethods.cvu}</label>
-                <h6>Nuevos datos</h6>
-                <FloatingLabel controlId="floatingInput" label="nuevo titular" className="mb-2" >
-                    <Form.Control type="text" placeholder="nuevo titular" name='titularCuentaCvu' value={newValues.titularCuentaCvu} onChange={handleChangeInput} />
-                </FloatingLabel>
-                <FloatingLabel controlId="floatingInput" label="nuevo alias" className="mb-2" >
-                    <Form.Control type="text" placeholder="nuevo alias" name='aliasCvu' value={newValues.aliasCvu} onChange={handleChangeInput} />
-                </FloatingLabel>
-                <FloatingLabel controlId="floatingInput" label="nuevo cvu" className="mb-2" >
-                    <Form.Control type="text" placeholder="nuevo cvu" name='cvu' value={newValues.cvu} onChange={handleChangeInput} />
-                </FloatingLabel>
-                {/* Alias: <input type="text" placeholder='nuevo alias' name='aliasCvu' value={newValues.aliasCvu} onChange={handleChangeInput} /> */}
-                {/* CVU: <input type="text" placeholder='nuevo cvu' name='cvu' value={newValues.cvu} onChange={handleChangeInput}/> */}
-                <button type='submit' className='btn btn-dark'>Modificar</button>
-            </form>
-        )
-    }
-    const htmlTransferencia = () => {
-        return (
-            <form style={divPayment} onSubmit={handleSubmit}>
-                <h6>Datos actuales</h6>
-                <label>Titular: {paymentMethods.titularCuentaCbu}</label>
-                <label>Alias: {paymentMethods.aliasCbu}</label>
-                <label>CBU: {paymentMethods.cbu}</label>
-                <h6>Nuevos datos</h6>
-                <FloatingLabel controlId="floatingInput" label="nuevo titular" className="mb-2" >
-                    <Form.Control type="text" placeholder="nuevo titular" name='titularCuentaCbu' value={newValues.titularCuentaCbu} onChange={handleChangeInput} />
-                </FloatingLabel>
-                <FloatingLabel controlId="floatingInput" label="nuevo alias" className="mb-2" >
-                    <Form.Control type="text" placeholder='nuevo alias' name='aliasCbu' value={newValues.aliasCbu} onChange={handleChangeInput} />
-                </FloatingLabel>
-                <FloatingLabel controlId="floatingInput" label="nuevo cbu" className="mb-2" >
-                    <Form.Control type="text" placeholder='nuevo cbu' name='cbu' value={newValues.cbu} onChange={handleChangeInput} />
-                </FloatingLabel>
-                {/* Alias: <input type="text" placeholder='nuevo alias' name='aliasCbu' value={newValues.aliasCbu} onChange={handleChangeInput} />
-                CBU: <input type="text" placeholder='nuevo cbu' name='cbu' value={newValues.cbu} onChange={handleChangeInput}/> */}
-                <button type='submit' className='btn btn-dark'>Modificar</button>
-            </form>
-        )
-    }
-    const htmlCuentaDni = () => {
-        return (
-            <form style={divPayment} onSubmit={handleSubmit}>
-                <h6>QR actual</h6>
-                <img src={paymentMethods.imgQr} alt="" style={{height:'150px', width:'150px'}} />
-                <h6>Nuevo QR</h6>
-                {/* <input type="file" name='image' onChange={handleFileChange} /> */}
-                <Form.Control type="file"name='image' onChange={handleFileChange} style={{marginBottom:'10px'}} />
-                <button type='submit' className='btn btn-dark'>Modificar</button>
-            </form>
-
-        )
-    }
-    const htmlSucursal = () => {
-        return (
-            <form style={divPayment} onSubmit={handleSubmit}>
-                <h6>Datos actuales</h6>
-                <label>Valor: ${paymentMethods.priceShipmentSucursal}</label>
-                <h6>Nuevos datos</h6>
-                <FloatingLabel controlId="floatingInput" label="envio a sucursal" className="mb-2" >
-                    <Form.Control type="text" placeholder='envio a sucursal' name='sucursal' value={newValues.sucursal} onChange={handleChangeInput}  />
-                </FloatingLabel>
-                {/* <input type="text" placeholder='envio a sucursal' name='sucursal' value={newValues.sucursal} onChange={handleChangeInput} /> */}
-                <button type='submit' className='btn btn-dark' >Modificar</button>
-            </form>
-        )
-    }
-    const htmlDomicilio = () => {
-        return (
-            <form style={divPayment} onSubmit={handleSubmit}>
-                <h6>Datos actuales</h6>
-                <label>Valor: ${paymentMethods.priceShipmentDomicilio}</label>
-                <h6>Nuevos datos</h6>
-                <FloatingLabel controlId="floatingInput" label="envio a domicilio" className="mb-2" >
-                    <Form.Control type="text" placeholder='envio a domicilio' name='domicilio' value={newValues.domicilio} onChange={handleChangeInput} />
-                </FloatingLabel>
-                {/* <input type="text" placeholder='envio a domicilio' name='domicilio' value={newValues.domicilio} onChange={handleChangeInput} /> */}
-                <button type='submit' className='btn btn-dark'>Modificar</button>
-            </form>
-        )
+    const checkWhichPaymentMethodToShow = () => {
+        switch (selectedMethod) {
+            case "mercado-pago":
+                return <DataForMP formData={newValues} currentData={paymentMethodsFromState} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
+            case "transferencia-bancaria":
+                return <DataForTransferencia formData={newValues} currentData={paymentMethodsFromState} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
+            case "banco-frances":
+                return <DataForBancoFrances formData={newValues} currentData={paymentMethodsFromState} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
+            case "envio-sucursal":
+                return <DataForSucursal formData={newValues} currentData={paymentMethodsFromState} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
+            case "envio-domicilio":
+                return <DataForDomicilio formData={newValues} currentData={paymentMethodsFromState} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
+            default:
+                return null
+        }
     }
 
     return (
-        <div>
-            <div className='main-container-payment'>
-                <div className='second-container-payment'> 
-                    <div className='haeder-container-payment'>
-                        {/* <Header /> */}
-                        <h3>Modificar Medios de Pago</h3>
-                    </div>
-                    <div className="tab-container">
-                        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-                            <Row>
-                                <Col sm={5} className='col'>
-                                    <Nav variant="pills" className="flex-column nav-pills" >
-                                        <Nav.Item>
-                                            <Nav.Link eventKey="first">Mercado Pago</Nav.Link>
-                                        </Nav.Item>
-                                        <Nav.Item>
-                                            <Nav.Link eventKey="second">Transferencia Bancaria</Nav.Link>
-                                        </Nav.Item>
-                                        <Nav.Item>
-                                            <Nav.Link eventKey="third">Cuenta DNI</Nav.Link>
-                                        </Nav.Item>
-                                        <Nav.Item>
-                                            <Nav.Link eventKey="forth">Envio a Sucursal</Nav.Link>
-                                        </Nav.Item>
-                                        <Nav.Item>
-                                            <Nav.Link eventKey="fifth">Envio a domicilio</Nav.Link>
-                                        </Nav.Item>
-                                    </Nav>
-                                </Col>
-                                <Col sm={7}>
-                                <Tab.Content>
-                                    <Tab.Pane eventKey="first">{htmlMercadoPago()}</Tab.Pane>
-                                    <Tab.Pane eventKey="second">{htmlTransferencia()}</Tab.Pane>
-                                    <Tab.Pane eventKey="third">{htmlCuentaDni()}</Tab.Pane>
-                                    <Tab.Pane eventKey="forth">{htmlSucursal()}</Tab.Pane>
-                                    <Tab.Pane eventKey="fifth">{htmlDomicilio()}</Tab.Pane>
-                                </Tab.Content>
-                                </Col>
-                            </Row>
-                        </Tab.Container>
+    paymentMethodsFromState && (
+        <div className="min-h-screen bg-gray-50 p-6">
+            <div className="max-w-6xl mx-auto">
+                {/* Header */}
+                <div className="mb-8">
+                <h1 className="text-3xl font-bold text-gray-700 mb-2">Modificar Medios de Pago</h1>
+                <p className="text-gray-600">Gestiona los métodos de pago donde recibirás los pagos</p>
+                </div>
 
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Payment Methods Sidebar */}
+                <div className="lg:col-span-1">
+                    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+                    <h2 className="text-lg font-semibold text-gray-900 mb-4">Métodos de Pago</h2>
+                    <div className="space-y-3">
+                        {paymentMethods.map((method) => {
+                        const IconComponent = method.icon
+                        const isSelected = selectedMethod === method.id
+
+                        return (
+                            <button
+                            key={method.id}
+                            onClick={() => setSelectedMethod(method.id)}
+                            className={`w-full p-4 rounded-xl border-2 transition-all duration-200 text-left ${
+                                isSelected
+                                ? "border-pink-500 bg-pink-50"
+                                : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
+                            }`}
+                            >
+                            <div className="flex items-center space-x-3">
+                                <div
+                                className={`p-2 rounded-lg ${
+                                    isSelected ? "bg-pink-500 text-white" : "bg-gray-100 text-gray-600"
+                                }`}
+                                >
+                                <IconComponent size={20} />
+                                </div>
+                                <div className="flex-1">
+                                <div className={`font-medium ${isSelected ? "text-pink-900" : "text-gray-900"}`}>
+                                    {method.name}
+                                </div>
+                                <div className={`text-sm ${isSelected ? "text-pink-700" : "text-gray-500"}`}>
+                                    {method.description}
+                                </div>
+                                </div>
+                                {isSelected && <Check size={20} className="text-pink-500" />}
+                            </div>
+                            </button>
+                        )
+                        })}
+                    </div>
                     </div>
                 </div>
-            </div>    
+
+                {/* Main Content */}
+                {checkWhichPaymentMethodToShow()}
+                </div>
+            </div>
         </div>
+    )
     )
 }
 
