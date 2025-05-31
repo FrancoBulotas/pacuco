@@ -3,7 +3,6 @@ import { setToken } from '../../services/token'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { reloadPage } from './common/commonFunctions'
 import { setNewPaymentMethods } from '../../reducers/paymentMethodsReducer'
 
 import imageService from '../../services/imageUpload'
@@ -109,8 +108,6 @@ const PaymentAdministration = () => {
 
         let imageFile = { image: newValues.bancoFrances.imgQr !== "" ? newValues.bancoFrances.imgQr : false }
              
-        console.log(data)
-
         try {
             const token = setToken(userLogged.token);
             if (imageFile.image !== false) {

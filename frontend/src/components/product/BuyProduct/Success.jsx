@@ -116,7 +116,7 @@ const Success = () => {
         else if(formData.paymentMethod === 'Banco Frances') {
             return <div className="mb-3 mt-3">
                 <p className="success-message"> 
-                    Para realizar el pago con QR al Banco Frances, escanea el siguiente código QR con tu aplicación de banco o billetera digital.
+                    Para realizar el pago con QR al Banco Frances, escanea el siguiente código QR:
                 </p>
                 <img src={paymentMethods?.bancoFrances?.imgQr} alt="" style={{height:'150px', width:'150px'}} />
             </div>;
