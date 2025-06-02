@@ -13,8 +13,6 @@ const PaymentMethodsAccordion = () => {
     const cart = useSelector(state => state.cart.items);
     const [selectedMethod, setSelectedMethod] = useState(formData.paymentMethod || '');
 
-    console.log(cart);
-
     useEffect(() => {
         if(formData.paymentMethod === 'Efectivo' || formData.paymentMethod === 'Transferencia Bancaria') {
             dispatch(setTotalPrice(cart.reduce((acc, item) =>  acc +  ((item.discountPrice || item.discountPrice > 0 ? item.discountPrice : item.price) * item.amountToBuy), 0))); 
