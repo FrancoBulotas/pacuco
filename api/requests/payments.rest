@@ -6,33 +6,33 @@ POST http://localhost:8080/api/payments HTTP/1.1
 content-type: application/json
 
 ###
-PUT http://localhost:8080/api/payments/6685fad08053115930d87b29 HTTP/1.1
+PUT http://localhost:8080/api/payments/66758b2b64c03ef4951806be HTTP/1.1
 content-type: application/json
 
 {
-  "priceShipmentSucursal": "5000",
+  "priceShipmentSucursal": "6000",
   "priceShipmentDomicilio": "8000",
   "bancoFrances": {
     "imgQr": "https://pacucostorage.blob.core.windows.net/guardapolvos-dev/1748616136456-431255556-qr-pago-banco-frances.png"
   },
   "mercadoPago": {
-    "currentUser": "Prueba Juan Arca",
-    "currentUserPublicKey": "ASDF_NSIDF23084093284293084092"
+    "currentUser": "",
+    "currentUserPublicKey": ""
   },
   "transferencia": {
-    "cbu": "1289409218309",
-    "aliasCbu": "eppe-pep",
-    "titularCuentaCbu": "juan carlos",
+    "cbu": "0000003100026313332638",
+    "aliasCbu": "aldiparo.mp",
+    "titularCuentaCbu": "Aldana Belen Parodi",
     "savedProfiles": {
       "Adry": {
-          "cbu": "1289409218309",
-          "aliasCbu": "eppe.pep",
-          "titularCuentaCbu": "juan carlos" 
+          "cbu": "0140024303502657621621",
+          "aliasCbu": "pacuco.love",
+          "titularCuentaCbu": "Adriana Francisco" 
       },
       "Aldi": {
-          "cbu": "123498371298",
-          "aliasCbu": "lucas.poepoe",
-          "titularCuentaCbu": "Aldana"
+          "cbu": "0000003100026313332638",
+          "aliasCbu": "aldiparo.mp",
+          "titularCuentaCbu": "Aldana Belen Parodi"
       }
     }
   }

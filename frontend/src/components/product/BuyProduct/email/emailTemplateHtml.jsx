@@ -1,4 +1,5 @@
 
+import { checkPrice } from "./SendEmail"
 
 const emailTemplateHtml = ( formData, totalPrice, operationCode, cart, shippingPrice ) => {
     
@@ -19,7 +20,7 @@ const emailTemplateHtml = ( formData, totalPrice, operationCode, cart, shippingP
                       <h3>${item.name}</h3>
                       <p>Cantidad: ${item.amountToBuy}</p>
                       <p>Talle: ${item.size}</p>
-                      <p>Valor unidad: $ ${item.discountPrice || item.discountPrice > 0 ? item.discountPrice : item.price}</p>
+                      <p>Valor unidad: $ ${checkPrice(item, formData)}</p>
                   </div>
                 </div>
                 `

@@ -14,6 +14,14 @@ export const sendEmailJS = async (formData, cart, totalPrice, shippingPrice) => 
     return [response, operationCode]
 }
 
+export const checkPrice = (item, formData) => {
+    if (formData.paymentMethod === 'Efectivo' || formData.paymentMethod === 'Transferencia Bancaria'){
+        return item.discountPrice || item.discountPrice > 0 ? item.discountPrice : item.price;
+    }
+    else {
+        return item.discountListedPrice || item.discountListedPrice > 0 ? item.discountListedPrice : item.listedPrice;
+    }
+}   
 
 const sendEmail = async (formData, totalPrice, operationCode, cart, shippingPrice) => {
     try {

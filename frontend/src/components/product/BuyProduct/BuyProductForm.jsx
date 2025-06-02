@@ -42,8 +42,6 @@ const BuyProductForm = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
-    console.log(formData);
     
     useEffect(() => {
         // para poner el precio del envio a sucursal ya que es el default
