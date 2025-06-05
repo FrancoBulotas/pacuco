@@ -38,9 +38,18 @@ export const LoadProducts = ({ products }) => {
                                                     <span className="text-decoration-line-through" style={{marginRight:'8px', color:'gray'}}>$ {formatNumber(prod.listedPrice)}</span>
                                                     <span className='porcentajeProductoOff'>{checkDiscountPorcentage(prod)}% OFF</span>        
                                                 </div>
-                                                <span className="precioProducto">$ {formatNumber(prod.discountListedPrice)}</span> 
+                                                <span className="precioProducto">$ {formatNumber(prod.discountListedPrice)}</span>
                                             </>
-                                        : <p className="precioProducto">$ {formatNumber(prod.listedPrice)}</p>
+                                        : <>
+                                            <p style={{ margin: '0px'}}>
+                                                <strong>$ {formatNumber(prod.listedPrice)} </strong>
+                                                <span className='span-product'>precio de lista</span>
+                                            </p>
+                                            <p style={{ margin: '0px'}}>
+                                                <span style={{color: 'gray'}}>$ {formatNumber(prod.price)} </span>
+                                                <span className='span-product'>transferencia o efectivo</span>
+                                            </p>
+                                        </>
                                     }
                                 </div>
                                 <div>
