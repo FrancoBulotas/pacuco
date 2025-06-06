@@ -24,6 +24,7 @@ const FiltersBar = ({ setIsLoading, table, isAdmin, searchParamsAdmin, setSearch
         table: null,
         sortByPrice: null,
         name: null,
+        category: ""
     })
 
     const currentUrl = window.location.href;
@@ -55,7 +56,7 @@ const FiltersBar = ({ setIsLoading, table, isAdmin, searchParamsAdmin, setSearch
             size: url.searchParams.get('size'), 
             type: url.searchParams.get('type'), 
             sortByPrice: url.searchParams.get('sortByPrice'), 
-            name: url.searchParams.get('name'), 
+            name: url.searchParams.get('name'),
             category: url.searchParams.get('category'), 
         }));
     
@@ -76,27 +77,27 @@ const FiltersBar = ({ setIsLoading, table, isAdmin, searchParamsAdmin, setSearch
             setFilters((prevFilters) => ({ ...prevFilters, size: null}));
             url.searchParams.delete('size');
         }
-        if(choice == 'type'){
+        else if(choice == 'type'){
             setFilters((prevFilters) => ({ ...prevFilters, size: null}));
             url.searchParams.delete('type');
             // url.searchParams.append('category', 'guardapolvo');
         }
-        if(choice == 'sortByPrice'){
+        else if(choice == 'sortByPrice'){
             setFilters((prevFilters) => ({ ...prevFilters, sortByPrice: null}));
             url.searchParams.delete('sortByPrice');
         }
-        if(choice == 'name'){
+        else if(choice == 'name'){
             setFilters((prevFilters) => ({ ...prevFilters, name: null}));
             url.searchParams.delete('name');
         }
-        if(choice == 'category'){
+        else if(choice == 'category'){
             setFilters((prevFilters) => ({ ...prevFilters, category: null}));
             url.searchParams.delete('category');
         }
 
         let filtersUpdated = filters;
         filtersUpdated[choice] = null;
-        // para cuando no haya filtros que se busquen todos los prods
+        //para cuando no haya filtros que se busquen todos los prods
         const allNull = Object.values(filtersUpdated).every(value => value === null);
         if(allNull){
             url.searchParams.append('category', '');
@@ -136,7 +137,7 @@ const FiltersBar = ({ setIsLoading, table, isAdmin, searchParamsAdmin, setSearch
 
     return (
         <div>
-            <div style={{display:'flex', height:'40px', marginLeft:'10px', marginRight:'10px', marginBottom:'5px', paddingTop:'5px'}}>
+            <div style={{display:'flex', height:'40px', marginBottom:'5px', paddingTop:'5px'}}>
                 <Dropdown as={ButtonGroup} className="dropdown-custom">
                     <Button variant="light" style={{backgroundColor:'#fff', color:'#000', padding:'5px 25px', fontSize:'14px', border:'1px solid #f1f1f1'}}>Ordenar</Button>
 
@@ -145,7 +146,7 @@ const FiltersBar = ({ setIsLoading, table, isAdmin, searchParamsAdmin, setSearch
                     <Dropdown.Menu>
                         <Dropdown.Item onClick={() => handleClick('sortByPrice', 'asc')}>Precio menor a mayor</Dropdown.Item>
                         <Dropdown.Item onClick={() => handleClick('sortByPrice', 'desc')}>Precio mayor a menor</Dropdown.Item>
-                        {/* <Dropdown.Item onClick={() => navigate(updateQueryParamsOrderButton('sortByName', 'asc'))}>Nombre</Dropdown.Item> */}
+                        {/* <Dropdown.Item onClick={() => handleClick('sortByName', 'asc')}>Nombre</Dropdown.Item> */}
                     </Dropdown.Menu>
                 </Dropdown>
                 

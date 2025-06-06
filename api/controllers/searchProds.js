@@ -142,18 +142,7 @@ searchProdsRouter.get('/products', async (req, res) => {
 
           const products = await Guardapolvo.aggregate([
             { $match: filters },
-            {
-              $addFields: {
-                effectivePrice: {
-                  $cond: {
-                    if: { $gt: ['$discountPrice', 0] },
-                    then: '$discountPrice',
-                    else: '$price'
-                  }
-                }
-              }
-            },
-            { $sort: { effectivePrice: sortOrder } }
+             { $sort: { effectivePrice: sortOrder } }
           ]);
           
           // Aplicar transformación manual para cada producto
