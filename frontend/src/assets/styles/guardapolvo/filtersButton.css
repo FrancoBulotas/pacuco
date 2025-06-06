@@ -1,0 +1,19 @@
+
+
+.filters-container {
+    margin-bottom: 10px;
+    padding: 10px;
+    border:1px solid #f1f1f1;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.filters-second-container {
+    display: flex;
+
+}
+
+.choosen-filters-container {
+    display: flex;
+    flex-wrap: wrap;
+}
