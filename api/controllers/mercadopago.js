@@ -13,7 +13,7 @@ mercadopagoRouter.post('/create-preference', async (req, res) => {
             unit_price: item.price,
             quantity: item.quantity,
         }));
-    
+
         // Agregar el costo del envío como un ítem adicional
         if (shippingPrice > 0) {
             cartItems.push({
