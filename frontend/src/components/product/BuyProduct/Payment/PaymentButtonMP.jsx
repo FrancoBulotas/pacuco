@@ -1,10 +1,9 @@
 
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setFormData } from '../../../../reducers/cartReducer'
+import { useSelector } from 'react-redux';
 import { checkWhichPriceToShow } from '../../../common/functions';
 
 // Inicializa Mercado Pago con tu clave pública ALDI
@@ -14,26 +13,23 @@ initMercadoPago('APP_USR-30e5d751-8056-4181-ad59-423b5d0813df', { locale: 'es-AR
 const PaymentButtonMP = ({ shippingPrice }) => {
     const [preferenceId, setPreferenceId] = useState(null);
     const cart = useSelector((state) => state.cart.items);
-    const formData = useSelector((state) => state.cart.formData);
-    const dispatch = useDispatch();
 
     useEffect(() => {
+        console.log('useEffect PaymentButtonMP: createPayment y dispatch');
         createPayment();
-        dispatch(setFormData({
-            ...formData,
-            paymentMethod: 'Mercado Pago',
-        }));
     }, [])
 
     const createPayment = async () => {
         try {
+            const items = cart.map((item) => ({
+                name: item.name,
+                price: checkWhichPriceToShow(item),
+                quantity: item.amountToBuy,
+            }));
+
             const response = await axios.post('/api/mp/create-preference', {
-                items: cart.map((item) => ({
-                    name: item.name,
-                    price: checkWhichPriceToShow(item),
-                    quantity: item.amountToBuy,
-                })),
-                backUrl: "https://pacuco.loca.lt", 
+                items: items,
+                backUrl: "https://www.pacuco.com.ar", 
                 shippingPrice: shippingPrice, 
             });
             setPreferenceId(response.data.id);                  
@@ -43,16 +39,13 @@ const PaymentButtonMP = ({ shippingPrice }) => {
     };
 
     return (
-        <div id="wallet_container">
+        <div>
             {preferenceId && (
                 <Wallet 
-                initialization={{ preferenceId }} 
-                customization={{
-                    texts: { valueProp: 'smart_option' },
-                    // visual: {
-                    //     buttonBackground: 'black',
-                    //     borderRadius: '8px',
-                    // }
+                    key={preferenceId}
+                    initialization={{ preferenceId }} 
+                    customization={{
+                        texts: { valueProp: 'smart_option' }
                 }} />
             )}
         </div>

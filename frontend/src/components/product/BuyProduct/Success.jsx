@@ -27,12 +27,13 @@ const Success = () => {
         setTimeout(() => setCopied(null), 2000);
     };
 
-    useEffect(() => {
-        dispatch(clearCart()); 
-    }, []);
+    // useEffect(() => {
+    //     dispatch(clearCart()); 
+    // }, []);
 
     useEffect(() => {
         return () => {
+            dispatch(clearCart()); 
             dispatch(setTotalPrice(0));
             dispatch(setShippingPrice(0));
         };
