@@ -17,6 +17,8 @@ import { FaCheck, FaTrash, FaTimes } from 'react-icons/fa'
 import { IoEyeOutline } from 'react-icons/io5'
 import { DateTime } from 'luxon';
 
+import Stats from './common/Stats'
+
 import '../../assets/styles/admin/purchaseHistory.scss'
 
 const PurchaseHistory = () => {
@@ -164,13 +166,13 @@ const PurchaseHistory = () => {
                     <table className="responsive-table">
                         <thead>
                             <tr>
-                            <th>#</th>
-                            <th>Código de operación</th>
-                            <th>Cliente</th>
-                            <th>Total Compra</th>
-                            <th>Fecha</th>
-                            <th>Comprob.</th>
-                            <th colSpan={2}>Acciones</th>
+                                <th>#</th>
+                                <th>Código de operación</th>
+                                <th>Cliente</th>
+                                <th>Total Compra</th>
+                                <th>Fecha</th>
+                                <th>Comp.</th>
+                                <th colSpan={2}>*</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -210,6 +212,9 @@ const PurchaseHistory = () => {
                     <PaginationProducts currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
                 </div>
                 <PurchaseHistoryModal item={itemToShow} show={purchaseModalShow} onHide={() => setpurchaseModalShow(false)} resetProducts={resetProducts} />
+                <div className='chart'>
+                    <Stats purchasedProducts={purchasedProducts} />
+                </div>
             </div>
         </div>
     )

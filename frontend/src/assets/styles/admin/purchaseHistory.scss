@@ -181,6 +181,12 @@
   width: 40px;
 }
 
+.actions-cell{
+  width: 40px;
+  height: 40px;
+  display: flex;
+}
+
 /* Responsive */
 @media screen and (max-width: 768px) {
   .table-wrapper {

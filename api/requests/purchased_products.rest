@@ -1,10 +1,16 @@
 
+
+
 GET http://localhost:8080/api/purchasedProduct
 ###
 GET http://localhost:8080/api/purchasedProduct/68508b5d51ab69da1b34961f
 ###
 GET http://localhost:8080/api/purchasedProduct/get/onlyTimes
 ###
+GET http://localhost:8080/api/purchasedProduct/get/topPaymentMethods
+###
+
+
 DELETE http://localhost:8080/api/purchasedProduct/6683317de68ddb78136d7377
 ###
 POST http://localhost:8080/api/purchasedProduct HTTP/1.1
