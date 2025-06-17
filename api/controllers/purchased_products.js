@@ -114,5 +114,18 @@ purchasedProductsRouter.get('/get/onlyTimes', async (request, response) => {
     }
 })
 
+purchasedProductsRouter.get('/get/topPaymentMethods', async (request, response) => {
+    try {
+        const topPaymentMethods = await PurchasedProduct.aggregate([
+            { $project: { _id: 0, paymentMethods: '$clientData.paymentMethod' } },
+            { $group: { _id: '$paymentMethods', count: { $sum: 1 } } }
+        ]);
+
+        response.json({ topPaymentMethods });
+    } catch (e) {
+        console.error(e);
+        response.status(500).json({ error: "Error al obtener metodos de pago."})
+    }
+});
 
 module.exports = purchasedProductsRouter

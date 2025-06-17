@@ -7,6 +7,11 @@ const getAll = async () => {
   return response.data
 }
 
+const getTopPaymentMethods = async () => {
+  const response = await api.get(`${baseUrl}/get/topPaymentMethods`);
+  return response.data;
+}
+
 const create = async (product) => {
   const response = await api.post(baseUrl, product)
   return response.data
@@ -30,4 +35,4 @@ const deletePurchase = async (id, token) => {
   return response.data
 }
 
-export default { getAll, create, update, deletePurchase }
+export default { getAll, create, update, deletePurchase, getTopPaymentMethods }
