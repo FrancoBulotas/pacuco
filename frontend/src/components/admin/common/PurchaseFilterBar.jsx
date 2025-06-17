@@ -1,12 +1,11 @@
 
-import { useCallback, useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { IconSearch, IconReload } from '../../../assets/icons/icons'
 
-import debounce from 'just-debounce-it'
 import { orderByDate } from '../../common/functions'
 
 import { filterChange } from '../../../reducers/filterReducer'
@@ -17,42 +16,12 @@ const PurchaseFilterBar = ({ purchasedProducts, setPurchasedProducts, everyProdu
     const filter = useSelector(state => state.filter.search.toLowerCase()) 
     const [search, setSearch] = useState('')
 
-    // const [prods, setprods] = useState([])
-
-    // useEffect(() => {
-    //     const fetchPurchasedProducts = async () => {
-    //         setprods(await purchasedProductsService.getAll())
-    //     }
-    //     fetchPurchasedProducts()
-    // }, [])
-
-    // const debounceFilter = useCallback(
-    //     debounce(input => {
-    //         if(input !== '') {
-    //             // estos console log estan porque sino no aparece la busqueda (creo que es porque demora lo suficiente para que se termine la busqueda real, nose pero funciona)
-    //             console.log(prods)
-    //             console.log(prods.filter(item => item.operationCode.toLowerCase().includes(input.toLowerCase())
-    //                                                         || item.clientData.fullName.toLowerCase().includes(input.toLowerCase())
-    //                                                         || item.time.toLowerCase().includes(input.toLowerCase())))
-
-    //             setPurchasedProducts(prods.filter(item => item.operationCode.toLowerCase().includes(input.toLowerCase())
-    //                                                               || item.clientData.fullName.toLowerCase().includes(input.toLowerCase())
-    //                                                               || item.time.toLowerCase().includes(input.toLowerCase()))) 
-    //             onPageChange(1)
-    //         }
-    //         else {
-    //             resetProducts()
-    //         }
-    //     }, 400)
-    //   , [])
-
     const handleChange = (e) => {
         const newInput = e.target.value
         if(newInput.startsWith(' ')) return
         
         setSearch(newInput)
         dispatch(filterChange(newInput))
-        // debounceFilter(newInput)
     }
 
     const displaySearch = async () => {
@@ -73,7 +42,15 @@ const PurchaseFilterBar = ({ purchasedProducts, setPurchasedProducts, everyProdu
     }
 
     return(
-        <Form className="d-flex" fixed='right' style={{ marginLeft: 'auto', flexDirection:'column' }}>
+        <Form 
+            className="d-flex" 
+            fixed='right' 
+            style={{ marginLeft: 'auto', flexDirection:'column' }}
+            onSubmit={e => {
+                e.preventDefault(); 
+                displaySearch();
+            }}
+        >
             <div className="d-flex" style={{}}>
                 <Form.Control
                     type="search"

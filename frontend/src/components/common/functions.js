@@ -59,7 +59,7 @@ export const checkWhichPriceToShow = (item) => {
     } else if(item.listedPrice && item.listedPrice > 0){
         return item.listedPrice;
     } else {
-        return 0;
+        return item.price;
     }
 }
 

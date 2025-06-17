@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { DateTime } from 'luxon';
 
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -24,7 +25,7 @@ const SoldProductsBarChart = ({ data }) => {
       },
     ],
   });
-
+  
   useEffect(() => {
     // Function to calculate the number of products sold per month
     const calculateProductsSold = (year) => {
@@ -32,8 +33,9 @@ const SoldProductsBarChart = ({ data }) => {
       let annualProductsSold = 0;
 
       data.forEach((sale) => {
-        const saleMonth = sale.time.split('/')[1];
-        const saleYear = sale.time.split('/')[2].split(',')[0];
+        const time = DateTime.fromJSDate(new Date(sale.time)).setZone('America/Argentina/Buenos_Aires').toFormat('dd/MM/yyyy HH:mm')
+        const saleMonth = time.split('/')[1];
+        const saleYear = time.split('/')[2].split(' ')[0];
         
         if (saleYear.toString() === year.toString()) {
           // Sum up the total products sold (`amountToBuy`) for each product in the cart
