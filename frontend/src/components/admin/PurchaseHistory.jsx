@@ -1,21 +1,21 @@
 
 import { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { reloadPage } from './common/commonFunctions'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import purchasedProductsService from '../../services/purchasedProduct'
 import guardapolvosService from '../../services/guardapolvos'
 import PurchaseHistoryModal from './modals/PurchaseHistoryModal'
 import { setToken } from '../../services/token'
 
+import { orderByDate } from '../common/functions'
 import { formatNumber } from '../product/common/functions'
 
-import { orderByDate } from '../common/functions'
-
 import PaginationProducts from '../product/common/PaginationProductos'
-import Table from 'react-bootstrap/Table'
 import PurchaseFilterBar from './common/PurchaseFilterBar'
 import Swal from 'sweetalert2'
+import { FaCheck, FaTrash, FaTimes } from 'react-icons/fa'
+import { IoEyeOutline } from 'react-icons/io5'
+import { DateTime } from 'luxon';
 
 import '../../assets/styles/admin/purchaseHistory.scss'
 
@@ -148,10 +148,10 @@ const PurchaseHistory = () => {
 
     return (
         <div>
-            <div className="contenedor-tablas-productos">                
+            <div className="table-wrapper">            
                 {/* <Header /> */}                
                 <h3>Historial de ventas</h3>
-                <div className='d-flex gap-2 w-100' style={{marginLeft: '2%', alignItems:'center', marginBottom:'20px'}}>
+                <div className='d-flex gap-2 w-100' style={{ marginLeft:'4px', alignItems:'center', marginBottom:'20px'}}>
                     <div style={{backgroundColor:'#eed6e5', width: '40px', height: '20px', borderRadius:'8px'}}></div>
                     <p style={{fontSize:'13px', margin:'0px'}}>Productos comprados del stock</p>
                 </div>
@@ -159,33 +159,56 @@ const PurchaseHistory = () => {
                     <PurchaseFilterBar purchasedProducts={purchasedProducts} 
                                         setPurchasedProducts={setPurchasedProducts} 
                                         everyProductsRef={purchasedProductsRef.current} 
-                                        onPageChange={onPageChange} />
-                    <div className='contenedor-tabla'>
-                        <Table hover variant="light" className='tabla-de-productos'>
-                            <thead>
-                                <tr className='tr-tabla-productos'>
-                                    <th>#</th><th className='hide-on-mobile'>Codigo de operacion</th><th>Cliente</th><th className='hide-on-mobile'>Total Compra</th><th >Fecha de compra</th><th>Compr.</th><th>*</th><th>*</th>
-                                </tr>
-                            </thead>
-                            {getCurrentProducts()?.map((item, i) =>       
-                                <tbody key={i}>
-                                    <tr className='tr-tabla-productos' style={isProductFromStock(item) ? { backgroundColor: '#fbe6f3' } : null}>
-                                        <td>{i+1}</td>
-                                        <td className='hide-on-mobile'>{item.operationCode}</td>
-                                        <td>{item.clientData.fullName}</td>
-                                        <td className='hide-on-mobile'>$ {formatNumber(item.totalPricePurchased)}</td>
-                                        <td>{item.time.split(",")[0]}</td>
-                                        <td>{item.saleConfirmed ? <i className="bi bi-check-lg" style={{color:'green'}}></i> : <i className="bi bi-x-lg" style={{color:'red'}}></i>}</td>
-                                        <td onClick={() => showPurchaseModal(item)} style={{ cursor: 'pointer', textDecoration:'underline' }}>ver detalle</td>
-                                        <td><button onClick={() => handleClickDelete(item)} className='boton-eliminar' style={{backgroundColor:'transparent'}}><i className="fas fa-trash-alt"></i></button></td> 
-                                    </tr>
-                                </tbody>
-                            )}
-                        </Table>
-                    </div>
+                                        onPageChange={onPageChange} 
+                    />
+                    <table className="responsive-table">
+                        <thead>
+                            <tr>
+                            <th>#</th>
+                            <th>Código de operación</th>
+                            <th>Cliente</th>
+                            <th>Total Compra</th>
+                            <th>Fecha</th>
+                            <th>Comprob.</th>
+                            <th colSpan={2}>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {getCurrentProducts().map((item, index) => (
+                            <tr
+                                key={item.operationCode}
+                                className={isProductFromStock(item) ? 'from-stock' : ''}
+                            >
+                                <td>{(currentPage - 1) * productsPerPage + index + 1}</td>
+                                <td><span className="code-pill">{item.operationCode}</span></td>
+                                <td>{item.clientData.fullName}</td>
+                                <td>$ {formatNumber(item.totalPricePurchased)}</td>
+                                <td>{DateTime.fromJSDate(new Date(item.time)).setZone('America/Argentina/Buenos_Aires').toFormat('dd/MM/yyyy')}</td>
+                                <td className="icon-cell">
+                                    {item.saleConfirmed ? (
+                                        <FaCheck className="icon success" />
+                                    ) : (
+                                        <FaTimes className="icon error" />
+                                    )}
+                                </td>
+                                <td className="icon-cell">
+                                    <IoEyeOutline
+                                        className="icon view"
+                                        onClick={() => showPurchaseModal(item)}
+                                />
+                                </td>
+                                <td className="icon-cell">
+                                    <FaTrash
+                                        className="icon delete"
+                                        onClick={() => handleClickDelete(item)}
+                                />
+                                </td>
+                            </tr>
+                            ))}
+                        </tbody>
+                    </table>
                     <PaginationProducts currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
                 </div>
-               
                 <PurchaseHistoryModal item={itemToShow} show={purchaseModalShow} onHide={() => setpurchaseModalShow(false)} resetProducts={resetProducts} />
             </div>
         </div>

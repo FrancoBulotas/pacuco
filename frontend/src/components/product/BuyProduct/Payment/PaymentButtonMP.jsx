@@ -15,7 +15,6 @@ const PaymentButtonMP = ({ shippingPrice }) => {
     const cart = useSelector((state) => state.cart.items);
 
     useEffect(() => {
-        console.log('useEffect PaymentButtonMP: createPayment y dispatch');
         createPayment();
     }, [])
 

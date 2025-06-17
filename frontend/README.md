@@ -8,14 +8,14 @@ URL: pacuco.com.ar
 TODO:
 
 - Agregar que se pueda aumentar nuevamente el valor de los prods en conjunto segun %
+- Ver si hay API del correo argentino para simplificar la eleccion de sucursal.
 
 - Corregir bug que en admin de productos toma datos del cache desp de modificar
 - Corregir EditAllProductsModal.jsx
-- (URGENTE) Mejorar invocacion de funciones de vercel (Cache agregado, ver si funciona bien sino buscar otras alternativas)
-- Mejorar la forma en la que se pueden ocultar guardapolvos del publico.
+
 - Agregar a la barra de navegacion los accesorios (intentar hacer == que lo que voy a implementar en administracion)
 - Agregar en seccion admin que puedan editar los textos mas importantes. (que se haga la request en App.jsx y se guarde en un reducer)
-- Ver si hay API del correo argentino para simplificar la eleccion de sucursal.
+
 - Ver como hacer para implementar el whatsapp una vez re realice una compra en lugar de un mail
 - Ver de agregar en productos comprados, unos botones por producto, para indicar que esta en proceso su pedido y que ya fue entregado, y que al clickearse se envie un correo
 - Cuando un guardapolvo es == pero de distinto talle, que aparezcan en una misma publicacion (esto en los de stock)

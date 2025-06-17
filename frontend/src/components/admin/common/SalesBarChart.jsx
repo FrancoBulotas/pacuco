@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { DateTime } from 'luxon';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -31,8 +32,9 @@ const BarChart = ({ data }) => {
           let annualSales = 0;
     
           data.forEach((sale) => {
-            const month = sale.time.split('/')[1];
-            const saleYear = sale.time.split('/')[2].split(',')[0];
+            const time = DateTime.fromJSDate(new Date(sale.time)).setZone('America/Argentina/Buenos_Aires').toFormat('dd/MM/yyyy HH:mm')
+            const month = time.split('/')[1];
+            const saleYear = time.split('/')[2].split(' ')[0];
 
             if (saleYear.toString() === year.toString()) {
               const saleAmount = Number(sale.totalPricePurchased);

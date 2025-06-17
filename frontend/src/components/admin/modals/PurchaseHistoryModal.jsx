@@ -13,6 +13,8 @@ import { useNavigate } from 'react-router-dom'
 import purchasedProductsService from '../../../services/purchasedProduct'
 import searchProdsService from '../../../services/searchProds'
 import Swal from 'sweetalert2'
+import { DateTime } from 'luxon';
+import { checkWhichPriceToShow } from '../../common/functions'
 
 const PurchaseHistoryModal = (props) => {
     const navigate = useNavigate()
@@ -119,7 +121,7 @@ const PurchaseHistoryModal = (props) => {
                                     <tbody key={i}>
                                         <tr className='tr-tabla-productos' onClick={() => redirectToProduct(item)} style={{ cursor: 'pointer' }}>
                                             <td>{item.name}</td>
-                                            <td>$ {(item.discountPrice || item.discountPrice > 0 ? item.discountPrice : item.price)}</td>
+                                            <td>$ {checkWhichPriceToShow(item)}</td>
                                             <td>{item.size}</td> 
                                             <td>{item.amountToBuy}</td>
                                             <td>{checkTable(item)}</td>
@@ -148,7 +150,7 @@ const PurchaseHistoryModal = (props) => {
                 </Accordion>
                 <div style={{padding:'20px'}}>
                     <div><strong>Total:</strong> ${formatNumber(props.item.totalPricePurchased || 0)}</div>
-                    <div><strong>Fecha:</strong> {props.item.time}</div>
+                    <div><strong>Fecha:</strong> {DateTime.fromJSDate(new Date(props.item.time)).setZone('America/Argentina/Buenos_Aires').toFormat('dd/MM/yyyy HH:mm')}</div>
                 </div>
             </Modal.Body>
             <Modal.Footer>
