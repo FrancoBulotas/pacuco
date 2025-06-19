@@ -118,7 +118,7 @@ purchasedProductsRouter.get('/get/topPaymentMethods', async (request, response) 
     try {
         const topPaymentMethods = await PurchasedProduct.aggregate([
             { $project: { _id: 0, paymentMethods: '$clientData.paymentMethod' } },
-            { $group: { _id: '$paymentMethods', count: { $sum: 1 } } }
+            { $group: { _id: '$paymentMethods', cantidad: { $sum: 1 } } }
         ]);
 
         response.json({ topPaymentMethods });

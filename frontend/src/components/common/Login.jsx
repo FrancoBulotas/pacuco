@@ -46,29 +46,33 @@ const Login = () => {
     }
 
     return (
-        <div style={{margin:'120px auto', marginTop:'160px', width:'400px', padding:'10px', boxShadow:'0px 4px 8px 2px rgba(0, 0, 0, 0.1)', borderRadius:'6px'}}>
-            <h3 style={{display:'flex', justifyContent:'center'}}>Iniciar sesión</h3>
-            <Alert key='danger' variant='danger' style={{display:`${alertStatus.display}`}}>
-            {alertStatus.text}
-            </Alert>
-            <form onSubmit={handleLogin}>
-                <div className="mb-3">
-                    <label className="form-label">Usuario</label>
-                    <input  className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    value={username}
-                    onChange={({ target }) => setUsername(target.value)}  
-                    ></input>
+        <div className='auth-main-container'>
+            <div className='auth-container'>
+                <div className='auth-div'>
+                    <h3 style={{display:'flex', justifyContent:'center'}}>Iniciar sesión</h3>
+                    <Alert key='danger' variant='danger' style={{display:`${alertStatus.display}`}}>
+                    {alertStatus.text}
+                    </Alert>
+                    <form onSubmit={handleLogin}>
+                        <div className="mb-3">
+                            <label className="form-label">Usuario</label>
+                            <input  className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            value={username}
+                            onChange={({ target }) => setUsername(target.value)}  
+                            ></input>
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Contraseña</label>
+                            <input type="password" className="form-control" id="exampleInputPassword1"
+                            value={password !== undefined ? password : ''}
+                            onChange={({ target }) => setPassword(target.value)} 
+                            ></input>
+                        </div>
+                        <button type="submit" className="btn btn-dark">Ingresar</button>
+                        <a href="/register" className="btn ">Registrarse</a>
+                    </form>
                 </div>
-                <div className="mb-3">
-                    <label className="form-label">Contraseña</label>
-                    <input type="password" className="form-control" id="exampleInputPassword1"
-                    value={password !== undefined ? password : ''}
-                    onChange={({ target }) => setPassword(target.value)} 
-                    ></input>
-                </div>
-                <button type="submit" className="btn btn-dark">Ingresar</button>
-                <a href="/register" className="btn ">Registrarse</a>
-            </form>
+            </div>
         </div>
     )
 }
