@@ -170,7 +170,7 @@ const BuyProductForm = () => {
 
     const checkStockProductsInCart = async () => {
         const stockProductsInCart = cart.filter(item => item.table == 'stock');
-        
+        console.log(cart)
         if (stockProductsInCart.length !== 0){
             try {
                 await checkStock(stockProductsInCart, dispatch);
