@@ -1,0 +1,33 @@
+
+POST https://apitest.correoargentino.com.ar/micorreo/v1/token HTTP/1.1
+content-type: application/json
+Authorization: Basic 
+
+
+###
+POST https://apitest.correoargentino.com.ar/micorreo/v1/register HTTP/1.1
+content-type: application/json
+Authorization: Bearer 
+
+{
+    "firstName": "franco",
+    "lastName": "prueba",
+    "email": "email@mail.com",
+    "password": "123456",
+    "documentType": "CUIT",
+    "documentId": "30324719607",
+    "phone": "1165446544",
+    "cellPhone": "1165446544",
+    "address": {
+        "streetName": "Vicente Lopez",
+        "streetNumber": "448",
+        "floor": "1",
+        "apartment": "D",
+        "locality": "Monte Grande",
+        "city": "Esteban Echeverria",
+        "provinceCode": "B",
+        "postalCode": "B1842ZAB"
+}
+}
+
+###

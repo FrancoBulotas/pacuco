@@ -8,9 +8,8 @@ const errorHandler = (error, request, response, next) => {
     
     if (response.headersSent) {
         return response.status(500).send({ error: 'header already sent' })
-
     }
-    else if (error.name === 'CastError') {
+    else if (error.name === 'CastError') {        
         return response.status(400).send({ error: 'malformatted id' })
     }
     else if (error.name === 'ValidationError') {

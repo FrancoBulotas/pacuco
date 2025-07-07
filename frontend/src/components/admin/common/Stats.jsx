@@ -9,9 +9,10 @@ const Stats = ({ purchasedProducts }) => {
   const [topPaymentMethods, setTopPaymentMethods] = useState(null);
 
   useEffect(() => {
+    // este es para agarrar los datos de los metodos de pago del back.
     const getTopPaymentMethods = async () => {
       const response = await purchasedProductService.getTopPaymentMethods();
-      setTopPaymentMethods(response.topPaymentMethods.sort((a, b) => b.count - a.count));
+      setTopPaymentMethods(response.topPaymentMethods.sort((a, b) => b.cantidad - a.cantidad));
     }
     getTopPaymentMethods();
   }, [])
@@ -100,7 +101,7 @@ const Stats = ({ purchasedProducts }) => {
                   }}
                 />
                 <Bar
-                  dataKey="count"
+                  dataKey="cantidad"
                   fill="rgba(250, 191, 222, 0.8)"
                   radius={[4, 4, 0, 0]}
                   onMouseEnter={(topPaymentMethods) => setHoveredBar(topPaymentMethods._id)}

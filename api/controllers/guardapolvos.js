@@ -66,20 +66,26 @@ guardapolvosRouter.post('/', async (request, response) => {
 // PUT
 guardapolvosRouter.put('/:id', async (request, response) => {
     // price viene === al listedPrice, por lo que se le aplica un descuento del 6% al precio
-    const { name, type, amount, amountToBuy, size, price, listedPrice, discountListedPrice,
+
+    try {
+        const { name, type, amount, amountToBuy, size, price, listedPrice, discountListedPrice,
         discountPrice, img, img2, img3, table, description, category, show } = request.body
 
-    // const decodedToken = jwt.verify(request.token, process.env.SECRET)  
-    // if (!decodedToken.id) {    
-    //   return response.status(401).json({ error: 'token invalid' })  
-    // }  
-    const newPrice = roundNumber(price * 0.94);
-    const newDiscountPrice = roundNumber(discountPrice * 0.94);
+        // const decodedToken = jwt.verify(request.token, process.env.SECRET)  
+        // if (!decodedToken.id) {    
+        //   return response.status(401).json({ error: 'token invalid' })  
+        // }  
+        const newPrice = roundNumber(price * 0.94);
+        const newDiscountPrice = discountPrice ? roundNumber(discountPrice * 0.94) : 0;
 
-    response.json(await Guardapolvo.findByIdAndUpdate(request.params.id,
-    { name, type, amount, amountToBuy, size, price: newPrice, listedPrice, discountPrice: newDiscountPrice, discountListedPrice, 
-        img, img2, img3, table, description, category, show }, 
-    { new: true, runValidators: true, context: 'query' }))
+        response.json(await Guardapolvo.findByIdAndUpdate(request.params.id,
+        { name, type, amount, amountToBuy, size, price: newPrice, listedPrice, discountPrice: newDiscountPrice, discountListedPrice, 
+            img, img2, img3, table, description, category, show }, 
+        { new: true, runValidators: true, context: 'query' }))
+    } catch (e){
+        console.error(e);
+        response.status(400).json({ message: `Fallo endpoint PUT /api/products/guardapolvos. Error: ${e}` })
+    }
 })
 
 
