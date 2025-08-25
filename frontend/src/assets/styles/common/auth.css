@@ -20,3 +20,15 @@
     border-radius: 6px;
     padding: 15px;
 }
+
+.eye-button {
+    border: 1px solid #cecece;
+    padding-left: 4px;
+    padding-right: 4px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.eye-button:hover {
+    background-color: #f0f0f0;
+}
