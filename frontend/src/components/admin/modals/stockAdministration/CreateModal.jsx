@@ -14,6 +14,7 @@ import Swal from 'sweetalert2'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
+import Spinner from 'react-bootstrap/Spinner'
 
 const CreateModal = (props) => {
     const navigate = useNavigate()
@@ -37,6 +38,7 @@ const CreateModal = (props) => {
         imgs: [],
         show: '',
     })
+    const [isUploading, setIsUploading] = useState(false)
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -141,12 +143,10 @@ const CreateModal = (props) => {
                 title: `Estas segura que queres agregar ${formData.name}?`, icon: 'question', confirmButtonText: 'Aceptar', confirmButtonColor: '#000', showDenyButton: true, denyButtonText: 'Cancelar', })
             .then(async (result) => {
                 if (result.isConfirmed) {
+                    setIsUploading(true);
                     try {
-                        console.log(formData);
-
                         const token = setToken(userLogged.token)
                         await guardapolvosService.create(formData, token)
-
 
                         // genero la lista de todos los guardapolvos reemplazando el guardapolvo a editar por el newObject con datos actualizados
                         // const guardapolvosUpdated = guardapolvos.map(guardapolvo => guardapolvo.id === newObject.id ? newObject : guardapolvo)
@@ -155,11 +155,12 @@ const CreateModal = (props) => {
                         imageData.forEach(image => {
                             data.append('images', image)
                         })
+                       
                         await imageService.upload(data, token);
-
                         await searchProdsService.clearCache();
                     } catch (error){
-                        console.error(error)
+                        console.error(error);
+                        setIsUploading(false);
                         if(error.response.status === 401){
                             Swal.fire({title:'Se cerro tu sesion!', text:'Deberas iniciar sesion nuevamente', icon:'error', confirmButtonText: 'Aceptar', confirmButtonColor: '#000',})
                                 .then((result) => {
@@ -170,6 +171,8 @@ const CreateModal = (props) => {
                             Swal.fire({title:'Error inesperado', text:'Intentalo nuevamente mas tarde.', icon:'error', confirmButtonText: 'Aceptar', confirmButtonColor: '#000',})
                             return
                         }
+                    } finally {
+                        setIsUploading(false)
                     }
                     Swal.fire({ title: `${formData.name} agregado!`, icon: 'success', confirmButtonText: 'Aceptar', confirmButtonColor: '#000', })
                         .then(() => {
@@ -216,6 +219,17 @@ const CreateModal = (props) => {
                 {alertStatus.text}
             </Alert>
             <Modal.Body>
+                {isUploading && (
+                    <div style={{
+                        position: 'fixed', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        background: 'rgba(255,255,255,0.7)', zIndex: 1050
+                    }}>
+                        <div style={{textAlign:'center'}}>
+                            <Spinner animation="border" role="status" />
+                            <div style={{marginTop:8}}>Subiendo imágenes...</div>
+                        </div>
+                    </div>
+                )}
                 <Form onSubmit={handleSubmit} encType="multipart/form-data">
                     <Form.Group className="mb-3" controlId="controlInput1">
                         <Form.Label><strong>Nombre</strong></Form.Label>
