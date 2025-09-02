@@ -7,12 +7,12 @@ async function clonarColeccion() {
 
     const client = new MongoClient(uri);
 
-    const db = process.env.NODE_ENV === 'development' ? 'pacucoDev'  : 'pacuco';
+    const db = process.env.NODE_ENV === 'development' ? 'pacucoDev' : 'pacuco';
 
     try {
         await client.connect();
-        const origen = client.db(db).collection("purchased_products");
-        const destino = client.db(db).collection("purchased_products_backup");
+        const origen = client.db(db).collection("guardapolvos");
+        const destino = client.db(db).collection("guardapolvos_backup");
 
         const documentos = await origen.find().toArray();
         if (documentos.length > 0) {

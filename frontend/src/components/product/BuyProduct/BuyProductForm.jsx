@@ -202,7 +202,7 @@ const BuyProductForm = () => {
                     <img src={item.img} alt={item.name} className="cart-item-image" onClick={() => navigate(`/products?id=${item.id}`)}/>
                     <div className="cart-item-details">
                         <h3>{item.name}</h3>
-                        <p>Precio: $ {formatNumber(checkWhichPriceToShow(item))}</p>
+                        <p>Precio de lista: $ {formatNumber(checkWhichPriceToShow(item))}</p>
                         <p>Cantidad: {item.amountToBuy}</p>
                         <p>Talle: {item.size}</p>
                         <p>Subtotal: $ {formatNumber((checkWhichPriceToShow(item)) * item.amountToBuy)}</p>

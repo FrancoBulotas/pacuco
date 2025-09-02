@@ -25,8 +25,6 @@ searchProdsRouter.get('/products/featured', async (req, res) => {
                     _id: undefined, 
                     __v: undefined  
                 };
-
-
             });
 
             const firstHalf = cachedFeaturedProducts.slice(0, Math.ceil(products.length / 2));

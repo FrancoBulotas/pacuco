@@ -76,7 +76,7 @@ const Cart = () => {
                             </div>
                             <div className="detalles-prod-carrito">
                                 <p className="nombre-producto">{item.name}</p>
-                                <p>Precio: $ {formatNumber(checkWhichPriceToShow(item))}</p>
+                                <p>Precio de lista: ${formatNumber(checkWhichPriceToShow(item))}</p>
                                 <p> 
                                     <button onClick={() => deleteOneItem(item)} className="boton-restar-uno">-</button>
                                     <span id="cantidad">{item.amountToBuy}</span>
@@ -89,7 +89,7 @@ const Cart = () => {
                             </div>
                         </div>
                     )}
-                    <p className="precioProducto" style={{marginBottom: '10px'}}>Precio total: $ {totalInCart()}</p>
+                    <p className="precioProducto" style={{marginBottom: '10px'}}>Precio total: <strong>$ {totalInCart()}</strong></p>
                     <div>
                         <button onClick={() => dispatch(clearCart())} className="btn btn-light" >Vaciar carrito</button>
                         <button onClick={() => buyProduct()} className="btn btn-dark boton-comprar">Finalizar compra</button >

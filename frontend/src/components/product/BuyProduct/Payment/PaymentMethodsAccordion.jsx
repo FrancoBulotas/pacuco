@@ -94,7 +94,7 @@ const PaymentMethodsAccordion = () => {
                 />
                 <div className="container-labels-payment-methods">
                     <label htmlFor="transferencia-bancaria">Transferencia Bancaria</label>
-                    <label style={{color: 'gray', fontSize: '11px'}}>6% de descuento</label>
+                    <label style={{color: 'gray', fontSize: '11px'}}>10% de descuento</label>
                 </div>
                 <FaUniversity className="me-2 text-dark" size={30} />
             </div>
@@ -109,7 +109,7 @@ const PaymentMethodsAccordion = () => {
                 />
                 <div className="container-labels-payment-methods">
                     <label htmlFor="efectivo">Efectivo</label>
-                    <label style={{color: 'gray', fontSize: '12px'}}>6% de descuento</label>
+                    <label style={{color: 'gray', fontSize: '12px'}}>10% de descuento</label>
                 </div>
                 <img src="https://pacucostorage.blob.core.windows.net/common/bill-image.png" 
                     alt="" 

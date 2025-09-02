@@ -225,7 +225,7 @@ const EditModal = (props) => {
     }
 
     const deleteItem = () => {
-        Swal.fire({ title: 'Estas segura que queres eliminar el guardapolvo?', icon:'question', confirmButtonText: 'Aceptar', confirmButtonColor: '#000', showDenyButton: true, denyButtonText: 'Cancelar',})
+        Swal.fire({ title: `Estas segura que queres eliminar ${props.item.name}?`, icon:'question', confirmButtonText: 'Aceptar', confirmButtonColor: '#000', showDenyButton: true, denyButtonText: 'Cancelar',})
             .then(async (result) => {
                 if (result.isConfirmed) {
                     try { 
@@ -238,7 +238,7 @@ const EditModal = (props) => {
 
                         await searchProdsService.clearCache();
 
-                        Swal.fire({title:'Guardapolvo eliminado correctamente!', icon:'success', confirmButtonText: 'Aceptar', confirmButtonColor: '#000',})
+                        Swal.fire({title:`${props.item.name} eliminado correctamente!`, icon:'success', confirmButtonText: 'Aceptar', confirmButtonColor: '#000',})
                         .then((result)=>{
                             if (result.isConfirmed) {
                                 props.onHide();
@@ -248,7 +248,7 @@ const EditModal = (props) => {
                     }
                     catch (error) { 
                         console.error('Error:', error)
-                        Swal.fire({ title: 'Error', text: 'No se pudo eliminar el guardapolvo', icon:'error',confirmButtonText: 'Aceptar', confirmButtonColor: '#000', })
+                        Swal.fire({ title: 'Error', text: `No se pudo eliminar ${props.item.name}`, icon:'error',confirmButtonText: 'Aceptar', confirmButtonColor: '#000', })
                         if(error.response.data.error === 'token expired'){ navigate('/login') } 
                     }      
                 }
