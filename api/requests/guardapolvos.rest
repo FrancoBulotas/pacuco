@@ -1,6 +1,6 @@
 
 ###
-GET http://localhost:8080/api/products?category=guardapolvo
+GET http://localhost:8080/api/products?category=guardapolvo&type=nivel_inicial
 ###
 GET http://localhost:8080/api/products/guardapolvos/66c6248b94fcdcb275cfe304
 ###
@@ -63,83 +63,7 @@ content-type: application/json
 POST http://localhost:8080/api/products/guardapolvos/changePriceByPorcentage HTTP/1.1
 content-type: application/json
 
-{
-  "porcent": 0.10,
-
-  "guardapolvos": [
-  {
-    "name": "prueba1",
-    "amount": null,
-    "amountToBuy": 1,
-    "price": 36500,
-    "size": "",
-    "img": "https://pacucostorage.blob.core.windows.net/guardapolvos-dev/1720053196618-577498502-IMG-20240623-WA0031.jpg",
-    "img2": "https://pacucostorage.blob.core.windows.net/guardapolvos-dev/1720053196618-577498502-IMG-20240623-WA0038.jpg",
-    "table": "nivel_inicial",
-    "description": {
-      "general": "El Carola es un diseño súper práctico por la posibilidad de guardado debido a la cantidad y amplitud de los bolsillos. Posee cierre     general: 'El Carola es un diseño súper práctico por la posibilidad de guardado debido a la cantidad y amplitud de los bolsillos. Posee cierre frontal y 2 cierres diente de perro plásticos en los bolsillos. La espalda es toda del mismo color. Haz zoom y enamórate de los detalles!!!",
-      "base": "Cuadrille intermedio Francia",
-      "detalle": "Animal Print estampado",
-      "vivos": "Negros",
-      "bolsillos": "Animal Print + Gliter negro."
-    },
-    "id": "6685edcedb11e9cdb8a92f11"
-  },
-  {
-    "name": "prueba3",
-    "amount": null,
-    "amountToBuy": 1,
-    "price": 36000,
-    "size": "",
-    "img": "https://pacucostorage.blob.core.windows.net/guardapolvos-dev/1720053614713-119470314-IMG-20240623-WA0034.jpg",
-    "img2": "https://pacucostorage.blob.core.windows.net/guardapolvos-dev/1720053614713-119470314-IMG-20240623-WA0036.jpg",
-    "table": "nivel_inicial",
-    "description": {
-      "general": "El Carola es un diseño súper práctico por la posibilidad de guardado debido a la cantidad y amplitud de los bolsillos. Posee cierre     general: 'El Carola es un diseño súper práctico por la posibilidad de guardado debido a la cantidad y amplitud de los bolsillos. Posee cierre frontal y 2 cierres diente de perro plásticos en los bolsillos. La espalda es toda del mismo color. zoom y enamórate de los detalles!!!",
-      "base": "Cuadrille intermedio Francia",
-      "detalle": "Animal Print estampado",
-      "vivos": "Negros",
-      "bolsillos": "Animal Print + Gliter negro."
-    },
-    "id": "6685ef6fc71667eac4aea0c8"
-  },
-  {
-    "name": "prueba2",
-    "amount": 1,
-    "amountToBuy": 1,
-    "price": 35000,
-    "size": "5",
-    "img": "https://pacucostorage.blob.core.windows.net/guardapolvos-dev/1720053686998-556903630-IMG-20240623-WA0059.jpg",
-    "img2": "https://pacucostorage.blob.core.windows.net/guardapolvos-dev/1720053686998-556903630-IMG-20240623-WA0063.jpg",
-    "table": "stock",
-    "description": {
-      "general": "El Carola es un diseño súper práctico por la posibilidad de guardado debido a la cantidad y amplitud de los bolsillos. Posee cierre     general: 'El Carola es un diseño súper práctico por la posibilidad de guardado debido a la cantidad y amplitud de los bolsillos. Posee cierre frontal y 2 cierres diente de perro plásticos en los bolsillos. La espalda es toda del mismo color. Haz zoom y enamórate de los detalles!!!",
-      "base": "La puta Madre",
-      "detalle": "Animal Print tu vieja",
-      "vivos": "Negros",
-      "bolsillos": "Animal Print + Gliter negro."
-    },
-    "img3": "https://pacucostorage.blob.core.windows.net/guardapolvos-dev/1722532580047-837384044-qr-estatico.jpg",
-    "discountPrice": 0,
-    "id": "6685efb7c71667eac4aea0da"
-  },
-  {
-    "name": "prueba9",
-    "amount": 0,
-    "amountToBuy": 1,
-    "price": 39000,
-    "size": "00",
-    "img": "https://pacucostorage.blob.core.windows.net/guardapolvos-dev/1720053708996-52725487-IMG-20240623-WA0054.jpg",
-    "img2": "https://pacucostorage.blob.core.windows.net/guardapolvos-dev/1720053708996-52725487-IMG-20240623-WA0062.jpg",
-    "table": "stock",
-    "description": {
-      "general": "El Carola es un diseño súper práctico por la posibilidad de guardado debido a la cantidad y amplitud de los bolsillos. Posee cierre     general: 'El Carola es un diseño súper práctico por la posibilidad de guardado debido a la cantidad y amplitud de los bolsillos. Posee cierre frontal y 2 cierres diente de perro plásticos en los bolsillos. La espalda es toda del mismo color. Haz zoom y enamórate de los detalles!!!",
-      "base": "Cuadrille intermedio Francia",
-      "detalle": "Animal Print estampado",
-      "vivos": "Negros",
-      "bolsillos": "Animal Print + Gliter negro."
-    },
-    "discountPrice": 0,
-    "id": "6685efcdc71667eac4aea0e0"
-  }
-]}
+# {
+#   "porcent": 0.12,
+#   "guardapolvos": []
+# }

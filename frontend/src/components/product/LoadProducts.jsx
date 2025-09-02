@@ -1,10 +1,11 @@
 
-import { Link } from 'react-router-dom'
-import { formatNumber, roundNumber } from './common/functions.js'
-import HtmlForNoMatches from './common/HtmlForNoMatches.jsx'
-import { validateIfItemHasDiscount, checkDiscountPorcentage } from '../common/functions.js'
-import ImageComponent  from '../common/Placeholders/ImageComponent.jsx'
-import CheckIfIsStockOrCustomizable from './common/CheckIfIsStockOrCustomizable.jsx'
+import { Link } from 'react-router-dom';
+import { formatNumber, roundNumber } from './common/functions.js';
+import HtmlForNoMatches from './common/HtmlForNoMatches.jsx';
+import { validateIfItemHasDiscount, checkDiscountPorcentage } from '../common/functions.js';
+import ImageComponent  from '../common/Placeholders/ImageComponent.jsx';
+import CheckIfIsStockOrCustomizable from './common/CheckIfIsStockOrCustomizable.jsx';
+import { PriceComponent } from '../common/PriceComponent.jsx';
 
 import '../../assets/styles/product.css'
 
@@ -41,14 +42,15 @@ export const LoadProducts = ({ products }) => {
                                                 <span className="precioProducto">$ {formatNumber(prod.discountListedPrice)}</span>
                                             </>
                                         : <>
-                                            <p style={{ margin: '0px'}}>
+                                            {/* <p style={{ margin: '0px'}}>
                                                 <strong>$ {formatNumber(prod.listedPrice)} </strong>
                                                 <span className='span-product'>precio de lista</span>
                                             </p>
                                             <p style={{ margin: '0px'}}>
                                                 <span style={{color: 'gray'}}>$ {formatNumber(prod.price)} </span>
                                                 <span className='span-product'>transferencia o efectivo</span>
-                                            </p>
+                                            </p> */}
+                                            <PriceComponent item={prod} />
                                         </>
                                     }
                                 </div>

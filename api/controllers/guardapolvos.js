@@ -42,7 +42,7 @@ guardapolvosRouter.post('/', async (request, response) => {
         category: body.category,
         amount: body.amount,
         amountToBuy: body.amountToBuy,
-        price: roundNumber(body.price * 0.94),
+        price: roundNumber(body.price * 0.90), // 10% de descuento
         listedPrice: body.listedPrice,
         discountPrice: body.discountPrice,
         discountListedPrice: body.discountListedPrice,
@@ -75,8 +75,8 @@ guardapolvosRouter.put('/:id', async (request, response) => {
         // if (!decodedToken.id) {    
         //   return response.status(401).json({ error: 'token invalid' })  
         // }  
-        const newPrice = roundNumber(price * 0.94);
-        const newDiscountPrice = discountPrice ? roundNumber(discountPrice * 0.94) : 0;
+        const newPrice = roundNumber(price * 0.90);
+        const newDiscountPrice = discountPrice ? roundNumber(discountPrice * 0.90) : 0;
 
         response.json(await Guardapolvo.findByIdAndUpdate(request.params.id,
         { name, type, amount, amountToBuy, size, price: newPrice, listedPrice, discountPrice: newDiscountPrice, discountListedPrice, 
@@ -104,28 +104,42 @@ guardapolvosRouter.delete('/:id', async (request, response) => {
 
 guardapolvosRouter.post('/changePriceByPorcentage', async (request, response) => {
     // aca habria que desarrollar la logica que le agregue cierto % que viene en la request, al precio de todos los guarapolvos
-    const body = request.body
+    //const body = request.body
 
-    const decodedToken = jwt.verify(request.token, process.env.SECRET)  
-    if (!decodedToken.id) {    
-      return response.status(401).json({ error: 'token invalid' })  
-    }  
+    // const decodedToken = jwt.verify(request.token, process.env.SECRET)  
+    // if (!decodedToken.id) {    
+    //   return response.status(401).json({ error: 'token invalid' })  
+    // }  
+
 
     // guardapolvos a editar precio
-    const guardapolvos = body.guardapolvos
+    //const guardapolvos = body.guardapolvos
+    const guardapolvos = await Guardapolvo.find({ category: 'guardapolvo' });
+    console.log("guardapolvos a editar: " + guardapolvos.length)
     // porcentaje que se aumentara el precio
-    const porcent = body.porcent
-
+    const porcent = 0.12
+    const procentListedPriceOverPrice = 1.10 // el listedPrice es 10% mayor al price
+    
     try {
         await Promise.all (guardapolvos.map(async (guardapolvo) => {
+            console.log("viejo price: " + guardapolvo.price)
             const newPrice = guardapolvo.price = roundDownToNearestHundred(Number(guardapolvo.price) + (Number(guardapolvo.price) * porcent))
-                
+            const newListedPrice = guardapolvo.listedPrice = roundDownToNearestHundred(Number(newPrice * procentListedPriceOverPrice));
+
+            const plainObject = guardapolvo.toObject();
             const newGuardapolvo = {
-                ...guardapolvo,
-                price: newPrice 
+                ...plainObject,
+                price: newPrice,
+                listedPrice: newListedPrice
             }
 
-            await Guardapolvo.findByIdAndUpdate(newGuardapolvo.id, newGuardapolvo, { runValidators: true, context: 'query' })
+            console.log('New guardapolvo to update:', newGuardapolvo);
+            console.log('------------------------------------------------------------------------');
+            //await Guardapolvo.findByIdAndUpdate(newGuardapolvo.id, newGuardapolvo, { runValidators: true, context: 'query' })
+            await Guardapolvo.findByIdAndUpdate(plainObject._id, {
+                price: newGuardapolvo.price,
+                listedPrice: newGuardapolvo.listedPrice
+            }, { runValidators: true, context: 'query' });
         }))
         response.status(201).json({ message: 'Prices updated successfully', ok: true });
     } catch(error){
@@ -139,7 +153,7 @@ guardapolvosRouter.post('/updateField', async (request, response) => {
     try {
         const result = await Guardapolvo.updateMany(
             { discountListedPrice: { $exists: false } },
-            [{ $set: { discountListedPrice: { $multiply: [ { $ceil: { $divide: [ { $multiply: ["$discountPrice", 1.06] }, 100 ] } }, 100 ] } } } ]
+            [{ $set: { discountListedPrice: { $multiply: [ { $ceil: { $divide: [ { $multiply: ["$discountPrice", 1.10] }, 100 ] } }, 100 ] } } } ]
         );
         console.log('Documentos actualizados:', result.modifiedCount);
         response.status(201).json({ message: 'Added successfully', ok: true });

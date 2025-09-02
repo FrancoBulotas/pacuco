@@ -11,6 +11,7 @@ import { validateIfItemHasDiscount, checkDiscountPorcentage } from '../common/fu
 import ImageComponent from '../common/Placeholders/ImageComponent';
 import CheckIfIsStockOrCustomizable from '../product/common/CheckIfIsStockOrCustomizable.jsx';
 import LoadingScreen from '../common/loaders/LoadingScreen';
+import PriceComponent from '../common/PriceComponent.jsx';
 
 const CarouselProd = ({ title, prods }) => {
   const [featuredProducts, setFeaturedProducts] = useState(prods);
@@ -86,14 +87,7 @@ const CarouselProd = ({ title, prods }) => {
                     ) : (
                       // <span className="final-price">$ {formatNumber(item.listedPrice)}</span>
                       <>
-                        <p style={{ margin: '0px'}}>
-                            <strong>$ {formatNumber(item.listedPrice)} </strong>
-                            <span className='span-product'>precio de lista</span>
-                        </p>
-                        <p style={{ margin: '0px'}}>
-                            <span className='span-product'>$ {formatNumber(item.price)} </span>
-                            <span className='span-product'>transferencia o efectivo</span>
-                        </p>
+                        <PriceComponent item={item} />
                       </>
                     )}
                   </div>

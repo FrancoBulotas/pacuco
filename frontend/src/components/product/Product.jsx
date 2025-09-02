@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { addOneToCart, setShow } from '../../reducers/cartReducer.js'
 import { useNavigate } from 'react-router-dom'
 
+import { PriceComponent } from '../common/PriceComponent.jsx';
 import ScrollToTop from '../common/ScrollToTop.js'
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import Swal from 'sweetalert2';
@@ -125,14 +126,15 @@ const Product = ({ navigateTo, product }) => {
                                             </>
                                         ) : (
                                             <>
-                                                <p style={{ margin: '0px'}}>
+                                                {/* <p style={{ margin: '0px'}}>
                                                     <strong style={{fontSize: '26px'}}>$ {formatNumber(product.listedPrice)} </strong>
                                                     <span style={{ color: 'gray'}}>precio de lista</span>
                                                 </p>
                                                 <p style={{ margin: '0px'}}>
                                                     <span style={{color: 'gray'}}>$ {formatNumber(product.price)} </span>
                                                     <span style={{ color: 'gray'}}>con transferencia o efectivo</span>
-                                                </p>
+                                                </p> */}
+                                                <PriceComponent item={product} fontSize={"26"} />
                                             </>
                                         )
                                     }
