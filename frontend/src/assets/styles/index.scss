@@ -60,3 +60,71 @@ h2, h3 {
     font-family: 'Geist', sans-serif;
     line-height: 1.5;
 }
+
+
+
+// AppMaintenance
+
+/* Página de mantenimiento */
+
+.maintenance-wrapper {
+  background: radial-gradient(circle at top, #fdf3ff 0, #f8f9fa 40%, #e9ecef 100%);
+  padding: 1.5rem;
+}
+
+.maintenance-card {
+  max-width: 540px;
+  width: 100%;
+  background: #ffffff;
+}
+
+.maintenance-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.maintenance-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  color: #6c757d;
+}
+
+.maintenance-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background-color: #f37bb7; // tono bootstrap primary
+  animation: maintenance-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes maintenance-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Ajustes pequeños para móviles */
+@media (max-width: 576px) {
+  .maintenance-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .maintenance-logo {
+    width: 60px;
+    height: 60px;
+  }
+}
